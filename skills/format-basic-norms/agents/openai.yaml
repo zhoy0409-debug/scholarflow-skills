@@ -3,7 +3,7 @@ interface:
   short_description: "Universal baseline academic formatting and reference-integrity standard. Use automatically for every conversation involving drafting, rewriting, transla..."
   default_prompt: "Use format-basic-norms to improve this agent workflow safely."
 ownership:
-  product_owner: "JL Skill Collection"
+  product_owner: "Zhoy"
   product_line: "Agent Ops & Governance"
   origin: "jl-original-or-curated"
   release_channel: "stable"

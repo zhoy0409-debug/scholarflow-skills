@@ -3,7 +3,7 @@ interface:
   short_description: "Download large datasets from NCBI efficiently using EPost, history server, batching, rate limiting, and retry logic. Use when bulk-fetching tens of thou..."
   default_prompt: "Use bio-batch-downloads to design or troubleshoot this bioinformatics workflow."
 ownership:
-  product_owner: "JL Skill Collection"
+  product_owner: "Zhoy"
   product_line: "Bio & Omics Toolkit"
   origin: "jl-authored-tool-guide"
   release_channel: "stable"

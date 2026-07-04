@@ -3,7 +3,7 @@ interface:
   short_description: "Build sequence logos from aligned DNA, RNA, or protein motifs using ggseqlogo (R), Logomaker (Python), or WebLogo with explicit bits vs probability enco..."
   default_prompt: "Use bio-data-visualization-sequence-logos to design or troubleshoot this bioinformatics workflow."
 ownership:
-  product_owner: "JL Skill Collection"
+  product_owner: "Zhoy"
   product_line: "Bio & Omics Toolkit"
   origin: "jl-authored-tool-guide"
   release_channel: "stable"

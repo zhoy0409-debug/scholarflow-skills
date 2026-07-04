@@ -3,7 +3,7 @@ interface:
   short_description: "Detects and removes contamination in genome assemblies via two disjoint workflows - foreign-sequence screening of a single-organism (eukaryote/isolate)..."
   default_prompt: "Use bio-genome-assembly-contamination-detection to design or troubleshoot this bioinformatics workflow."
 ownership:
-  product_owner: "JL Skill Collection"
+  product_owner: "Zhoy"
   product_line: "Bio & Omics Toolkit"
   origin: "jl-authored-tool-guide"
   release_channel: "stable"

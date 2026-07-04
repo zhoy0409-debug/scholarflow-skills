@@ -3,7 +3,7 @@ interface:
   short_description: "Generate pre/post/pulse surveys tied to learning outcomes. Copy-ready for Nancy. Use for \"build surveys\", \"create survey\", \"post-survey\"."
   default_prompt: "Use survey-builder for this task."
 ownership:
-  product_owner: "JL Skill Collection"
+  product_owner: "Zhoy"
   product_line: "General Skill Library"
   origin: "jl-original-or-curated"
   release_channel: "stable"

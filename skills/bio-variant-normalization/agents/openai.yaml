@@ -3,7 +3,7 @@ interface:
   short_description: "Normalize indel representation, decompose MNPs, and split multiallelic variants using bcftools norm. Use when comparing variants from different callers,..."
   default_prompt: "Use bio-variant-normalization to design or troubleshoot this bioinformatics workflow."
 ownership:
-  product_owner: "JL Skill Collection"
+  product_owner: "Zhoy"
   product_line: "Bio & Omics Toolkit"
   origin: "jl-authored-tool-guide"
   release_channel: "stable"

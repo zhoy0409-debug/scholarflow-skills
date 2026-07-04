@@ -1,6 +1,6 @@
 ---
 name: deep-research
-description: Route deep research, literature review, systematic review, meta-analysis, fact-checking, research question refinement, and evidence mapping requests to JL literature, reading, citation, and PaperSpine workflows.
+description: Route deep research, literature review, systematic review, meta-analysis, fact-checking, research question refinement, and evidence mapping requests to ScholarFlow literature, reading, citation, and PaperSpine workflows.
 ---
 
 # Deep Research Router

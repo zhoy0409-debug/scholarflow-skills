@@ -1,9 +1,0 @@
-interface:
-  display_name: "dbs-slowisfast：慢就是快"
-  short_description: "dontbesilent 慢就是快。帮创业者找到看起来更慢但长期更快的方法，用摩擦建造资产。 触发方式：/dbs-slowisfast、/慢就是快、「有没有更慢的方法」「我是不是太快了」 Slow-is-fast diagnosis. Help entrepreneurs find seemingly..."
-  default_prompt: "Use dbs-slowisfast to diagnose this business or content problem."
-ownership:
-  product_owner: "JL Skill Collection"
-  product_line: "DBS Business Toolkit"
-  origin: "jl-original-or-curated"
-  release_channel: "stable"

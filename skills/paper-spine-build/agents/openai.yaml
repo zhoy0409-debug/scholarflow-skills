@@ -3,7 +3,7 @@ interface:
   short_description: "Builds a paper or report from materials using the shared PaperSpine research, motivation, and rationale workflow."
   default_prompt: "Use paper-spine-build for this task."
 ownership:
-  product_owner: "JL Skill Collection"
+  product_owner: "Zhoy"
   product_line: "PaperSpine & Literature Ops"
   origin: "jl-original-or-curated"
   release_channel: "stable"

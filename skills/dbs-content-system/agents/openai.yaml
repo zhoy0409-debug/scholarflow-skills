@@ -1,9 +1,0 @@
-interface:
-  display_name: "dbs-content-system：内容结构化系统"
-  short_description: "dontbesilent 内容结构化系统。把本地大量文稿、推文、选题、案例和课程稿搭成一个可持续生长的内容结构化工程：先审计内容规模与边界，再建立新工程、复制素材、抽取内容单元、生成主题地图与选题装配稿。 触发方式：/dbs-content-system、/内容结构化系统、「把我的内容做成结构化系统」「..."
-  default_prompt: "Use dbs-content-system to diagnose this business or content problem."
-ownership:
-  product_owner: "JL Skill Collection"
-  product_line: "DBS Business Toolkit"
-  origin: "jl-original-or-curated"
-  release_channel: "stable"

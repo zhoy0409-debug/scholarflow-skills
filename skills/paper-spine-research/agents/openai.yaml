@@ -3,7 +3,7 @@ interface:
   short_description: "Researches target requirements, downloads reference materials, learns strong examples, and prepares motivation options."
   default_prompt: "Use paper-spine-research for this task."
 ownership:
-  product_owner: "JL Skill Collection"
+  product_owner: "Zhoy"
   product_line: "PaperSpine & Literature Ops"
   origin: "jl-original-or-curated"
   release_channel: "stable"

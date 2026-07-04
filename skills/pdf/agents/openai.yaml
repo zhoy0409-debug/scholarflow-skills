@@ -3,7 +3,7 @@ interface:
   short_description: "Use when tasks involve reading, creating, or reviewing PDF files where rendering and layout matter; prefer visual checks by rendering pages (Poppler) an..."
   default_prompt: "Use pdf to create or verify this deliverable."
 ownership:
-  product_owner: "JL Skill Collection"
+  product_owner: "Zhoy"
   product_line: "Delivery Stack"
   origin: "jl-original-or-curated"
   release_channel: "stable"

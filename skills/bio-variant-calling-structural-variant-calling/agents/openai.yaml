@@ -3,7 +3,7 @@ interface:
   short_description: "Call structural variants (SVs) from sequencing data using Manta, Delly, GRIDSS, and LUMPY. Detects deletions, insertions, inversions, duplications, and..."
   default_prompt: "Use bio-variant-calling-structural-variant-calling to design or troubleshoot this bioinformatics workflow."
 ownership:
-  product_owner: "JL Skill Collection"
+  product_owner: "Zhoy"
   product_line: "Bio & Omics Toolkit"
   origin: "jl-authored-tool-guide"
   release_channel: "stable"

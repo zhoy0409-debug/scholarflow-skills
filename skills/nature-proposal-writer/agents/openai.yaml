@@ -3,7 +3,7 @@ interface:
   short_description: "Proposal-first scientific writing pipeline. Three modes (compose/revise/hybrid) with four-layer QA pipeline. Enforces evidence-before-prose, argument-be..."
   default_prompt: "Use nature-proposal-writer for this task."
 ownership:
-  product_owner: "JL Skill Collection"
+  product_owner: "Zhoy"
   product_line: "General Skill Library"
   origin: "jl-original-or-curated"
   release_channel: "stable"

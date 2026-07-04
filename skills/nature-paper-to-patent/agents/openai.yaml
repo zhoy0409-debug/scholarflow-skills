@@ -3,7 +3,7 @@ interface:
   short_description: "Convert scientific papers, theses, technical reports, source code, figures, or research manuscripts into evidence-grounded Chinese invention patent draf..."
   default_prompt: "Use nature-paper-to-patent to help with my research workflow."
 ownership:
-  product_owner: "JL Skill Collection"
+  product_owner: "Zhoy"
   product_line: "Nature Research Suite"
   origin: "jl-original-or-curated"
   release_channel: "stable"

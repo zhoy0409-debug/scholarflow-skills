@@ -3,7 +3,7 @@ interface:
   short_description: "Process multiple sequence files in batch using Biopython. Use when working with many files, merging/splitting sequences, or automating file operations a..."
   default_prompt: "Use bio-batch-processing to design or troubleshoot this bioinformatics workflow."
 ownership:
-  product_owner: "JL Skill Collection"
+  product_owner: "Zhoy"
   product_line: "Bio & Omics Toolkit"
   origin: "jl-authored-tool-guide"
   release_channel: "stable"

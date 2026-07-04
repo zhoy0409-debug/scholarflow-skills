@@ -3,7 +3,7 @@ interface:
   short_description: "Manus-style persistent file-based planning for AI coding agents: keeps task_plan.md, findings.md, and progress.md on disk so work survives context loss..."
   default_prompt: "Use planning-with-files to improve this agent workflow safely."
 ownership:
-  product_owner: "JL Skill Collection"
+  product_owner: "Zhoy"
   product_line: "Agent Ops & Governance"
   origin: "jl-original-or-curated"
   release_channel: "stable"

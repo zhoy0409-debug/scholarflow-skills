@@ -1,9 +1,0 @@
-interface:
-  display_name: "dbs-agent-migration：Agent 工作台迁移"
-  short_description: "Agent 工作台迁移。把任意项目整理成 Claude Code / Codex / Grok 三端一致、可长期维护的 Agent 工作台：审计规则文件、识别真源、统一命名并生成 bridge。 触发方式：/dbs-agent-migration、/agent迁移、「迁移到 Codex」「迁移到 Cla..."
-  default_prompt: "Use dbs-agent-migration to diagnose this business or content problem."
-ownership:
-  product_owner: "JL Skill Collection"
-  product_line: "DBS Business Toolkit"
-  origin: "jl-original-or-curated"
-  release_channel: "stable"

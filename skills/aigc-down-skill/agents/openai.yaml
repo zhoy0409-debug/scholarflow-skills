@@ -3,7 +3,7 @@ interface:
   short_description: "AIGC Down Router"
   default_prompt: "Use aigc-down-skill for this task."
 ownership:
-  product_owner: "JL Skill Collection"
+  product_owner: "Zhoy"
   product_line: "Academic Writing & Integrity"
   origin: "jl-original-or-curated"
   release_channel: "stable"

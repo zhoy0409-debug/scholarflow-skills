@@ -1,9 +1,0 @@
-interface:
-  display_name: "dbs-xhs-title：小红书标题公式工具"
-  short_description: "小红书标题公式工具。从 75 个验证过的爆款公式中，帮你挑对的、用对的、理解为什么用这个。 触发方式：/dbs-xhs-title、/小红书标题、「帮我起个小红书标题」「小红书标题公式」 Xiaohongshu title formula tool. Pick the right formula fro..."
-  default_prompt: "Use dbs-xhs-title to diagnose this business or content problem."
-ownership:
-  product_owner: "JL Skill Collection"
-  product_line: "DBS Business Toolkit"
-  origin: "jl-original-or-curated"
-  release_channel: "stable"

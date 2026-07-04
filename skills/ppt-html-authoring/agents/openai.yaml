@@ -3,7 +3,7 @@ interface:
   short_description: "Author a single PPT slide as a self-contained slide.html + design.md, given one outline entry. Use when the user asks to design, draft, or rewrite an in..."
   default_prompt: "Use ppt-html-authoring to create or verify this deliverable."
 ownership:
-  product_owner: "JL Skill Collection"
+  product_owner: "Zhoy"
   product_line: "Delivery Stack"
   origin: "jl-original-or-curated"
   release_channel: "stable"

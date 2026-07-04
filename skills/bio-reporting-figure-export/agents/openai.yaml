@@ -3,7 +3,7 @@ interface:
   short_description: "Exports publication-ready figures in various formats with proper resolution, sizing, and typography. Use when preparing figures for journal submission,..."
   default_prompt: "Use bio-reporting-figure-export to design or troubleshoot this bioinformatics workflow."
 ownership:
-  product_owner: "JL Skill Collection"
+  product_owner: "Zhoy"
   product_line: "Bio & Omics Toolkit"
   origin: "jl-authored-tool-guide"
   release_channel: "stable"

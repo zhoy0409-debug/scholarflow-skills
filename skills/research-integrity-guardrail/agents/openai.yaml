@@ -3,7 +3,7 @@ interface:
   short_description: "Research-paper integrity and quality guardrail for academic manuscripts, AutoResearch-style outputs, literature reviews, methods/results sections, appen..."
   default_prompt: "Use research-integrity-guardrail for this task."
 ownership:
-  product_owner: "JL Skill Collection"
+  product_owner: "Zhoy"
   product_line: "Academic Writing & Integrity"
   origin: "jl-original-or-curated"
   release_channel: "stable"

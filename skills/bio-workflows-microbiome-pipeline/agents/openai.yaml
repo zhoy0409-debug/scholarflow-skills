@@ -3,7 +3,7 @@ interface:
   short_description: "End-to-end 16S amplicon workflow from FASTQ reads to differential abundance. Orchestrates DADA2 ASV inference, taxonomy assignment, diversity analysis,..."
   default_prompt: "Use bio-workflows-microbiome-pipeline to design or troubleshoot this bioinformatics workflow."
 ownership:
-  product_owner: "JL Skill Collection"
+  product_owner: "Zhoy"
   product_line: "Bio & Omics Toolkit"
   origin: "jl-authored-tool-guide"
   release_channel: "stable"

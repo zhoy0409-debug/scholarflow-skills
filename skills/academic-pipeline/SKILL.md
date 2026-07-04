@@ -5,7 +5,7 @@ description: End-to-end research-to-paper pipeline routing: question refinement,
 
 # Academic Pipeline Router
 
-Use this skill as an alias for the full JL research-to-paper pipeline.
+Use this skill as an alias for the full ScholarFlow research-to-paper pipeline.
 
 ## Route
 

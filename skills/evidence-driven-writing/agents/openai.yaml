@@ -3,7 +3,7 @@ interface:
   short_description: "Use when writing or revising Introduction, Related Work, background, literature synthesis, or any section where references must drive claims"
   default_prompt: "Use evidence-driven-writing for this task."
 ownership:
-  product_owner: "JL Skill Collection"
+  product_owner: "Zhoy"
   product_line: "General Skill Library"
   origin: "jl-original-or-curated"
   release_channel: "stable"

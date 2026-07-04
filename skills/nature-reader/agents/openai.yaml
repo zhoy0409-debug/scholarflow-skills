@@ -3,7 +3,7 @@ interface:
   short_description: "Build full-paper Chinese-English side-by-side, figure/table-aware, source-grounded Markdown readers for journal or conference papers from PDF, DOI, arXi..."
   default_prompt: "Use nature-reader to help with my research workflow."
 ownership:
-  product_owner: "JL Skill Collection"
+  product_owner: "Zhoy"
   product_line: "Nature Research Suite"
   origin: "jl-refactored-community"
   release_channel: "stable"

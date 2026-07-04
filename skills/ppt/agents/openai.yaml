@@ -3,7 +3,7 @@ interface:
   short_description: "Build PPT / PowerPoint / 演示文稿 / slide decks end-to-end via a .pptwork/<deck>/ filesystem contract. Use when the user wants to plan, author, screenshot,..."
   default_prompt: "Use ppt to create or verify this deliverable."
 ownership:
-  product_owner: "JL Skill Collection"
+  product_owner: "Zhoy"
   product_line: "Delivery Stack"
   origin: "jl-original-or-curated"
   release_channel: "stable"

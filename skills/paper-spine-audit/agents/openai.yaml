@@ -3,7 +3,7 @@ interface:
   short_description: "Audits PaperSpine outputs for missing artifacts, shallow revisions, logic transfer, unsupported claims, and translation coverage."
   default_prompt: "Use paper-spine-audit for this task."
 ownership:
-  product_owner: "JL Skill Collection"
+  product_owner: "Zhoy"
   product_line: "PaperSpine & Literature Ops"
   origin: "jl-original-or-curated"
   release_channel: "stable"

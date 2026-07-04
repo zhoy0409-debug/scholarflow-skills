@@ -3,7 +3,7 @@ interface:
   short_description: "Three-tiered sgRNA design guide using validated Addgene sequences, CRISPick pre-computed datasets, or de novo design rules for CRISPR experiments"
   default_prompt: "Use sgrna-design-guide to design or troubleshoot this bioinformatics workflow."
 ownership:
-  product_owner: "JL Skill Collection"
+  product_owner: "Zhoy"
   product_line: "Bio & Omics Toolkit"
   origin: "jl-authored-tool-guide"
   release_channel: "stable"

@@ -3,7 +3,7 @@ interface:
   short_description: "Static security audit workflow for Codex skills, agent skills, SKILL.md files, bundled scripts, hooks, shell snippets, suspicious file operations, promp..."
   default_prompt: "Use securityauditor to improve this agent workflow safely."
 ownership:
-  product_owner: "JL Skill Collection"
+  product_owner: "Zhoy"
   product_line: "Agent Ops & Governance"
   origin: "jl-original-or-curated"
   release_channel: "stable"

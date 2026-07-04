@@ -1,9 +1,0 @@
-interface:
-  display_name: "dbs-ai-check：AI 写作特征识别"
-  short_description: "dontbesilent AI 写作特征识别。扫描文案中的 AI 生成痕迹，输出检测报告。默认只诊断不改。 触发方式：/dbs-ai-check、/AI检测、「帮我看看有没有 AI 味」「检测一下 AI 特征」 AI writing fingerprint detection. Scans copy f..."
-  default_prompt: "Use dbs-ai-check to diagnose this business or content problem."
-ownership:
-  product_owner: "JL Skill Collection"
-  product_line: "DBS Business Toolkit"
-  origin: "jl-original-or-curated"
-  release_channel: "stable"

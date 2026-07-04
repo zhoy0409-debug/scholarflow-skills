@@ -3,7 +3,7 @@ interface:
   short_description: "macOS / Windows 只读存储分析助手（自动识别系统）。扫描整机磁盘占用，找出 占空间大户，把每一项分成 🟢可自动清理 / 🟡需人工判断 / 🔴谨慎清理 三级并给出 可执行处置方案，生成排版精美、可折叠、命令可一键复制的交互式 HTML 报告，并可 起本地服务在网页上一键删除（移废纸篓/直接删..."
   default_prompt: "Use storage-analyzer to improve this agent workflow safely."
 ownership:
-  product_owner: "JL Skill Collection"
+  product_owner: "Zhoy"
   product_line: "Agent Ops & Governance"
   origin: "jl-original-or-curated"
   release_channel: "stable"

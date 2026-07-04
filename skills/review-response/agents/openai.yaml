@@ -3,7 +3,7 @@ interface:
   short_description: "Systematic review response workflow from comment analysis to professional rebuttal writing. Use when the user asks to \"write rebuttal\", \"respond to revi..."
   default_prompt: "Use review-response for this task."
 ownership:
-  product_owner: "JL Skill Collection"
+  product_owner: "Zhoy"
   product_line: "Academic Writing & Integrity"
   origin: "jl-original-or-curated"
   release_channel: "stable"

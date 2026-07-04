@@ -3,7 +3,7 @@ name: nature-proposal-writer
 description: |
   Proposal-first scientific writing pipeline. Three modes (compose/revise/hybrid) with four-layer QA pipeline. Enforces evidence-before-prose, argument-before-sections, and contracts-before-paragraphs.
 version: 1.0.0
-author: 十五 (JL Lab)
+author: Zhoy
 license: MIT
 metadata:
   hermes:

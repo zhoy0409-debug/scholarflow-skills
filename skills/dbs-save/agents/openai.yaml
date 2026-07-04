@@ -1,9 +1,0 @@
-interface:
-  display_name: "dbs-save：诊断存档"
-  short_description: "把当前诊断的关键状态存到本地，下次回来可以接着用。 触发方式：/dbs-save、/存档、「保存这次诊断」「记下来」「这个结论留着」 Save the current diagnosis state to disk for cross-session recall. Trigger: /dbs-save..."
-  default_prompt: "Use dbs-save to diagnose this business or content problem."
-ownership:
-  product_owner: "JL Skill Collection"
-  product_line: "DBS Business Toolkit"
-  origin: "jl-original-or-curated"
-  release_channel: "stable"

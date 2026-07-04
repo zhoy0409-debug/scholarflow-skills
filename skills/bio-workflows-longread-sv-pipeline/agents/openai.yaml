@@ -3,7 +3,7 @@ interface:
   short_description: "End-to-end workflow for detecting structural variants from long-read sequencing data. Covers ONT/PacBio alignment with minimap2 and SV calling with Snif..."
   default_prompt: "Use bio-workflows-longread-sv-pipeline to design or troubleshoot this bioinformatics workflow."
 ownership:
-  product_owner: "JL Skill Collection"
+  product_owner: "Zhoy"
   product_line: "Bio & Omics Toolkit"
   origin: "jl-authored-tool-guide"
   release_channel: "stable"

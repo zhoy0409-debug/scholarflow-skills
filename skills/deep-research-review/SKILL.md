@@ -1,6 +1,6 @@
 ---
 name: deep-research-review
-description: Review, audit, and stress-test deep research outputs, literature reviews, evidence maps, systematic review drafts, and research claims with JL reviewer, citation, and integrity workflows.
+description: Review, audit, and stress-test deep research outputs, literature reviews, evidence maps, systematic review drafts, and research claims with ScholarFlow reviewer, citation, and integrity workflows.
 ---
 
 # Deep Research Review Router

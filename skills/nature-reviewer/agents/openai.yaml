@@ -3,7 +3,7 @@ interface:
   short_description: "Simulate a Nature-style reviewer assessment from the referee perspective rather than an author rebuttal. Use when the user wants a pre-submission review..."
   default_prompt: "Use nature-reviewer to help with my research workflow."
 ownership:
-  product_owner: "JL Skill Collection"
+  product_owner: "Zhoy"
   product_line: "Nature Research Suite"
   origin: "jl-original-or-curated"
   release_channel: "stable"

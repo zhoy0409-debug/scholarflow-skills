@@ -3,7 +3,7 @@ interface:
   short_description: "Creates a safe en-US handoff markdown file from the current session, including the session timestamp, status, objective, expected result, work done, win..."
   default_prompt: "Use session-handoff to improve this agent workflow safely."
 ownership:
-  product_owner: "JL Skill Collection"
+  product_owner: "Zhoy"
   product_line: "Agent Ops & Governance"
   origin: "jl-original-or-curated"
   release_channel: "stable"

@@ -3,7 +3,7 @@ interface:
   short_description: "End-to-end research manuscript workflow from evidence and motivation to draft, revision, translation, LaTeX, and integrity checks."
   default_prompt: "Use paper-spine for this task."
 ownership:
-  product_owner: "JL Skill Collection"
+  product_owner: "Zhoy"
   product_line: "PaperSpine & Literature Ops"
   origin: "jl-original-or-curated"
   release_channel: "stable"

@@ -3,7 +3,7 @@ interface:
   short_description: "End-of-session knowledge cleanup with OCD-level rigor — reconciles project docs (CLAUDE.md, README.md, docs/) and agent memory against the code so nothi..."
   default_prompt: "Use neat-freak for this task."
 ownership:
-  product_owner: "JL Skill Collection"
+  product_owner: "Zhoy"
   product_line: "Content & Knowledge Work"
   origin: "jl-original-or-curated"
   release_channel: "stable"

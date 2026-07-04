@@ -3,7 +3,7 @@ interface:
   short_description: "Use when revising a Chinese Word manuscript to standardize in-text citation superscripts and end-reference formatting for journal submission, especially..."
   default_prompt: "Use chinese-docx-reference-unifier for this task."
 ownership:
-  product_owner: "JL Skill Collection"
+  product_owner: "Zhoy"
   product_line: "General Skill Library"
   origin: "jl-original-or-curated"
   release_channel: "stable"

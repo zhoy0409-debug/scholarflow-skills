@@ -3,7 +3,7 @@ interface:
   short_description: "Assigns pathogen lineages (SARS-CoV-2 Pangolin via UShER mode; Nextclade clade + QC; pango-designation alias_key.json resolution) and tracks variant fre..."
   default_prompt: "Use bio-epidemiological-genomics-variant-surveillance to design or troubleshoot this bioinformatics workflow."
 ownership:
-  product_owner: "JL Skill Collection"
+  product_owner: "Zhoy"
   product_line: "Bio & Omics Toolkit"
   origin: "jl-authored-tool-guide"
   release_channel: "stable"

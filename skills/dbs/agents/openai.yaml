@@ -1,9 +1,0 @@
-interface:
-  display_name: "dbs：商业工具箱"
-  short_description: "dontbesilent 商业工具箱主入口。根据你的问题自动路由到最合适的诊断工具。 触发方式：/dbs、/商业、「帮我看看」 Main entry point for dontbesilent business toolkit. Routes to the right diagnostic skill..."
-  default_prompt: "Use dbs to diagnose this business or content problem."
-ownership:
-  product_owner: "JL Skill Collection"
-  product_line: "DBS Business Toolkit"
-  origin: "jl-original-or-curated"
-  release_channel: "stable"

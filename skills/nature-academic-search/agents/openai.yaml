@@ -3,7 +3,7 @@ interface:
   short_description: "Multi-source literature search, citation verification, MeSH search strategy, citation file management (.nbib/.ris/.bib conversion), and reference manage..."
   default_prompt: "Use nature-academic-search to help with my research workflow."
 ownership:
-  product_owner: "JL Skill Collection"
+  product_owner: "Zhoy"
   product_line: "Nature Research Suite"
   origin: "jl-refactored-community"
   release_channel: "stable"

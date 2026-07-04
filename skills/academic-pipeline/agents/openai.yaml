@@ -3,7 +3,7 @@ interface:
   short_description: "Academic Pipeline Router"
   default_prompt: "Use academic-pipeline for this task."
 ownership:
-  product_owner: "JL Skill Collection"
+  product_owner: "Zhoy"
   product_line: "Academic Writing & Integrity"
   origin: "jl-original-or-curated"
   release_channel: "stable"

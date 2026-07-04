@@ -3,7 +3,7 @@ interface:
   short_description: "Rewrites an existing manuscript from confirmed motivation, research, paragraph-level rationale, and evidence."
   default_prompt: "Use paper-spine-rewrite for this task."
 ownership:
-  product_owner: "JL Skill Collection"
+  product_owner: "Zhoy"
   product_line: "PaperSpine & Literature Ops"
   origin: "jl-original-or-curated"
   release_channel: "stable"

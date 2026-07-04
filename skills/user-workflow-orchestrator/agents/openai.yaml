@@ -3,7 +3,7 @@ interface:
   short_description: "Use when the user asks Codex to decide what skill/workflow they need, summarize recurring needs, handle ambiguous or cross-domain work, recover from pre..."
   default_prompt: "Use user-workflow-orchestrator for this task."
 ownership:
-  product_owner: "JL Skill Collection"
+  product_owner: "Zhoy"
   product_line: "General Skill Library"
   origin: "jl-original-or-curated"
   release_channel: "stable"
