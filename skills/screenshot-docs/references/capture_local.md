@@ -18,7 +18,7 @@ screenshot --help
 When the `screenshot` command is missing, run the module form from the repo:
 
 ```bash
-cd /Users/vosslab/nsh/easy-screenshot && python3 -m screenshot.screencapture --help
+cd /opt/easy-screenshot && python3 -m screenshot.screencapture --help
 ```
 
 easy-screenshot is an external macOS-only prerequisite, not a pip dependency of

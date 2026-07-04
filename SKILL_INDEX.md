@@ -194,7 +194,7 @@ This release package includes 230 skills.
 | `bio-workflows-outbreak-pipeline` | End-to-end outbreak investigation from pathogen isolates to transmission networks. Orchestrates MLST typing, AMR surveillance, phylodynamic dating, and transmission inference wi... |
 | `bio-write-sequences` | Write biological sequences to files (FASTA, FASTQ, GenBank, EMBL) using Biopython Bio.SeqIO. Use when saving sequences, creating new sequence files, or outputting modified records. |
 | `busco-status-interpretation` | Guide to interpreting BUSCO completeness statuses: why Duplicated BUSCOs count as complete, parsing output files, computing/comparing completeness across proteomes/genomes, comm... |
-| `bwa-mem2-dna-aligner` | Fast short-read DNA aligner for WGS/WES/ChIP-seq. 2× faster BWA-MEM successor; outputs SAM/BAM with read group headers for GATK. Primary plus supplementary records for chimeric... |
+| `bwa-mem2-dna-aligner` | Fast short-read DNA aligner for WGS/WES/ChIP-seq. 2x faster BWA-MEM successor; outputs SAM/BAM with read group headers for GATK. Primary plus supplementary records for chimeric... |
 | `cobrapy-metabolic-modeling` | Constraint-based (COBRA) analysis of genome-scale metabolic models: FBA, FVA, knockouts, flux sampling, production envelopes, gapfilling, media optimization. Use for strain desi... |
 | `ena-database` | ENA REST API for sequences, reads, assemblies, and annotations. Portal API search, Browser API retrieval (XML/FASTA/EMBL), file reports for FASTQ/BAM URLs, taxonomy, cross-refs.... |
 | `fastp-fastq-preprocessing` | All-in-one FASTQ QC and adapter trimming. Auto-detects Illumina adapters, filters low-quality reads, corrects paired-end overlaps, emits HTML+JSON QC in one pass. 3-10x faster t... |
@@ -262,7 +262,7 @@ This release package includes 230 skills.
 | `impeccable` | Run a rigorous final-quality pass on a document or deliverable, focusing on internal consistency, wording precision, factual boundaries, formatting, and issues that would make t... |
 | `jupyter-notebook` | Use when the user asks to create, scaffold, or edit Jupyter notebooks (`.ipynb`) for experiments, explorations, or tutorials; prefer the bundled templates and run the helper scr... |
 | `molecular-docking-md-mmpbsa-pymol` | Automate small molecule-target protein docking, MD, MM-PBSA/MM-GBSA, and visualization. Default system is one or more protein receptor chains plus an organic small-molecule liga... |
-| `nature-literature-pipeline` | Complete automated literature discovery pipeline: multi-source search → six-dimension scoring → fine reading → formatted delivery → archival. Combines a configurable engine with... |
+| `nature-literature-pipeline` | Complete automated literature discovery pipeline: multi-source search -> six-dimension scoring -> fine reading -> formatted delivery -> archival. Combines a configurable engine with... |
 | `notebooklm` | Use this skill to query your Google NotebookLM notebooks directly from Claude Code for source-grounded, citation-backed answers from Gemini. Browser automation, library manageme... |
 | `peer-review` | Structured manuscript/grant review with checklist-based evaluation. Use when writing formal peer reviews with specific criteria methodology assessment, statistical validity, rep... |
 | `research-integrity-guardrail` | Research-paper integrity and quality guardrail for academic manuscripts, AutoResearch-style outputs, literature reviews, methods/results sections, appendices, rebuttals, grant t... |

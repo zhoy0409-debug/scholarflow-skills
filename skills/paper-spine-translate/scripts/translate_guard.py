@@ -2,7 +2,7 @@
 """PaperSpine Translation Guard - verify translation_zh/ completeness and quality.
 
 Checks file existence, structural preservation (table row counts for large
-artifacts), content density (stricter 50% threshold), full-paper coverage,
+artifacts), material density (stricter 50% threshold), full-paper coverage,
 and manifest cross-validation.  Produces a teaching-oriented report that
 says *what* is missing and *how* to fix it.
 
@@ -231,7 +231,7 @@ def check_structural_preservation(trans_dir: Path, out_dir: Path) -> list[Transl
 # Check 3 - Content Density
 # ---------------------------------------------------------------------------
 
-def check_content_density(trans_dir: Path, out_dir: Path) -> list[TranslationFinding]:
+def check_material_density(trans_dir: Path, out_dir: Path) -> list[TranslationFinding]:
     findings: list[TranslationFinding] = []
     for zh_name, en_name in sorted(TRANSLATION_SOURCE.items()):
         zh_path = trans_dir / zh_name
@@ -252,12 +252,12 @@ def check_content_density(trans_dir: Path, out_dir: Path) -> list[TranslationFin
                 severity="BLOCKER" if ratio < 0.25 else "WARNING",
                 what=f"`{zh_name}` is {zh_len} chars vs {en_len} in source - "
                       f"density ratio {ratio:.0%} (minimum: {MIN_DENSITY_RATIO:.0%})",
-                fix=f"Expand the translation of `{zh_name}` to cover all content from `{en_name}`. "
+                fix=f"Expand the translation of `{zh_name}` to cover all material from `{en_name}`. "
                     f"Chinese translations typically reach 40-70% of English character count. "
                     f"At {ratio:.0%}, this file appears to be a summary, not a translation.",
                 teaching="A translation should convey the same information as the source. "
                         "When a translated file is dramatically shorter than the original, "
-                        "content has been lost - usually because the translator summarized instead of translating.",
+                        "material has been lost - usually because the translator summarized instead of translating.",
             ))
 
     if not findings:
@@ -349,7 +349,7 @@ def check_manifest(trans_dir: Path, config: dict) -> list[TranslationFinding]:
             id="MANIFEST-001", severity="BLOCKER",
             what="translation_zh/manifest.md is missing",
             fix="Create manifest.md listing every translation file with its status (translated/missing/partial).",
-            teaching="The manifest is the translation package's table of contents. "
+            teaching="The manifest is the translation package's table of materials. "
                     "Without it, there's no way to quickly assess translation coverage.",
         ))
         return findings
@@ -382,7 +382,7 @@ def check_manifest(trans_dir: Path, config: dict) -> list[TranslationFinding]:
         ))
 
     # Check manifest flags partial/missing
-    if re.search(r"(missing|partial|not translated|English text|English text|English text)", manifest_text, re.IGNORECASE):
+    if re.search(r"(missing|partial|not translated|material|material|material)", manifest_text, re.IGNORECASE):
         findings.append(TranslationFinding(
             id="MANIFEST-003", severity="BLOCKER",
             what="Manifest reports files as missing or partially translated",
@@ -457,7 +457,7 @@ def main() -> int:
     all_findings: list[TranslationFinding] = []
     all_findings.extend(check_file_completeness(trans_dir, out_dir, config))
     all_findings.extend(check_structural_preservation(trans_dir, out_dir))
-    all_findings.extend(check_content_density(trans_dir, out_dir))
+    all_findings.extend(check_material_density(trans_dir, out_dir))
     all_findings.extend(check_full_paper_coverage(trans_dir, out_dir))
     all_findings.extend(check_manifest(trans_dir, config))
 

@@ -81,5 +81,5 @@ references:
       path: references/style-guardrails.md
     - condition: needs deeper writing-strategy principles
       path: references/writing-strategy.md
-    - condition: needs LaTeX layout/typesetting help (English text) - loose or sparse pages, stranded section headings, figures that don't fill the page or split across pages, "Float too large", multi-panel figure arrangement, or Supplementary Information that looks empty
+    - condition: needs LaTeX layout/typesetting help (description) - loose or sparse pages, stranded section headings, figures that don't fill the page or split across pages, "Float too large", multi-panel figure arrangement, or Supplementary Information that looks empty
       path: references/latex-layout.md

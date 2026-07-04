@@ -14,7 +14,7 @@
 #   capture_local.sh "App Name" "" /tmp/main_window.png        # no title filter
 #
 # Requirements: macOS, easy-screenshot installed (the `screenshot` command) or its
-# repo at /Users/vosslab/nsh/easy-screenshot/, and Screen Recording permission for
+# repo at /opt/easy-screenshot/, and Screen Recording permission for
 # the controlling terminal.
 
 set -euo pipefail
@@ -42,7 +42,7 @@ fi
 if command -v screenshot >/dev/null 2>&1; then
 	screenshot "${args[@]}"
 else
-	easy_screenshot_dir="/Users/vosslab/nsh/easy-screenshot"
+	easy_screenshot_dir="/opt/easy-screenshot"
 	( cd "${easy_screenshot_dir}" && python3 -m screenshot.screencapture "${args[@]}" )
 fi
 

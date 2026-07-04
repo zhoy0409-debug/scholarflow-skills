@@ -114,9 +114,9 @@ Each skill contains at least:
 
 ```text
 skill-name/
-├── SKILL.md
-└── agents/
-    └── openai.yaml
++-- SKILL.md
++-- agents/
+    +-- openai.yaml
 ```
 
 More complex skills may also include:
@@ -131,12 +131,12 @@ assets/       images, templates, or static resources
 
 ```text
 scholarflow-skills/
-├── README.md             project overview
-├── GETTING_STARTED.md    first-use guide
-├── QUALITY_STANDARD.md   release and quality standard
-├── SKILL_INDEX.md        skill index
-├── LICENSE               open-source license
-└── skills/               installable skills
++-- README.md             project overview
++-- GETTING_STARTED.md    first-use guide
++-- QUALITY_STANDARD.md   release and quality standard
++-- SKILL_INDEX.md        skill index
++-- LICENSE               open-source license
++-- skills/               installable skills
 ```
 
 ## Boundaries

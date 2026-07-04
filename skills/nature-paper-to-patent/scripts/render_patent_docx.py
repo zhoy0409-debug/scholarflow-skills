@@ -26,7 +26,7 @@ def add_heading(document: Document, text: str, level: int = 1) -> None:
     paragraph = document.add_paragraph()
     paragraph.alignment = WD_ALIGN_PARAGRAPH.CENTER if level == 1 else WD_ALIGN_PARAGRAPH.LEFT
     run = paragraph.add_run(text)
-    set_run_font(run, "English text", 16 if level == 1 else 14, bold=True)
+    set_run_font(run, "Times New Roman", 16 if level == 1 else 14, bold=True)
 
 
 def add_body(document: Document, text: str, indent: bool = True) -> None:
@@ -35,7 +35,7 @@ def add_body(document: Document, text: str, indent: bool = True) -> None:
     if indent:
         paragraph.paragraph_format.first_line_indent = Cm(0.74)
     run = paragraph.add_run(str(text))
-    set_run_font(run, "English text", 12)
+    set_run_font(run, "Times New Roman", 12)
 
 
 def add_equation(document: Document, equation: dict) -> None:
@@ -80,25 +80,25 @@ def configure(document: Document) -> None:
 
 
 def add_claims(document: Document, claims: list[dict]) -> None:
-    add_heading(document, "English text")
+    add_heading(document, "Abstract")
     for claim in claims:
         add_body(document, f"{claim['number']}. {claim['text']}", indent=False)
 
 
 def add_specification(document: Document, data: dict, figure_dir: Path | None = None) -> None:
-    add_heading(document, "English text")
+    add_heading(document, "Abstract")
     add_heading(document, data.get("title", "[TO CONFIRM: title]"), level=2)
     spec = data.get("specification", {})
     sections = [
-        ("English text", spec.get("technical_field", [])),
-        ("English text", spec.get("background", [])),
+        ("Technical Field", spec.get("technical_field", [])),
+        ("Background", spec.get("background", [])),
     ]
     invention = spec.get("invention_content", {})
     sections.extend(
         [
-            ("English text", invention.get("problem", []) + invention.get("solution", [])),
-            ("English text", invention.get("beneficial_effects", [])),
-            ("English text", spec.get("figure_descriptions", [])),
+            ("Summary", invention.get("problem", []) + invention.get("solution", [])),
+            ("Beneficial Effects", invention.get("beneficial_effects", [])),
+            ("Brief Description of Drawings", spec.get("figure_descriptions", [])),
         ]
     )
     for heading, paragraphs in sections:
@@ -108,14 +108,14 @@ def add_specification(document: Document, data: dict, figure_dir: Path | None = 
 
     equations = spec.get("equations", [])
     if equations:
-        add_heading(document, "English text", level=2)
+        add_heading(document, "Equations", level=2)
         for equation in equations:
             add_equation(document, equation)
 
     if figure_dir:
         figures = data.get("figures", [])
         if figures:
-            add_heading(document, "English text", level=2)
+            add_heading(document, "Equations", level=2)
         for figure in figures:
             image = figure_dir / f"figure-{figure['number']}.png"
             if not image.exists():
@@ -126,12 +126,12 @@ def add_specification(document: Document, data: dict, figure_dir: Path | None = 
             run.add_picture(str(image), width=Cm(14))
             caption = document.add_paragraph()
             caption.alignment = WD_ALIGN_PARAGRAPH.CENTER
-            caption_run = caption.add_run(f"English text{figure['number']} {figure.get('title', '')}")
-            set_run_font(caption_run, "English text", 11)
+            caption_run = caption.add_run(f"content{figure['number']} {figure.get('title', '')}")
+            set_run_font(caption_run, "Times New Roman", 11)
 
-    add_heading(document, "English text", level=2)
+    add_heading(document, "Equations", level=2)
     for embodiment in spec.get("embodiments", []):
-        add_heading(document, embodiment.get("heading", "English text"), level=2)
+        add_heading(document, embodiment.get("heading", "Embodiment"), level=2)
         for paragraph in embodiment.get("paragraphs", []):
             add_body(document, paragraph)
 
@@ -155,8 +155,8 @@ def add_figure(
     run.add_picture(str(image), width=Cm(14))
     caption = document.add_paragraph()
     caption.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    caption_run = caption.add_run(f"English text{figure['number']} {figure.get('title', '')}")
-    set_run_font(caption_run, "English text", 11)
+    caption_run = caption.add_run(f"content{figure['number']} {figure.get('title', '')}")
+    set_run_font(caption_run, "Times New Roman", 11)
     return True
 
 
@@ -174,12 +174,12 @@ def add_abstract(
     figure_dir: Path | None = None,
     include_figure: bool = True,
 ) -> None:
-    add_heading(document, "English text")
+    add_heading(document, "Abstract")
     add_heading(document, data.get("title", "[TO CONFIRM: title]"), level=2)
     add_body(document, data.get("abstract", ""), indent=False)
     figure = abstract_figure(data)
     if include_figure and figure:
-        add_figure(document, figure, figure_dir, heading="English text")
+        add_figure(document, figure, figure_dir, heading="Abstract Drawing")
 
 
 def add_abstract_figure(
@@ -187,7 +187,7 @@ def add_abstract_figure(
     data: dict,
     figure_dir: Path | None,
 ) -> None:
-    add_heading(document, "English text")
+    add_heading(document, "Abstract")
     figure = abstract_figure(data)
     if figure:
         add_figure(document, figure, figure_dir)
@@ -195,27 +195,27 @@ def add_abstract_figure(
 
 def add_review_appendix(document: Document, data: dict) -> None:
     document.add_section(WD_SECTION.NEW_PAGE)
-    add_heading(document, "English text")
+    add_heading(document, "Abstract")
     metadata = data.get("metadata", {})
     for key, value in metadata.items():
         add_body(document, f"{key}: {value}", indent=False)
 
-    add_heading(document, "English text", level=2)
+    add_heading(document, "Equations", level=2)
     for item in data.get("assumptions", []):
         add_body(document, f"- {item}", indent=False)
 
     concept = data.get("invention_concept", {})
-    add_heading(document, "English text", level=2)
+    add_heading(document, "Equations", level=2)
     for key in ("technical_problem", "technical_means", "technical_effect"):
         if concept.get(key):
             add_body(document, f"{key}: {concept[key]}", indent=False)
 
     ledger = data.get("evidence_ledger", [])
     if ledger:
-        add_heading(document, "English text", level=2)
+        add_heading(document, "Equations", level=2)
         table = document.add_table(rows=1, cols=6)
         table.style = "Table Grid"
-        headers = ("ID", "English text", "English text", "English text", "English text", "English text")
+        headers = ("ID", "Times New Roman", "Times New Roman", "Times New Roman", "Times New Roman", "Times New Roman")
         for cell, header in zip(table.rows[0].cells, headers):
             cell.text = header
         keys = ("id", "feature", "source_location", "technical_role", "effect", "support_status")
@@ -226,9 +226,9 @@ def add_review_appendix(document: Document, data: dict) -> None:
 
     audit = data.get("audit", {})
     for heading, key in (
-        ("English text", "support_findings"),
-        ("English text", "consistency_findings"),
-        ("English text", None),
+        ("Times New Roman", "support_findings"),
+        ("Times New Roman", "consistency_findings"),
+        ("Times New Roman", None),
     ):
         add_heading(document, heading, level=2)
         items = data.get("inventor_questions", []) if key is None else audit.get(key, [])

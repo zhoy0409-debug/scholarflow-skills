@@ -185,7 +185,7 @@ bamCoverage -b sample.bam -o sample.bw \
 
 # CORRECT ChIP-Rx spike-in:
 # 1. Compute scale factor externally
-SPIKE_RPM=$(samtools view -c sample.spike.bam) 
+SPIKE_RPM=$(samtools view -c sample.spike.bam)
 SCALE_FACTOR=$(echo "scale=10; 1000000 / $SPIKE_RPM" | bc)
 
 # 2. Apply --scaleFactor with --normalizeUsing None

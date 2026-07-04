@@ -1,4 +1,4 @@
-"""English text. """
+"""Load and match bundled institution presets."""
 
 from __future__ import annotations
 
@@ -10,6 +10,7 @@ try:
 except ImportError:
     yaml = None  # type: ignore
 
+
 SCHOOLS_FILE = Path(__file__).resolve().parent.parent / "data" / "schools.yaml"
 
 
@@ -17,25 +18,19 @@ def _parse_scalar(value: str) -> Any:
     value = value.strip()
     if value in ("", "null", "None"):
         return None
-    if value.startswith('"') and value.endswith('"'):
-        return value[1:-1]
     if value.startswith("[") and value.endswith("]"):
         inner = value[1:-1].strip()
-        if not inner:
-            return []
-        return [part.strip().strip('"') for part in inner.split(",")]
-    return value
+        return [] if not inner else [part.strip().strip("\"'") for part in inner.split(",")]
+    return value.strip("\"'")
 
 
 def _load_schools_without_yaml(text: str) -> list[dict[str, Any]]:
-    """English text schools.yaml, English text PyYAML English text. """
     schools: list[dict[str, Any]] = []
     current: Optional[dict[str, Any]] = None
     section: Optional[str] = None
-
     for raw in text.splitlines():
         stripped = raw.strip()
-        if not stripped or stripped.startswith("#") or stripped == "schools:":
+        if not stripped or stripped.startswith("#") or stripped in {"schools:", "version: 1"}:
             continue
         indent = len(raw) - len(raw.lstrip(" "))
         if stripped.startswith("- name:"):
@@ -44,91 +39,62 @@ def _load_schools_without_yaml(text: str) -> list[dict[str, Any]]:
             current = {"name": _parse_scalar(stripped.split(":", 1)[1]), "auth": {}}
             section = None
             continue
-        if current is None:
+        if current is None or ":" not in stripped:
             continue
-        if indent == 4 and stripped.endswith(":"):
-            section = stripped[:-1]
-            current.setdefault(section, {})
-            continue
-        if ":" not in stripped:
-            continue
-
         key, value = stripped.split(":", 1)
-        if section and indent >= 6:
+        if indent == 4 and value.strip() == "":
+            section = key.strip()
+            current.setdefault(section, {})
+        elif section and indent >= 6:
             current.setdefault(section, {})[key.strip()] = _parse_scalar(value)
         else:
             section = None
             current[key.strip()] = _parse_scalar(value)
-
     if current:
         schools.append(current)
     return schools
 
 
 def load_schools() -> list[dict[str, Any]]:
-    """English text. English text PyYAML, English text. """
     if not SCHOOLS_FILE.exists():
         return []
     text = SCHOOLS_FILE.read_text(encoding="utf-8")
     if yaml is None:
         return _load_schools_without_yaml(text)
     data = yaml.safe_load(text)
-    return data.get("schools", []) if data else []
+    return data.get("schools", []) if isinstance(data, dict) else []
 
 
 def match_school(query: str) -> Optional[dict[str, Any]]:
-    """English text. 
-
-    English text: English text → English text → English text. 
-    English text, English text None. 
-    """
     query = query.strip().lower()
     if not query:
         return None
-
     schools = load_schools()
-    if not schools:
-        return None
-
-    # 1. English text name
-    for s in schools:
-        if s["name"].lower() == query:
-            return s
-
-    # 2. English text
-    for s in schools:
-        for alias in s.get("aliases", []):
-            if alias.lower() == query:
-                return s
-
-    # 3. name English text
-    for s in schools:
-        if query in s["name"].lower():
-            return s
-
-    # 4. English text
-    for s in schools:
-        for alias in s.get("aliases", []):
-            if query in alias.lower():
-                return s
-
+    for school in schools:
+        if school.get("name", "").lower() == query:
+            return school
+    for school in schools:
+        for alias in school.get("aliases", []) or []:
+            if str(alias).lower() == query:
+                return school
+    for school in schools:
+        if query in school.get("name", "").lower():
+            return school
+    for school in schools:
+        for alias in school.get("aliases", []) or []:
+            if query in str(alias).lower():
+                return school
     return None
 
 
 def list_school_names() -> list[str]:
-    """English text. """
-    return [s["name"] for s in load_schools()]
+    return [school["name"] for school in load_schools() if school.get("name")]
 
 
 if __name__ == "__main__":
     schools = load_schools()
-    print(f"English text {len(schools)} English text")
-    for s in schools[:5]:
-        print(f"  - {s['name']} ({', '.join(s.get('aliases', []))})")
-    if len(schools) > 5:
-        print(f"  ... English text {len(schools) - 5} English text")
-
-    print("\n=== English text ===")
-    for q in ["English text", "SJTU", "English text", "English text", "English text"]:
-        m = match_school(q)
-        print(f"  '{q}' -> {m['name'] if m else 'English text'}")
+    print(f"Loaded {len(schools)} school presets")
+    for school in schools[:8]:
+        print(f"  - {school['name']} ({', '.join(school.get('aliases', []))})")
+    if len(schools) > 8:
+        print(f"  ... and {len(schools) - 8} more")

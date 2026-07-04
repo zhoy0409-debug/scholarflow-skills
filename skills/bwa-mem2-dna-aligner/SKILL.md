@@ -233,7 +233,7 @@ for sample in "${SAMPLES[@]}"; do
         data/${sample}_R2.fastq.gz \
         | samtools sort -@ 4 -m 2G -o results/${sample}.sorted.bam
     samtools index results/${sample}.sorted.bam
-    
+
     MAPPED=$(samtools view -c -F 4 results/${sample}.sorted.bam)
     TOTAL=$(samtools view -c results/${sample}.sorted.bam)
     echo "$sample: $MAPPED / $TOTAL reads mapped"

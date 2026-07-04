@@ -1,119 +1,86 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "SchoolConfig",
-  "description": "English text schema, English text ~/.config/lit-dl/school.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://scholarflow.skills/schemas/school-access.schema.json",
+  "title": "School Access Configuration",
+  "description": "Configuration used by nature-downloader to remember an institution's access route.",
   "type": "object",
-  "required": ["version", "school", "auth", "libraries"],
+  "required": [
+    "version",
+    "school",
+    "access",
+    "libraries"
+  ],
   "properties": {
     "version": {
       "type": "integer",
-      "description": "English text, English text",
-      "const": 1
+      "description": "Configuration schema version."
+    },
+    "updated_at": {
+      "type": "string",
+      "description": "ISO-8601 timestamp for the last update."
     },
     "school": {
       "type": "object",
-      "required": ["name"],
+      "required": [
+        "name"
+      ],
       "properties": {
         "name": {
           "type": "string",
-          "minLength": 2,
-          "description": "English text"
+          "description": "Institution name."
         },
-        "code": {
-          "type": ["string", "null"],
-          "description": "English text/English text"
-        },
-        "configured_at": {
-          "type": ["string", "null"],
-          "format": "date-time",
-          "description": "English text ISO 8601"
+        "aliases": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "source": {
-          "type": ["string", "null"],
-          "enum": ["preset", "manual", "resource_url", null],
-          "description": "English text: English text / English text / English text"
+          "type": "string",
+          "description": "preset, manual, or resource_url."
+        },
+        "notes": {
+          "type": "string"
         }
       }
     },
-    "auth": {
+    "access": {
       "type": "object",
-      "required": ["type", "sso_domain"],
       "properties": {
         "type": {
           "type": "string",
-          "enum": ["cas", "jaccount", "uis", "ustp", "sso", "custom"],
-          "description": "English text"
+          "enum": [
+            "cas",
+            "sso",
+            "ezproxy",
+            "webvpn",
+            "custom"
+          ]
         },
         "sso_domain": {
-          "type": "string",
-          "description": "English text, English text jaccount.sjtu.edu.cn"
+          "type": "string"
         },
         "carsi_entry": {
-          "type": ["string", "null"],
-          "description": "CARSI English text URL"
-        },
-        "carsi_sp_entity_id": {
-          "type": ["string", "null"],
-          "description": "CARSI SP EntityID(English text)"
-        }
-      }
-    },
-    "proxy": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": ["string", "null"],
-          "enum": ["ezproxy", null],
-          "description": "English text"
+          "type": "string"
         },
         "ezproxy_url": {
-          "type": ["string", "null"],
-          "description": "EZproxy English text"
+          "type": "string"
+        },
+        "resource_entry": {
+          "type": "string"
         }
       }
     },
     "libraries": {
       "type": "array",
+      "description": "Databases or publisher platforms available through the institution.",
       "items": {
         "type": "string"
-      },
-      "minItems": 1,
-      "description": "English text, English text"
+      }
     },
     "discovery": {
       "type": "object",
-      "properties": {
-        "web_of_science_url": {
-          "type": ["string", "null"],
-          "description": "Web of Science / English text"
-        },
-        "resource_entry_url": {
-          "type": ["string", "null"],
-          "description": "English text"
-        },
-        "resource_portal_url": {
-          "type": ["string", "null"],
-          "description": "English text"
-        },
-        "auth_service_host": {
-          "type": ["string", "null"],
-          "description": "English text"
-        }
-      },
       "additionalProperties": true
-    },
-    "notes": {
-      "type": "string",
-      "default": "",
-      "description": "English text"
-    },
-    "_warnings": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      },
-      "description": "English text(English text)"
     }
-  },
-  "additionalProperties": false
+  }
 }

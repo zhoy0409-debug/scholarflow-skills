@@ -19,6 +19,7 @@ PLACEHOLDER_PATTERNS = (
     r"\?\?",
     r"\[\[",
     r"\]\]",
+    r"<[^>]+>",
 )
 
 
@@ -29,16 +30,6 @@ class WordGuardResult:
     text_length: int
     paragraph_count: int
     findings: list[str]
-
-
-def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Check a generated .docx file.")
-    parser.add_argument("docx_path")
-    parser.add_argument("--min-chars", type=int, default=200)
-    parser.add_argument("--markdown", action="store_true")
-    parser.add_argument("--json", action="store_true")
-    parser.add_argument("--output", type=Path, help="Optional report path.")
-    return parser.parse_args()
 
 
 def extract_text(document_xml: bytes) -> tuple[str, int]:
@@ -57,12 +48,10 @@ def check_docx(path: Path, min_chars: int) -> WordGuardResult:
     findings: list[str] = []
     text = ""
     paragraph_count = 0
-
     if not path.exists():
         return WordGuardResult(str(path), False, 0, 0, ["file does not exist"])
     if path.suffix.lower() != ".docx":
         findings.append("file extension is not .docx")
-
     names: set[str] = set()
     try:
         with zipfile.ZipFile(path) as docx:
@@ -76,34 +65,19 @@ def check_docx(path: Path, min_chars: int) -> WordGuardResult:
         return WordGuardResult(str(path), False, 0, 0, ["not a valid zip/docx file"])
     except ElementTree.ParseError as exc:
         findings.append(f"word/document.xml parse error: {exc}")
-
     if len(text) < min_chars:
         findings.append(f"text is too short: {len(text)} chars < {min_chars}")
     if paragraph_count == 0:
-        findings.append("no non-empty paragraphs found - docx may be empty or corrupted")
-        # Check if images exist but text was lost (broken image conversion)
-        has_images = any(name.startswith("word/media/") for name in names)
-        if has_images:
-            findings.append(
-                "Images found in docx but no text - pandoc image conversion likely failed. "
-                "Verify: (1) images are PNG/JPG format, (2) `--resource-path` and `--extract-media` flags used, "
-                "(3) pandoc ran from the `final_paper/` directory so relative paths resolve."
-            )
+        findings.append("no non-empty paragraphs found; the document may be empty or corrupted")
+        if any(name.startswith("word/media/") for name in names):
+            findings.append("images are present but text was not extracted; verify document conversion settings")
     for pattern in PLACEHOLDER_PATTERNS:
         if re.search(pattern, text, flags=re.IGNORECASE):
             findings.append(f"unresolved placeholder pattern found: {pattern}")
-
-    # Chinese encoding checks: detect garbled text / mojibake
-    has_chinese = bool(re.search(r"[English text-English text]", text))
-    if has_chinese:
-        garbled = re.findall(r"[\x80-\xff]{4,}", text)
-        if garbled:
-            findings.append(f"Possible garbled Chinese text: {len(garbled)} suspicious byte sequences. Re-export with UTF-8 encoding.")
-        # Check for common encoding corruption patterns
-        corruption = re.findall(r"English text[English text]", text)  # common gbk-decoded-as-utf8 pattern
-        if corruption:
-            findings.append("Chinese encoding corruption detected: GBK text decoded as UTF-8. Re-export with proper encoding.")
-
+    if re.search(r"[\u4e00-\u9fff]", text):
+        suspicious = re.findall(r"[\x80-\xff]{4,}", text)
+        if suspicious:
+            findings.append("possible encoding corruption detected; re-export with UTF-8 compatible settings")
     return WordGuardResult(str(path), not findings, len(text), paragraph_count, findings)
 
 
@@ -119,23 +93,24 @@ def to_markdown(result: WordGuardResult) -> str:
         "## Findings",
         "",
     ]
-    if result.findings:
-        lines.extend(f"- {finding}" for finding in result.findings)
-    else:
-        lines.append("- None")
+    lines.extend(f"- {finding}" for finding in result.findings) if result.findings else lines.append("- None")
     lines.append("")
     return "\n".join(lines)
 
 
 def main() -> int:
-    args = parse_args()
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("docx_path")
+    parser.add_argument("--min-chars", type=int, default=200)
+    parser.add_argument("--markdown", action="store_true")
+    parser.add_argument("--json", action="store_true")
+    parser.add_argument("--output", type=Path)
+    args = parser.parse_args()
     result = check_docx(Path(args.docx_path), args.min_chars)
     markdown = to_markdown(result)
-
     if args.output:
         args.output.parent.mkdir(parents=True, exist_ok=True)
         args.output.write_text(markdown, encoding="utf-8")
-
     if args.json:
         print(json.dumps(result.__dict__, ensure_ascii=False, indent=2))
     if args.markdown or not args.json:

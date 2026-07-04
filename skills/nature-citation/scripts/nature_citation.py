@@ -314,7 +314,7 @@ def slug_from_text(text: str, max_words: int = 6) -> str:
     """Derive a filename slug from the first meaningful words of manuscript text."""
     text = clean_text(text)
     text = re.sub(r"\[[^\]]+\]|\([A-Za-z]+ et al\.,? \d{4}\)", " ", text)
-    words = re.findall(r"[A-Za-z0-9]+|[English text-English text]+", text)
+    words = re.findall(r"[A-Za-z0-9]+|[\u4e00-\u9fff]+", text)
     stopwords = {
         "the", "a", "an", "and", "or", "of", "to", "in", "for", "by", "with", "on", "at",
         "from", "is", "are", "was", "were", "be", "been", "being", "that", "this", "these",
@@ -1976,7 +1976,7 @@ def main(argv: list[str]) -> int:
     errors.extend(doi_errors)
     references = dedupe([*references, *doi_candidates])[: args.max_candidates]
 
-    # English text
+    # content
     if args.format == "enw":
         write_enw(references, output_path)
     elif args.format == "ris":

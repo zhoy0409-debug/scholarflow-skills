@@ -1,6 +1,6 @@
 # Section contracts
 
-## Section: 
+## Section:
 
 - Purpose:
 - Inputs:

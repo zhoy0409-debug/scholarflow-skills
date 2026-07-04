@@ -65,7 +65,7 @@ Systematically improve resilience:
 ```css
 /* Prevent flex items from overflowing */
 .flex-item {
-  min-width: 0; /* Allow shrinking below content size */
+  min-width: 0; /* Allow shrinking below guidance size */
   overflow: hidden;
 }
 
@@ -86,15 +86,15 @@ Systematically improve resilience:
 
 **Text expansion**:
 - Add 30-40% space budget for translations
-- Use flexbox/grid that adapts to content
+- Use flexbox/grid that adapts to guidance
 - Test with longest language (usually German)
 - Avoid fixed widths on text containers
 
 ```jsx
-// ❌ Bad: Assumes short English text
+// ❌ Bad: Assumes short guidance
 <button className="w-24">Submit</button>
 
-// ✅ Good: Adapts to content
+// ✅ Good: Adapts to guidance
 <button className="px-4 py-2">Submit</button>
 ```
 
@@ -121,9 +121,9 @@ border-inline-end: 1px solid; /* Not border-right */
 new Intl.DateTimeFormat('en-US').format(date); // 1/15/2024
 new Intl.DateTimeFormat('de-DE').format(date); // 15.1.2024
 
-new Intl.NumberFormat('en-US', { 
-  style: 'currency', 
-  currency: 'USD' 
+new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD'
 }).format(1234.56); // $1,234.56
 ```
 
@@ -235,7 +235,7 @@ t('items', { count }) // Handles complex plural rules
 **Constraint handling**:
 ```html
 <!-- Set clear constraints -->
-<input 
+<input
   type="text"
   maxlength="100"
   pattern="[A-Za-z0-9]+"
@@ -253,7 +253,7 @@ t('items', { count }) // Handles complex plural rules
 - All functionality accessible via keyboard
 - Logical tab order
 - Focus management in modals
-- Skip links for long content
+- Skip links for long guidance
 
 **Screen reader support**:
 - Proper ARIA labels

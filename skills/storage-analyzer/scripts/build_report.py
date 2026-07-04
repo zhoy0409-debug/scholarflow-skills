@@ -42,13 +42,13 @@ def main():
         tpl = f.read()
 
     blob = json.dumps(data, ensure_ascii=False)
-    # English text(DELETE=null), English text server.py English text
+    # DELETE is disabled in static reports; server.py injects a token when live delete actions are enabled.
     html = tpl.replace("__REPORT_DATA__", blob).replace("__DELETE_CONFIG__", "null")
 
     with open(out, "w", encoding="utf-8") as f:
         f.write(html)
-    print(f"English text: {out}")
-    print(f"English text: open '{out}'")
+    print(f"Wrote report: {out}")
+    print(f"Open the report in a browser: {out}")
 
 
 if __name__ == "__main__":

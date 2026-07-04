@@ -58,12 +58,12 @@ def main() -> int:
         shutil.copy2(paper, project / "paper" / paper.name)
 
     intake = {
-        "target_jurisdiction": "English text",
+        "target_jurisdiction": "to be confirmed",
         "requested_deliverable": "full-draft",
-        "publication_status": "[TO CONFIRM: English text]",
+        "publication_status": "[TO CONFIRM: publication or disclosure status]",
         "publication_dates": [],
-        "inventorship": "[TO CONFIRM: English text]",
-        "ownership": "[TO CONFIRM: English text]",
+        "inventorship": "[TO CONFIRM: inventors]",
+        "ownership": "[TO CONFIRM: owner or applicant]",
         "source_files": [],
     }
     intake_path = project / "work" / "00-intake.json"
@@ -76,12 +76,12 @@ def main() -> int:
     notes = project / "supplementary" / "inventor-notes.md"
     if not notes.exists():
         notes.write_text(
-            "# English text\n\n"
-            "- English text: \n"
-            "- English text: \n"
-            "- English text: \n"
-            "- English text: \n"
-            "- English text: \n",
+            "# Invention Notes\n\n"
+            "- Technical problem: \n"
+            "- Technical problem: \n"
+            "- Technical problem: \n"
+            "- Technical problem: \n"
+            "- Technical problem: \n",
             encoding="utf-8",
         )
 

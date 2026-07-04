@@ -218,13 +218,13 @@ def fetch_crossref(doi: str, timeout: int) -> dict | None:
 
 def classify_citation_type(reference: str) -> str:
     text = reference.lower()
-    if any(w in text for w in ("survey", "review", "meta-analysis", "English text", "English text")):
+    if any(w in text for w in ("survey", "review", "meta-analysis", "systematic review", "scoping review")):
         return "survey"
-    if any(w in text for w in ("benchmark", "dataset", "corpus", "evaluation", "English text")):
+    if any(w in text for w in ("benchmark", "dataset", "corpus", "evaluation", "shared task")):
         return "benchmark"
     if any(w in text for w in ("limitation", "robustness", "reproducib", "bias", "fairness")):
         return "critique"
-    if any(w in text for w in ("application", "real-world", "deployment", "clinical", "English text")):
+    if any(w in text for w in ("application", "real-world", "deployment", "clinical", "field study")):
         return "application"
     if any(w in text for w in ("foundation", "seminal", "classic", "theory", "theorem")):
         return "foundational"

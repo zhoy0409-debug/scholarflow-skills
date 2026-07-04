@@ -4,9 +4,9 @@
 Usage: python3 scripts/build_proposal_docx.py <input.md> [output.docx]
 
 Formatting standard (JL's academic proposals):
-- Title: centered, Times New Roman + English text, 18pt bold
-- Headings: Times New Roman + English text, 16/14/12pt bold, black
-- Body: Times New Roman + English text, 12pt, 1.5 line spacing, NO first-line indent
+- Title: centered, Times New Roman + Arial, 18pt bold
+- Headings: Times New Roman + Arial, 16/14/12pt bold, black
+- Body: Times New Roman + Arial, 12pt, 1.5 line spacing, NO first-line indent
 - Margins: 1 inch all sides
 - Tables: 10pt, Table Grid style
 """
@@ -33,7 +33,7 @@ for section in doc.sections:
 style = doc.styles['Normal']
 style.font.name = 'Times New Roman'
 style.font.size = Pt(12)
-style.element.rPr.rFonts.set(qn('w:eastAsia'), 'English text')
+style.element.rPr.rFonts.set(qn('w:eastAsia'), 'Arial')
 pf = style.paragraph_format
 pf.line_spacing = 1.5
 pf.space_before = Pt(0)
@@ -47,7 +47,7 @@ for level, size in [(1, 16), (2, 14), (3, 12)]:
     hs.font.size = Pt(size)
     hs.font.bold = True
     hs.font.color.rgb = RGBColor(0, 0, 0)
-    hs.element.rPr.rFonts.set(qn('w:eastAsia'), 'English text')
+    hs.element.rPr.rFonts.set(qn('w:eastAsia'), 'Arial')
     hs.paragraph_format.line_spacing = 1.5
     hs.paragraph_format.space_before = Pt(18 if level == 1 else 12 if level == 2 else 6)
     hs.paragraph_format.space_after = Pt(12 if level == 1 else 6 if level == 2 else 3)
@@ -57,7 +57,7 @@ def bp(text, bold=False, size=12, italic=False, color=None):
     p = doc.add_paragraph(style='Normal')
     run = p.add_run(text)
     run.font.name = 'Times New Roman'
-    run.element.rPr.rFonts.set(qn('w:eastAsia'), 'English text')
+    run.element.rPr.rFonts.set(qn('w:eastAsia'), 'Arial')
     run.font.size = Pt(size)
     run.bold = bold
     run.italic = italic
@@ -71,7 +71,7 @@ def bullet(text, level=0):
     p.paragraph_format.left_indent = Cm(1.0 + level * 0.5)
     run = p.add_run('• ' + text)
     run.font.name = 'Times New Roman'
-    run.element.rPr.rFonts.set(qn('w:eastAsia'), 'English text')
+    run.element.rPr.rFonts.set(qn('w:eastAsia'), 'Arial')
     run.font.size = Pt(11)
 
 
@@ -80,7 +80,7 @@ def numbered(text):
     p.paragraph_format.left_indent = Cm(1.0)
     run = p.add_run(text)
     run.font.name = 'Times New Roman'
-    run.element.rPr.rFonts.set(qn('w:eastAsia'), 'English text')
+    run.element.rPr.rFonts.set(qn('w:eastAsia'), 'Arial')
     run.font.size = Pt(11)
 
 
@@ -96,7 +96,7 @@ def table(headers, rows):
         run.font.size = Pt(10)
         run.font.bold = True
         run.font.name = 'Times New Roman'
-        run.element.rPr.rFonts.set(qn('w:eastAsia'), 'English text')
+        run.element.rPr.rFonts.set(qn('w:eastAsia'), 'Arial')
     for r, row in enumerate(rows):
         for c, val in enumerate(row):
             cell = t.rows[r + 1].cells[c]
@@ -106,7 +106,7 @@ def table(headers, rows):
             run = p.add_run(val)
             run.font.size = Pt(10)
             run.font.name = 'Times New Roman'
-            run.element.rPr.rFonts.set(qn('w:eastAsia'), 'English text')
+            run.element.rPr.rFonts.set(qn('w:eastAsia'), 'Arial')
     doc.add_paragraph()
 
 
@@ -154,7 +154,7 @@ while i < len(lines):
         run.bold = True
         run.font.size = Pt(18)
         run.font.name = 'Times New Roman'
-        run.element.rPr.rFonts.set(qn('w:eastAsia'), 'English text')
+        run.element.rPr.rFonts.set(qn('w:eastAsia'), 'Arial')
         first_title = False
         i += 1
         continue
@@ -180,7 +180,7 @@ while i < len(lines):
         run.bold = True
         run.font.size = Pt(12)
         run.font.name = 'Times New Roman'
-        run.element.rPr.rFonts.set(qn('w:eastAsia'), 'English text')
+        run.element.rPr.rFonts.set(qn('w:eastAsia'), 'Arial')
         i += 1
         continue
 

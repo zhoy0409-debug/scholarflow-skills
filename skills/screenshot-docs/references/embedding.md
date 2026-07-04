@@ -42,7 +42,7 @@ Fall back to the Python module form, run from the easy-screenshot repo, when the
 console command is unavailable:
 
 ```bash
-cd /Users/vosslab/nsh/easy-screenshot && python3 -m screenshot.screencapture -A "App Name" -t "main" -f /tmp/main_window.png
+cd /opt/easy-screenshot && python3 -m screenshot.screencapture -A "App Name" -t "main" -f /tmp/main_window.png
 ```
 
 List matching windows first with `--preview` to confirm the app name and title.

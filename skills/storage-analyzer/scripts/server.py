@@ -1,23 +1,8 @@
 #!/usr/bin/env python3
-"""Serve the storage report with a guarded one-click delete API (macOS + Windows).
+"""Serve the storage report with a guarded local action API."""
 
-Starts on 127.0.0.1 + a random port + a random per-session token, serves the
-interactive report, and exposes POST /action to move green-tier paths to Trash
-or delete them outright. Stop with Ctrl+C.
+from __future__ import annotations
 
-Usage:
-    server.py <analysis.json>
-
-SAFETY MODEL - read before changing:
-- Allowlist: only paths listed in this report's green items `trash_paths` are
-  accepted. Every request path is realpath-resolved and must be in the allowlist
-  AND under $HOME. Anything else is rejected. This is the core guard - the
-  endpoint cannot be used to delete arbitrary files.
-- Bound to 127.0.0.1 only; every POST requires the session token; Host header
-  must be 127.0.0.1 (blocks DNS-rebinding from a malicious page).
-- Two modes: "trash" (Finder -> Trash, reversible) and "rm" (immediate,
-  irreversible). The browser confirms each action before sending.
-"""
 import json
 import os
 import secrets
@@ -28,145 +13,125 @@ import time
 import webbrowser
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
+
 HERE = os.path.dirname(os.path.abspath(__file__))
 TEMPLATE = os.path.join(HERE, "..", "assets", "report_template.html")
 HOME = os.path.realpath(os.path.expanduser("~"))
 TOKEN = secrets.token_urlsafe(24)
 
-DATA = {}
+DATA: dict = {}
 TPL = ""
-RM_ALLOW = set()
-TRASH_ALLOW = set()
-OPEN_ALLOW = set()
+RM_ALLOW: set[str] = set()
+TRASH_ALLOW: set[str] = set()
+OPEN_ALLOW: set[str] = set()
 
 
-def expand(p):
-    return os.path.realpath(os.path.expanduser(p))
+def expand(path: str) -> str:
+    return os.path.realpath(os.path.expanduser(path))
 
 
-def load(src):
-    with open(src, encoding="utf-8") as f:
-        data = json.load(f)
-    with open(TEMPLATE, encoding="utf-8") as f:
-        tpl = f.read()
-    # English text, English text: 
-    #   rm    = English text trash_paths(English text)
-    #   trash = English text + English text trash_paths(English text, English text)
-    #   open  = trash English text + English text path + English text app_paths(English text"English text", English text)
-    rm_allow, trash_allow, open_allow = set(), set(), set()
-    for it in data.get("green", []):
-        for p in (it.get("trash_paths") or []):
-            rp = expand(p)
-            rm_allow.add(rp); trash_allow.add(rp); open_allow.add(rp)
-    for it in data.get("yellow", []):
-        for p in (it.get("trash_paths") or []):
-            rp = expand(p)
-            trash_allow.add(rp); open_allow.add(rp)
-        if it.get("path"):
-            rp = expand(it["path"])
-            if os.path.exists(rp):
-                open_allow.add(rp)
-    # English text"English text"(English text /Applications, English text)
-    for it in data.get("red", []):
-        for p in (it.get("app_paths") or []):
-            rp = expand(p)
-            if os.path.exists(rp):
-                open_allow.add(rp)
-    return data, tpl, rm_allow, trash_allow, open_allow
+def load(src: str):
+    with open(src, encoding="utf-8") as handle:
+        data = json.load(handle)
+    with open(TEMPLATE, encoding="utf-8") as handle:
+        template = handle.read()
+    rm_allow: set[str] = set()
+    trash_allow: set[str] = set()
+    open_allow: set[str] = set()
+    for item in data.get("green", []):
+        for raw in item.get("trash_paths") or []:
+            path = expand(raw)
+            rm_allow.add(path)
+            trash_allow.add(path)
+            open_allow.add(path)
+    for item in data.get("yellow", []):
+        for raw in item.get("trash_paths") or []:
+            path = expand(raw)
+            trash_allow.add(path)
+            open_allow.add(path)
+        if item.get("path"):
+            path = expand(item["path"])
+            if os.path.exists(path):
+                open_allow.add(path)
+    for item in data.get("red", []):
+        for raw in item.get("app_paths") or []:
+            path = expand(raw)
+            if os.path.exists(path):
+                open_allow.add(path)
+    return data, template, rm_allow, trash_allow, open_allow
 
 
-def move_to_trash(path):
+def move_to_trash(path: str) -> None:
     if sys.platform == "darwin":
-        _trash_macos(path)
+        script = 'tell application "Finder" to delete (POSIX file %s as alias)' % json.dumps(path)
+        result = subprocess.run(["osascript", "-e", script], capture_output=True, text=True)
+        if result.returncode != 0:
+            destination = os.path.join(HOME, ".Trash", os.path.basename(path.rstrip("/")) + "." + time.strftime("%H%M%S"))
+            shutil.move(path, destination)
     elif sys.platform.startswith("win"):
-        _trash_windows(path)
+        import ctypes
+        from ctypes import wintypes
+
+        class SHFILEOPSTRUCTW(ctypes.Structure):
+            _fields_ = [
+                ("hwnd", wintypes.HWND),
+                ("wFunc", wintypes.UINT),
+                ("pFrom", wintypes.LPCWSTR),
+                ("pTo", wintypes.LPCWSTR),
+                ("fFlags", ctypes.c_uint16),
+                ("fAnyOperationsAborted", wintypes.BOOL),
+                ("hNameMappings", ctypes.c_void_p),
+                ("lpszProgressTitle", wintypes.LPCWSTR),
+            ]
+
+        op = SHFILEOPSTRUCTW()
+        op.wFunc = 3
+        op.pFrom = os.path.abspath(path) + "\x00\x00"
+        op.fFlags = 0x0040 | 0x0010 | 0x0004
+        rc = ctypes.windll.shell32.SHFileOperationW(ctypes.byref(op))
+        if rc != 0:
+            raise OSError(f"SHFileOperation failed with code {rc}")
     else:
-        raise OSError("English text macOS / Windows")
+        raise OSError("Trash action is supported only on macOS and Windows.")
 
 
-def _trash_macos(path):
-    # osascript Finder delete -> macOS Trash, recoverable. First run may prompt
-    # for Finder automation permission. Fall back to ~/.Trash move if it fails.
-    script = 'tell application "Finder" to delete (POSIX file %s as alias)' % json.dumps(path)
-    r = subprocess.run(["osascript", "-e", script], capture_output=True, text=True)
-    if r.returncode != 0:
-        dest = os.path.join(HOME, ".Trash",
-                            os.path.basename(path.rstrip("/")) + "." + time.strftime("%H%M%S"))
-        shutil.move(path, dest)
-
-
-def _trash_windows(path):
-    # Send to Recycle Bin via SHFileOperationW with FOF_ALLOWUNDO (stdlib ctypes).
-    # UNTESTED on this build - verify on a real Windows machine.
-    import ctypes
-    from ctypes import wintypes
-
-    class SHFILEOPSTRUCTW(ctypes.Structure):
-        _fields_ = [
-            ("hwnd", wintypes.HWND),
-            ("wFunc", wintypes.UINT),
-            ("pFrom", wintypes.LPCWSTR),
-            ("pTo", wintypes.LPCWSTR),
-            ("fFlags", ctypes.c_uint16),
-            ("fAnyOperationsAborted", wintypes.BOOL),
-            ("hNameMappings", ctypes.c_void_p),
-            ("lpszProgressTitle", wintypes.LPCWSTR),
-        ]
-
-    FO_DELETE = 3
-    FOF_ALLOWUNDO = 0x0040
-    FOF_NOCONFIRMATION = 0x0010
-    FOF_SILENT = 0x0004
-    op = SHFILEOPSTRUCTW()
-    op.wFunc = FO_DELETE
-    op.pFrom = os.path.abspath(path) + "\x00\x00"  # double-null terminated list
-    op.fFlags = FOF_ALLOWUNDO | FOF_NOCONFIRMATION | FOF_SILENT
-    rc = ctypes.windll.shell32.SHFileOperationW(ctypes.byref(op))
-    if rc != 0:
-        raise OSError("SHFileOperation failed (code %d)" % rc)
-
-
-def hard_delete(path):
+def hard_delete(path: str) -> None:
     if os.path.isdir(path) and not os.path.islink(path):
         shutil.rmtree(path)
     else:
         os.remove(path)
 
 
-def open_in_file_manager(path):
-    # English text: English text / English text, English text
+def open_in_file_manager(path: str) -> None:
     target = path if os.path.isdir(path) else os.path.dirname(path)
     if sys.platform == "darwin":
-        # .app English text bundle, English text open English text"English text"English text; English text open -R English text. 
-        if target.rstrip("/").endswith(".app"):
-            r = subprocess.run(["open", "-R", target], capture_output=True, text=True)
-            if r.returncode != 0:
-                raise OSError((r.stderr or "open -R English text").strip())
-            return
-        # English text: English text; English text(English text)open English text -10814, 
-        # English text open -R English text. English text. 
-        r = subprocess.run(["open", target], capture_output=True, text=True)
-        if r.returncode != 0:
-            r2 = subprocess.run(["open", "-R", target], capture_output=True, text=True)
-            if r2.returncode != 0:
-                raise OSError((r.stderr or r2.stderr or "open English text").strip())
+        result = subprocess.run(["open", target], capture_output=True, text=True)
+        if result.returncode != 0:
+            result = subprocess.run(["open", "-R", target], capture_output=True, text=True)
+        if result.returncode != 0:
+            raise OSError((result.stderr or "open failed").strip())
     elif sys.platform.startswith("win"):
-        subprocess.run(["explorer", target])  # explorer English text, English text
+        subprocess.run(["explorer", target], check=False)
     else:
-        raise OSError("English text macOS / Windows")
+        raise OSError("Open action is supported only on macOS and Windows.")
+
+
+def allowed(path: str, allowlist: set[str]) -> bool:
+    real = expand(path)
+    return real in allowlist and (real == HOME or real.startswith(HOME + os.sep))
 
 
 class Handler(BaseHTTPRequestHandler):
-    def log_message(self, *a):
-        pass
+    def log_message(self, *args):
+        return None
 
-    def _send(self, code, body, ctype="application/json"):
-        b = body.encode("utf-8") if isinstance(body, str) else body
+    def _send(self, code: int, body, content_type: str = "application/json") -> None:
+        payload = body.encode("utf-8") if isinstance(body, str) else json.dumps(body).encode("utf-8")
         self.send_response(code)
-        self.send_header("Content-Type", ctype)
-        self.send_header("Content-Length", str(len(b)))
+        self.send_header("Content-Type", content_type)
+        self.send_header("Content-Length", str(len(payload)))
         self.end_headers()
-        self.wfile.write(b)
+        self.wfile.write(payload)
 
     def do_GET(self):
         if self.path in ("/", "/index.html"):
@@ -179,72 +144,52 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_POST(self):
         if self.path != "/action":
-            self._send(404, json.dumps({"ok": False, "error": "not found"}))
+            self._send(404, {"ok": False, "error": "not found"})
             return
-        # DNS-rebinding guard: only accept local Host
-        host = (self.headers.get("Host") or "").split(":")[0]
-        if host not in ("127.0.0.1", "localhost"):
-            self._send(403, json.dumps({"ok": False, "error": "host English text"}))
+        if self.headers.get("X-Storage-Token") != TOKEN:
+            self._send(403, {"ok": False, "error": "invalid token"})
             return
-        n = int(self.headers.get("Content-Length", 0))
+        length = int(self.headers.get("Content-Length", "0"))
+        request = json.loads(self.rfile.read(length).decode("utf-8") or "{}")
+        action = request.get("action")
+        path = expand(request.get("path", ""))
         try:
-            req = json.loads(self.rfile.read(n) or b"{}")
-        except Exception:
-            self._send(400, json.dumps({"ok": False, "error": "English text"}))
+            if action == "trash":
+                if not allowed(path, TRASH_ALLOW):
+                    raise PermissionError("path is not allowed for trash")
+                move_to_trash(path)
+            elif action == "rm":
+                if not allowed(path, RM_ALLOW):
+                    raise PermissionError("path is not allowed for delete")
+                hard_delete(path)
+            elif action == "open":
+                if not allowed(path, OPEN_ALLOW):
+                    raise PermissionError("path is not allowed for open")
+                open_in_file_manager(path)
+            else:
+                raise ValueError("unknown action")
+        except Exception as exc:
+            self._send(400, {"ok": False, "error": str(exc)})
             return
-        if req.get("token") != TOKEN:
-            self._send(403, json.dumps({"ok": False, "error": "token English text"}))
-            return
-        mode = req.get("mode")
-        allow = {"rm": RM_ALLOW, "trash": TRASH_ALLOW, "open": OPEN_ALLOW}.get(mode)
-        if allow is None:
-            self._send(400, json.dumps({"ok": False, "error": "English text"}))
-            return
-        done = []
-        for p in (req.get("paths") or []):
-            rp = expand(p)
-            if rp not in allow:
-                self._send(403, json.dumps({"ok": False, "error": "English text: %s" % p}))
-                return
-            # English text: English text /Applications(English text open English text, English text)
-            roots = (HOME, "/Applications")
-            if not any(rp == base or rp.startswith(base + os.sep) for base in roots):
-                self._send(403, json.dumps({"ok": False, "error": "English text: %s" % p}))
-                return
-            try:
-                if mode == "open":
-                    open_in_file_manager(rp)
-                elif not os.path.exists(rp):
-                    pass  # already gone, treat as success
-                elif mode == "trash":
-                    move_to_trash(rp)
-                else:
-                    hard_delete(rp)
-                done.append(p)
-            except Exception as e:
-                self._send(500, json.dumps({"ok": False, "error": str(e)}))
-                return
-        self._send(200, json.dumps({"ok": True, "done": done}))
+        self._send(200, {"ok": True, "action": action, "path": path})
 
 
-def main():
-    if len(sys.argv) < 2:
-        print(__doc__)
-        sys.exit(1)
+def main() -> int:
+    if len(sys.argv) != 2:
+        print("Usage: server.py <analysis.json>")
+        return 2
     global DATA, TPL, RM_ALLOW, TRASH_ALLOW, OPEN_ALLOW
     DATA, TPL, RM_ALLOW, TRASH_ALLOW, OPEN_ALLOW = load(sys.argv[1])
-    srv = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
-    port = srv.server_address[1]
-    url = "http://127.0.0.1:%d/" % port
-    print("English text: " + url)
-    print("English text %d English text | English text/English text %d English text | English text" % (len(RM_ALLOW), len(TRASH_ALLOW) - len(RM_ALLOW)))
-    print("English text Ctrl+C English text(English text)")
+    server = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+    url = f"http://127.0.0.1:{server.server_port}/"
+    print(f"Storage report server: {url}")
     webbrowser.open(url)
     try:
-        srv.serve_forever()
+        server.serve_forever()
     except KeyboardInterrupt:
-        print("\nEnglish text. ")
+        print("\nStopped.")
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

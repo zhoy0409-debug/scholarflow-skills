@@ -1,287 +1,162 @@
 #!/usr/bin/env python3
-"""
-English text Markdown → PDF English text (WeasyPrintEnglish text)
-English text: python md_to_pdf.py input.md output.pdf [--title "English text"] [--author "English text"]
+"""Convert Markdown to a clean PDF using markdown + WeasyPrint."""
 
-English text: pip install weasyprint markdown --break-system-packages
-"""
+from __future__ import annotations
 
-import sys
-import os
-import re
 import argparse
+import html
+from pathlib import Path
+
 import markdown
 
-# ── CSS English text ──
+
 CSS_TEMPLATE = """
 @page {
-    size: A4;
-    margin: 25mm 20mm 20mm 20mm;
-
-    @top-center {
-        content: "HEADER_TEXT";
-        font-family: "Droid Sans Fallback", Helvetica, Arial, sans-serif;
-        font-size: 8pt;
-        color: #95a5a6;
-        border-bottom: 0.5pt solid #ecf0f1;
-        padding-bottom: 3mm;
-    }
-
-    @bottom-center {
-        content: "English text " counter(page) " English text";
-        font-family: "Droid Sans Fallback", Helvetica, Arial, sans-serif;
-        font-size: 8pt;
-        color: #95a5a6;
-        border-top: 0.8pt solid #1a5276;
-        padding-top: 2mm;
-    }
+  size: A4;
+  margin: 25mm 20mm 20mm 20mm;
+  @top-center {
+    content: "HEADER_TEXT";
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8pt;
+    color: #6b7280;
+    border-bottom: 0.5pt solid #e5e7eb;
+    padding-bottom: 3mm;
+  }
+  @bottom-center {
+    content: "Page " counter(page) " of " counter(pages);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8pt;
+    color: #6b7280;
+    border-top: 0.6pt solid #1f4e79;
+    padding-top: 2mm;
+  }
 }
-
 @page :first {
-    @top-center { content: none; }
-    @bottom-center { content: none; }
+  @top-center { content: none; }
+  @bottom-center { content: none; }
 }
-
 body {
-    font-family: "Droid Sans Fallback", Helvetica, Arial, sans-serif;
-    font-size: 10.5pt;
-    line-height: 1.75;
-    color: #2c3e50;
-    text-align: justify;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 10.5pt;
+  line-height: 1.65;
+  color: #1f2937;
 }
-
-/* English text */
 .cover {
-    page-break-after: always;
-    text-align: center;
-    padding-top: 45%;
+  page-break-after: always;
+  text-align: center;
+  padding-top: 38%;
 }
 .cover h1 {
-    font-size: 28pt;
-    color: #1a5276;
-    margin-bottom: 8mm;
-    font-weight: bold;
-    letter-spacing: 2pt;
-}
-.cover .subtitle {
-    font-size: 14pt;
-    color: #95a5a6;
-    margin-bottom: 6mm;
+  font-size: 28pt;
+  color: #1f4e79;
+  margin-bottom: 8mm;
 }
 .cover .meta {
-    font-size: 11pt;
-    color: #95a5a6;
-    margin-bottom: 4mm;
+  font-size: 11pt;
+  color: #6b7280;
+  margin-bottom: 4mm;
 }
-.cover .divider {
-    width: 60%;
-    margin: 8mm auto;
-    border: none;
-    border-top: 1.5pt solid #1a5276;
-}
-
-/* English text */
 h1 {
-    font-size: 20pt;
-    color: #1a5276;
-    margin-top: 16mm;
-    margin-bottom: 6mm;
-    padding-bottom: 3mm;
-    border-bottom: 2pt solid #1a5276;
-    page-break-before: always;
-    font-weight: bold;
+  font-size: 20pt;
+  color: #1f4e79;
+  margin-top: 14mm;
+  margin-bottom: 6mm;
+  padding-bottom: 3mm;
+  border-bottom: 2pt solid #1f4e79;
+  page-break-before: always;
 }
-
-/* English text */
+h1:first-child { page-break-before: auto; }
 h2 {
-    font-size: 14pt;
-    color: #1e8449;
-    margin-top: 10mm;
-    margin-bottom: 5mm;
-    font-weight: bold;
+  font-size: 14pt;
+  color: #166534;
+  margin-top: 9mm;
+  margin-bottom: 4mm;
 }
-
-/* English text */
 h3 {
-    font-size: 12pt;
-    color: #2e86c1;
-    margin-top: 6mm;
-    margin-bottom: 3mm;
-    font-weight: bold;
+  font-size: 12pt;
+  color: #1d4ed8;
+  margin-top: 6mm;
+  margin-bottom: 3mm;
 }
-
-h4 {
-    font-size: 11pt;
-    color: #5b2c6f;
-    margin-top: 5mm;
-    margin-bottom: 2mm;
-    font-weight: bold;
-}
-
-/* English text */
-p {
-    margin-top: 1.5mm;
-    margin-bottom: 1.5mm;
-    orphans: 3;
-    widows: 3;
-}
-
-/* English text */
+p { margin: 1.5mm 0; orphans: 3; widows: 3; }
 blockquote {
-    margin: 4mm 0;
-    padding: 4mm 4mm 4mm 10mm;
-    background: #f8f9fa;
-    border-left: 3pt solid #1a5276;
-    color: #5d6d7e;
-    font-size: 10pt;
+  margin: 4mm 0;
+  padding: 4mm 4mm 4mm 8mm;
+  background: #f9fafb;
+  border-left: 3pt solid #1f4e79;
+  color: #4b5563;
 }
-blockquote p {
-    margin: 1mm 0;
-}
-
-/* English text */
-strong, b {
-    font-weight: bold;
-    color: #1a252f;
-}
-
-/* English text */
 code {
-    font-family: "Courier New", Courier, monospace;
-    background: #fdf2e9;
-    color: #c0392b;
-    padding: 0.5mm 1.5mm;
-    border-radius: 2pt;
-    font-size: 9.5pt;
+  font-family: Consolas, "Courier New", monospace;
+  background: #fff7ed;
+  color: #9a3412;
+  padding: 0.5mm 1.5mm;
+  border-radius: 2pt;
+  font-size: 9.5pt;
 }
-
-/* English text */
+pre {
+  background: #111827;
+  color: #f9fafb;
+  padding: 4mm;
+  border-radius: 4pt;
+  white-space: pre-wrap;
+}
 table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 4mm 0;
-    font-size: 9.5pt;
+  width: 100%;
+  border-collapse: collapse;
+  margin: 5mm 0;
+  font-size: 9.5pt;
 }
-thead th {
-    background: #1a5276;
-    color: white;
-    padding: 3mm;
-    text-align: left;
-    font-weight: bold;
+th, td {
+  border: 0.5pt solid #d1d5db;
+  padding: 2mm 3mm;
 }
-tbody td {
-    padding: 2.5mm 3mm;
-    border-bottom: 0.5pt solid #bdc3c7;
-}
-tbody tr:nth-child(even) {
-    background: #f8f9fa;
-}
-
-/* English text */
-hr {
-    border: none;
-    border-top: 0.5pt solid #bdc3c7;
-    margin: 4mm 0;
-}
-
-/* English text */
-ul, ol {
-    margin: 2mm 0;
-    padding-left: 8mm;
-}
-li {
-    margin-bottom: 1mm;
-}
-
-/* English text */
-a {
-    color: #2e86c1;
-    text-decoration: none;
-}
+th { background: #e5eef8; color: #111827; }
+img { max-width: 100%; height: auto; }
 """
 
 
-def md_to_html(md_text, title="English text", subtitle="English text",
-               meta_line="", author="English text"):
-    """English text Markdown English text HTML"""
-
-    # English text markdown English text
-    html_body = markdown.markdown(
-        md_text,
-        extensions=['tables', 'fenced_code', 'nl2br'],
-        output_format='html5'
+def build_html(markdown_text: str, title: str, author: str) -> str:
+    body = markdown.markdown(
+        markdown_text,
+        extensions=["extra", "tables", "fenced_code", "toc", "sane_lists"],
+        output_format="html5",
+    )
+    cover = ""
+    if title:
+        cover = (
+            '<section class="cover">'
+            f"<h1>{html.escape(title)}</h1>"
+            f'<div class="meta">{html.escape(author)}</div>' if author else ""
+        )
+        cover += "</section>"
+    return (
+        "<!doctype html><html lang=\"en\"><head><meta charset=\"utf-8\">"
+        f"<title>{html.escape(title or 'Markdown Report')}</title>"
+        f"<style>{CSS_TEMPLATE.replace('HEADER_TEXT', html.escape(title or 'Markdown Report'))}</style>"
+        "</head><body>"
+        f"{cover}{body}"
+        "</body></html>"
     )
 
-    # English text h1(English text)
-    first_h1_match = re.search(r'<h1>(.*?)</h1>', html_body)
-    if first_h1_match:
-        extracted_title = first_h1_match.group(1)
-        if not title or title == "English text":
-            title = extracted_title
-        html_body = html_body.replace(first_h1_match.group(0), '', 1)
 
-    # English text CSS English text
-    css = CSS_TEMPLATE.replace("HEADER_TEXT", f"{title}  |  English text")
-
-    # English text
-    cover_html = f"""
-    <div class="cover">
-        <h1 style="page-break-before: avoid; border: none;">{title}</h1>
-        <div class="subtitle">{subtitle}</div>
-        {"<div class='meta'>" + meta_line + "</div>" if meta_line else ""}
-        <hr class="divider">
-        <div class="meta">English text: {author}</div>
-    </div>
-    """
-
-    full_html = f"""<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <style>{css}</style>
-</head>
-<body>
-{cover_html}
-{html_body}
-</body>
-</html>"""
-
-    return full_html
-
-
-def main():
-    parser = argparse.ArgumentParser(description="English text Markdown → PDF")
-    parser.add_argument("input", help="English text Markdown English text")
-    parser.add_argument("output", help="English text PDF English text")
-    parser.add_argument("--title", default=None, help="English text")
-    parser.add_argument("--author", default="English text", help="English text")
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("input", type=Path)
+    parser.add_argument("output", type=Path)
+    parser.add_argument("--title", default="")
+    parser.add_argument("--author", default="")
     args = parser.parse_args()
-
-    with open(args.input, "r", encoding="utf-8") as f:
-        md_text = f.read()
-
-    # English text
-    meta_line = ""
-    for line in md_text.split("\n"):
-        stripped = line.strip().lstrip(">").strip()
-        if "English text" in stripped or "English text" in stripped or "English text" in stripped:
-            meta_line = stripped
-            break
-
-    html = md_to_html(md_text, title=args.title or "English text", meta_line=meta_line, author=args.author)
-
-    # English text HTML(English text)
-    html_path = args.output.replace('.pdf', '.html')
-    with open(html_path, 'w', encoding='utf-8') as f:
-        f.write(html)
-    print(f"[OK] HTML English text: {html_path}")
-
-    # English text PDF
-    from weasyprint import HTML
-    HTML(string=html).write_pdf(args.output)
-    size_kb = os.path.getsize(args.output) / 1024
-    print(f"[OK] PDF English text: {args.output} ({size_kb:.1f} KB)")
+    try:
+        from weasyprint import HTML
+    except Exception as exc:
+        raise SystemExit(f"WeasyPrint is required to render PDF output: {exc}")
+    text = args.input.read_text(encoding="utf-8")
+    args.output.parent.mkdir(parents=True, exist_ok=True)
+    HTML(string=build_html(text, args.title, args.author), base_url=str(args.input.parent)).write_pdf(str(args.output))
+    print(f"Wrote PDF: {args.output}")
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

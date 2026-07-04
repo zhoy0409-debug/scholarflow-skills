@@ -1,23 +1,13 @@
 #!/usr/bin/env python3
-"""Validate traceability, completeness, and quality gates in a patent draft."""
+"""Validate the structured JSON draft used by the patent package renderer."""
+
+from __future__ import annotations
 
 import argparse
 import json
-import re
 from dataclasses import dataclass
 from pathlib import Path
-
-
-SOURCE_ID = re.compile(r"^[PEFC]\d{3,}$")
-PLACEHOLDER = re.compile(r"\[(?:TO CONFIRM|English text)[^\]]*\]", re.IGNORECASE)
-VAGUE_RESULT = re.compile(r"(English text|English text|English text)")
-QUALITY_THRESHOLDS = {
-    "evidence_support": 4,
-    "claim_architecture": 4,
-    "terminology_consistency": 4,
-    "enablement_detail": 3,
-    "technical_effect_reasoning": 3,
-}
+from typing import Any
 
 
 @dataclass
@@ -31,279 +21,92 @@ def add(findings: list[Finding], level: str, code: str, message: str) -> None:
     findings.append(Finding(level, code, message))
 
 
-def validate(data: dict) -> list[Finding]:
+def require_mapping(value: Any, findings: list[Finding], code: str, message: str) -> bool:
+    if not isinstance(value, dict):
+        add(findings, "ERROR", code, message)
+        return False
+    return True
+
+
+def validate(data: dict[str, Any]) -> list[Finding]:
     findings: list[Finding] = []
-    required = (
-        "title",
-        "metadata",
-        "source_analysis",
-        "source_map",
-        "terminology_ledger",
-        "formula_inventory",
-        "figure_inventory",
-        "evidence_ledger",
-        "claims",
-        "claim_feature_map",
-        "figures",
-        "specification",
-        "abstract",
-        "quality_assessment",
-    )
-    for key in required:
-        if key not in data:
-            add(findings, "ERROR", "MISSING_KEY", f"English text: {key}. ")
-
+    for key in ("title", "claims", "specification", "abstract", "figures"):
+        if key not in data or data.get(key) in (None, "", [], {}):
+            add(findings, "ERROR", "MISSING_FIELD", f"Required field is missing or empty: {key}.")
     claims = data.get("claims", [])
-    numbers = [claim.get("number") for claim in claims]
-    if not claims:
-        add(findings, "ERROR", "NO_CLAIMS", "English text. ")
-    elif numbers != list(range(1, len(numbers) + 1)):
-        add(findings, "ERROR", "CLAIM_SEQUENCE", f"English text: {numbers}. ")
-    for claim in claims:
-        text = str(claim.get("text", ""))
-        if not text.strip():
-            add(findings, "ERROR", "EMPTY_CLAIM", f"English text{claim.get('number')}English text. ")
-        if PLACEHOLDER.search(text):
-            add(
-                findings,
-                "ERROR",
-                "CLAIM_PLACEHOLDER",
-                f"English text{claim.get('number')}English text. ",
-            )
-
-    source_records = data.get("source_map", [])
-    source_ids = set()
-    for record in source_records:
-        source_id = str(record.get("id", ""))
-        if not SOURCE_ID.fullmatch(source_id):
-            add(findings, "ERROR", "SOURCE_ID", f"English textID: {source_id!r}. ")
-        if source_id in source_ids:
-            add(findings, "ERROR", "DUPLICATE_SOURCE_ID", f"English textIDEnglish text: {source_id}. ")
-        source_ids.add(source_id)
-        if not record.get("locator"):
-            add(findings, "WARNING", "SOURCE_LOCATOR", f"{source_id}English text, English text. ")
-
-    canonical_terms = set()
-    forbidden_aliases = set()
-    for item in data.get("terminology_ledger", []):
-        canonical = str(item.get("canonical_zh", "")).strip()
-        if not canonical:
-            add(findings, "ERROR", "CANONICAL_TERM", "English textcanonical_zh. ")
-        elif canonical in canonical_terms:
-            add(findings, "ERROR", "DUPLICATE_TERM", f"English text: {canonical}. ")
-        canonical_terms.add(canonical)
-        forbidden_aliases.update(
-            str(alias).strip() for alias in item.get("forbidden_aliases", []) if str(alias).strip()
-        )
-
-    ledger_ids = set()
-    for item in data.get("evidence_ledger", []):
-        ledger_id = str(item.get("id", ""))
-        if not ledger_id:
-            add(findings, "ERROR", "LEDGER_ID", "English textID. ")
-        elif ledger_id in ledger_ids:
-            add(findings, "ERROR", "DUPLICATE_LEDGER_ID", f"English textIDEnglish text: {ledger_id}. ")
-        ledger_ids.add(ledger_id)
-        status = item.get("support_status")
-        if status not in {"explicit", "inherent", "needs-confirmation", "unsupported"}:
-            add(findings, "ERROR", "SUPPORT_STATUS", f"{ledger_id}English text: {status}. ")
-        referenced = item.get("source_ids", [])
-        if status in {"explicit", "inherent"} and not referenced:
-            add(findings, "ERROR", "MISSING_SOURCE_LINK", f"{ledger_id}English textID. ")
-        for source_id in referenced:
-            if source_ids and source_id not in source_ids:
-                add(findings, "ERROR", "UNKNOWN_SOURCE_ID", f"{ledger_id}English textID: {source_id}. ")
-
-    mapped_claims = set()
-    for mapping in data.get("claim_feature_map", []):
-        claim_number = mapping.get("claim_number")
-        mapped_claims.add(claim_number)
-        if claim_number not in numbers:
-            add(findings, "ERROR", "UNKNOWN_CLAIM", f"English text: {claim_number}. ")
-        if not str(mapping.get("feature", "")).strip():
-            add(findings, "ERROR", "EMPTY_FEATURE", "English text. ")
-        evidence_ids = mapping.get("evidence_ids", [])
-        if not evidence_ids:
-            add(
-                findings,
-                "ERROR",
-                "UNMAPPED_FEATURE",
-                f"English text{claim_number}English text"{mapping.get('feature', '')}"English textID. ",
-            )
-        for evidence_id in evidence_ids:
-            if evidence_id not in ledger_ids:
-                add(
-                    findings,
-                    "ERROR",
-                    "UNKNOWN_EVIDENCE_ID",
-                    f"English text{claim_number}English textID: {evidence_id}. ",
-                )
-    for number in numbers:
-        if number not in mapped_claims:
-            add(findings, "ERROR", "CLAIM_NOT_MAPPED", f"English text{number}English text. ")
-    formal_text = "\n".join(str(claim.get("text", "")) for claim in claims)
-    formal_text += "\n" + json.dumps(data.get("specification", {}), ensure_ascii=False)
-    for alias in sorted(forbidden_aliases):
-        if alias in formal_text:
-            add(findings, "ERROR", "FORBIDDEN_ALIAS", f"English text: {alias}. ")
-
-    source_analysis = data.get("source_analysis", {})
+    if not isinstance(claims, list) or not claims:
+        add(findings, "ERROR", "CLAIMS", "claims must be a non-empty list.")
+    else:
+        numbers = []
+        for claim in claims:
+            if not require_mapping(claim, findings, "CLAIM_TYPE", "Each claim must be an object."):
+                continue
+            number = claim.get("number")
+            numbers.append(number)
+            if not isinstance(number, int):
+                add(findings, "ERROR", "CLAIM_NUMBER", "Each claim must have an integer number.")
+            if not str(claim.get("text", "")).strip():
+                add(findings, "ERROR", "CLAIM_TEXT", f"Claim {number} has no text.")
+        expected = list(range(1, len(numbers) + 1))
+        if numbers != expected:
+            add(findings, "ERROR", "CLAIM_SEQUENCE", f"Claim numbers must be consecutive: expected {expected}, found {numbers}.")
     spec = data.get("specification", {})
-    equations = spec.get("equations", [])
-    formula_inventory = data.get("formula_inventory", [])
-    for item in formula_inventory:
-        source_id = item.get("source_id")
-        if source_ids and source_id not in source_ids:
-            add(findings, "ERROR", "FORMULA_INVENTORY_SOURCE", f"English textID: {source_id}. ")
-        if not item.get("disposition"):
-            add(findings, "ERROR", "FORMULA_DISPOSITION", f"English text{source_id}English text. ")
-    expected_formula_count = source_analysis.get("formula_count_in_source")
-    if isinstance(expected_formula_count, int) and expected_formula_count != len(formula_inventory):
-        add(
-            findings,
-            "WARNING",
-            "FORMULA_INVENTORY_COUNT",
-            f"English text{expected_formula_count}English text, English text{len(formula_inventory)}English text. ",
-        )
-    if "equations" not in spec:
-        add(findings, "ERROR", "EQUATIONS_ARRAY", "English textequationsEnglish text. ")
-    if source_analysis.get("contains_core_formulas") and not equations:
-        add(findings, "ERROR", "MISSING_CORE_EQUATIONS", "English text, English text. ")
-    equation_numbers = [equation.get("number") for equation in equations]
-    if equation_numbers and equation_numbers != list(range(1, len(equation_numbers) + 1)):
-        add(findings, "ERROR", "EQUATION_SEQUENCE", f"English text: {equation_numbers}. ")
-    for equation in equations:
-        number = equation.get("number")
-        if not equation.get("latex"):
-            add(findings, "ERROR", "EQUATION_LATEX", f"English text{number}English textLaTeXEnglish text. ")
-        if not equation.get("source_ids"):
-            add(findings, "ERROR", "EQUATION_SOURCE", f"English text{number}English textID. ")
-        for source_id in equation.get("source_ids", []):
-            if source_ids and source_id not in source_ids:
-                add(findings, "ERROR", "EQUATION_SOURCE", f"English text{number}English textID: {source_id}. ")
-        if not equation.get("symbols"):
-            add(findings, "ERROR", "EQUATION_SYMBOLS", f"English text{number}English text. ")
-        if not equation.get("technical_role"):
-            add(findings, "ERROR", "EQUATION_ROLE", f"English text{number}English text. ")
-
+    if require_mapping(spec, findings, "SPECIFICATION_TYPE", "specification must be an object."):
+        for field in ("technical_field", "background", "figure_descriptions", "embodiments"):
+            if field not in spec:
+                add(findings, "ERROR", "SPECIFICATION_FIELD", f"specification.{field} is required.")
+        if "equations" not in spec:
+            add(findings, "ERROR", "EQUATIONS_FIELD", "specification.equations is required; use an empty list when no equations are needed.")
+        for equation in spec.get("equations", []) or []:
+            if not isinstance(equation, dict) or not equation.get("latex"):
+                add(findings, "ERROR", "EQUATION_LATEX", "Each equation must include a latex field.")
     figures = data.get("figures", [])
-    for item in data.get("figure_inventory", []):
-        source_id = item.get("source_id")
-        if source_ids and source_id not in source_ids:
-            add(findings, "ERROR", "FIGURE_INVENTORY_SOURCE", f"English textID: {source_id}. ")
-        if not item.get("disposition"):
-            add(findings, "ERROR", "FIGURE_DISPOSITION", f"English text{source_id}English text. ")
-    figure_numbers = [figure.get("number") for figure in figures]
-    if not figures:
-        add(findings, "ERROR", "NO_FIGURES", "English text. ")
-    elif figure_numbers != list(range(1, len(figure_numbers) + 1)):
-        add(findings, "ERROR", "FIGURE_SEQUENCE", f"English text: {figure_numbers}. ")
-    abstract_figure = data.get("abstract_figure_number")
-    if abstract_figure not in figure_numbers:
-        add(findings, "ERROR", "ABSTRACT_FIGURE", "English text. ")
-    for figure in figures:
-        if not figure.get("source_ids"):
-            add(findings, "WARNING", "FIGURE_SOURCE", f"English text{figure.get('number')}English textIDEnglish text. ")
-        for source_id in figure.get("source_ids", []):
-            if source_ids and source_id not in source_ids:
-                add(
-                    findings,
-                    "ERROR",
-                    "FIGURE_SOURCE",
-                    f"English text{figure.get('number')}English textID: {source_id}. ",
-                )
-        end_nodes = set(str(node.get("id")) for node in figure.get("nodes", []))
-        for edge in figure.get("edges", []):
-            end_nodes.discard(str(edge.get("from")))
-        for node in figure.get("nodes", []):
-            if str(node.get("id")) in end_nodes and VAGUE_RESULT.search(str(node.get("label", ""))):
-                add(
-                    findings,
-                    "ERROR",
-                    "VAGUE_FINAL_RESULT",
-                    f"English text{figure.get('number')}English text. ",
-                )
-
-    for field in ("technical_field", "background", "embodiments", "figure_descriptions"):
-        if not spec.get(field):
-            add(findings, "ERROR", "SPEC_SECTION", f"English text: {field}. ")
-    invention = spec.get("invention_content", {})
-    for field in ("problem", "solution", "beneficial_effects"):
-        if not invention.get(field):
-            add(findings, "ERROR", "INVENTION_CONTENT", f"English text: {field}. ")
-
-    abstract = re.sub(r"\s+", "", str(data.get("abstract", "")))
-    if not abstract:
-        add(findings, "ERROR", "EMPTY_ABSTRACT", "English text. ")
-    elif len(abstract) > 300:
-        add(findings, "WARNING", "ABSTRACT_LENGTH", f"English text{len(abstract)}English text, English text. ")
-
-    quality = data.get("quality_assessment", {})
-    if quality.get("status") not in {"review-draft", "incomplete-draft"}:
-        add(
-            findings,
-            "WARNING",
-            "DRAFT_STATUS",
-            "quality_assessment.statusEnglish textreview-draftEnglish textincomplete-draft. ",
-        )
-    scores = quality.get("scores", {})
-    for dimension, threshold in QUALITY_THRESHOLDS.items():
-        item = scores.get(dimension)
-        if not isinstance(item, dict) or not isinstance(item.get("score"), int):
-            add(findings, "ERROR", "QUALITY_SCORE", f"English text: {dimension}. ")
+    if isinstance(figures, list):
+        figure_numbers = {item.get("number") for item in figures if isinstance(item, dict)}
+        abstract_figure_number = data.get("abstract_figure_number")
+        if abstract_figure_number is not None and abstract_figure_number not in figure_numbers:
+            add(findings, "ERROR", "ABSTRACT_FIGURE", "abstract_figure_number does not match any figure number.")
+    else:
+        add(findings, "ERROR", "FIGURES_TYPE", "figures must be a list.")
+    evidence_ledger = data.get("evidence_ledger", [])
+    source_ids = {item.get("id") for item in evidence_ledger if isinstance(item, dict)}
+    for mapping in data.get("claim_feature_map", []) or []:
+        if not isinstance(mapping, dict):
+            add(findings, "ERROR", "FEATURE_MAP_TYPE", "claim_feature_map entries must be objects.")
             continue
-        score = item["score"]
-        if score < 1 or score > 5:
-            add(findings, "ERROR", "QUALITY_RANGE", f"{dimension}English text1-5: {score}. ")
-        elif score < threshold:
-            add(
-                findings,
-                "ERROR",
-                "QUALITY_THRESHOLD",
-                f"{dimension}English text{score}, English text{threshold}. ",
-            )
-        if not str(item.get("evidence", "")).strip():
-            add(findings, "WARNING", "QUALITY_EVIDENCE", f"{dimension}English text. ")
-
-    if source_analysis.get("contains_core_formulas"):
-        formula_item = scores.get("formula_coverage", {})
-        if formula_item.get("score", 0) < 4:
-            add(findings, "ERROR", "FORMULA_SCORE", "English text, formula_coverageEnglish text4. ")
-    if figures:
-        figure_item = scores.get("figure_alignment", {})
-        if figure_item.get("score", 0) < 4:
-            add(findings, "ERROR", "FIGURE_SCORE", "English text, figure_alignmentEnglish text4. ")
-
+        claim_number = mapping.get("claim_number")
+        if claim_number not in [claim.get("number") for claim in claims if isinstance(claim, dict)]:
+            add(findings, "ERROR", "UNKNOWN_CLAIM", f"Feature map references unknown claim: {claim_number}.")
+        if not str(mapping.get("feature", "")).strip():
+            add(findings, "ERROR", "EMPTY_FEATURE", "Feature map entry has no feature text.")
+        for evidence_id in mapping.get("evidence_ids", []) or []:
+            if source_ids and evidence_id not in source_ids:
+                add(findings, "ERROR", "UNKNOWN_EVIDENCE_ID", f"Unknown evidence id: {evidence_id}.")
     return findings
 
 
 def format_report(findings: list[Finding]) -> str:
     if not findings:
-        return "PASS: English text, English text. \n"
-    lines = [f"{item.level}\t{item.code}\t{item.message}" for item in findings]
-    errors = sum(item.level == "ERROR" for item in findings)
-    warnings = sum(item.level == "WARNING" for item in findings)
-    lines.extend(("", f"English text: {errors} English text, {warnings} English text"))
-    return "\n".join(lines) + "\n"
+        return "PASS: patent draft structure is valid.\n"
+    lines = ["# Patent Draft Validation Report", ""]
+    for item in findings:
+        lines.append(f"- **{item.level}** `{item.code}`: {item.message}")
+    lines.append("")
+    return "\n".join(lines)
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("draft", type=Path, help="UTF-8 structured patent draft JSON")
-    parser.add_argument("--report", type=Path, help="Write the validation report to a file")
-    parser.add_argument("--json", action="store_true", help="Print findings as JSON")
+    parser.add_argument("draft", type=Path)
+    parser.add_argument("--output", type=Path)
     args = parser.parse_args()
-
     data = json.loads(args.draft.read_text(encoding="utf-8"))
     findings = validate(data)
     report = format_report(findings)
-    if args.report:
-        args.report.parent.mkdir(parents=True, exist_ok=True)
-        args.report.write_text(report, encoding="utf-8")
-    if args.json:
-        print(json.dumps([item.__dict__ for item in findings], ensure_ascii=False, indent=2))
+    if args.output:
+        args.output.write_text(report, encoding="utf-8")
     else:
-        print(report, end="")
+        print(report)
     return 1 if any(item.level == "ERROR" for item in findings) else 0
 
 

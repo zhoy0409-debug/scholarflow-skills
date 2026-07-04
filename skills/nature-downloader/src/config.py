@@ -1,8 +1,4 @@
-"""English text. 
-
-English text school.json English text, English text, English text, English text. 
-English text: ~/.config/lit-dl/school.json
-"""
+"""Read, validate, save, and remove literature-download school configuration."""
 
 from __future__ import annotations
 
@@ -18,156 +14,124 @@ try:
 except ImportError:
     jsonschema = None  # type: ignore
 
-# English text(English text, English text profile)
+
 CONFIG_DIR = Path(os.environ.get("LIT_DL_CONFIG_DIR", Path.home() / ".config" / "lit-dl"))
 CONFIG_FILE = CONFIG_DIR / "school.json"
-
-# schema English text(English text)
 SCHEMA_FILE = Path(__file__).resolve().parent.parent / "data" / "school.schema.json"
 
 
 def load_schema() -> dict[str, Any]:
-    """English text JSON Schema. """
-    with open(SCHEMA_FILE, "r", encoding="utf-8") as f:
-        return json.load(f)
+    """Load the bundled JSON schema."""
+    with open(SCHEMA_FILE, "r", encoding="utf-8") as handle:
+        return json.load(handle)
 
 
 def config_exists() -> bool:
-    """English text. """
+    """Return True when a school configuration has already been saved."""
     return CONFIG_FILE.exists()
 
 
+def _access(config: dict[str, Any]) -> dict[str, Any]:
+    return config.get("access") or config.get("auth") or {}
+
+
 def validate(config: dict[str, Any]) -> list[str]:
-    """English text schema. 
-
-    English text, English text. 
-    English text jsonschema English text schema English text, English text. 
-    """
+    """Return configuration validation errors without raising."""
     errors: list[str] = []
-
-    # English text(English text jsonschema)
     if not isinstance(config, dict):
-        return ["English text JSON English text"]
+        return ["configuration must be a JSON object"]
     if "version" not in config:
-        errors.append("English text version English text")
-    if "school" not in config or "name" not in config.get("school", {}):
-        errors.append("English text school.name English text")
-    auth = config.get("auth", {})
-    if "type" not in auth:
-        errors.append("English text auth.type English text")
-    if "sso_domain" not in auth or not auth["sso_domain"]:
-        errors.append("English text auth.sso_domain English text")
+        errors.append("missing version")
+    school = config.get("school", {})
+    if not isinstance(school, dict) or not school.get("name"):
+        errors.append("missing school.name")
+    access = _access(config)
+    if not isinstance(access, dict) or not access.get("type"):
+        errors.append("missing access.type")
     if not config.get("libraries"):
-        errors.append("libraries English text")
-
-    # schema English text(English text)
+        errors.append("libraries must contain at least one database or publisher platform")
     if jsonschema is not None and not errors:
         try:
             jsonschema.validate(instance=config, schema=load_schema())
-        except jsonschema.ValidationError as e:  # type: ignore
-            errors.append(f"schema English text: {e.message}")
-
+        except jsonschema.ValidationError as exc:  # type: ignore[attr-defined]
+            errors.append(f"schema validation failed: {exc.message}")
     return errors
 
 
 def load_config() -> Optional[dict[str, Any]]:
-    """English text. 
-
-    English text, English text None. 
-    English text JSON English text, English text None. 
-    """
+    """Load configuration. Return None if the file is missing or unreadable."""
     if not CONFIG_FILE.exists():
         return None
-
     try:
-        with open(CONFIG_FILE, "r", encoding="utf-8") as f:
-            return json.load(f)
-    except (json.JSONDecodeError, UnicodeDecodeError) as e:
-        # English text, English text None
+        with open(CONFIG_FILE, "r", encoding="utf-8") as handle:
+            return json.load(handle)
+    except (json.JSONDecodeError, UnicodeDecodeError) as exc:
         backup = CONFIG_FILE.with_suffix(".json.broken")
         shutil.copy2(CONFIG_FILE, backup)
         try:
             CONFIG_FILE.unlink()
         except OSError:
             pass
-        print(f"English text, English text {backup}, English text. English text: {e}")
+        print(f"Configuration was unreadable and has been backed up to {backup}: {exc}")
         return None
 
 
 def save_config(config: dict[str, Any]) -> Path:
-    """English text. 
-
-    English text, English text configured_at English text. 
-    English text. 
-    """
+    """Validate and save configuration with private file permissions."""
     CONFIG_DIR.mkdir(parents=True, exist_ok=True)
-
-    # English text
-    if not config.get("school", {}).get("configured_at"):
-        config.setdefault("school", {})["configured_at"] = datetime.now().isoformat()
-
-    # English text
+    config.setdefault("version", 1)
+    config.setdefault("school", {})
+    config["school"].setdefault("configured_at", datetime.now().isoformat(timespec="seconds"))
     errors = validate(config)
     if errors:
-        raise ValueError(f"English text: {'; '.join(errors)}")
-
-    with open(CONFIG_FILE, "w", encoding="utf-8") as f:
-        json.dump(config, f, ensure_ascii=False, indent=2)
-
-    # English text(English text)
-    os.chmod(CONFIG_FILE, 0o600)
-
+        raise ValueError("; ".join(errors))
+    with open(CONFIG_FILE, "w", encoding="utf-8") as handle:
+        json.dump(config, handle, ensure_ascii=False, indent=2)
+        handle.write("\n")
+    try:
+        os.chmod(CONFIG_FILE, 0o600)
+    except OSError:
+        pass
     return CONFIG_FILE
 
 
 def backup_config() -> Optional[Path]:
-    """English text, English text. English text None. """
+    """Create a timestamped backup and return its path."""
     if not CONFIG_FILE.exists():
         return None
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    backup = CONFIG_FILE.with_suffix(f".json.{timestamp}.bak")
+    backup = CONFIG_FILE.with_suffix(f".json.{datetime.now().strftime('%Y%m%d_%H%M%S')}.bak")
     shutil.copy2(CONFIG_FILE, backup)
     return backup
 
 
 def delete_config() -> bool:
-    """English text(English text). English text. """
-    if CONFIG_FILE.exists():
-        backup_config()
-        CONFIG_FILE.unlink()
-        return True
-    return False
+    """Back up and remove the current configuration."""
+    if not CONFIG_FILE.exists():
+        return False
+    backup_config()
+    CONFIG_FILE.unlink()
+    return True
 
 
 def get_school_name() -> Optional[str]:
-    """English text. English text None. """
     cfg = load_config()
-    if cfg is None:
-        return None
-    return cfg.get("school", {}).get("name")
+    return None if cfg is None else cfg.get("school", {}).get("name")
 
 
 def get_auth_info() -> Optional[dict[str, Any]]:
-    """English text. English text None. """
     cfg = load_config()
-    if cfg is None:
-        return None
-    return cfg.get("auth")
+    return None if cfg is None else _access(cfg)
 
 
 if __name__ == "__main__":
-    # CLI English text
-    if config_exists():
-        cfg = load_config()
-        if cfg:
-            print(f"English text: {cfg.get('school', {}).get('name', 'English text')}")
-            print(f"English text: {CONFIG_FILE}")
-            errors = validate(cfg)
-            if errors:
-                print(f"English text: {errors}")
-            else:
-                print("English text")
-        else:
-            print("English text, English text")
-    else:
-        print(f"English text, English text: {CONFIG_FILE}")
+    if not config_exists():
+        print(f"No configuration found. Expected path: {CONFIG_FILE}")
+        raise SystemExit(1)
+    cfg = load_config()
+    if cfg is None:
+        print("Configuration could not be loaded.")
+        raise SystemExit(1)
+    errors = validate(cfg)
+    print(f"School: {cfg.get('school', {}).get('name', 'unknown')}")
+    print(f"Path: {CONFIG_FILE}")
+    print("Status: valid" if not errors else f"Status: invalid ({'; '.join(errors)})")

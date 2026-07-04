@@ -18,7 +18,7 @@ SITES = {
     },
     "cnki": {
         "port": 9226,
-        "name": "English text/CNKI",
+        "name": "browser/CNKI",
         "url": "https://www.cnki.net/",
     },
 }
@@ -27,8 +27,8 @@ ALIASES = {
     "science-direct": "sciencedirect",
     "science_direct": "sciencedirect",
     "elsevier": "sciencedirect",
-    "English text": "cnki",
-    "English text": "cnki",
+    "browser": "cnki",
+    "browser": "cnki",
 }
 
 

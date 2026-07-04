@@ -117,7 +117,7 @@ python3 -m http.server 8080 &
 server_pid=$!
 
 # 2. Capture with the template
-cd /path/to/vosslab-skills
+cd /path/to/scholarflow-skills
 node skills/screenshot-docs/scripts/screenshot_web.mjs \
     http://localhost:8080/ \
     /tmp/concept_map_main.png

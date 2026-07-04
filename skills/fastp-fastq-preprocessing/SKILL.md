@@ -168,10 +168,10 @@ from pathlib import Path
 def parse_fastp_json(json_path: str) -> dict:
     with open(json_path) as f:
         data = json.load(f)
-    
+
     before = data["summary"]["before_filtering"]
     after = data["summary"]["after_filtering"]
-    
+
     return {
         "total_reads_in":  before["total_reads"],
         "total_reads_out": after["total_reads"],

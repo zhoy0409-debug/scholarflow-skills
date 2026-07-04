@@ -53,7 +53,7 @@ const ROBOT_CHECK_RE =
 
 // Publisher access-denied signals.
 const ACCESS_DENIED_RE =
-  /access denied|don't have permission|forbidden|403|English text|English text/i;
+  /access denied|don't have permission|forbidden|403|not authorized|no permission/i;
 
 /**
  * Classify a wall (login / verification / block) from URL + title + body hint.

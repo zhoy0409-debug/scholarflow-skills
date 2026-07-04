@@ -1,49 +1,56 @@
 #!/usr/bin/env python3
-"""ScienceDirect runner using DrissionPage CDP takeover."""
+"""Search ScienceDirect in a browser session and export reviewable candidates."""
 
 from __future__ import annotations
 
 import argparse
 import csv
-import hashlib
+import html
 import json
 import re
 import sys
-import time
 from datetime import datetime
 from pathlib import Path
 from urllib.parse import urlencode
-from urllib.request import Request, urlopen
+from urllib.request import urlopen
 
-from DrissionPage import Chromium, ChromiumOptions
+try:
+    from DrissionPage import Chromium, ChromiumOptions
+except Exception as exc:
+    raise SystemExit(
+        "DrissionPage is required for this runner. Install it in the active Python environment "
+        f"or use the browser-guided workflow. Original error: {exc}"
+    )
+
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 if str(SCRIPT_DIR) not in sys.path:
     sys.path.insert(0, str(SCRIPT_DIR))
 
-from zotero_bridge import locate_zotero_data_dir, ping_zotero, save_metadata_item, wait_for_attachment
+try:
+    from zotero_bridge import save_metadata_item
+except Exception:
+    save_metadata_item = None
 
 
-def safe_file_part(value: str, fallback: str = "sciencedirect_article") -> str:
-    text = re.sub(r'[<>:"/\\|?*\x00-\x1f]+', " ", value or "").strip()
-    text = re.sub(r"\s+", " ", text)
-    return (text or fallback)[:120]
-
-
-def write_csv(path: Path, headers: list[str], rows: list[list[str]]) -> None:
+def write_csv(path: Path, headers: list[str], rows: list[dict[str, str]]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("w", encoding="utf-8-sig", newline="") as handle:
-        writer = csv.writer(handle)
-        writer.writerow(headers)
-        writer.writerows(rows)
+        writer = csv.DictWriter(handle, fieldnames=headers)
+        writer.writeheader()
+        for row in rows:
+            writer.writerow({key: row.get(key, "") for key in headers})
 
 
-def sha256(path: Path) -> str:
-    h = hashlib.sha256()
-    with path.open("rb") as handle:
-        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
-            h.update(chunk)
-    return h.hexdigest()
+def assert_cdp_port_ready(port: int) -> None:
+    try:
+        with urlopen(f"http://127.0.0.1:{port}/json/version", timeout=3) as response:
+            response.read(256)
+    except Exception as exc:
+        raise RuntimeError(
+            f"Browser CDP port {port} is not available. Start a browser with remote debugging, "
+            "open ScienceDirect, sign in if needed, and rerun this script."
+        ) from exc
 
 
 def connect_browser(port: int):
@@ -56,28 +63,16 @@ def connect_browser(port: int):
         return Chromium(addr_or_opts=opts)
 
 
-def assert_cdp_port_ready(port: int) -> None:
-    url = f"http://127.0.0.1:{port}/json/version"
+def open_tab(browser, url: str):
     try:
-        with urlopen(url, timeout=3) as response:
-            response.read(256)
-    except Exception as exc:
-        raise RuntimeError(
-            f"English text {port}. English text open_lit_browser.ps1 English text ScienceDirect. "
-        ) from exc
-
-
-def open_tab(browser, url: str | None = None):
-    try:
-        tab = browser.new_tab(url) if url else browser.new_tab()
+        tab = browser.new_tab(url)
     except Exception:
         tab = getattr(browser, "latest_tab", None)
         if isinstance(tab, str):
             tab = browser.get_tab(tab)
-        if url and tab is not None:
-            tab.get(url)
-    if tab is None:
-        raise RuntimeError("English text. ")
+        if tab is None:
+            raise RuntimeError("Could not open or locate a browser tab.")
+        tab.get(url)
     try:
         tab.set.timeouts(12)
     except Exception:
@@ -92,651 +87,103 @@ def search_url(query: str, year_from: str, year_to: str) -> str:
     return "https://www.sciencedirect.com/search?" + urlencode(params)
 
 
-def js_collect_results() -> str:
+def collect_js() -> str:
     return r"""
 const clean = (s) => (s || '').replace(/\s+/g, ' ').trim();
-const stripBadges = (s) => clean(s)
-  .replace(/(?:EIEnglish text|SCIEnglish text\s*[\u4e00-\u9fa5A-Za-z\s]*?\dEnglish text|[\u4e00-\u9fa5A-Za-z]+TOP|IF\s*\d+(?:\.\d+)?)/g, '')
-  .replace(/\s+/g, ' ')
-  .trim();
 const anchors = [...document.querySelectorAll('a[href*="/science/article/"]')];
-const pdfLinks = anchors
-  .map((a) => ({ href: new URL(a.getAttribute('href'), location.href).href, text: clean(a.innerText || a.textContent || '') }))
-  .filter((x) => /\/pdfft\?/i.test(x.href));
-const piiFrom = (href) => {
-  const match = href.match(/\/pii\/([^/?#]+)/i);
-  return match ? match[1] : '';
-};
 const seen = new Set();
 const items = [];
 for (const a of anchors) {
   const href = new URL(a.getAttribute('href'), location.href).href.split('#')[0];
-  const title = stripBadges(a.innerText || a.textContent || '');
-  if (!title || title.length < 8 || title === 'View PDF' || /\/pdfft\?/i.test(href) || seen.has(href)) continue;
+  const title = clean(a.innerText || a.textContent || '');
+  if (!title || title.length < 8 || /\/pdfft\?/i.test(href) || seen.has(href)) continue;
   seen.add(href);
-  const pii = piiFrom(href);
-  const matchingPdf = pdfLinks.find((x) => pii && piiFrom(x.href) === pii);
-  const card = a.closest('li, article, div.ResultItem, div[class*="result"], div[class*="Result"], div[class*="card"]') || a.parentElement;
+  const card = a.closest('li, article, div[class*="result"], div[class*="Result"], div[class*="card"]') || a.parentElement;
   const text = card ? clean(card.innerText || '') : '';
-  const easyScholarLabels = card
-    ? [...card.querySelectorAll('.easyscholar-ranking, [class*="easyscholar"]')]
-        .map((el) => clean(el.innerText || el.textContent || ''))
-        .filter(Boolean)
-    : [];
-  const easyScholarText = easyScholarLabels.join('; ');
-  const ifMatch = (easyScholarText || text).match(/\bIF\s*(\d+(?:\.\d+)?)\b/i);
-  const jcrMatch = easyScholarText.match(/SCIEnglish text\s*([^;]*?\dEnglish text)/);
-  const afterTitle = text.includes(title) ? text.slice(text.indexOf(title) + title.length) : text;
-  const dateMatch = afterTitle.match(/(?:Available online\s+)?(?:\d{1,2}\s+)?(?:January|February|March|April|May|June|July|August|September|October|November|December)\s+20\d{2}|\b20\d{2}\b/i);
-  const journal = stripBadges(dateMatch ? afterTitle.slice(0, dateMatch.index).replace(/^(?:\s|,|;|-)+/, '').trim() : '');
-  const yearMatch = text.match(/\b(20\d{2}|19\d{2})\b/);
-  const doiMatch = text.match(/10\.\d{4,9}\/[-._;()/:A-Z0-9]+/i);
-  const hasOpen = /open access/i.test(text);
-  const hasFull = Boolean(matchingPdf) || /full text access|view pdf|open access/i.test(text);
-  const ifNote = ifMatch ? `EasyScholar IF ${ifMatch[1]}` : 'IFEnglish text: English text EasyScholar IF English text';
-  items.push({
-    title,
-    url: href,
-    journal,
-    publication_year: yearMatch ? yearMatch[1] : '',
-    doi: doiMatch ? doiMatch[0] : '',
-    impact_factor: ifMatch ? ifMatch[1] : '',
-    metric_year: '',
-    metric_source: ifMatch ? 'EasyScholar browser badge on ScienceDirect result page' : '',
-    journal_ranking: jcrMatch ? jcrMatch[1] : '',
-    easyscholar_labels: easyScholarText,
-    pdf_url: matchingPdf ? matchingPdf.href : '',
-    access_status: hasOpen ? 'open access visible in result' : (hasFull ? 'official View PDF visible in result' : 'unknown from result'),
-    notes: (hasOpen ? 'Open access visible in result' : (hasFull ? 'Full text access/View PDF visible in result' : 'No visible full-text signal in result')) + '; ' + ifNote + (easyScholarText ? `; EasyScholar: ${easyScholarText}` : '')
-  });
+  const year = (text.match(/\b(19|20)\d{2}\b/) || [''])[0];
+  const journal = clean((text.match(/Journal|Book|Volume|Issue/i) || [''])[0]);
+  const access = /open access|view pdf|download pdf/i.test(text) ? 'full text visible' : 'check access';
+  const ifMatch = text.match(/\bIF\s*[:：]?\s*(\d+(?:\.\d+)?)/i);
+  items.push({ title, url: href, year, journal, access, impact_factor: ifMatch ? ifMatch[1] : '', source_text: text.slice(0, 500) });
 }
-return items
-  .sort((a, b) => {
-    const score = (x) => (Number(x.impact_factor || 0) * 10) + (x.pdf_url ? 4 : 0) + (/open access/i.test(x.access_status) ? 2 : 0) + (/full text|view pdf/i.test(x.access_status) ? 1 : 0);
-    return score(b) - score(a);
-  })
-  .slice(0, 50);
+return JSON.stringify(items);
 """
 
 
-def js_article_pdf_info() -> str:
-    return r"""
-const clean = (s) => (s || '').replace(/\s+/g, ' ').trim();
-const title = clean(document.querySelector('h1')?.innerText) || document.title;
-const text = clean(document.body ? document.body.innerText : '');
-const doi = clean(document.querySelector('a[href*="doi.org"]')?.innerText || document.querySelector('a[href*="doi.org"]')?.href || '') || (text.match(/10\.\d{4,9}\/[-._;()/:A-Z0-9]+/i)?.[0] || '');
-const controls = [...document.querySelectorAll('a, button, [role="button"]')].map((el) => ({
-  text: clean(el.innerText || el.textContent || el.getAttribute('aria-label') || el.getAttribute('title') || ''),
-  href: el.href || el.getAttribute('href') || '',
-}));
-const pdf = controls.find((x) => /view pdf|download pdf|pdf/i.test(x.text + ' ' + x.href) && /\/pdfft\?/i.test(x.href));
-const fullIssue = controls.find((x) => /download\s+(full\s+)?issue|English text|English text|English text/i.test(x.text));
-return { title, doi, pdf_url: pdf ? new URL(pdf.href, location.href).href : '', has_full_issue: Boolean(fullIssue), full_issue_text: fullIssue ? fullIssue.text : '' };
-"""
+def classify(row: dict[str, str], if_min: float | None) -> str:
+    try:
+        impact_factor = float(row.get("impact_factor") or "nan")
+    except ValueError:
+        impact_factor = float("nan")
+    if if_min is not None and impact_factor == impact_factor:
+        return "high" if impact_factor >= if_min else "low"
+    if "full text" in row.get("access", "").lower():
+        return "medium"
+    return "review"
 
 
-def js_click_pdf_save() -> str:
-    return r"""
-const labels = ['download', 'save', 'English text', 'English text'];
-const bad = ['print', 'zoom', 'rotate', 'fit', 'page', 'search', 'open'];
-const seen = new Set();
-const matches = [];
-function visit(root) {
-  if (!root || seen.has(root)) return;
-  seen.add(root);
-  let nodes = [];
-  try { nodes = [...root.querySelectorAll('*')]; } catch (e) { return; }
-  for (const el of nodes) {
-    const text = [
-      el.id,
-      el.getAttribute && el.getAttribute('aria-label'),
-      el.getAttribute && el.getAttribute('title'),
-      el.getAttribute && el.getAttribute('alt'),
-      el.innerText,
-      el.textContent,
-      el.className && String(el.className)
-    ].filter(Boolean).join(' ').toLowerCase();
-    if (labels.some(x => text.includes(x)) && !bad.some(x => text.includes(x))) {
-      matches.push({ el, text });
-    }
-    if (el.shadowRoot) visit(el.shadowRoot);
-  }
-}
-visit(document);
-const ranked = matches.sort((a, b) => {
-  const score = (x) =>
-    (/\bdownload\b|English text/.test(x.text) ? 4 : 0) +
-    (/\bsave\b|English text/.test(x.text) ? 3 : 0) +
-    (/button|icon-button/.test(x.text) ? 1 : 0);
-  return score(b) - score(a);
-});
-for (const item of ranked) {
-  try {
-    item.el.scrollIntoView && item.el.scrollIntoView({ block: 'center', inline: 'center' });
-    item.el.click();
-    return { clicked: true, text: item.text.slice(0, 180), candidates: ranked.length };
-  } catch (e) {}
-}
-return { clicked: false, candidates: ranked.length };
-"""
-
-
-def save_candidate_tables(run_dir: Path, rows: list[dict[str, str]]) -> None:
-    candidate_headers = [
-        "priority",
-        "title",
-        "authors",
-        "journal",
-        "publication_year",
-        "impact_factor",
-        "metric_year",
-        "metric_source",
-        "doi",
-        "source",
-        "url",
-        "abstract",
-        "access_status",
-        "zotero_status",
-        "zotero_item_key",
-        "next_action",
-        "notes",
-    ]
-    candidate_rows = [
-        [
-            row.get("priority", "English text"),
-            row.get("title", ""),
-            row.get("authors", ""),
-            row.get("journal", ""),
-            row.get("publication_year", ""),
-            row.get("impact_factor", ""),
-            row.get("metric_year", ""),
-            row.get("metric_source", ""),
-            row.get("doi", ""),
-            "ScienceDirect",
-            row.get("url", ""),
-            "",
-            row.get("access_status", ""),
-            row.get("zotero_status", "not_attempted"),
-            row.get("zotero_item_key", ""),
-            row.get("next_action", "save metadata to Zotero; no PDF download"),
-            row.get("notes", ""),
-        ]
+def save_html(path: Path, rows: list[dict[str, str]], args: argparse.Namespace) -> None:
+    items = "\n".join(
+        f"<tr><td>{html.escape(row.get('priority',''))}</td><td>{html.escape(row.get('title',''))}</td>"
+        f"<td>{html.escape(row.get('year',''))}</td><td><a href=\"{html.escape(row.get('url',''))}\">open</a></td>"
+        f"<td>{html.escape(row.get('notes',''))}</td></tr>"
         for row in rows
-    ]
-    write_csv(run_dir / "English text.csv", candidate_headers, candidate_rows)
-    write_csv(
-        run_dir / "English text.csv",
-        ["record_id", "source", "title", "url", "doi", "publication_year", "journal", "discovered_at", "status"],
-        [
-            [
-                f"sd-{idx + 1:03d}",
-                "ScienceDirect",
-                row.get("title", ""),
-                row.get("url", ""),
-                row.get("doi", ""),
-                row.get("publication_year", ""),
-                row.get("journal", ""),
-                datetime.now().isoformat(timespec="seconds"),
-                row.get("access_status", ""),
-            ]
-            for idx, row in enumerate(rows)
-        ],
     )
-    priority_headers = [
-        "title",
-        "authors",
-        "journal",
-        "publication_year",
-        "impact_factor",
-        "metric_year",
-        "metric_source",
-        "doi",
-        "source",
-        "url",
-        "access_status",
-        "zotero_status",
-        "zotero_item_key",
-        "next_action",
-        "notes",
-    ]
-    for level, filename in [("English text", "English text.csv"), ("English text", "English text.csv"), ("English text", "English text.csv")]:
-        write_csv(
-            run_dir / filename,
-            priority_headers,
-            [
-                [
-                    row.get("title", ""),
-                    row.get("authors", ""),
-                    row.get("journal", ""),
-                    row.get("publication_year", ""),
-                    row.get("impact_factor", ""),
-                    row.get("metric_year", ""),
-                    row.get("metric_source", ""),
-                    row.get("doi", ""),
-                    "ScienceDirect",
-                    row.get("url", ""),
-                    row.get("access_status", ""),
-                    row.get("zotero_status", "not_attempted"),
-                    row.get("zotero_item_key", ""),
-                    row.get("next_action", "save metadata to Zotero; no PDF download"),
-                    row.get("notes", ""),
-                ]
-                for row in rows
-                if row.get("priority", "English text") == level
-            ],
-        )
-
-
-def wait_mission(mission, timeout: float = 90.0):
-    start = time.time()
-    while time.time() - start < timeout:
-        for attr in ("is_done", "done", "success"):
-            value = getattr(mission, attr, None)
-            if value is True:
-                return True
-        state = str(getattr(mission, "state", "") or getattr(mission, "status", "")).lower()
-        if any(token in state for token in ("done", "success", "completed", "finished")):
-            return True
-        if any(token in state for token in ("fail", "error", "cancel")):
-            return False
-        if hasattr(mission, "wait"):
-            try:
-                result = mission.wait(1)
-                if result is not False and result is not None:
-                    return True
-            except TypeError:
-                try:
-                    result = mission.wait()
-                    if result is not False and result is not None:
-                        return True
-                except Exception:
-                    pass
-            except Exception:
-                pass
-        time.sleep(1)
-    return False
-
-
-def newest_download(download_dir: Path, before: set[str]) -> Path | None:
-    allowed = {".pdf", ".zip", ".html", ".xml"}
-    files = [p for p in download_dir.iterdir() if p.is_file() and p.name not in before and p.suffix.lower() in allowed]
-    if not files:
-        return None
-    return max(files, key=lambda p: p.stat().st_mtime)
-
-
-def wait_for_new_download(download_dir: Path, before: set[str], timeout: float = 90.0) -> Path | None:
-    start = time.time()
-    while time.time() - start < timeout:
-        found = newest_download(download_dir, before)
-        if found and found.exists() and found.stat().st_size > 1000:
-            partials = list(download_dir.glob("*.crdownload")) + list(download_dir.glob("*.tmp"))
-            if not partials:
-                return found
-        time.sleep(1)
-    return None
-
-
-def rename_downloaded_file(path: Path, title: str) -> Path:
-    wanted = safe_file_part(title, path.stem)
-    target = path.with_name(f"{wanted}{path.suffix.lower()}")
-    if path.resolve() == target.resolve():
-        return path
-    counter = 2
-    while target.exists():
-        target = path.with_name(f"{wanted} ({counter}){path.suffix.lower()}")
-        counter += 1
-    path.replace(target)
-    return target
-
-
-def parse_float(value: object) -> float | None:
-    text = str(value or "").strip()
-    if not text:
-        return None
-    match = re.search(r"\d+(?:\.\d+)?", text)
-    return float(match.group(0)) if match else None
-
-
-def save_official_pdf_preview_url(pdf_url: str, download_dir: Path, title: str) -> Path | None:
-    if not re.search(r"\.pdf(?:\?|$)|pdf\.sciencedirectassets\.com", pdf_url, re.I):
-        return None
-    target = download_dir / f"{safe_file_part(title)}.pdf"
-    counter = 2
-    while target.exists():
-        target = download_dir / f"{safe_file_part(title)} ({counter}).pdf"
-        counter += 1
-    request = Request(
-        pdf_url,
-        headers={
-            "User-Agent": "Mozilla/5.0",
-            "Accept": "application/pdf,*/*",
-            "Referer": "https://www.sciencedirect.com/",
-        },
-    )
-    with urlopen(request, timeout=60) as response:
-        content_type = response.headers.get("content-type", "")
-        data = response.read()
-    if len(data) < 1000 or (b"%PDF" not in data[:1024] and "pdf" not in content_type.lower()):
-        return None
-    target.write_bytes(data)
-    return target
-
-
-def try_download_with_downloadkit(tab, pdf_url: str, download_dir: Path, title: str) -> tuple[Path | None, str]:
-    before = {p.name for p in download_dir.iterdir() if p.is_file()}
-    filename = safe_file_part(title)
-    try:
-        mission = tab.download.add(
-            pdf_url,
-            save_path=str(download_dir),
-            rename=filename,
-            suffix="pdf",
-            file_exists="rename",
-            split=False,
-        )
-        ok = wait_mission(mission, timeout=25)
-        saved = wait_for_new_download(download_dir, before, timeout=5)
-        if ok and saved:
-            return rename_downloaded_file(saved, title), "Downloaded by DrissionPage DownloadKit from official View PDF link"
-        return None, "DownloadKit did not produce a completed PDF"
-    except Exception as exc:
-        return None, f"DownloadKit failed: {exc}"
-
-
-def try_download_with_pdf_viewer(browser, pdf_url: str, download_dir: Path, title: str) -> tuple[Path | None, str]:
-    before = {p.name for p in download_dir.iterdir() if p.is_file()}
-    pdf_tab = open_tab(browser, pdf_url)
-    try:
-        pdf_tab.set.download_path(str(download_dir))
-        pdf_tab.set.when_download_file_exists("rename")
-    except Exception:
-        pass
-    try:
-        pdf_tab.wait.doc_loaded()
-    except Exception:
-        pass
-    time.sleep(4)
-    current_pdf_url = getattr(pdf_tab, "url", "") or ""
-    try:
-        saved = save_official_pdf_preview_url(current_pdf_url, download_dir, title)
-        if saved:
-            return saved, "Downloaded from the official PDF preview URL opened by the logged-in browser"
-    except Exception as exc:
-        preview_error = f"official PDF preview URL save failed: {exc}"
-    else:
-        preview_error = "official PDF preview URL was not a direct PDF response"
-    try:
-        result = pdf_tab.run_js(js_click_pdf_save()) or {}
-    except Exception as exc:
-        return None, f"{preview_error}; PDF viewer save button JS failed: {exc}"
-    saved = wait_for_new_download(download_dir, before, timeout=90)
-    if saved:
-        clicked_text = str(result.get("text", "")).strip()
-        note = "Downloaded by clicking the logged-in browser PDF viewer save button"
-        if clicked_text:
-            note += f"; control={clicked_text[:80]}"
-        return rename_downloaded_file(saved, title), note
-    if result.get("clicked"):
-        return None, f"{preview_error}; PDF viewer save button was clicked but no completed file appeared in the output directory"
-    return None, f"{preview_error}; PDF viewer save button was not found"
-
-
-def try_download_with_zotero(tab, row: dict[str, str], info: dict[str, str], download_dir: Path, args: argparse.Namespace) -> tuple[Path | None, str]:
-    data_dir = locate_zotero_data_dir(args.zotero_data_dir)
-    if not data_dir:
-        return None, "Zotero data directory not found; open Zotero once or pass --zotero-data-dir"
-    ping = ping_zotero()
-    if not ping.get("ok"):
-        return None, "Zotero desktop connector port 23119 is not reachable; start Zotero Desktop and keep the browser Zotero Connector enabled"
-
-    title = info.get("title") or row.get("title", "")
-    doi = info.get("doi") or row.get("doi", "")
-    started = time.time()
-    # Keep the official article landing page active. The user/browser connector
-    # saves from this page, which is where Zotero translators are most reliable.
-    try:
-        tab.set.activate()
-    except Exception:
-        pass
-    print(
-        f"[Zotero] English text Zotero Connector English text: {title[:90]}. "
-        f"English text {args.zotero_wait_seconds} English text PDF English text. ",
-        flush=True,
-    )
-    result = wait_for_attachment(
-        data_dir=data_dir,
-        title=title,
-        doi=doi,
-        out_dir=download_dir,
-        since_epoch=started - 10,
-        timeout=float(args.zotero_wait_seconds),
-    )
-    if result.get("ok"):
-        return Path(str(result["path"])), (
-            "Saved by Zotero Connector from the official article page; "
-            f"copied from Zotero attachment {result.get('zotero_attachment_key', '')}"
-        )
-    return None, str(result.get("reason", "Zotero Connector did not produce a matching PDF attachment"))
-
-
-def run(args: argparse.Namespace) -> dict[str, object]:
-    run_dir = Path(args.out).resolve()
-    internal_dir = run_dir / "English text_English text"
-    (internal_dir / "logs").mkdir(parents=True, exist_ok=True)
-    (internal_dir / "raw_exports").mkdir(parents=True, exist_ok=True)
-
-    browser = connect_browser(args.port)
-    tab = open_tab(browser)
-    tab.set.timeouts(12)
-
-    url = search_url(args.query, str(args.year_from or ""), str(args.year_to or ""))
-    tab.get(url)
-    tab.wait.doc_loaded()
-    results = []
-    if_min = parse_float(args.if_min)
-    for _ in range(20):
-        time.sleep(2)
-        results = tab.run_js(js_collect_results()) or []
-        has_easy_scholar_if = any(parse_float(row.get("impact_factor", "")) is not None for row in results)
-        if results and (if_min is None or has_easy_scholar_if):
-            break
-    (internal_dir / "raw_exports" / "sciencedirect_drission_search_results.json").write_text(
-        json.dumps(results, ensure_ascii=False, indent=2),
+    path.write_text(
+        f"""<!doctype html>
+<html lang="en"><meta charset="utf-8"><title>ScienceDirect Search Summary</title>
+<body><h1>ScienceDirect Search Summary</h1>
+<p><strong>Query:</strong> {html.escape(args.query)}</p>
+<p><strong>Year range:</strong> {html.escape(args.year_from or 'any')} - {html.escape(args.year_to or 'any')}</p>
+<p><strong>Records:</strong> {len(rows)}</p>
+<table border="1" cellspacing="0" cellpadding="6">
+<tr><th>Priority</th><th>Title</th><th>Year</th><th>URL</th><th>Notes</th></tr>
+{items}
+</table></body></html>
+""",
         encoding="utf-8",
     )
 
-    for row in results:
-        access = row.get("access_status", "")
-        if_value = parse_float(row.get("impact_factor", ""))
-        row["source"] = "ScienceDirect"
-        if if_min is None:
-            row["priority"] = "English text" if if_value is not None else ("English text" if re.search(r"open access|view pdf|full text", access, re.I) else "English text")
-        elif if_value is None:
-            row["priority"] = "English text"
-            row["notes"] = (row.get("notes", "") + f"; English text EasyScholar IF, English text IF>{if_min:g} English text").strip("; ")
-        elif if_value > if_min:
-            row["priority"] = "English text"
-        else:
-            row["priority"] = "English text"
-            row["notes"] = (row.get("notes", "") + f"; IF {if_value:g} English text IF>{if_min:g}").strip("; ")
-        row["zotero_status"] = "not_attempted"
-        row["zotero_item_key"] = ""
-        row["next_action"] = "save metadata to Zotero collection; no PDF download"
-
-    if if_min is not None and not any(parse_float(row.get("impact_factor", "")) is not None for row in results):
-        for row in results:
-            row["priority"] = "English text"
-            row["notes"] = (row.get("notes", "") + f"; EasyScholar English text IF, English text ScienceDirect English text IF>{if_min:g}").strip("; ")
-        save_candidate_tables(run_dir, results)
-        write_csv(run_dir / "English textZoteroEnglish text.csv", ["record_id", "title", "doi", "source", "url", "journal", "publication_year", "zotero_item_key", "zotero_status", "saved_at", "access_status", "notes"], [])
-        write_csv(
-            run_dir / "English text.csv",
-            ["title", "doi", "source", "url", "reason", "next_action", "priority"],
-            [["", "", "ScienceDirect", "", f"EasyScholar IF not visible; log in EasyScholar and refresh the ScienceDirect results page, then rerun if IF>{if_min:g} is required", "wait for EasyScholar IF badges to appear on the results page", "English text"]],
-        )
-        html = f"""<!doctype html><html lang="zh-CN"><meta charset="utf-8"><title>English text</title><body>
-<h1>English text</h1>
-<p>English text: DrissionPage English text 9225 English text; English text: Zotero English text, English text PDF. </p>
-<p>English text: {args.query}</p>
-<p>English text: {args.year_from}-{args.year_to}</p>
-<p>English text: {args.if_min or "English text"}; English text EasyScholar IF English text, English text EasyScholar English text ScienceDirect English text. </p>
-<p>Zotero collection: {args.zotero_collection or args.zotero_target or "Zotero English text"}</p>
-<p>English text: {len(results)}, English text: 0, English text: 0, English text/English text: 0, English text: 1</p>
-<p>English text: English text, English text EasyScholar IF, English text Zotero English text. English text EasyScholar English text. </p>
-</body></html>"""
-        (run_dir / "English text.html").write_text(html, encoding="utf-8")
-        summary = {
-            "runner": "drission",
-            "download_method": "metadata_only",
-            "query": args.query,
-            "year_from": args.year_from,
-            "year_to": args.year_to,
-            "candidates": len(results),
-            "eligible_for_zotero": 0,
-            "attempted": 0,
-            "downloaded": 0,
-            "zotero_saved": 0,
-            "pending": 1,
-            "zotero_collection": args.zotero_collection or args.zotero_target or "Zotero English text",
-            "needs_easyscholar_login": True,
-        }
-        (internal_dir / "logs" / "sciencedirect_drission_summary.json").write_text(json.dumps(summary, ensure_ascii=False, indent=2), encoding="utf-8")
-        return summary
-    save_candidate_tables(run_dir, results)
-
-    zotero_rows: list[list[str]] = []
-    pending_rows: list[list[str]] = []
-    zotero_saved = 0
-    attempts = 0
-    data_dir = locate_zotero_data_dir(args.zotero_data_dir)
-    import_candidates = [row for row in results if row.get("priority") == "English text"]
-    if if_min is None:
-        import_candidates.extend(row for row in results if row.get("priority") == "English text")
-    max_requested = min(int(args.limit), len(import_candidates))
-    max_attempts = min(int(args.max_attempts or max_requested), max_requested, len(import_candidates))
-
-    for row in import_candidates[:max_attempts]:
-        if zotero_saved >= args.limit:
-            break
-        attempts += 1
-        tab.get(row["url"])
-        tab.wait.doc_loaded()
-        time.sleep(2)
-        page_text = ""
-        try:
-            page_text = tab.run_js('return (document.body && document.body.innerText || "").slice(0, 2000)') or ""
-        except Exception:
-            page_text = ""
-        if re.search(r"captcha|robot|verify|unusual activity|English text|English text|English text", page_text, re.I):
-            row["zotero_status"] = "pending"
-            row["next_action"] = "site verification shown; user should resolve manually before rerun"
-            pending_rows.append([row["title"], row.get("doi", ""), "ScienceDirect", row["url"], "site verification or CAPTCHA detected", row["next_action"], row.get("priority", "English text")])
-            break
-        info = tab.run_js(js_article_pdf_info()) or {}
-        row["doi"] = info.get("doi") or row.get("doi", "")
-        row["title"] = info.get("title") or row.get("title", "")
-        row["has_full_issue"] = str(bool(info.get("has_full_issue")))
-        result = save_metadata_item(
-            row,
-            data_dir=data_dir,
-            collection_name=args.zotero_collection,
-            collection_target=args.zotero_target,
-        )
-        if result.get("ok"):
-            zotero_saved += 1
-            row["zotero_status"] = str(result.get("status") or "saved")
-            row["zotero_item_key"] = str(result.get("zotero_item_key") or "")
-            row["next_action"] = "metadata stored in Zotero; no PDF download attempted"
-            zotero_rows.append([
-                f"sd-{attempts:03d}",
-                row["title"],
-                row.get("doi", ""),
-                "ScienceDirect",
-                row["url"],
-                row.get("journal", ""),
-                row.get("publication_year", ""),
-                row.get("zotero_item_key", ""),
-                row.get("zotero_status", ""),
-                datetime.now().isoformat(timespec="seconds"),
-                row.get("access_status", ""),
-                f"metadata only; PDF download intentionally disabled; Zotero collection={result.get('zotero_collection', args.zotero_collection)}",
-            ])
-        else:
-            row["zotero_status"] = "pending"
-            row["next_action"] = "manual Zotero save or rerun after Zotero is available"
-            pending_rows.append([row["title"], row.get("doi", ""), "ScienceDirect", row["url"], str(result.get("reason", "Zotero metadata save failed")), row["next_action"], row.get("priority", "English text")])
-
-        save_candidate_tables(run_dir, results)
-        write_csv(run_dir / "English textZoteroEnglish text.csv", ["record_id", "title", "doi", "source", "url", "journal", "publication_year", "zotero_item_key", "zotero_status", "saved_at", "access_status", "notes"], zotero_rows)
-        write_csv(run_dir / "English text.csv", ["title", "doi", "source", "url", "reason", "next_action", "priority"], pending_rows)
-
-    save_candidate_tables(run_dir, results)
-    write_csv(run_dir / "English textZoteroEnglish text.csv", ["record_id", "title", "doi", "source", "url", "journal", "publication_year", "zotero_item_key", "zotero_status", "saved_at", "access_status", "notes"], zotero_rows)
-    write_csv(run_dir / "English text.csv", ["title", "doi", "source", "url", "reason", "next_action", "priority"], pending_rows)
-
-    collection_label = args.zotero_collection or args.zotero_target or "Zotero English text"
-    html = f"""<!doctype html><html lang="zh-CN"><meta charset="utf-8"><title>English text</title><body>
-<h1>English text</h1>
-<p>English text: DrissionPage English text 9225 English text; English text: Zotero English text, English text PDF. </p>
-<p>English text: {args.query}</p>
-<p>English text: {args.year_from}-{args.year_to}</p>
-<p>English text: {args.if_min or "English text"}; IF English text ScienceDirect English text EasyScholar English text. </p>
-<p>Zotero collection: {collection_label}</p>
-<p>English text: {len(results)}, English text: {len(import_candidates)}, English text: {attempts}, English text/English text: {zotero_saved}, English text: {len(pending_rows)}</p>
-<p>English text: English text; English text PDF English text. Zotero English text, English text, English text, English text, English text. </p>
-</body></html>"""
-    (run_dir / "English text.html").write_text(html, encoding="utf-8")
-    summary = {
-        "runner": "drission",
-        "download_method": "metadata_only",
-        "query": args.query,
-        "year_from": args.year_from,
-        "year_to": args.year_to,
-        "candidates": len(results),
-        "eligible_for_zotero": len(import_candidates),
-        "attempted": attempts,
-        "downloaded": 0,
-        "zotero_saved": zotero_saved,
-        "pending": len(pending_rows),
-        "zotero_collection": collection_label,
-    }
-    (internal_dir / "logs" / "sciencedirect_drission_summary.json").write_text(json.dumps(summary, ensure_ascii=False, indent=2), encoding="utf-8")
-    return summary
-
-
-def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--port", type=int, default=9225)
-    parser.add_argument("--query")
-    parser.add_argument("--query-file")
-    parser.add_argument("--year-from", default="")
-    parser.add_argument("--year-to", default="")
-    parser.add_argument("--if-min", default="")
-    parser.add_argument("--limit", type=int, default=5)
-    parser.add_argument("--max-attempts", type=int, default=0)
-    parser.add_argument(
-        "--download-method",
-        choices=("metadata", "zotero-metadata", "auto", "direct", "zotero"),
-        default="zotero-metadata",
-        help="Deprecated compatibility option. The runner now saves metadata to Zotero and never downloads PDFs.",
-    )
-    parser.add_argument("--zotero-wait-seconds", type=int, default=90)
-    parser.add_argument("--zotero-data-dir", default="")
-    parser.add_argument("--zotero-collection", default="science direct", help="Zotero collection name to save metadata into")
-    parser.add_argument("--zotero-target", default="", help="Optional Zotero connector target id such as C2")
-    parser.add_argument("--out", required=True)
-    args = parser.parse_args()
-    if args.query_file:
-        args.query = Path(args.query_file).read_text(encoding="utf-8").strip()
-    if not args.query:
-        parser.error("--query or --query-file is required")
-    return args
-
 
 def main() -> int:
-    summary = run(parse_args())
-    print(json.dumps(summary, ensure_ascii=False, indent=2))
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("query")
+    parser.add_argument("--year-from", default="")
+    parser.add_argument("--year-to", default="")
+    parser.add_argument("--port", type=int, default=9225)
+    parser.add_argument("--if-min", type=float)
+    parser.add_argument("--max-records", type=int, default=50)
+    parser.add_argument("--output-dir", type=Path, default=Path("paper_harbor_runs"))
+    parser.add_argument("--zotero-collection", default="")
+    parser.add_argument("--save-zotero", action="store_true")
+    args = parser.parse_args()
+    run_dir = args.output_dir / datetime.now().strftime("sciencedirect-%Y%m%d-%H%M%S")
+    run_dir.mkdir(parents=True, exist_ok=True)
+    browser = connect_browser(args.port)
+    tab = open_tab(browser, search_url(args.query, args.year_from, args.year_to))
+    raw = tab.run_js(collect_js())
+    rows = json.loads(raw or "[]")[: args.max_records]
+    for idx, row in enumerate(rows, start=1):
+        row["record_id"] = str(idx)
+        row["priority"] = classify(row, args.if_min)
+        row["source"] = "ScienceDirect"
+        row["notes"] = "Verify full text access, journal fit, and citation metadata before importing."
+    headers = ["record_id", "priority", "title", "year", "journal", "impact_factor", "access", "source", "url", "notes"]
+    write_csv(run_dir / "science_direct_candidates.csv", headers, rows)
+    zotero_rows: list[dict[str, str]] = []
+    if args.save_zotero and save_metadata_item is not None:
+        for row in rows:
+            result = save_metadata_item(
+                title=row.get("title", ""),
+                url=row.get("url", ""),
+                publication_title=row.get("journal", ""),
+                year=row.get("year", ""),
+                collection=args.zotero_collection or None,
+            )
+            zotero_rows.append({**row, "zotero_status": str(result)})
+    write_csv(run_dir / "zotero_saved_items.csv", headers + ["zotero_status"], zotero_rows)
+    save_html(run_dir / "science_direct_summary.html", rows, args)
+    print(f"Wrote ScienceDirect candidate package: {run_dir}")
     return 0
 
 
