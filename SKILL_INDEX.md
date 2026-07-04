@@ -2,7 +2,7 @@
 
 ScholarFlow Skills 的可安装 skill 索引。每个条目都是独立工作流，可以按任务单独安装，也可以按产品线成套安装。
 
-当前发布包包含 229 个 skill。
+当前发布包包含 230 个 skill。
 
 ## Nature Research Suite
 
@@ -51,6 +51,7 @@ ScholarFlow Skills 的可安装 skill 索引。每个条目都是独立工作流
 | `deep-research` | Route deep research, literature review, systematic review, meta-analysis, fact-checking, research question refinement, and evidence mapping requests to ScholarFlow literature, r... |
 | `deep-research-review` | Review, audit, and stress-test deep research outputs, literature reviews, evidence maps, systematic review drafts, and research claims with ScholarFlow reviewer, citation, and i... |
 | `humanize` | Humanize academic or professional writing by reducing formulaic AI-like patterns while preserving meaning, evidence, tone, and citation integrity. Alias for paper-spine-humanize... |
+| `journal-selection-advisor` | Help users choose suitable Chinese or English journals for a manuscript through guided intake, manuscript-journal fit analysis, tiered journal recommendations, JCR/CAS/disciplin... |
 | `journal-submission-normalizer` | Find official Chinese or English journal author instructions, extract submission and formatting requirements, and normalize manuscripts before submission. Use when the user asks... |
 | `manuscript-writing` | Route manuscript drafting, restructuring, abstract writing, results narration, discussion framing, cover letters, and journal-style polishing to PaperSpine, Nature writing, Natu... |
 | `omics-analysis` | Route omics analysis planning, QC, bioinformatics workflow design, multi-omics data interpretation, figures, reproducibility checks, and manuscript-ready reporting across instal... |

@@ -36,7 +36,7 @@ assets/
 | 查文献、做综述、核引用 | `nature-academic-search`, `reference-checker` |
 | 精读论文、中英文对照 | `nature-reader` |
 | 写论文、改论文、润色英文 | `nature-writing`, `nature-polishing`, `paper-spine` |
-| 投稿前质量检查 | `journal-submission-normalizer`, `research-integrity-guardrail`, `paper-self-review` |
+| 选刊和投稿前质量检查 | `journal-selection-advisor`, `journal-submission-normalizer`, `research-integrity-guardrail`, `paper-self-review` |
 | 做论文图表 | `nature-figure`, `sci-figure-composer` |
 | 做组会/汇报 PPT | `nature-paper2ppt`, `ppt` |
 | 做生信/组学分析 | `omics-analysis`, `bio-*`, `samtools-bam-processing`, `bcftools-variant-manipulation` |
@@ -45,6 +45,12 @@ assets/
 | 长任务防止上下文丢失 | `planning-with-files`, `session-handoff` |
 
 ## 推荐开场白
+
+### 选刊定位
+
+```text
+请用 journal-selection-advisor 帮我选刊。先判断我的文章适合什么领域和文章类型，再结合我的目标、单位要求、中科院/JCR 分区、时间和版面费限制，给出 Reach/Target/Safe/Fallback 分档推荐和投稿顺序。
+```
 
 ### 论文精读
 
