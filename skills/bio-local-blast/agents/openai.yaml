@@ -1,9 +1,9 @@
 interface:
-  display_name: "Local BLAST"
+  display_name: "Bio Local Blast"
   short_description: "Build local BLAST databases and run searches using NCBI BLAST+ command-line tools. Use when running >50 queries, building custom databases with -parse_s..."
-  default_prompt: "Use bio-local-blast to design or troubleshoot this bioinformatics workflow."
+  default_prompt: "Use bio-local-blast to handle this workflow."
 ownership:
   product_owner: "Zhoy"
   product_line: "Bio & Omics Toolkit"
-  origin: "jl-authored-tool-guide"
+  origin: "zhoy-original-or-curated"
   release_channel: "stable"

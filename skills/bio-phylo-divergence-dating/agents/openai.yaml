@@ -1,9 +1,9 @@
 interface:
-  display_name: "Divergence Time Estimation"
+  display_name: "Bio Phylo Divergence Dating"
   short_description: "Estimate divergence times using molecular clock models with BEAST2, MCMCTree, and TreePL. Use when dating speciation events, calibrating phylogenies wit..."
-  default_prompt: "Use bio-phylo-divergence-dating to design or troubleshoot this bioinformatics workflow."
+  default_prompt: "Use bio-phylo-divergence-dating to handle this workflow."
 ownership:
   product_owner: "Zhoy"
   product_line: "Bio & Omics Toolkit"
-  origin: "jl-authored-tool-guide"
+  origin: "zhoy-original-or-curated"
   release_channel: "stable"

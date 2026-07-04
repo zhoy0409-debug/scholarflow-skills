@@ -1,23 +1,22 @@
-# 实验索引
+# Experiment Index
 
-Dataview 查询入口，自动汇总所有实验日志。
+This reference supports the `nature-experiment-log` skill. Load it only when the current task needs the additional detail implied by the file name.
 
-```dataview
-TABLE date, salt_system, exp_type, material, anomaly
-FROM "实验日志"
-WHERE exp_id
-SORT date DESC
-```
+## Purpose
 
-## 使用
+Use this note to keep the workflow consistent, evidence-grounded, and easy to audit. It should help the agent make decisions, structure outputs, and avoid common failure modes for this part of the workflow.
 
-1. 将此文件放在 vault 的 `实验日志/` 目录下
-2. 确保所有日志文件包含 YAML frontmatter（`exp_id`, `date`, `salt_system`, `exp_type` 等字段）
-3. Obsidian 打开此文件即可看到交互式实验列表
+## Use Pattern
 
-## 自定义
+- Confirm the user's goal and available materials before applying the reference.
+- Prefer official sources, user-provided files, and reproducible checks.
+- Keep outputs structured enough to continue into a manuscript, report, slide deck, figure, or submission package.
+- Record assumptions, missing information, and verification needs explicitly.
 
-按你的实验体系调整查询字段。常见扩展：
-- 按体系筛选：`WHERE salt_system = "氯盐"`
-- 按异常筛选：`WHERE anomaly = true`
-- 按日期范围：`WHERE date >= date(2026-01-01)`
+## Checklist
+
+- Inputs are identified and scoped.
+- Sources or tools used are named.
+- Output format is explicit.
+- Risks and limitations are visible.
+- Next actions are practical and sequenced.

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Validate PaperSpine humanize_matrix.md and scan for remaining AI patterns.
 
-Self-contained — standard library only, no dependencies on other PaperSpine
+Self-contained - standard library only, no dependencies on other PaperSpine
 modules.  Can be distributed standalone with paper-spine-humanize skill.
 """
 
@@ -47,10 +47,10 @@ def _split_paragraphs(text: str) -> list[str]:
 # --- AI pattern detection ---
 
 AI_CONNECTORS_ZH = [
-    "首先", "其次", "再次", "最后", "综上所述", "总而言之", "总的来说",
-    "此外", "另外", "不仅如此", "值得注意的是", "需要指出的是", "不容忽视的是",
-    "具有重要意义", "具有重要的理论意义", "具有重要的现实意义",
-    "为……奠定基础", "在……的过程中",
+    "English text", "English text", "English text", "English text", "English text", "English text", "English text",
+    "English text", "English text", "English text", "English text", "English text", "English text",
+    "English text", "English text", "English text",
+    "English text......English text", "English text......English text",
 ]
 AI_CONNECTORS_EN = [
     "firstly", "secondly", "thirdly", "finally", "in conclusion", "to sum up",
@@ -87,7 +87,7 @@ def parse_args() -> argparse.Namespace:
 
 
 def sentence_lengths(text: str) -> list[int]:
-    sents = re.split(r"[.。!！?？;；\n]+", text)
+    sents = re.split(r"[.. !! ?? ;; \n]+", text)
     return [len(s.strip()) for s in sents if 5 < len(s.strip()) < 300]
 
 
@@ -140,7 +140,7 @@ def check_matrix(matrix_path: Path, manuscript_text: str, lang: str) -> Humanize
             if dim in joined:
                 dim_hits.add(dim)
     if result.matrix_rows > 2 and severity_counts["high"] == 0:
-        result.findings.append("No high-severity patterns found — matrix may be under-reporting")
+        result.findings.append("No high-severity patterns found - matrix may be under-reporting")
 
     missing_dims = set(CNKI_DIMENSIONS) - dim_hits
     if missing_dims:
@@ -151,7 +151,7 @@ def check_matrix(matrix_path: Path, manuscript_text: str, lang: str) -> Humanize
         result.sentence_length_stddev = round(statistics.stdev(lengths), 2)
         if result.sentence_length_stddev < 6:
             result.findings.append(
-                f"Sentence length stddev = {result.sentence_length_stddev} — too uniform. "
+                f"Sentence length stddev = {result.sentence_length_stddev} - too uniform. "
                 "AI text typically < 6; human text > 10."
             )
 
@@ -167,11 +167,11 @@ def check_matrix(matrix_path: Path, manuscript_text: str, lang: str) -> Humanize
             )
 
     # Check for long dash separators (common AI pattern)
-    dash_pattern = re.search(r"[—\-—―]{3,}", manuscript_text)
+    dash_pattern = re.search(r"[-\--―]{3,}", manuscript_text)
     if dash_pattern:
         result.findings.append(
-            "Long dash separators detected (e.g. '————'). "
-            "These are a strong AI-generation signal — replace with section headings or blank lines."
+            "Long dash separators detected (e.g. '----'). "
+            "These are a strong AI-generation signal - replace with section headings or blank lines."
         )
 
     result.ok = not result.findings

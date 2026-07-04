@@ -1,9 +1,9 @@
 interface:
-  display_name: "Assembly QC"
+  display_name: "Bio Genome Assembly Assembly QC"
   short_description: "Evaluates genome assembly quality across the three orthogonal axes - contiguity (QUAST auN/NG50/NGx, not bare N50), completeness (BUSCO/compleasm gene-s..."
-  default_prompt: "Use bio-genome-assembly-assembly-qc to design or troubleshoot this bioinformatics workflow."
+  default_prompt: "Use bio-genome-assembly-assembly-qc to handle this workflow."
 ownership:
   product_owner: "Zhoy"
   product_line: "Bio & Omics Toolkit"
-  origin: "jl-authored-tool-guide"
+  origin: "zhoy-original-or-curated"
   release_channel: "stable"

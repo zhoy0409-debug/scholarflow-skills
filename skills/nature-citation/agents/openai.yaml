@@ -1,9 +1,9 @@
 interface:
   display_name: "Nature Citation"
-  short_description: "Add strict Nature/CNS citations to manuscript text by splitting long passages into citable segments, searching only accepted flagship and subjournal tit..."
-  default_prompt: "Use nature-citation to help with my research workflow."
+  short_description: "Audit citations and reference lists for scholarly manuscripts, including source verification, metadata consistency, journal-style formatting, and eviden..."
+  default_prompt: "Use nature-citation to handle this workflow."
 ownership:
   product_owner: "Zhoy"
   product_line: "Nature Research Suite"
-  origin: "jl-original-or-curated"
+  origin: "zhoy-original-or-curated"
   release_channel: "stable"

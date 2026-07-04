@@ -1,113 +1,116 @@
 # ScholarFlow Skills
 
-ScholarFlow Skills 是一套面向科研场景的 Agent Skills。
+ScholarFlow Skills is a research-focused Agent Skills collection created and maintained by Zhoy.
 
-我做这套 skills，是因为在真实科研工作中反复遇到同一类问题：很多任务并不是完全不会做，而是每次都要重新告诉 AI 背景、流程、标准和边界。查文献时，要说明检索源、筛选标准和引用格式；读论文时，要提醒它不要只总结摘要，而要保留图表逻辑和证据链；写论文时，又要反复约束引用真实性、论证边界、段落功能和语气强度。到了科研作图、生信分析、PPT、PDF、Word 排版和投稿前检查，真正消耗时间的往往不是某一个单点任务，而是这些流程总要从头解释。
+I built it because research work is often slowed down not by one impossible task, but by having to explain the same context, workflow, standards, and boundaries to AI again and again. Literature search, paper reading, manuscript writing, figures, bioinformatics, slides, PDFs, Word formatting, journal selection, and submission checks all contain small rules that decide whether the output is actually usable.
 
-ScholarFlow Skills 的目标，就是把这些已经在科研工作中反复使用、反复修正过的流程，沉淀成可以复用的 Agent Skills。
+ScholarFlow Skills turns those repeated research workflows into reusable Agent Skills. It is not a loose prompt list. Each skill is designed to clarify the use case, required inputs, execution workflow, expected deliverable, and conservative boundaries.
 
-它不是一组零散提示词，而是一套可安装、可调用、可扩展的科研工作流组件。每个 skill 都尽量说明：适合什么场景、需要什么输入、如何执行、交付什么结果，以及哪些边界不能越过。
+This repository publishes Zhoy's own workflow design and curated implementations. External software, databases, journal platforms, and online services may be called from the user's environment, but they are not distributed as part of this product and are not claimed as ScholarFlow assets.
 
-本仓库由 Zhoy 发布和维护，只发布 ScholarFlow Skills 的自有工作流和自研封装。底层公开软件、数据库、期刊平台和外部服务只作为用户环境中的可调用工具，不随本包分发，也不归属本产品。
+## Contents
 
-## 为什么不是又一个 skill 列表
+- [Why this is not just another skill list](#why-this-is-not-just-another-skill-list)
+- [Who this is for](#who-this-is-for)
+- [Core workflows](#core-workflows)
+- [Example prompts](#example-prompts)
+- [Installation](#installation)
+- [Repository layout](#repository-layout)
+- [Boundaries](#boundaries)
+- [License](#license)
 
-现在已经有很多通用 skill 仓库、跨平台 skill 格式、自动生成器和配置校验器。它们很有价值，可以让 skill 更容易创建、安装、迁移和检查。
+## Why this is not just another skill list
 
-ScholarFlow Skills 不重复这类基础设施，而是专注于一个更具体、也更容易出问题的场景：科研用户如何把 AI 稳定地带进文献检索、论文精读、学术写作、科研作图、生信分析和交付物整理。
+There are already many general skill repositories, cross-agent formats, generators, installers, and validators. They are useful infrastructure.
 
-它的重点不在于“有多少个条目”，而在于每个主推 skill 都尽量回答四个问题：
+ScholarFlow Skills focuses on a narrower problem: how research users can bring AI into literature review, manuscript writing, journal selection, submission formatting, scientific figures, bioinformatics, and research deliverables without re-explaining the workflow every time.
 
-- 这个任务在真实科研流程中到底卡在哪里？
-- 用户需要准备哪些材料，AI 才不会凭空发挥？
-- 结果应该交付成什么形态，才真的能继续用于写论文、做汇报或投稿？
-- 哪些地方必须保守处理，例如引用真实性、统计结论、版权边界、文件覆盖和外部工具调用？
+The value is not the number of entries. The value is whether a skill answers the questions that decide real research usability:
 
-因此，这里的 skills 不会把成熟软件、数据库或期刊平台说成自己的能力。例如，生信方向可能会调用用户环境中的 `fastp`、`samtools`、`bcftools`、`BLAST`、`KEGG`、`NCBI` 等工具或资源，但 ScholarFlow Skills 的价值在于把这些工具放进可复用的科研流程中：什么时候使用、输入输出如何组织、质控节点怎么看、结果如何解释，以及如何写进论文。
+- Where does this task usually fail in an actual research workflow?
+- What must the user provide so the AI does not invent missing facts?
+- What output format can continue into a paper, presentation, submission package, or analysis report?
+- Which boundaries must stay conservative: citations, statistics, copyright, file edits, journal rules, and external tools?
 
-## 适合谁使用
+ScholarFlow Skills does not rebrand mature open-source software, databases, or journal platforms as its own capability. For example, bioinformatics workflows may call tools such as `fastp`, `samtools`, `bcftools`, `BLAST`, `KEGG`, or `NCBI` resources from the user's environment. ScholarFlow's value is the reusable research workflow around those tools: when to use them, how to structure inputs and outputs, how to inspect quality-control checkpoints, how to interpret results, and how to write them into a manuscript.
 
-如果你也经常遇到下面这些情况，ScholarFlow Skills 可能会有用：
+## Who this is for
 
-- 读了很多论文，但真正能写进综述、Introduction 或 Discussion 的信息没有系统沉淀。
-- 想让 AI 辅助论文写作，但担心它语气过满、引用不准、逻辑松散或段落功能不清。
-- 每次科研作图都要重新强调 panel 结构、统计标注、颜色风格、导出格式和投稿审美。
-- 生信分析跑完了，但不知道如何把 QC、参数、结果解释和论文叙述连起来。
-- 组会 PPT、PDF、Word、Markdown、引用格式和图表整理总是在最后阶段消耗大量时间。
-- 长任务一跨会话就丢上下文，前面已经想清楚的流程，下一轮又要重新铺垫。
+ScholarFlow Skills is useful when your research work repeatedly runs into the same friction:
 
-我希望这些 skills 能把“重复解释”变成“稳定调用”，让科研工作少一点从头再来，多一点可复用的流程积累。
+- You read many papers, but the information that should enter the Introduction, Discussion, or review section is not systematically captured.
+- You want AI help with manuscript writing, but you worry about overclaiming, weak evidence chains, inaccurate citations, or generic academic tone.
+- Scientific figures take too much time because panel logic, statistical annotation, color consistency, export settings, and journal expectations have to be restated every time.
+- Bioinformatics analysis finishes, but QC, parameters, results, interpretation, and manuscript language do not naturally connect.
+- Slides, PDFs, Word files, Markdown notes, references, and figure assets pile up at the final stage.
+- Long AI sessions lose context, and a workflow that was already clarified has to be rebuilt in the next conversation.
 
-## 核心工作流
+The goal is simple: turn repeated explanation into stable reuse.
 
-| 工作流 | 解决的真实问题 | 代表 skills |
+## Core workflows
+
+| Workflow | Research pain point | Representative skills |
 |---|---|---|
-| 文献检索与精读 | 从关键词、PDF 和数据库结果中整理出真正可用的证据 | `nature-academic-search`, `nature-literature-pipeline`, `nature-reader`, `zotero-lit-fetch` |
-| 论文脊柱与写作 | 先搭建研究动机、证据链和段落功能，再进入写作和改写 | `paper-spine`, `nature-writing`, `nature-polishing`, `manuscript-writing` |
-| 选刊、投稿规范与研究诚信 | 从选刊定位、期刊分档、格式要求、引用真实性到审稿风险做投稿前把关 | `journal-selection-advisor`, `journal-submission-normalizer`, `reference-checker`, `nature-citation`, `research-integrity-guardrail`, `paper-self-review` |
-| 科研图表与展示 | 让图先服务结论，再处理 panel、统计标注、视觉一致性和导出格式 | `nature-figure`, `sci-figure-composer`, `nature-paper2ppt`, `ppt` |
-| 生信与组学分析 | 把 FASTQ、BAM、VCF、宏基因组、系统发育和论文解释串起来 | `bio-*`, `omics-analysis`, `samtools-bam-processing`, `bcftools-variant-manipulation` |
-| 交付物整理 | 把 Markdown、PDF、PPT、DOCX、截图和引用格式整理成可交付结果 | `pdf-guide`, `local-md-mermaid-pdf`, `chinese-docx-reference-unifier`, `screenshot-docs` |
-| Agent 工作流治理 | 为长任务、文件交接、安全审计和 skill 写作建立可复用纪律 | `planning-with-files`, `session-handoff`, `securityauditor`, `skill-writing-guide` |
+| Literature search and deep reading | Turn keywords, PDFs, and database results into usable evidence | `nature-academic-search`, `nature-literature-pipeline`, `nature-reader`, `zotero-lit-fetch` |
+| Manuscript spine and academic writing | Build motivation, evidence chains, section functions, and conservative claims before drafting | `paper-spine`, `nature-writing`, `nature-polishing`, `manuscript-writing` |
+| Journal selection, submission formatting, and integrity checks | Match the manuscript to realistic journals, verify author instructions, normalize formatting, and reduce submission risk | `journal-selection-advisor`, `journal-submission-normalizer`, `reference-checker`, `nature-citation`, `research-integrity-guardrail`, `paper-self-review` |
+| Scientific figures and presentations | Make figures serve the argument before polishing panels, labels, visual style, and export formats | `nature-figure`, `sci-figure-composer`, `nature-paper2ppt`, `ppt` |
+| Bioinformatics and omics workflows | Connect FASTQ, BAM, VCF, metagenomics, phylogeny, QC, and interpretation to manuscript-ready outputs | `bio-*`, `omics-analysis`, `samtools-bam-processing`, `bcftools-variant-manipulation` |
+| Deliverable cleanup | Turn Markdown, PDF, PPT, DOCX, screenshots, citations, and figures into shareable deliverables | `pdf-guide`, `local-md-mermaid-pdf`, `chinese-docx-reference-unifier`, `screenshot-docs` |
+| Agent workflow discipline | Keep long tasks, handoffs, file operations, security checks, and skill writing consistent | `planning-with-files`, `session-handoff`, `securityauditor`, `skill-writing-guide` |
 
-完整 skill 列表见 [SKILL_INDEX.md](SKILL_INDEX.md)。第一次使用可以先看 [GETTING_STARTED.md](GETTING_STARTED.md)。发布标准见 [QUALITY_STANDARD.md](QUALITY_STANDARD.md)。
+See [SKILL_INDEX.md](SKILL_INDEX.md) for the full index, [GETTING_STARTED.md](GETTING_STARTED.md) for first use, and [QUALITY_STANDARD.md](QUALITY_STANDARD.md) for release standards.
 
-## 使用示例
+## Example prompts
 
-### 选刊定位
-
-```text
-请用 journal-selection-advisor 帮我选刊。先判断我的文章适合什么领域和文章类型，再结合我的目标、单位要求、中科院/JCR 分区、时间和版面费限制，给出 Reach/Target/Safe/Fallback 分档推荐和投稿顺序。
-```
-
-### 读一篇论文
+### Journal selection
 
 ```text
-请用 nature-reader 的方式读这篇论文，输出中英文对照精读，保留图表逻辑、核心贡献、方法路线和可引用要点。
+Use journal-selection-advisor to help me choose target journals. First assess the manuscript field and article type, then factor in my goals, institutional requirements, JCR/CAS targets, timeline, and APC limits. Return Reach/Target/Safe/Fallback tiers and a recommended submission sequence.
 ```
 
-### 投稿前检查
+### Journal submission formatting
 
 ```text
-请对这篇稿子做投稿前质量检查，重点看引用真实性、过度声称、结果一致性、AI 写作痕迹和审稿风险。
+Use journal-submission-normalizer to search the target journal's official author instructions, extract formatting rules, normalize the manuscript for font, font size, line spacing, headings, figures, tables, superscripts/subscripts, references, and declarations, then return a compliance report.
 ```
 
-### 期刊格式规范化
+### Read a paper deeply
 
 ```text
-请用 journal-submission-normalizer 先联网检索目标期刊的官方投稿要求，再把这篇稿件按字体、字号、行距、标题层级、图表、上下标、参考文献和声明部分逐项规范化，并输出投稿合规报告。
+Read this paper with the nature-reader workflow. Produce a bilingual deep-reading note that preserves figure logic, core contribution, methods, evidence chain, and reusable citation points.
 ```
 
-### 从结果写论文
+### Pre-submission quality check
 
 ```text
-请把这些结果和图表整理成论文 Results 和 Discussion。先搭建论证结构，再写正文，不要编造引用或夸大结论。
+Run a pre-submission quality check on this manuscript. Focus on citation reliability, overclaiming, result consistency, AI-writing traces, and likely reviewer risks.
 ```
 
-### 做生信分析并写进论文
+### Turn results into a manuscript section
 
 ```text
-我有一批测序数据，目标是完成变异分析并写进论文。请先给出完整工作流、质控节点、关键参数和结果解释框架。
+Turn these results and figures into Results and Discussion sections. Build the argument first, then draft the text. Do not invent citations or overstate conclusions.
 ```
 
-### 做组会汇报
+### Connect bioinformatics output to paper writing
 
 ```text
-请把这篇论文做成组会汇报 PPT，保留研究问题、方法、关键图表、主要结论和讨论问题。
+I have sequencing data and need variant analysis that can be written into a manuscript. Start with the complete workflow, QC checkpoints, key parameters, and interpretation framework.
 ```
 
-## 安装方式
+## Installation
 
-选择需要的 skill 文件夹，复制到你的 Agent skills 目录即可。
+Copy the skill folders you need into your Agent skills directory.
 
-常见目录：
+Common locations:
 
 ```text
 ~/.codex/skills/
 ~/.claude/skills/
 ```
 
-每个 skill 至少包含：
+Each skill contains at least:
 
 ```text
 skill-name/
@@ -116,42 +119,37 @@ skill-name/
     └── openai.yaml
 ```
 
-复杂 skill 还可能包含：
+More complex skills may also include:
 
 ```text
-references/   深度规则、模板、检查清单
-scripts/      可复用脚本
-assets/       图像、模板或静态资源
+references/   deeper rules, templates, and checklists
+scripts/      reusable scripts
+assets/       images, templates, or static resources
 ```
 
-## 仓库结构
+## Repository layout
 
 ```text
 scholarflow-skills/
-├── README.md             项目介绍
-├── GETTING_STARTED.md    上手指南
-├── QUALITY_STANDARD.md   发布标准
-├── SKILL_INDEX.md        skill 索引
-├── LICENSE               开源许可
-└── skills/               可安装 skill
+├── README.md             project overview
+├── GETTING_STARTED.md    first-use guide
+├── QUALITY_STANDARD.md   release and quality standard
+├── SKILL_INDEX.md        skill index
+├── LICENSE               open-source license
+└── skills/               installable skills
 ```
 
-## 边界与原则
+## Boundaries
 
-ScholarFlow Skills 的目标是提高科研效率，而不是替代研究判断本身。
+ScholarFlow Skills is designed to improve research efficiency, not to replace research judgment.
 
-- 文献下载只处理用户已授权访问的内容。
-- 引用和事实不确定时必须标注，不编造。
-- 研究结果、统计结论和实验数据以用户提供的材料为准。
-- 文件删除、覆盖和外部写入必须由用户确认。
-- 外部软件、联网脚本和高权限操作应先经过 `securityauditor` 审计。
-- 对统计结论、机制推断、临床意义和投稿前判断，应保持保守表达，避免过度声称。
+- Literature downloading should only use content the user is authorized to access.
+- Citations and factual claims must be marked as uncertain when they cannot be verified.
+- Research results, statistical conclusions, and experimental data are grounded in user-provided materials.
+- File deletion, overwrite, and external writes require user confirmation.
+- External software, network scripts, and high-privilege operations should be reviewed with `securityauditor`.
+- Statistical conclusions, mechanistic claims, clinical meaning, and journal-fit advice should stay conservative.
 
-## 许可
+## License
 
-ScholarFlow Skills 的原创说明、工作流编排和文档以 [MIT License](LICENSE) 发布。底层公开软件、数据库、期刊平台和外部服务按各自许可、服务条款和访问权限使用。
-
-
-## 一句话
-
-ScholarFlow Skills 是一套从真实科研使用场景中长出来的 Agent Skills：少一点重复铺垫，多一点稳定复用。
+ScholarFlow Skills' original instructions, workflow design, and documentation are released under the [MIT License](LICENSE). External software, databases, journal platforms, and services remain governed by their own licenses, terms, and access permissions.

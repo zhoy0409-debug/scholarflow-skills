@@ -22,7 +22,7 @@ SITES = {
         "profile": "sciencedirect",
     },
     "cnki": {
-        "name": "中国知网/CNKI",
+        "name": "English text/CNKI",
         "port": 9226,
         "url": "https://www.cnki.net/",
         "profile": "cnki",
@@ -36,13 +36,13 @@ ALIASES = {
     "science_direct": "sciencedirect",
     "sciencedirect": "sciencedirect",
     "elsevier": "sciencedirect",
-    "知网": "cnki",
-    "中国知网": "cnki",
+    "English text": "cnki",
+    "English text": "cnki",
     "cnki": "cnki",
 }
 
 CSV_HEADERS = {
-    "文章地址总表.csv": [
+    "English text.csv": [
         "record_id",
         "source",
         "title",
@@ -53,7 +53,7 @@ CSV_HEADERS = {
         "discovered_at",
         "status",
     ],
-    "候选文献总表.csv": [
+    "English text.csv": [
         "priority",
         "title",
         "authors",
@@ -72,7 +72,7 @@ CSV_HEADERS = {
         "next_action",
         "notes",
     ],
-    "高优先级文献.csv": [
+    "English text.csv": [
         "title",
         "authors",
         "journal",
@@ -89,7 +89,7 @@ CSV_HEADERS = {
         "next_action",
         "notes",
     ],
-    "中优先级文献.csv": [
+    "English text.csv": [
         "title",
         "authors",
         "journal",
@@ -106,7 +106,7 @@ CSV_HEADERS = {
         "next_action",
         "notes",
     ],
-    "低优先级文献.csv": [
+    "English text.csv": [
         "title",
         "authors",
         "journal",
@@ -123,7 +123,7 @@ CSV_HEADERS = {
         "next_action",
         "notes",
     ],
-    "已入库Zotero文献清单.csv": [
+    "English textZoteroEnglish text.csv": [
         "record_id",
         "title",
         "doi",
@@ -137,7 +137,7 @@ CSV_HEADERS = {
         "access_status",
         "notes",
     ],
-    "待处理文献清单.csv": [
+    "English text.csv": [
         "title",
         "doi",
         "source",
@@ -166,13 +166,13 @@ def parse_prompt(prompt: str) -> dict[str, Any]:
             result["site"] = site
             break
 
-    quoted = re.findall(r"[\"“](.+?)[\"”]", text)
+    quoted = re.findall(r"[\""](.+?)[\""]", text)
     site_words = {
         "science direct",
         "sciencedirect",
         "elsevier",
-        "中国知网",
-        "知网",
+        "English text",
+        "English text",
         "cnki",
     }
     if quoted:
@@ -182,50 +182,50 @@ def parse_prompt(prompt: str) -> dict[str, Any]:
                 continue
             if re.search(r"[\\/]:?|^[A-Za-z]:", item) or item.strip().startswith("."):
                 continue
-            if re.search(r"(?:19|20)\d{2}|以来|以后|至今|影响因子|篇", item):
+            if re.search(r"(?:19|20)\d{2}|English text|English text|English text|English text|English text", item):
                 continue
             result["keywords"] = item.strip()
             break
     else:
-        keyword_match = re.search(r"(?:关键词|关键字|关于|检索)\s*[:：]?\s*([^，,。；;\n]+)", text)
+        keyword_match = re.search(r"(?:English text|English text|English text|English text)\s*[:: ]?\s*([^, ,. ; ;\n]+)", text)
         if keyword_match:
             result["keywords"] = keyword_match.group(1).strip()
 
-    limit_match = re.search(r"(?:下载|要|需要)?\s*(\d{1,4})\s*(?:篇|个|条)", text)
+    limit_match = re.search(r"(?:English text|English text|English text)?\s*(\d{1,4})\s*(?:English text|English text|English text)", text)
     if limit_match:
         result["limit"] = int(limit_match.group(1))
 
-    range_match = re.search(r"((?:19|20)\d{2})\s*[-~—至到]\s*((?:19|20)\d{2})", text)
+    range_match = re.search(r"((?:19|20)\d{2})\s*[-~-English text]\s*((?:19|20)\d{2})", text)
     if range_match:
         result["year_from"] = int(range_match.group(1))
         result["year_to"] = int(range_match.group(2))
     else:
-        since_match = re.search(r"((?:19|20)\d{2})\s*(?:年)?\s*(?:以后|以来|之后|至今)", text)
+        since_match = re.search(r"((?:19|20)\d{2})\s*(?:English text)?\s*(?:English text|English text|English text|English text)", text)
         if since_match:
             result["year_from"] = int(since_match.group(1))
             result["year_to"] = dt.date.today().year
 
-    if_range = re.search(r"(?:影响因子|impact\s*factor|if)\s*[:：]?\s*(\d+(?:\.\d+)?)\s*[-~—至到]\s*(\d+(?:\.\d+)?)", text, re.I)
+    if_range = re.search(r"(?:English text|impact\s*factor|if)\s*[:: ]?\s*(\d+(?:\.\d+)?)\s*[-~-English text]\s*(\d+(?:\.\d+)?)", text, re.I)
     if if_range:
         result["if_min"] = float(if_range.group(1))
         result["if_max"] = float(if_range.group(2))
     else:
-        if_min = re.search(r"(?:影响因子|impact\s*factor|if)\s*(?:大于|高于|>=|＞|>)\s*(\d+(?:\.\d+)?)", text, re.I)
+        if_min = re.search(r"(?:English text|impact\s*factor|if)\s*(?:English text|English text|>=|＞|>)\s*(\d+(?:\.\d+)?)", text, re.I)
         if if_min:
             result["if_min"] = float(if_min.group(1))
-        if_max = re.search(r"(?:影响因子|impact\s*factor|if)\s*(?:小于|低于|<=|＜|<)\s*(\d+(?:\.\d+)?)", text, re.I)
+        if_max = re.search(r"(?:English text|impact\s*factor|if)\s*(?:English text|English text|<=|＜|<)\s*(\d+(?:\.\d+)?)", text, re.I)
         if if_max:
             result["if_max"] = float(if_max.group(1))
 
-    zotero_collection = re.search(r"保存到\s*Zotero\s*(?:的|目录|collection)?\s*[\"“]([^\"”]+)[\"”]", text, re.I)
+    zotero_collection = re.search(r"English text\s*Zotero\s*(?:English text|English text|collection)?\s*[\""]([^\""]+)[\""]", text, re.I)
     if zotero_collection:
         result["zotero_collection"] = zotero_collection.group(1).strip()
 
-    out_match = re.search(r"(?:下载到|输出到)\s*[\"“]?([^\"”\n]+)[\"”]?", text)
+    out_match = re.search(r"(?:English text|English text)\s*[\""]?([^\""\n]+)[\""]?", text)
     if not out_match:
-        out_match = re.search(r"保存到(?!\s*Zotero)\s*[\"“]?([^\"”\n]+)[\"”]?", text, re.I)
+        out_match = re.search(r"English text(?!\s*Zotero)\s*[\""]?([^\""\n]+)[\""]?", text, re.I)
     if out_match:
-        result["out"] = out_match.group(1).strip().rstrip("。；;,，")
+        result["out"] = out_match.group(1).strip().rstrip(". ; ;,, ")
 
     return result
 
@@ -304,13 +304,13 @@ def create_scaffold(args: argparse.Namespace) -> Path:
     site = SITES[site_key]
     default_collection = {
         "sciencedirect": "science direct",
-        "cnki": "中国知网",
+        "cnki": "English text",
     }.get(site_key, site["name"])
     zotero_collection = args.zotero_collection or prompt_values.get("zotero_collection") or default_collection
     out_root = Path(args.out or prompt_values.get("out") or ".").expanduser().resolve()
     run_name = args.run_name or f"{now_stamp()}_{site_key}_{slugify(keywords)}"
     run_dir = out_root / run_name
-    internal = run_dir / "内部数据_一般不用打开"
+    internal = run_dir / "English text_English text"
     internal.mkdir(parents=True, exist_ok=True)
     (internal / "logs").mkdir(exist_ok=True)
     (internal / "raw_exports").mkdir(exist_ok=True)
@@ -354,8 +354,8 @@ def create_scaffold(args: argparse.Namespace) -> Path:
     for filename, headers in CSV_HEADERS.items():
         write_csv(run_dir / filename, headers)
 
-    year_text = "不限" if year_from is None and year_to is None else f"{year_from or ''}-{year_to or ''}".strip("-")
-    if_text = "不限"
+    year_text = "English text" if year_from is None and year_to is None else f"{year_from or ''}-{year_to or ''}".strip("-")
+    if_text = "English text"
     if if_min is not None and if_max is not None:
         if_text = f"{if_min}-{if_max}"
     elif if_min is not None:
@@ -363,123 +363,123 @@ def create_scaffold(args: argparse.Namespace) -> Path:
     elif if_max is not None:
         if_text = f"<= {if_max}"
 
-    readme = f"""# 先看我
+    readme = f"""# English text
 
-本目录是一次文献检索与 Zotero 入库任务的输出目录。
+English text Zotero English text. 
 
-- 网站：{site["name"]}
-- 浏览器调试端口：{site["port"]}
-- 关键词：{keywords}
-- 出版时间：{year_text}
-- 影响因子要求：{if_text}
-- 目标合格入库数量：{limit}{"（已按单次上限 50 自动限制）" if limit_capped else ""}
-- Zotero 目录：{zotero_collection}
+- English text: {site["name"]}
+- English text: {site["port"]}
+- English text: {keywords}
+- English text: {year_text}
+- English text: {if_text}
+- English text: {limit}{"(English text 50 English text)" if limit_capped else ""}
+- Zotero English text: {zotero_collection}
 
-## 强制合规规则
+## English text
 
-- 单次运行最多整理 50 篇。
-- 不下载 PDF，不点击全文下载按钮，不处理 PDF 预览页。
-- 不并发处理，一次只保存一条 Zotero 元数据。
-- 不绕过付费墙、验证码、权限限制、异常访问提醒或网站安全提示。
-- 权限不清楚、需要付费、需要验证码、或访问失败的文献，仍保留候选信息并放入待处理清单。
+- English text 50 English text. 
+- English text PDF, English text, English text PDF English text. 
+- English text, English text Zotero English text. 
+- English text, English text, English text, English text. 
+- English text, English text, English text, English text, English text. 
 
-## 先登录
+## English text
 
-请在 PowerShell 里打开对应默认浏览器，然后在弹出的浏览器窗口中手动登录站点，再登录 EasyScholar：
+English text PowerShell English text, English text, English text EasyScholar: 
 
 ```powershell
 {login_command(site_key)}
 ```
 
-登录完成后，刷新结果页，确认 EasyScholar 的 IF 标签可见，再让 Codex 继续检索和 Zotero 入库。
+English text, English text, English text EasyScholar English text IF English text, English text Codex English text Zotero English text. 
 
-## 首次运行准备
+## English text
 
-请确保已安装并启用：
+English text: 
 
 1. Zotero Desktop
-2. 当前浏览器里的 Zotero Connector
-3. 当前浏览器里的 EasyScholar
+2. English text Zotero Connector
+3. English text EasyScholar
 
-并在 Zotero 里创建/选中 collection：`{zotero_collection}`。如果页面支持，EasyScholar 会在检索结果旁显示 IF，Paper Harbor 会读取这些可见标签；ScienceDirect 和知网都按同样的提醒和流程执行。
+English text Zotero English text/English text collection: `{zotero_collection}`. English text, EasyScholar English text IF, Paper Harbor English text; ScienceDirect English text. 
 
-## 合规说明
+## English text
 
-这里只保存题名、DOI、期刊、年份、地址等元数据到 Zotero，不下载全文。遇到验证码、付费、权限不足或异常活动提醒时，应停止并由你手动处理。
+English text, DOI, English text, English text, English text Zotero, English text. English text, English text, English text, English text. 
 """
-    write_text(run_dir / "README_先看我.md", readme)
+    write_text(run_dir / "README_English text.md", readme)
 
-    plain_readme = f"""请先阅读 README_先看我.md
+    plain_readme = f"""English text README_English text.md
 
-网站：{site["name"]}
-端口：{site["port"]}
-关键词：{keywords}
-出版时间：{year_text}
-影响因子：{if_text}
-目标合格入库数量：{limit}
-Zotero 目录：{zotero_collection}
+English text: {site["name"]}
+English text: {site["port"]}
+English text: {keywords}
+English text: {year_text}
+English text: {if_text}
+English text: {limit}
+Zotero English text: {zotero_collection}
 
-重要：用户必须自己登录；不得绕过付费墙、验证码或权限限制。
+English text: English text; English text, English text. 
 """
-    write_text(run_dir / "00_先看我_文件说明.txt", plain_readme)
+    write_text(run_dir / "00_English text_English text.txt", plain_readme)
 
-    plan = f"""# 检索计划
+    plan = f"""# English text
 
-## 任务参数
+## English text
 
-- 网站：{site["name"]} (`{site_key}`)
-- 端口：`{site["port"]}`
-- 起始网址：{site["url"]}
-- 关键词：{keywords}
-- 出版时间：{year_text}
-- 影响因子：{if_text}
-- 目标合格入库数量：{limit}{"（用户请求 " + str(requested_limit) + "，已按单次上限 50 自动限制）" if limit_capped else ""}
-- Zotero 目录：{zotero_collection}
+- English text: {site["name"]} (`{site_key}`)
+- English text: `{site["port"]}`
+- English text: {site["url"]}
+- English text: {keywords}
+- English text: {year_text}
+- English text: {if_text}
+- English text: {limit}{"(English text " + str(requested_limit) + ", English text 50 English text)" if limit_capped else ""}
+- Zotero English text: {zotero_collection}
 
-## 强制合规规则
+## English text
 
-1. 单次运行最多整理 50 篇。
-2. 不下载 PDF，不点击全文下载按钮，不处理 PDF 预览页。
-3. 不并发处理，一次只保存一条 Zotero 元数据并立即更新清单。
-4. 不绕过付费墙、验证码、权限限制、异常访问提醒、隐藏接口、镜像站或非官方副本。
-5. 权限不清楚、需要付费、需要验证码、或访问失败的文献，仍保留候选信息并写入 `待处理文献清单.csv`。
+1. English text 50 English text. 
+2. English text PDF, English text, English text PDF English text. 
+3. English text, English text Zotero English text. 
+4. English text, English text, English text, English text, English text, English text. 
+5. English text, English text, English text, English text, English text `English text.csv`. 
 
-## 登录命令
+## English text
 
 ```powershell
 {login_command(site_key)}
 ```
 
-## 执行步骤
+## English text
 
-1. 用户打开上述默认浏览器并完成站点登录。
-2. 用户在同一个浏览器里登录 EasyScholar，并刷新结果页确认 IF 标签可见。
-3. Codex 检查端口是否可访问。
-4. Codex 检查 Zotero Desktop、Zotero Connector、EasyScholar 和 Zotero collection。
-5. 在官方网站 UI 中检索关键词并套用出版时间筛选。
-6. 收集候选文献、文章地址、DOI、期刊、年份、摘要、可访问状态。
-7. 如果页面显示 EasyScholar IF 标签，读取并写入影响因子字段；如果没有显示，先停在候选层，提示用户登录 EasyScholar 并刷新页面后再重新运行。
-8. 根据主题相关性、年份、可访问性和可信影响因子数据分为高/中/低优先级。
-9. 先保存候选清单，再从候选清单串行写入 Zotero 的 `{zotero_collection}`。
-10. 不打开下载完整期刊/Download full issue，不点击 View PDF 或 Download PDF。
-11. 从高优先级开始保存 Zotero 元数据，直到达到目标合格入库数量、无更多匹配文献或遇到网站限制；不符合 IF 或 IF 待核验的条目只进入待处理清单，不占用目标数量。
-12. 更新 CSV 清单和文献整理报告。
+1. English text. 
+2. English text EasyScholar, English text IF English text. 
+3. Codex English text. 
+4. Codex English text Zotero Desktop, Zotero Connector, EasyScholar English text Zotero collection. 
+5. English text UI English text. 
+6. English text, English text, DOI, English text, English text, English text, English text. 
+7. English text EasyScholar IF English text, English text; English text, English text, English text EasyScholar English text. 
+8. English text, English text, English text/English text/English text. 
+9. English text, English text Zotero English text `{zotero_collection}`. 
+10. English text/Download full issue, English text View PDF English text Download PDF. 
+11. English text Zotero English text, English text, English text; English text IF English text IF English text, English text. 
+12. English text CSV English text. 
 
-## 影响因子规则
+## English text
 
-如需按影响因子筛选，请把可信来源整理到：
+English text, English text: 
 
-`内部数据_一般不用打开/journal_impact_factors.csv`
+`English text_English text/journal_impact_factors.csv`
 
-没有可信影响因子数据时，不臆造 IF；将匹配但 IF 待核验的文献放入中优先级。若用户明确要求 IF 阈值，未显示 IF 的条目不自动入库。
+English text, English text IF; English text IF English text. English text IF English text, English text IF English text. 
 """
-    write_text(run_dir / "检索计划.md", plan)
+    write_text(run_dir / "English text.md", plan)
 
     html = f"""<!doctype html>
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8">
-  <title>文献整理报告</title>
+  <title>English text</title>
   <style>
     body {{ font-family: Arial, "Microsoft YaHei", sans-serif; margin: 32px; line-height: 1.6; }}
     table {{ border-collapse: collapse; width: 100%; max-width: 920px; }}
@@ -489,31 +489,31 @@ Zotero 目录：{zotero_collection}
   </style>
 </head>
 <body>
-  <h1>文献整理报告</h1>
+  <h1>English text</h1>
   <table>
-    <tr><th>网站</th><td>{site["name"]}</td></tr>
-    <tr><th>端口</th><td>{site["port"]}</td></tr>
-    <tr><th>关键词</th><td>{keywords}</td></tr>
-    <tr><th>出版时间</th><td>{year_text}</td></tr>
-    <tr><th>影响因子</th><td>{if_text}</td></tr>
-    <tr><th>目标合格入库数量</th><td>{limit}{"（已按单次上限 50 自动限制）" if limit_capped else ""}</td></tr>
-    <tr><th>Zotero 目录</th><td>{zotero_collection}</td></tr>
-    <tr><th>当前状态</th><td>目录已创建，等待登录、检索和 Zotero 入库。</td></tr>
+    <tr><th>English text</th><td>{site["name"]}</td></tr>
+    <tr><th>English text</th><td>{site["port"]}</td></tr>
+    <tr><th>English text</th><td>{keywords}</td></tr>
+    <tr><th>English text</th><td>{year_text}</td></tr>
+    <tr><th>English text</th><td>{if_text}</td></tr>
+    <tr><th>English text</th><td>{limit}{"(English text 50 English text)" if limit_capped else ""}</td></tr>
+    <tr><th>Zotero English text</th><td>{zotero_collection}</td></tr>
+    <tr><th>English text</th><td>English text, English text, English text Zotero English text. </td></tr>
   </table>
-  <h2>强制合规规则</h2>
+  <h2>English text</h2>
   <ul>
-    <li>单次运行最多整理 50 篇。</li>
-    <li>不下载 PDF，不点击全文下载按钮，不处理 PDF 预览页。</li>
-    <li>不并发处理，一次只保存一条 Zotero 元数据。</li>
-    <li>不绕过付费墙、验证码、权限限制、异常访问提醒或网站安全提示。</li>
-    <li>权限不清楚或访问失败的文献写入待处理清单。</li>
+    <li>English text 50 English text. </li>
+    <li>English text PDF, English text, English text PDF English text. </li>
+    <li>English text, English text Zotero English text. </li>
+    <li>English text, English text, English text, English text. </li>
+    <li>English text. </li>
   </ul>
-  <h2>下一步</h2>
-  <p>打开对应端口浏览器并登录，同时保持 Zotero Desktop 运行；随后继续执行检索，条目会写入 Zotero，并记录到 <code>已入库Zotero文献清单.csv</code>。</p>
+  <h2>English text</h2>
+  <p>English text, English text Zotero Desktop English text; English text, English text Zotero, English text <code>English textZoteroEnglish text.csv</code>. </p>
 </body>
 </html>
 """
-    write_text(run_dir / "文献整理报告.html", html)
+    write_text(run_dir / "English text.html", html)
 
     checksum = hashlib.sha256(json.dumps(config, ensure_ascii=False, sort_keys=True).encode("utf-8")).hexdigest()
     write_text(internal / "run_checksum.sha256", checksum + "\n")
@@ -559,7 +559,7 @@ def main() -> int:
     args = parser.parse_args()
     run_dir = create_scaffold(args)
     print(f"Created literature metadata run directory:\n{run_dir}")
-    print("\nNext step: open the default-browser command in README_先看我.md, log in to the site and EasyScholar, then continue the search.")
+    print("\nNext step: open the default-browser command in README_English text.md, log in to the site and EasyScholar, then continue the search.")
     return 0
 
 

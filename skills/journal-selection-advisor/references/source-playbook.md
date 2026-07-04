@@ -1,62 +1,48 @@
 # Source Playbook
 
-Journal metrics and indexing status change. Always verify current information online.
+Journal data changes frequently. Use current sources and clearly separate verified facts from estimates.
 
-## Discovery Sources
+## Source Priority
 
-Use multiple sources because each has bias:
+| Need | Preferred sources |
+|---|---|
+| Aims and scope | Official journal website and publisher page. |
+| Article types | Official author instructions and submission system guidance. |
+| Formatting requirements | Official author instructions, templates, checklists, and style files. |
+| JCR metrics | Journal Citation Reports or institutional access. |
+| CAS partition | Official or institution-provided CAS partition sources when available. |
+| Indexing | Web of Science, Scopus, PubMed/MEDLINE, DOAJ, Ei Compendex, or relevant official index. |
+| APC/OA | Official publisher APC page and journal-specific OA policy. |
+| Publication speed | Official journal statistics when available; otherwise mark as uncertain. |
+| Similar papers | Recent articles from the same journal. |
+| Risk signals | Institutional warning lists, COPE status, DOAJ status, publisher transparency, suspicious solicitation patterns. |
 
-- Publisher journal finder tools: Elsevier Journal Finder, Springer Nature Journal and Funding Finder, Wiley Journal Finder, Taylor & Francis Journal Suggester, MDPI journal finder when relevant.
-- Biomedical matching: JANE for PubMed/MEDLINE-heavy topics.
-- Official journal pages: aims and scope, article types, author instructions, APC/OA, editorial policies.
-- Indexing and quality: Web of Science Master Journal List, Scopus Source List, PubMed/MEDLINE/NLM Catalog, DOAJ, COPE, DOAJ seals where relevant.
-- Metrics: Journal Citation Reports/JCR if accessible, CAS/中科院分区 if accessible, Scimago/SJR as supplementary context, journal official metrics pages.
-- Chinese journals: journal official site, society publisher, CNKI journal page, Wanfang/VIP, CSSCI/CSCD/北大核心/科技核心 lists if available to the user.
-- Risk checks: institutional warning lists, publisher policies, journal official contact/domain, retraction/ethics concerns, suspicious special issues.
+## Search Pattern
 
-## Search Queries
+Search with combinations such as:
 
 ```text
-"<manuscript keywords>" "<field>" journal
-"<journal name>" aims and scope
+"<journal name>" aims scope
 "<journal name>" author guidelines
 "<journal name>" article types
 "<journal name>" APC open access
-"<journal name>" Web of Science Master Journal List
-"<journal name>" Scopus source
-"<journal name>" PubMed NLM Catalog
-"<journal name>" 中科院分区
-"<journal name>" JCR Quartile
-"<期刊名>" 投稿须知
-"<期刊名>" 中科院分区
-"<期刊名>" 预警
+"<journal name>" indexing Web of Science Scopus PubMed
+"<journal name>" warning list
 ```
 
-## Verification Labels
+For field discovery:
 
-- `verified-official`: official journal/publisher/index source checked.
-- `verified-database`: reputable index or directory checked.
-- `user-provided`: user supplied institutional list or screenshot.
-- `secondary-only`: only secondary sources found; use cautiously.
-- `needs-access`: requires subscription or institutional access.
-- `unknown`: not verified.
+```text
+"<topic keywords>" "journal" "aims and scope"
+"<topic keywords>" site:springer.com/journal
+"<topic keywords>" site:elsevier.com/journals
+"<topic keywords>" site:frontiersin.org/journals
+```
 
-## Predatory or Poor-Fit Signals
+## Verification Rules
 
-Flag, do not automatically exclude unless evidence is strong:
-
-- promises of unrealistically fast acceptance;
-- mismatched scope or overly broad mega-special issue;
-- unclear editorial board or contact domain;
-- unclear indexing claims;
-- fake or misleading impact factor;
-- journal not found in claimed index;
-- APC hidden until late stage;
-- title similar to a reputable journal but different publisher;
-- unit or school warning-list conflict.
-
-## Notes on Metrics
-
-- JCR quartile, impact factor, and CAS/中科院分区 are time-sensitive.
-- If exact current values cannot be verified, say `needs verification` rather than guessing.
-- For institutional decisions, the user's school/unit rule overrides generic prestige.
+- Prefer official sources over third-party aggregators.
+- If a metric or partition requires subscription access and is unavailable, mark it as `needs verification`.
+- Do not use outdated screenshots, old journal lists, or unverified blog posts as final evidence.
+- Treat "fast acceptance", unsolicited special issues, and vague indexing claims as risk signals.
+- Check whether the user's institution has its own whitelist, blacklist, or warning list.

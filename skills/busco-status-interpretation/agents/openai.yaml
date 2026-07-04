@@ -1,9 +1,9 @@
 interface:
-  display_name: "BUSCO Status Interpretation Guide"
+  display_name: "Busco Status Interpretation"
   short_description: "Guide to interpreting BUSCO completeness statuses: why Duplicated BUSCOs count as complete, parsing output files, computing/comparing completeness acros..."
-  default_prompt: "Use busco-status-interpretation to design or troubleshoot this bioinformatics workflow."
+  default_prompt: "Use busco-status-interpretation to handle this workflow."
 ownership:
   product_owner: "Zhoy"
   product_line: "Bio & Omics Toolkit"
-  origin: "jl-authored-tool-guide"
+  origin: "zhoy-original-or-curated"
   release_channel: "stable"

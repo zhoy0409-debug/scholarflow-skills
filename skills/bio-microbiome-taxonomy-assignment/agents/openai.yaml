@@ -1,9 +1,9 @@
 interface:
-  display_name: "Taxonomy Assignment"
+  display_name: "Bio Microbiome Taxonomy Assignment"
   short_description: "Taxonomic classification of ASVs using reference databases like SILVA, GTDB, or UNITE. Covers naive Bayes classifiers (DADA2, IDTAXA) and exact matching..."
-  default_prompt: "Use bio-microbiome-taxonomy-assignment to design or troubleshoot this bioinformatics workflow."
+  default_prompt: "Use bio-microbiome-taxonomy-assignment to handle this workflow."
 ownership:
   product_owner: "Zhoy"
   product_line: "Bio & Omics Toolkit"
-  origin: "jl-authored-tool-guide"
+  origin: "zhoy-original-or-curated"
   release_channel: "stable"

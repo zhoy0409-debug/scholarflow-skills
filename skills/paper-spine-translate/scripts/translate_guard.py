@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-"""PaperSpine Translation Guard — verify translation_zh/ completeness and quality.
+"""PaperSpine Translation Guard - verify translation_zh/ completeness and quality.
 
 Checks file existence, structural preservation (table row counts for large
 artifacts), content density (stricter 50% threshold), full-paper coverage,
 and manifest cross-validation.  Produces a teaching-oriented report that
 says *what* is missing and *how* to fix it.
 
-Pattern: follows the writing_rationale_matrix philosophy — every finding teaches.
+Pattern: follows the writing_rationale_matrix philosophy - every finding teaches.
 """
 
 from __future__ import annotations
@@ -141,7 +141,7 @@ def load_config(out_dir: Path) -> dict:
 
 
 # ---------------------------------------------------------------------------
-# Check 1 — File Completeness
+# Check 1 - File Completeness
 # ---------------------------------------------------------------------------
 
 def check_file_completeness(trans_dir: Path, out_dir: Path, config: dict) -> list[TranslationFinding]:
@@ -165,7 +165,7 @@ def check_file_completeness(trans_dir: Path, out_dir: Path, config: dict) -> lis
             fix=f"Translate `{en_name}` into `translation_zh/{f}`. "
                 f"Use `paper-spine-translate` to produce this file.",
             teaching=f"Every intermediate artifact needs a Chinese counterpart. "
-                      f"`{en_name}` is a required PaperSpine artifact — its translation "
+                      f"`{en_name}` is a required PaperSpine artifact - its translation "
                       f"is not optional.",
         ))
 
@@ -179,7 +179,7 @@ def check_file_completeness(trans_dir: Path, out_dir: Path, config: dict) -> lis
 
 
 # ---------------------------------------------------------------------------
-# Check 2 — Structural Preservation (table rows for large tabular artifacts)
+# Check 2 - Structural Preservation (table rows for large tabular artifacts)
 # ---------------------------------------------------------------------------
 
 def check_structural_preservation(trans_dir: Path, out_dir: Path) -> list[TranslationFinding]:
@@ -206,13 +206,13 @@ def check_structural_preservation(trans_dir: Path, out_dir: Path) -> list[Transl
                 findings.append(TranslationFinding(
                     id=f"STRUCT-{len(findings)+1:03d}",
                     severity="BLOCKER",
-                    what=f"`{zh_name}` has {zh_count} table rows vs {en_count} in source — "
+                    what=f"`{zh_name}` has {zh_count} table rows vs {en_count} in source - "
                           f"missing {en_count - zh_count} rows",
                     fix=f"Translate every row of `{en_name}` into `{zh_name}`. "
-                        f"Row-by-row translation is mandatory for this file — "
+                        f"Row-by-row translation is mandatory for this file - "
                         f"a shortened summary table is a failed output.",
                     teaching="Large tabular artifacts must preserve their row structure in translation. "
-                            "Each row represents a unit of reasoning or a citation candidate — "
+                            "Each row represents a unit of reasoning or a citation candidate - "
                             "losing rows means losing information the reader needs.",
                 ))
 
@@ -228,7 +228,7 @@ def check_structural_preservation(trans_dir: Path, out_dir: Path) -> list[Transl
 
 
 # ---------------------------------------------------------------------------
-# Check 3 — Content Density
+# Check 3 - Content Density
 # ---------------------------------------------------------------------------
 
 def check_content_density(trans_dir: Path, out_dir: Path) -> list[TranslationFinding]:
@@ -250,14 +250,14 @@ def check_content_density(trans_dir: Path, out_dir: Path) -> list[TranslationFin
             findings.append(TranslationFinding(
                 id=f"DENS-{len(findings)+1:03d}",
                 severity="BLOCKER" if ratio < 0.25 else "WARNING",
-                what=f"`{zh_name}` is {zh_len} chars vs {en_len} in source — "
+                what=f"`{zh_name}` is {zh_len} chars vs {en_len} in source - "
                       f"density ratio {ratio:.0%} (minimum: {MIN_DENSITY_RATIO:.0%})",
                 fix=f"Expand the translation of `{zh_name}` to cover all content from `{en_name}`. "
                     f"Chinese translations typically reach 40-70% of English character count. "
                     f"At {ratio:.0%}, this file appears to be a summary, not a translation.",
                 teaching="A translation should convey the same information as the source. "
                         "When a translated file is dramatically shorter than the original, "
-                        "content has been lost — usually because the translator summarized instead of translating.",
+                        "content has been lost - usually because the translator summarized instead of translating.",
             ))
 
     if not findings:
@@ -273,7 +273,7 @@ def check_content_density(trans_dir: Path, out_dir: Path) -> list[TranslationFin
 
 
 # ---------------------------------------------------------------------------
-# Check 4 — Full Paper Translation Coverage
+# Check 4 - Full Paper Translation Coverage
 # ---------------------------------------------------------------------------
 
 SECTION_HEADING_RE = re.compile(r"^#{1,4}\s+(.+)", re.MULTILINE)
@@ -284,10 +284,10 @@ def check_full_paper_coverage(trans_dir: Path, out_dir: Path) -> list[Translatio
     if not fp_path.exists():
         findings.append(TranslationFinding(
             id="FULL-001", severity="BLOCKER",
-            what="full_paper_translation.zh.md is missing — the most important translation file",
+            what="full_paper_translation.zh.md is missing - the most important translation file",
             fix="Translate the complete final paper (title, abstract, all sections, figure/table captions, "
                 "conclusion, acknowledgements) into full_paper_translation.zh.md. "
-                "This is mandatory — do not skip or summarize.",
+                "This is mandatory - do not skip or summarize.",
             teaching="full_paper_translation.zh.md is the Chinese reader's primary entry point. "
                     "Without it, the translation package fails its purpose: making the paper "
                     "accessible to Chinese readers.",
@@ -321,11 +321,11 @@ def check_full_paper_coverage(trans_dir: Path, out_dir: Path) -> list[Translatio
     if len(text) < 1000:
         findings.append(TranslationFinding(
             id="FULL-003", severity="BLOCKER",
-            what=f"full_paper_translation.zh.md is only {len(text)} chars — far too short for a full paper",
+            what=f"full_paper_translation.zh.md is only {len(text)} chars - far too short for a full paper",
             fix="Expand the full paper translation to cover all sections. "
                 "A conference paper translation should be at least 3000+ characters.",
             teaching="A full paper translation that is shorter than the abstract "
-                    "is not a translation — it's a note saying 'I was supposed to translate this.'",
+                    "is not a translation - it's a note saying 'I was supposed to translate this.'",
         ))
 
     if not findings:
@@ -338,7 +338,7 @@ def check_full_paper_coverage(trans_dir: Path, out_dir: Path) -> list[Translatio
 
 
 # ---------------------------------------------------------------------------
-# Check 5 — Manifest Cross-Validation
+# Check 5 - Manifest Cross-Validation
 # ---------------------------------------------------------------------------
 
 def check_manifest(trans_dir: Path, config: dict) -> list[TranslationFinding]:
@@ -382,7 +382,7 @@ def check_manifest(trans_dir: Path, config: dict) -> list[TranslationFinding]:
         ))
 
     # Check manifest flags partial/missing
-    if re.search(r"(missing|partial|not translated|缺失|未翻译|部分翻译)", manifest_text, re.IGNORECASE):
+    if re.search(r"(missing|partial|not translated|English text|English text|English text)", manifest_text, re.IGNORECASE):
         findings.append(TranslationFinding(
             id="MANIFEST-003", severity="BLOCKER",
             what="Manifest reports files as missing or partially translated",
@@ -415,7 +415,7 @@ def to_markdown(report: TranslationGuardReport) -> str:
         f"- Status: {'BLOCKED' if report.blocked else 'PASS'}",
         "",
         "> Each finding explains *what* is missing and *how* to fix it. "
-        "Translation is not optional — it's a required deliverable.",
+        "Translation is not optional - it's a required deliverable.",
         "",
     ]
 
@@ -425,7 +425,7 @@ def to_markdown(report: TranslationGuardReport) -> str:
             lines.append("")
             continue
         icon = "BLOCKED" if f.severity == "BLOCKER" else "WARNING"
-        lines.append(f"### {f.id} — {icon}")
+        lines.append(f"### {f.id} - {icon}")
         lines.append("")
         lines.append(f"**What:** {f.what}")
         lines.append("")

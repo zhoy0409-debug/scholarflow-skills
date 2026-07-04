@@ -1,9 +1,9 @@
 interface:
-  display_name: "Batch Processing"
+  display_name: "Bio Batch Processing"
   short_description: "Process multiple sequence files in batch using Biopython. Use when working with many files, merging/splitting sequences, or automating file operations a..."
-  default_prompt: "Use bio-batch-processing to design or troubleshoot this bioinformatics workflow."
+  default_prompt: "Use bio-batch-processing to handle this workflow."
 ownership:
   product_owner: "Zhoy"
   product_line: "Bio & Omics Toolkit"
-  origin: "jl-authored-tool-guide"
+  origin: "zhoy-original-or-curated"
   release_channel: "stable"

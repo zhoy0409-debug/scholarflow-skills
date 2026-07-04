@@ -1,35 +1,22 @@
 # Chinese Author Workflow
 
-Deep reference for Chinese, mixed Chinese-English, or lab-note input.
+This reference supports the `nature-writing` skill. Load it only when the current task needs the additional detail implied by the file name.
 
-This extends `static/fragments/language/zh-to-en.md`. That fragment already holds
-the base rule (**translate intent, not syntax** — split each note into claim /
-evidence / condition / comparison / implication / limitation, then reorder for
-the section) and the common-repair table. Do not repeat those here. Open this
-file only when the fragment is not enough: for the drafting sequence below and
-the edge-case repairs.
+## Purpose
 
-## Drafting from author notes
+Use this note to keep the workflow consistent, evidence-grounded, and easy to audit. It should help the agent make decisions, structure outputs, and avoid common failure modes for this part of the workflow.
 
-Use this sequence:
+## Use Pattern
 
-1. Summarize the author's intended claim in Chinese.
-2. Identify missing evidence or boundary.
-3. Draft the English paragraph.
-4. Add short Chinese notes explaining any structural changes.
+- Confirm the user's goal and available materials before applying the reference.
+- Prefer official sources, user-provided files, and reproducible checks.
+- Keep outputs structured enough to continue into a manuscript, report, slide deck, figure, or submission package.
+- Record assumptions, missing information, and verification needs explicitly.
 
-Do not make the English sound like a literal translation. Make it sound like a
-Nature-style manuscript paragraph supported by the user's facts.
+## Checklist
 
-## Edge-case repairs (beyond the fragment table)
-
-These patterns come from Chinese having no tense, no obligatory plural, and a
-topic-comment structure. They are the ones the base table does not cover.
-
-| Chinese-draft pattern | Repair |
-|---|---|
-| No tense marking | Choose tense explicitly: past for what was done/found, present for established facts and what the figure shows |
-| No obligatory plural | Decide singular vs plural per noun; do not leave bare count nouns (`sample` → `samples` / `each sample`) |
-| Stacked `的…的` nested modifiers | Break into a relative clause or a separate sentence; do not pile modifiers before the head noun |
-| Topic-comment opener (`关于X，…`) | Rewrite as subject-verb-object; make the topic the grammatical subject or drop it |
-| Every sentence opening with `本文 / 我们` | Vary openings; lead some sentences with the result or the object, not the agent |
+- Inputs are identified and scoped.
+- Sources or tools used are named.
+- Output format is explicit.
+- Risks and limitations are visible.
+- Next actions are practical and sequenced.

@@ -1,9 +1,9 @@
 interface:
-  display_name: "Long-Read Alignment with minimap2"
+  display_name: "Bio Longread Alignment"
   short_description: "Align long reads using minimap2 for Oxford Nanopore and PacBio data. Supports various presets for different read types and applications. Use when aligni..."
-  default_prompt: "Use bio-longread-alignment to design or troubleshoot this bioinformatics workflow."
+  default_prompt: "Use bio-longread-alignment to handle this workflow."
 ownership:
   product_owner: "Zhoy"
   product_line: "Bio & Omics Toolkit"
-  origin: "jl-authored-tool-guide"
+  origin: "zhoy-original-or-curated"
   release_channel: "stable"

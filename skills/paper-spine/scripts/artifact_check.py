@@ -111,22 +111,22 @@ GENERIC_CELL_VALUES = {
     "make academic",
     "polish wording",
     "add detail",
-    "提升清晰度",
-    "学术化",
-    "润色",
-    "补充细节",
-    "待定",
-    "无",
+    "English text",
+    "English text",
+    "English text",
+    "English text",
+    "English text",
+    "English text",
 }
 BAD_GENERIC_PHRASES = (
     "improve clarity",
     "make academic",
     "polish wording",
     "add detail",
-    "提升清晰度",
-    "学术化",
-    "润色",
-    "补充细节",
+    "English text",
+    "English text",
+    "English text",
+    "English text",
 )
 FRAMEWORK_TERMS = (
     "framework",
@@ -136,12 +136,12 @@ FRAMEWORK_TERMS = (
     "spine",
     "throughline",
     "architecture",
-    "框架",
-    "整体",
-    "全文",
-    "全局",
-    "结构",
-    "主线",
+    "English text",
+    "English text",
+    "English text",
+    "English text",
+    "English text",
+    "English text",
 )
 
 RATIONALE_MIN_ROWS = 8
@@ -181,11 +181,11 @@ TRANSLATION_SOURCE_BY_TARGET = {
 }
 
 RATIONALE_ANCHOR_CATEGORIES = {
-    "motivation": ("motivation", "spine", "throughline", "动机", "主线", "贡献"),
-    "reference": ("reference", "sota", "example", "pattern", "paper", "literature", "参考", "样例", "论文", "文献"),
-    "target": ("target", "scene", "venue", "journal", "conference", "competition", "rubric", "norm", "目标", "场景", "期刊", "会议", "比赛", "评分", "规范"),
-    "evidence": ("evidence", "figure", "table", "result", "citation", "data", "source", "claim", "证据", "图", "表", "结果", "引用", "数据", "素材", "主张"),
-    "text_move": ("reframe", "rewrite", "move", "place", "sequence", "contrast", "echo", "narrow", "写作", "重构", "改写", "前后呼应", "收束", "对照"),
+    "motivation": ("motivation", "spine", "throughline", "English text", "English text", "English text"),
+    "reference": ("reference", "sota", "example", "pattern", "paper", "literature", "English text", "English text", "English text", "English text"),
+    "target": ("target", "scene", "venue", "journal", "conference", "competition", "rubric", "norm", "English text", "English text", "English text", "English text", "English text", "English text", "English text"),
+    "evidence": ("evidence", "figure", "table", "result", "citation", "data", "source", "claim", "English text", "English text", "English text", "English text", "English text", "English text", "English text", "English text"),
+    "text_move": ("reframe", "rewrite", "move", "place", "sequence", "contrast", "echo", "narrow", "English text", "English text", "English text", "English text", "English text", "English text"),
 }
 
 
@@ -299,7 +299,7 @@ def normalize(text: str) -> str:
 
 
 def is_generic_cell(text: str) -> bool:
-    return normalize(text).strip(" .。:：") in GENERIC_CELL_VALUES
+    return normalize(text).strip(" .. :: ") in GENERIC_CELL_VALUES
 
 
 def header_has(header: list[str], alternatives: tuple[str, ...]) -> bool:
@@ -320,8 +320,8 @@ def find_rationale_table(text: str) -> tuple[list[str], list[list[str]]] | None:
         if not table:
             continue
         header = table[0]
-        if header_has(header, ("manuscript", "unit", "writing", "section", "单元", "段落", "章节")) and header_has(
-            header, ("motivation", "动机")
+        if header_has(header, ("manuscript", "unit", "writing", "section", "English text", "English text", "English text")) and header_has(
+            header, ("motivation", "English text")
         ):
             return header, table[1:]
     return None
@@ -342,13 +342,13 @@ def validate_writing_rationale_matrix(output_dir: Path) -> list[str]:
 
     header, rows = table
     required_columns = {
-        "manuscript unit": ("manuscript", "unit", "writing", "section", "单元", "段落", "章节"),
-        "motivation link": ("motivation", "动机"),
-        "reference or SOTA pattern": ("reference", "sota", "example", "样例", "参考", "文献", "优秀"),
-        "target scene or venue norm": ("target", "scene", "venue", "norm", "目标", "场景", "期刊", "会议", "比赛", "规范"),
-        "evidence or citation anchor": ("evidence", "citation", "anchor", "证据", "引用", "材料", "数据"),
-        "planned change or text move": ("planned", "change", "move", "function", "plan", "修改", "计划", "写法", "功能"),
-        "final text check": ("final", "check", "最终", "检查", "落点"),
+        "manuscript unit": ("manuscript", "unit", "writing", "section", "English text", "English text", "English text"),
+        "motivation link": ("motivation", "English text"),
+        "reference or SOTA pattern": ("reference", "sota", "example", "English text", "English text", "English text", "English text"),
+        "target scene or venue norm": ("target", "scene", "venue", "norm", "English text", "English text", "English text", "English text", "English text", "English text"),
+        "evidence or citation anchor": ("evidence", "citation", "anchor", "English text", "English text", "English text", "English text"),
+        "planned change or text move": ("planned", "change", "move", "function", "plan", "English text", "English text", "English text", "English text"),
+        "final text check": ("final", "check", "English text", "English text", "English text"),
     }
     column_map: dict[str, int] = {}
     for label, alternatives in required_columns.items():
@@ -413,7 +413,7 @@ def validate_writing_rationale_matrix(output_dir: Path) -> list[str]:
                 f"writing_rationale_matrix.md row {row_number} lacks enough concrete anchors; include motivation, learned reference/SOTA pattern, target-scene norm, evidence/citation, and the planned text move."
             )
         if any(phrase in lowered for phrase in BAD_GENERIC_PHRASES) and not any(
-            token in lowered for token in ("because", "动机", "evidence", "sota", "reference", "目标", "证据", "引用")
+            token in lowered for token in ("because", "English text", "evidence", "sota", "reference", "English text", "English text", "English text")
         ):
             issues.append(
                 f"writing_rationale_matrix.md row {row_number} uses generic polishing language without a concrete anchor."
@@ -481,7 +481,7 @@ def validate_citation_support_bank(output_dir: Path, config: dict[str, object]) 
     for index, row in enumerate(rows[:required_candidates], start=1):
         joined = " ".join(row)
         has_reference = any(token in joined for token in ("@", "doi", "DOI", "http", "arXiv", "Journal", "Proceedings"))
-        has_sentence = len(joined) >= 80 and bool(re.search(r"[.!?。！？]", joined))
+        has_sentence = len(joined) >= 80 and bool(re.search(r"[.!?. ! ? ]", joined))
         if not has_reference or not has_sentence:
             weak_rows.append(index)
     if weak_rows:
@@ -500,7 +500,7 @@ def validate_translation_package(output_dir: Path, required: list[str]) -> list[
     if coverage_path.exists():
         coverage_text = coverage_path.read_text(encoding="utf-8", errors="ignore")
         coverage_lower = coverage_text.lower()
-        if any(status in coverage_lower for status in ("missing", "partial", "not translated", "未翻译", "缺失", "部分")):
+        if any(status in coverage_lower for status in ("missing", "partial", "not translated", "English text", "English text", "English text")):
             issues.append("translation_zh/translation_coverage.md reports missing or partial translation.")
 
     required_translation_targets = [name for name in required if name.startswith("translation_zh/")]
@@ -630,4 +630,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-

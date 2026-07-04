@@ -1,9 +1,9 @@
 interface:
-  display_name: "Skill Security Auditor"
+  display_name: "Securityauditor"
   short_description: "Static security audit workflow for Codex skills, agent skills, SKILL.md files, bundled scripts, hooks, shell snippets, suspicious file operations, promp..."
-  default_prompt: "Use securityauditor to improve this agent workflow safely."
+  default_prompt: "Use securityauditor to handle this workflow."
 ownership:
   product_owner: "Zhoy"
   product_line: "Agent Ops & Governance"
-  origin: "jl-original-or-curated"
+  origin: "zhoy-original-or-curated"
   release_channel: "stable"

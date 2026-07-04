@@ -1,9 +1,9 @@
 interface:
-  display_name: "Long-Read Quality Control"
+  display_name: "Bio Longread QC"
   short_description: "Quality control for long-read sequencing data using NanoPlot, NanoStat, and chopper. Generate QC reports, filter reads by length and quality, and visual..."
-  default_prompt: "Use bio-longread-qc to design or troubleshoot this bioinformatics workflow."
+  default_prompt: "Use bio-longread-qc to handle this workflow."
 ownership:
   product_owner: "Zhoy"
   product_line: "Bio & Omics Toolkit"
-  origin: "jl-authored-tool-guide"
+  origin: "zhoy-original-or-curated"
   release_channel: "stable"

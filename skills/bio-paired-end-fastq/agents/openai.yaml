@@ -1,9 +1,9 @@
 interface:
-  display_name: "Paired-End FASTQ"
+  display_name: "Bio Paired End Fastq"
   short_description: "Handle paired-end FASTQ files (R1/R2) using Biopython. Use when working with Illumina paired reads, synchronizing pairs, interleaving/deinterleaving, or..."
-  default_prompt: "Use bio-paired-end-fastq to design or troubleshoot this bioinformatics workflow."
+  default_prompt: "Use bio-paired-end-fastq to handle this workflow."
 ownership:
   product_owner: "Zhoy"
   product_line: "Bio & Omics Toolkit"
-  origin: "jl-authored-tool-guide"
+  origin: "zhoy-original-or-curated"
   release_channel: "stable"

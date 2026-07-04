@@ -1,9 +1,9 @@
 interface:
-  display_name: "Local MD & Mermaid to PDF"
+  display_name: "Local Md Mermaid PDF"
   short_description: "Converts Markdown files with Mermaid diagrams to PDF using local tools (mmdc, md-to-pdf, Puppeteer) with CSS styling and page numbers. Use when the user..."
-  default_prompt: "Use local-md-mermaid-pdf to create or verify this deliverable."
+  default_prompt: "Use local-md-mermaid-pdf to handle this workflow."
 ownership:
   product_owner: "Zhoy"
   product_line: "Delivery Stack"
-  origin: "jl-original-or-curated"
+  origin: "zhoy-original-or-curated"
   release_channel: "stable"

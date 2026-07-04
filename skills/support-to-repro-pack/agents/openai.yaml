@@ -1,9 +1,9 @@
 interface:
-  display_name: "Support-to-Repro-Pack"
-  short_description: "Convert support tickets, logs, and screenshots into sanitized, reproducible engineering issue packs"
-  default_prompt: "Use support-to-repro-pack for this task."
+  display_name: "Support To Repro Pack"
+  short_description: "Convert support materials into a reproducibility package with organized files, metadata, methods notes, environment details, redaction checks, and revie..."
+  default_prompt: "Use support-to-repro-pack to handle this workflow."
 ownership:
   product_owner: "Zhoy"
-  product_line: "General Skill Library"
-  origin: "jl-original-or-curated"
+  product_line: "General Utilities"
+  origin: "zhoy-original-or-curated"
   release_channel: "stable"

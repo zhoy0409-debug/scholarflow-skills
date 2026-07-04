@@ -1,6 +1,6 @@
-# Gap Analysis
+# Local Trial Quickstart
 
-This reference supports the `nature-literature-pipeline` skill. Load it only when the current task needs the additional detail implied by the file name.
+This reference supports the `paper-harbor` skill. Load it only when the current task needs the additional detail implied by the file name.
 
 ## Purpose
 

@@ -1,9 +1,9 @@
 interface:
-  display_name: "Differential Abundance Testing"
+  display_name: "Bio Microbiome Differential Abundance"
   short_description: "Differential abundance testing for microbiome data using compositionally-aware methods like ALDEx2, ANCOM-BC2, and MaAsLin2. Use when identifying taxa t..."
-  default_prompt: "Use bio-microbiome-differential-abundance to design or troubleshoot this bioinformatics workflow."
+  default_prompt: "Use bio-microbiome-differential-abundance to handle this workflow."
 ownership:
   product_owner: "Zhoy"
   product_line: "Bio & Omics Toolkit"
-  origin: "jl-authored-tool-guide"
+  origin: "zhoy-original-or-curated"
   release_channel: "stable"

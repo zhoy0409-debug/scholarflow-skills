@@ -1,37 +1,22 @@
-# 异常记录
+# Anomaly Log
 
-记录实验过程中发现的所有异常，供后续质量控制和故障排查。
+This reference supports the `nature-experiment-log` skill. Load it only when the current task needs the additional detail implied by the file name.
 
-## 格式
+## Purpose
 
-```yaml
----
-date: YYYY-MM-DD
-related_exp: EXP-ID
-anomaly_type: 设备故障 / 操作失误 / 结果异常 / 安全事件
-severity: 低 / 中 / 高
-status: 待处理 / 已处理 / 需复查
----
+Use this note to keep the workflow consistent, evidence-grounded, and easy to audit. It should help the agent make decisions, structure outputs, and avoid common failure modes for this part of the workflow.
 
-## 描述
+## Use Pattern
 
-[异常现象的客观描述]
+- Confirm the user's goal and available materials before applying the reference.
+- Prefer official sources, user-provided files, and reproducible checks.
+- Keep outputs structured enough to continue into a manuscript, report, slide deck, figure, or submission package.
+- Record assumptions, missing information, and verification needs explicitly.
 
-## 影响
+## Checklist
 
-[对实验结果的影响评估]
-
-## 处理
-
-[已采取的措施]
-
-## 备注
-
-[后续建议]
-```
-
-## 使用
-
-- 每次实验结束后检查是否有异常
-- 有则追加记录到此文件
-- 定期复查未处理异常
+- Inputs are identified and scoped.
+- Sources or tools used are named.
+- Output format is explicit.
+- Risks and limitations are visible.
+- Next actions are practical and sequenced.

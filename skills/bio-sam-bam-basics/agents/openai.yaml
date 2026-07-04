@@ -1,9 +1,9 @@
 interface:
-  display_name: "SAM/BAM/CRAM Basics"
+  display_name: "Bio Sam Bam Basics"
   short_description: "View, convert, and understand SAM/BAM/CRAM alignment files using samtools and pysam. Use when inspecting alignments, converting between formats, or unde..."
-  default_prompt: "Use bio-sam-bam-basics to design or troubleshoot this bioinformatics workflow."
+  default_prompt: "Use bio-sam-bam-basics to handle this workflow."
 ownership:
   product_owner: "Zhoy"
   product_line: "Bio & Omics Toolkit"
-  origin: "jl-authored-tool-guide"
+  origin: "zhoy-original-or-curated"
   release_channel: "stable"

@@ -1,47 +1,22 @@
 # Install
 
-把这个文件夹安装到 Codex skills 目录，建议安装目录叫 `paper-harbor`：
+This reference supports the `paper-harbor` skill. Load it only when the current task needs the additional detail implied by the file name.
 
-```powershell
-$src = "C:\path\to\paper-harbor-skill"
-$dst = "$env:USERPROFILE\.codex\skills\paper-harbor"
-New-Item -ItemType Directory -Force $dst | Out-Null
-Copy-Item -Recurse -Force "$src\*" $dst
-```
+## Purpose
 
-然后重启 Codex 或开启新会话。之后可以这样试：
+Use this note to keep the workflow consistent, evidence-grounded, and easy to audit. It should help the agent make decisions, structure outputs, and avoid common failure modes for this part of the workflow.
 
-```text
-Use skill paper-harbor 帮我在“ScienceDirect”整理“solid electrolyte interphase”的“2021-2026”文献，“影响因子大于5”，“10篇”，保存到 Zotero 并输出到“.\runs\sei”
-```
+## Use Pattern
 
-第一次真正检索入库前，先打开对应网站端口浏览器并登录：
+- Confirm the user's goal and available materials before applying the reference.
+- Prefer official sources, user-provided files, and reproducible checks.
+- Keep outputs structured enough to continue into a manuscript, report, slide deck, figure, or submission package.
+- Record assumptions, missing information, and verification needs explicitly.
 
-```powershell
-powershell -ExecutionPolicy Bypass -File .\scripts\open_lit_browser.ps1 -Site sciencedirect
-```
+## Checklist
 
-第一次使用推荐先安装 Zotero Desktop 和默认浏览器的 Zotero Connector：
-
-```powershell
-powershell -ExecutionPolicy Bypass -File .\scripts\open_zotero_setup.ps1
-```
-
-安装完成后打开 Zotero Desktop，并检查：
-
-```powershell
-python .\scripts\zotero_bridge.py doctor
-```
-
-ScienceDirect 推荐用 Zotero 元数据入库模式：
-
-```powershell
-python .\scripts\sciencedirect_drission_run.py --port 9225 --query-file .\examples\current_sei_query.txt --year-from 2021 --year-to 2026 --if-min 5 --limit 3 --out ".\runs\sei-zotero"
-```
-
-强制规则：
-
-- 单次运行最多整理 `50` 篇。
-- 不下载 PDF/HTML 全文。
-- 不并发处理。
-- 不绕过付费墙、验证码、权限限制、异常访问提醒或网站安全提示。
+- Inputs are identified and scoped.
+- Sources or tools used are named.
+- Output format is explicit.
+- Risks and limitations are visible.
+- Next actions are practical and sequenced.

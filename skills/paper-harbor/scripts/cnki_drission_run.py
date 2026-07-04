@@ -66,7 +66,7 @@ def assert_cdp_port_ready(port: int) -> None:
             response.read(256)
     except Exception as exc:
         raise RuntimeError(
-            f"未检测到已登录浏览器调试端口 {port}。请先运行 open_lit_browser.ps1 -Site cnki 并在浏览器里登录知网。"
+            f"English text {port}. English text open_lit_browser.ps1 -Site cnki English text. "
         ) from exc
 
 
@@ -90,7 +90,7 @@ def open_tab(browser, url: str | None = None):
         if url and tab is not None:
             tab.get(url)
     if tab is None:
-        raise RuntimeError("无法获取浏览器标签页。")
+        raise RuntimeError("English text. ")
     try:
         tab.set.timeouts(12)
     except Exception:
@@ -144,7 +144,7 @@ for (const tr of rows) {
   const year = dateMatch ? dateMatch[1] : '';
   const doiMatch = text.match(/10\.\d{4,9}\/[-._;()/:A-Z0-9]+/i);
   const ifMatch = text.match(/\bIF\s*([0-9]+(?:\.[0-9]+)?)/i);
-  const htmlRead = /HTML阅读|原版阅读|CNKI AI阅读/.test(text);
+  const htmlRead = /HTMLEnglish text|English text|CNKI AIEnglish text/.test(text);
   items.push({
     title,
     authors,
@@ -158,7 +158,7 @@ for (const tr of rows) {
     access_status: htmlRead ? 'official CNKI reading link visible' : 'metadata visible in CNKI result',
     notes: ifMatch
       ? 'CNKI result page metadata; IF read from visible EasyScholar badge'
-      : 'CNKI result page metadata; IF待核验：结果页未显示 EasyScholar IF，需用户刷新插件或手动核验'
+      : 'CNKI result page metadata; IFEnglish text: English text EasyScholar IF, English text'
   });
 }
 return items;
@@ -174,7 +174,7 @@ const next = controls.find((el) => {
   const cls = `${el.className || ''}`.toLowerCase();
   const disabled = el.disabled || /disabled|disable|unavailable/.test(cls) || el.getAttribute('aria-disabled') === 'true';
   if (disabled) return false;
-  return /下一页|下页|next/i.test(text) || text === '>' || /next/.test(cls);
+  return /English text|English text|next/i.test(text) || text === '>' || /next/.test(cls);
 });
 if (!next) return false;
 next.click();
@@ -186,12 +186,12 @@ def js_article_metadata() -> str:
     return r"""
 const clean = (s) => (s || '').replace(/\s+/g, ' ').trim();
 const body = clean(document.body ? document.body.innerText : '');
-const title = clean(document.querySelector('h1, .wx-tit, .brief h1')?.innerText) || document.title.replace(/- 中国知网.*/, '');
+const title = clean(document.querySelector('h1, .wx-tit, .brief h1')?.innerText) || document.title.replace(/- English text.*/, '');
 const doi = (body.match(/10\.\d{4,9}\/[-._;()/:A-Z0-9]+/i) || [''])[0];
 const year = (body.match(/\b(20\d{2}|19\d{2})\b/) || [''])[0];
 const abstract =
   clean(document.querySelector('#ChDivSummary, .abstract-text, .abstract, [id*="abstract"]')?.innerText) ||
-  (body.match(/摘要[:：]\s*(.{20,600}?)(关键词|Key words|分类号|DOI|$)/)?.[1] || '');
+  (body.match(/English text[:: ]\s*(.{20,600}?)(English text|Key words|English text|DOI|$)/)?.[1] || '');
 return { title, doi, publication_year: year, abstract: clean(abstract) };
 """
 
@@ -204,13 +204,13 @@ def prefer_cnki_title(search_title: str, page_title: str) -> tuple[str, str]:
         return search, ""
     lowered = page.lower()
     suspicious_tokens = (
-        "自动登录",
-        "登录",
+        "English text",
+        "English text",
         "sign in",
         "log in",
         "cnki",
-        "中国知网",
-        "知网",
+        "English text",
+        "English text",
     )
     if any(token in lowered for token in suspicious_tokens):
         return search or page, page
@@ -240,16 +240,16 @@ def apply_filters(rows: list[dict[str, str]], year_from: str, year_to: str, if_m
         current_if = parse_float(row.get("impact_factor", ""))
         if min_if is not None:
             if current_if is None:
-                row["priority"] = "中"
+                row["priority"] = "English text"
                 row["next_action"] = "pending IF verification; EasyScholar IF badge not visible"
             elif current_if <= min_if:
-                row["priority"] = "低"
+                row["priority"] = "English text"
                 row["next_action"] = f"skip Zotero import; IF {current_if:g} does not exceed {min_if:g}"
             else:
-                row["priority"] = "高"
+                row["priority"] = "English text"
                 row["next_action"] = "save metadata to Zotero; no full-text download"
         else:
-            row["priority"] = "高" if current_if is not None else "中"
+            row["priority"] = "English text" if current_if is not None else "English text"
             row["next_action"] = "save metadata to Zotero; no full-text download"
         row["source"] = "CNKI"
         row["impact_factor"] = row.get("impact_factor", "")
@@ -264,7 +264,7 @@ def apply_filters(rows: list[dict[str, str]], year_from: str, year_to: str, if_m
 def save_candidate_tables(run_dir: Path, rows: list[dict[str, str]]) -> None:
     candidate_rows = [
         [
-            row.get("priority", "中"),
+            row.get("priority", "English text"),
             row.get("title", ""),
             row.get("authors", ""),
             row.get("journal", ""),
@@ -284,9 +284,9 @@ def save_candidate_tables(run_dir: Path, rows: list[dict[str, str]]) -> None:
         ]
         for row in rows
     ]
-    write_csv(run_dir / "候选文献总表.csv", CANDIDATE_HEADERS, candidate_rows)
+    write_csv(run_dir / "English text.csv", CANDIDATE_HEADERS, candidate_rows)
     write_csv(
-        run_dir / "文章地址总表.csv",
+        run_dir / "English text.csv",
         ["record_id", "source", "title", "url", "doi", "publication_year", "journal", "discovered_at", "status"],
         [
             [
@@ -303,14 +303,14 @@ def save_candidate_tables(run_dir: Path, rows: list[dict[str, str]]) -> None:
             for idx, row in enumerate(rows)
         ],
     )
-    write_csv(run_dir / "高优先级文献.csv", CANDIDATE_HEADERS, [r for r in candidate_rows if r[0] == "高"])
-    write_csv(run_dir / "中优先级文献.csv", CANDIDATE_HEADERS, [r for r in candidate_rows if r[0] == "中"])
-    write_csv(run_dir / "低优先级文献.csv", CANDIDATE_HEADERS, [r for r in candidate_rows if r[0] == "低"])
+    write_csv(run_dir / "English text.csv", CANDIDATE_HEADERS, [r for r in candidate_rows if r[0] == "English text"])
+    write_csv(run_dir / "English text.csv", CANDIDATE_HEADERS, [r for r in candidate_rows if r[0] == "English text"])
+    write_csv(run_dir / "English text.csv", CANDIDATE_HEADERS, [r for r in candidate_rows if r[0] == "English text"])
 
 
 def run(args: argparse.Namespace) -> dict[str, object]:
     run_dir = Path(args.out).resolve()
-    internal_dir = run_dir / "内部数据_一般不用打开"
+    internal_dir = run_dir / "English text_English text"
     (internal_dir / "logs").mkdir(parents=True, exist_ok=True)
     (internal_dir / "raw_exports").mkdir(parents=True, exist_ok=True)
 
@@ -341,12 +341,12 @@ def run(args: argparse.Namespace) -> dict[str, object]:
             if page_rows:
                 break
             text = tab.run_js('return (document.body && document.body.innerText || "").slice(0, 2000)') or ""
-            if re.search(r"验证码|安全验证|异常|captcha|robot|verify", text, re.I):
+            if re.search(r"English text|English text|English text|captcha|robot|verify", text, re.I):
                 stopped_reason = "site verification or unusual activity detected"
                 break
         add_page_results(page_rows)
         screened_so_far = apply_filters(raw_results, str(args.year_from or ""), str(args.year_to or ""), str(args.if_min or ""))
-        importable_so_far = [row for row in screened_so_far if row.get("priority") == "高"]
+        importable_so_far = [row for row in screened_so_far if row.get("priority") == "English text"]
         if len(importable_so_far) >= target_count or len(raw_results) >= scan_cap or stopped_reason:
             break
         clicked_next = bool(tab.run_js(js_click_next_page()))
@@ -366,7 +366,7 @@ def run(args: argparse.Namespace) -> dict[str, object]:
                 add_page_results(page_rows)
                 break
             text = tab.run_js('return (document.body && document.body.innerText || "").slice(0, 2000)') or ""
-            if re.search(r"验证码|安全验证|异常|captcha|robot|verify", text, re.I):
+            if re.search(r"English text|English text|English text|captcha|robot|verify", text, re.I):
                 stopped_reason = "site verification or unusual activity detected"
                 break
 
@@ -382,13 +382,13 @@ def run(args: argparse.Namespace) -> dict[str, object]:
     zotero_saved = 0
     attempts = 0
     data_dir = locate_zotero_data_dir(args.zotero_data_dir)
-    importable_results = [row for row in results if row.get("priority") == "高"]
-    non_importable_results = [row for row in results if row.get("priority") != "高"]
+    importable_results = [row for row in results if row.get("priority") == "English text"]
+    non_importable_results = [row for row in results if row.get("priority") != "English text"]
     for row in non_importable_results:
         reason = "IF missing or does not satisfy requested threshold"
-        if row.get("priority") == "中":
+        if row.get("priority") == "English text":
             reason = "EasyScholar IF badge not visible; IF threshold cannot be verified"
-        elif row.get("priority") == "低":
+        elif row.get("priority") == "English text":
             reason = "Impact factor does not satisfy requested threshold"
         pending_rows.append([
             row.get("title", ""),
@@ -397,7 +397,7 @@ def run(args: argparse.Namespace) -> dict[str, object]:
             row.get("url", ""),
             reason,
             row.get("next_action", "manual review required"),
-            row.get("priority", "中"),
+            row.get("priority", "English text"),
         ])
 
     max_attempts = min(int(args.max_attempts or target_count), target_count, len(importable_results))
@@ -408,13 +408,13 @@ def run(args: argparse.Namespace) -> dict[str, object]:
         tab.wait.doc_loaded()
         time.sleep(1.5)
         page_text = tab.run_js('return (document.body && document.body.innerText || "").slice(0, 3000)') or ""
-        if re.search(r"验证码|安全验证|异常访问|captcha|robot|verify", page_text, re.I):
+        if re.search(r"English text|English text|English text|captcha|robot|verify", page_text, re.I):
             row["zotero_status"] = "pending"
             row["next_action"] = "site verification shown; user should resolve manually before rerun"
-            pending_rows.append([row["title"], row.get("doi", ""), "CNKI", row["url"], "site verification detected", row["next_action"], row.get("priority", "中")])
+            pending_rows.append([row["title"], row.get("doi", ""), "CNKI", row["url"], "site verification detected", row["next_action"], row.get("priority", "English text")])
             save_candidate_tables(run_dir, results)
-            write_csv(run_dir / "已入库Zotero文献清单.csv", ["record_id", "title", "doi", "source", "url", "journal", "publication_year", "zotero_item_key", "zotero_status", "saved_at", "access_status", "notes"], zotero_rows)
-            write_csv(run_dir / "待处理文献清单.csv", ["title", "doi", "source", "url", "reason", "next_action", "priority"], pending_rows)
+            write_csv(run_dir / "English textZoteroEnglish text.csv", ["record_id", "title", "doi", "source", "url", "journal", "publication_year", "zotero_item_key", "zotero_status", "saved_at", "access_status", "notes"], zotero_rows)
+            write_csv(run_dir / "English text.csv", ["title", "doi", "source", "url", "reason", "next_action", "priority"], pending_rows)
             continue
         info = tab.run_js(js_article_metadata()) or {}
         title, generic_page_title = prefer_cnki_title(row.get("title", ""), str(info.get("title") or ""))
@@ -449,27 +449,27 @@ def run(args: argparse.Namespace) -> dict[str, object]:
         else:
             row["zotero_status"] = "pending"
             row["next_action"] = "manual Zotero save or rerun after Zotero is available"
-            pending_rows.append([row["title"], row.get("doi", ""), "CNKI", row["url"], str(result.get("reason", "Zotero metadata save failed")), row["next_action"], row.get("priority", "中")])
+            pending_rows.append([row["title"], row.get("doi", ""), "CNKI", row["url"], str(result.get("reason", "Zotero metadata save failed")), row["next_action"], row.get("priority", "English text")])
 
         save_candidate_tables(run_dir, results)
-        write_csv(run_dir / "已入库Zotero文献清单.csv", ["record_id", "title", "doi", "source", "url", "journal", "publication_year", "zotero_item_key", "zotero_status", "saved_at", "access_status", "notes"], zotero_rows)
-        write_csv(run_dir / "待处理文献清单.csv", ["title", "doi", "source", "url", "reason", "next_action", "priority"], pending_rows)
+        write_csv(run_dir / "English textZoteroEnglish text.csv", ["record_id", "title", "doi", "source", "url", "journal", "publication_year", "zotero_item_key", "zotero_status", "saved_at", "access_status", "notes"], zotero_rows)
+        write_csv(run_dir / "English text.csv", ["title", "doi", "source", "url", "reason", "next_action", "priority"], pending_rows)
 
     save_candidate_tables(run_dir, results)
-    write_csv(run_dir / "已入库Zotero文献清单.csv", ["record_id", "title", "doi", "source", "url", "journal", "publication_year", "zotero_item_key", "zotero_status", "saved_at", "access_status", "notes"], zotero_rows)
-    write_csv(run_dir / "待处理文献清单.csv", ["title", "doi", "source", "url", "reason", "next_action", "priority"], pending_rows)
+    write_csv(run_dir / "English textZoteroEnglish text.csv", ["record_id", "title", "doi", "source", "url", "journal", "publication_year", "zotero_item_key", "zotero_status", "saved_at", "access_status", "notes"], zotero_rows)
+    write_csv(run_dir / "English text.csv", ["title", "doi", "source", "url", "reason", "next_action", "priority"], pending_rows)
 
-    html = f"""<!doctype html><html lang="zh-CN"><meta charset="utf-8"><title>文献整理报告</title><body>
-<h1>文献整理报告</h1>
-<p>运行方式：DrissionPage 接管 9226 已登录知网浏览器；模式：Zotero 元数据入库，不下载 PDF。</p>
-<p>关键词：{args.query}</p>
-<p>年份：{args.year_from}-{args.year_to}</p>
-<p>目标合格入库数量：{target_count}</p>
-<p>候选：{len(results)}，符合入库条件：{len(importable_results)}，尝试入库：{attempts}，成功/已存在：{zotero_saved}，待处理：{len(pending_rows)}</p>
-<p>停止原因：{stopped_reason or '达到目标或完成本页检索'}</p>
-<p>说明：候选清单先保存；本流程不会点击知网下载、HTML阅读、原版阅读或 CNKI AI 阅读按钮。</p>
+    html = f"""<!doctype html><html lang="zh-CN"><meta charset="utf-8"><title>English text</title><body>
+<h1>English text</h1>
+<p>English text: DrissionPage English text 9226 English text; English text: Zotero English text, English text PDF. </p>
+<p>English text: {args.query}</p>
+<p>English text: {args.year_from}-{args.year_to}</p>
+<p>English text: {target_count}</p>
+<p>English text: {len(results)}, English text: {len(importable_results)}, English text: {attempts}, English text/English text: {zotero_saved}, English text: {len(pending_rows)}</p>
+<p>English text: {stopped_reason or 'English text'}</p>
+<p>English text: English text; English text, HTMLEnglish text, English text CNKI AI English text. </p>
 </body></html>"""
-    (run_dir / "文献整理报告.html").write_text(html, encoding="utf-8")
+    (run_dir / "English text.html").write_text(html, encoding="utf-8")
     summary = {
         "runner": "cnki_drission",
         "download_method": "metadata_only",

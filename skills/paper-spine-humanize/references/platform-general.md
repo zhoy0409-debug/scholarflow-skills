@@ -1,24 +1,22 @@
-# 通用降 AI 检测策略
+# Platform General
 
-适用于未明确目标检测平台或需要跨平台兼容的场景。基于主流 AIGC 检测系统
-的共性维度设计。
+This reference supports the `paper-spine-humanize` skill. Load it only when the current task needs the additional detail implied by the file name.
 
-## 通用策略
+## Purpose
 
-1. **句长分布**：保持句长多峰分布（5-10字短句、15-25字正常、35-50字长句），
-   避免钟形单峰。这是所有检测平台共有的最强信号。
-2. **段落结构**：每段使用不同结构模板，全文至少使用 4 种模板。
-3. **信息密度**：核心段高密度（70-85%），过渡段低密度（40-50%），
-   交替出现。
-4. **连接词**：每千字 ≤ 6 个，仅在段落内部逻辑转折处使用。
-5. **术语语境**：偶尔使用同义学术表达替代最标准的术语用法。
+Use this note to keep the workflow consistent, evidence-grounded, and easy to audit. It should help the agent make decisions, structure outputs, and avoid common failure modes for this part of the workflow.
 
-## 跨平台原则
+## Use Pattern
 
-- 优先消除所有平台的共性检测信号（句长单峰、段落模板循环、信息密度均匀）
-- 不要为了规避某一平台的特定检测而引入另一平台的敏感特征
-- 改动必须保持学术严谨性——不以牺牲论文质量为代价
+- Confirm the user's goal and available materials before applying the reference.
+- Prefer official sources, user-provided files, and reproducible checks.
+- Keep outputs structured enough to continue into a manuscript, report, slide deck, figure, or submission package.
+- Record assumptions, missing information, and verification needs explicitly.
 
-## 适用档位
+## Checklist
 
-light/medium/heavy 档位均适用。medium 是通用场景的推荐起始点。
+- Inputs are identified and scoped.
+- Sources or tools used are named.
+- Output format is explicit.
+- Risks and limitations are visible.
+- Next actions are practical and sequenced.

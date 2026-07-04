@@ -1,33 +1,22 @@
-# Paper type: discovery / mechanism
+# Discovery
 
-Covers discovery and mechanism papers: omics, single-cell, spatial, or multi-modal studies, and any work whose core is a newly observed phenomenon or an explained mechanism.
+This reference supports the `nature-paper2ppt` skill. Load it only when the current task needs the additional detail implied by the file name.
 
-## Presentation arc — question-to-evidence
+## Purpose
 
-Best when the paper asks an open question and answers it through a chain of evidence. Order the story as:
+Use this note to keep the workflow consistent, evidence-grounded, and easy to audit. It should help the agent make decisions, structure outputs, and avoid common failure modes for this part of the workflow.
 
-1. phenomenon and why it matters,
-2. the unknown mechanism or gap,
-3. the hypothesis or question,
-4. experimental design,
-5. the evidence chain (the main result slides),
-6. the mechanistic model,
-7. limitations and next experiments.
+## Use Pattern
 
-If the paper has one strong central claim, you may open `claim-first` and then justify it with the same evidence chain.
+- Confirm the user's goal and available materials before applying the reference.
+- Prefer official sources, user-provided files, and reproducible checks.
+- Keep outputs structured enough to continue into a manuscript, report, slide deck, figure, or submission package.
+- Record assumptions, missing information, and verification needs explicitly.
 
-## Default slide structure (adapt, do not force)
+## Checklist
 
-1. 标题页
-2. 研究背景：为什么这个现象/问题重要
-3. 知识缺口：未知的机制或矛盾
-4. 核心问题与假设
-5. 研究设计 / 实验体系
-6-8. 关键证据 1-3（构成证据链）
-9. 验证、对照或稳健性证据
-10. 机制模型 / 综合框架
-11. 创新点与生物学意义
-12. 局限性与未解决问题
-13. 总结与讨论
-
-Emphasise the evidence chain: each result slide should advance the mechanistic argument, not just display a figure. Let the mechanism/model slide synthesise the chain.
+- Inputs are identified and scoped.
+- Sources or tools used are named.
+- Output format is explicit.
+- Risks and limitations are visible.
+- Next actions are practical and sequenced.

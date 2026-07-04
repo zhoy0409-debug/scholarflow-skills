@@ -1,9 +1,9 @@
 interface:
-  display_name: "Motif Search"
+  display_name: "Bio Motif Search"
   short_description: "Find patterns, motifs, and subsequences in biological sequences using Biopython. Use when searching for transcription factor binding sites, regulatory e..."
-  default_prompt: "Use bio-motif-search to design or troubleshoot this bioinformatics workflow."
+  default_prompt: "Use bio-motif-search to handle this workflow."
 ownership:
   product_owner: "Zhoy"
   product_line: "Bio & Omics Toolkit"
-  origin: "jl-authored-tool-guide"
+  origin: "zhoy-original-or-curated"
   release_channel: "stable"

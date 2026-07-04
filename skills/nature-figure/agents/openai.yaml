@@ -1,9 +1,9 @@
 interface:
-  display_name: "Nature Figure Making"
-  short_description: "Submission-grade Nature/high-impact journal figure workflow for Python or R. Use whenever the user asks to create, revise, audit, or polish manuscript f..."
-  default_prompt: "Use nature-figure to help with my research workflow."
+  display_name: "Nature Figure"
+  short_description: "Plan, build, and quality-check scientific figures so panels, statistics, legends, visual hierarchy, and export settings support the manuscript argument."
+  default_prompt: "Use nature-figure to handle this workflow."
 ownership:
   product_owner: "Zhoy"
   product_line: "Nature Research Suite"
-  origin: "jl-refactored-community"
+  origin: "zhoy-original-or-curated"
   release_channel: "stable"

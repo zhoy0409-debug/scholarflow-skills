@@ -1,29 +1,22 @@
-# Paper type: review / perspective / commentary
+# Review
 
-Covers reviews, perspectives, and commentaries that synthesise a field rather than report new primary data.
+This reference supports the `nature-paper2ppt` skill. Load it only when the current task needs the additional detail implied by the file name.
 
-## Presentation arc — evidence-map
+## Purpose
 
-Best when the contribution is organisation and synthesis of existing knowledge. Order the story as:
+Use this note to keep the workflow consistent, evidence-grounded, and easy to audit. It should help the agent make decisions, structure outputs, and avoid common failure modes for this part of the workflow.
 
-1. why the topic matters now,
-2. the conceptual framework,
-3. theme 1,
-4. theme 2,
-5. theme 3,
-6. controversy or unresolved problem,
-7. the author's synthesis,
-8. future directions.
+## Use Pattern
 
-## Default slide structure (adapt, do not force)
+- Confirm the user's goal and available materials before applying the reference.
+- Prefer official sources, user-provided files, and reproducible checks.
+- Keep outputs structured enough to continue into a manuscript, report, slide deck, figure, or submission package.
+- Record assumptions, missing information, and verification needs explicitly.
 
-1. 标题页
-2. 为什么这个主题现在重要
-3. 概念框架 / 全局地图
-4-6. 主题 1-3（每个主题一张证据/示意）
-7. 争议 / 未解决的问题
-8. 作者的综合观点
-9. 未来方向
-10. 总结
+## Checklist
 
-A review deck leans more text- and schematic-led than a primary-research deck, but still avoid dense bullet pages: use a conceptual framework diagram as the spine, and give each theme one clear visual or schematic. Attribute key ideas to their original sources, not to the review alone.
+- Inputs are identified and scoped.
+- Sources or tools used are named.
+- Output format is explicit.
+- Risks and limitations are visible.
+- Next actions are practical and sequenced.

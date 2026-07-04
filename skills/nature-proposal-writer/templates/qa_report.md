@@ -1,25 +1,22 @@
-# QA report
+# Qa Report
 
-- Round:
-- Mode:
-- Text type:
+This reference supports the `nature-proposal-writer` skill. Load it only when the current task needs the additional detail implied by the file name.
 
-## Scores
+## Purpose
 
-| Dimension | Score | Notes |
-|---|---:|---|
-| 研究问题清晰度 |  |  |
-| 科学张力 |  |  |
-| 证据匹配 |  |  |
-| 逻辑链 |  |  |
-| 方法可行性 |  |  |
-| 创新性 |  |  |
-| 风险边界 |  |  |
-| 语言质量 |  |  |
+Use this note to keep the workflow consistent, evidence-grounded, and easy to audit. It should help the agent make decisions, structure outputs, and avoid common failure modes for this part of the workflow.
 
-## Main risks
+## Use Pattern
 
-## Required fixes
+- Confirm the user's goal and available materials before applying the reference.
+- Prefer official sources, user-provided files, and reproducible checks.
+- Keep outputs structured enough to continue into a manuscript, report, slide deck, figure, or submission package.
+- Record assumptions, missing information, and verification needs explicitly.
 
-## Recommendation
+## Checklist
 
+- Inputs are identified and scoped.
+- Sources or tools used are named.
+- Output format is explicit.
+- Risks and limitations are visible.
+- Next actions are practical and sequenced.

@@ -1,9 +1,9 @@
 interface:
-  display_name: "Nature Reviewer Response"
-  short_description: "Draft, audit, or revise point-by-point reviewer response letters for Nature-family manuscript revisions. Use when the user provides reviewer comments, e..."
-  default_prompt: "Use nature-response to help with my research workflow."
+  display_name: "Nature Response"
+  short_description: "Draft and audit reviewer responses, rebuttals, revision plans, and response tables with respectful tone, evidence-backed replies, and clear manuscript-c..."
+  default_prompt: "Use nature-response to handle this workflow."
 ownership:
   product_owner: "Zhoy"
   product_line: "Nature Research Suite"
-  origin: "jl-refactored-community"
+  origin: "zhoy-original-or-curated"
   release_channel: "stable"

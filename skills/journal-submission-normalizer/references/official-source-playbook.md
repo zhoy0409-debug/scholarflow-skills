@@ -1,73 +1,74 @@
 # Official Source Playbook
 
-Use this guide to find current journal requirements before normalizing a manuscript.
+Use this reference when collecting journal submission requirements.
 
-## Search Strategy
+## Source Priority
 
-Start from the target journal, not the publisher homepage.
+| Priority | Source | Use |
+|---|---|---|
+| 1 | Official journal author instructions | Main source for formatting and submission rules. |
+| 2 | Publisher journal page | Scope, article types, APC, policies, templates. |
+| 3 | Official templates or style files | DOCX, LaTeX, EndNote, CSL, figure templates. |
+| 4 | Submission-system checklist | File naming, declarations, required uploads. |
+| 5 | Official ethics and policy pages | AI disclosure, data availability, conflict of interest, trial registration, consent. |
+| 6 | Recent accepted articles | Layout clues only; do not override official instructions. |
 
-Preferred queries:
+## Search Queries
+
+Use combinations such as:
 
 ```text
-"<journal name>" "Guide for Authors"
-"<journal name>" "Instructions for Authors"
-"<journal name>" "Author Guidelines"
-"<journal name>" "Submission Guidelines"
-"<journal name>" "formatting guide"
-"<journal name>" "manuscript preparation"
-"<期刊名>" 投稿须知
-"<期刊名>" 稿约
-"<期刊名>" 作者指南
-"<期刊名>" 参考文献 格式
+"<journal name>" author instructions
+"<journal name>" guide for authors
+"<journal name>" manuscript preparation
+"<journal name>" reference style
+"<journal name>" LaTeX template
+"<journal name>" Word template
+"<journal name>" submission checklist
+"<journal name>" data availability statement
+"<journal name>" AI policy authors
 ```
 
-When a journal name is ambiguous, add publisher, ISSN, society, field, or language.
+For publisher pages:
 
-## Official Source Examples
+```text
+site:elsevier.com/journals "<journal name>" "guide for authors"
+site:springer.com/journal "<journal name>" "submission guidelines"
+site:nature.com "<journal name>" "for authors"
+site:wiley.com "<journal name>" "author guidelines"
+site:tandfonline.com "<journal name>" "instructions for authors"
+```
 
-Common official sources to check when relevant:
+## Rule Matrix Template
 
-- Nature Portfolio: journal-specific "For Authors" and formatting pages.
-- Science/AAAS: "Information for Authors" and article-type instructions.
-- Cell Press: journal author information and article type pages.
-- Elsevier: journal "Guide for Authors" plus Elsevier author policies.
-- Springer Nature: journal submission guidelines plus publisher author tutorials.
-- Wiley: journal author guidelines and Wiley Author Services.
-- MDPI: journal instructions plus MDPI layout style guide.
-- ICMJE: biomedical manuscript preparation and reference guidance when required.
-- Chinese journals: official journal website, society publisher page, official submission system, or authoritative "投稿须知/稿约".
-- Chinese reference style: use GB/T 7714 only when the journal explicitly requires it or when Chinese academic convention is requested.
+| Area | Requirement | Source | Status | Action |
+|---|---|---|---|---|
+| Abstract | Structured, max 250 words | Official author instructions | verified | Check headings and word count |
+| References | Vancouver style | Official reference examples | verified | Normalize citations and bibliography |
+| Figures | TIFF/EPS, 300 dpi minimum | Figure guidelines | verified | Check exported files |
+| Declarations | Funding, COI, ethics, data availability | Publisher policy | verified | Add or flag missing items |
 
-## Source Log Fields
+## Conflict Handling
 
-Record:
+When sources conflict:
 
-| Field | Meaning |
-|---|---|
-| Journal | Target journal name and article type |
-| Source title | Page title or document name |
-| URL | Official URL |
-| Owner | Journal, publisher, society, or standard body |
-| Source level | journal-specific, publisher-level, delegated standard, or inferred example |
-| Access date | Date checked |
-| Key sections | Formatting, references, figures, ethics, declarations, etc. |
+1. Prefer the journal-specific page over publisher-wide general guidance.
+2. Prefer the most recent official page over old PDFs.
+3. Prefer submission-system requirements for upload mechanics.
+4. Show the conflict in the report instead of hiding it.
 
-## Reliability Labels
+## Common Missing Items
 
-- `official-journal`: highest confidence.
-- `official-publisher`: reliable if journal delegates to it.
-- `official-standard`: reliable only for the parts the journal requires.
-- `published-example`: useful for style clues, not binding.
-- `secondary`: use only to find official links.
-
-## Red Flags
-
-Treat these as blockers or uncertainties:
-
-- requirements conflict across pages;
-- page has no date and conflicts with submission system;
-- downloaded template has unclear license;
-- unofficial sites mirror old requirements;
-- PDF template differs from HTML author guide;
-- journal changed publisher or submission system recently;
-- Chinese and English pages disagree.
+- article type mismatch;
+- abstract length or structure;
+- title page fields;
+- author contribution statement;
+- funding statement;
+- conflict-of-interest statement;
+- ethics approval and consent;
+- trial registration;
+- data availability statement;
+- AI-use disclosure;
+- figure resolution or file format;
+- reference style and DOI completeness;
+- supplementary file naming.

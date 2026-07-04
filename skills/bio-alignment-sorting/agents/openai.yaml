@@ -1,9 +1,9 @@
 interface:
-  display_name: "Alignment Sorting"
+  display_name: "Bio Alignment Sorting"
   short_description: "Sort alignment files by coordinate or read name using samtools and pysam. Use when preparing BAM files for indexing, variant calling, or paired-end anal..."
-  default_prompt: "Use bio-alignment-sorting to design or troubleshoot this bioinformatics workflow."
+  default_prompt: "Use bio-alignment-sorting to handle this workflow."
 ownership:
   product_owner: "Zhoy"
   product_line: "Bio & Omics Toolkit"
-  origin: "jl-authored-tool-guide"
+  origin: "zhoy-original-or-curated"
   release_channel: "stable"

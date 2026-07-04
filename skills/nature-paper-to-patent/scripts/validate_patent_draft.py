@@ -9,8 +9,8 @@ from pathlib import Path
 
 
 SOURCE_ID = re.compile(r"^[PEFC]\d{3,}$")
-PLACEHOLDER = re.compile(r"\[(?:TO CONFIRM|待确认)[^\]]*\]", re.IGNORECASE)
-VAGUE_RESULT = re.compile(r"(技术结果|处理结果|最终结果)")
+PLACEHOLDER = re.compile(r"\[(?:TO CONFIRM|English text)[^\]]*\]", re.IGNORECASE)
+VAGUE_RESULT = re.compile(r"(English text|English text|English text)")
 QUALITY_THRESHOLDS = {
     "evidence_support": 4,
     "claim_architecture": 4,
@@ -51,24 +51,24 @@ def validate(data: dict) -> list[Finding]:
     )
     for key in required:
         if key not in data:
-            add(findings, "ERROR", "MISSING_KEY", f"缺少顶层字段：{key}。")
+            add(findings, "ERROR", "MISSING_KEY", f"English text: {key}. ")
 
     claims = data.get("claims", [])
     numbers = [claim.get("number") for claim in claims]
     if not claims:
-        add(findings, "ERROR", "NO_CLAIMS", "完整草稿必须包含权利要求。")
+        add(findings, "ERROR", "NO_CLAIMS", "English text. ")
     elif numbers != list(range(1, len(numbers) + 1)):
-        add(findings, "ERROR", "CLAIM_SEQUENCE", f"权利要求编号不连续：{numbers}。")
+        add(findings, "ERROR", "CLAIM_SEQUENCE", f"English text: {numbers}. ")
     for claim in claims:
         text = str(claim.get("text", ""))
         if not text.strip():
-            add(findings, "ERROR", "EMPTY_CLAIM", f"权利要求{claim.get('number')}为空。")
+            add(findings, "ERROR", "EMPTY_CLAIM", f"English text{claim.get('number')}English text. ")
         if PLACEHOLDER.search(text):
             add(
                 findings,
                 "ERROR",
                 "CLAIM_PLACEHOLDER",
-                f"权利要求{claim.get('number')}仍含待确认标记。",
+                f"English text{claim.get('number')}English text. ",
             )
 
     source_records = data.get("source_map", [])
@@ -76,21 +76,21 @@ def validate(data: dict) -> list[Finding]:
     for record in source_records:
         source_id = str(record.get("id", ""))
         if not SOURCE_ID.fullmatch(source_id):
-            add(findings, "ERROR", "SOURCE_ID", f"无效来源ID：{source_id!r}。")
+            add(findings, "ERROR", "SOURCE_ID", f"English textID: {source_id!r}. ")
         if source_id in source_ids:
-            add(findings, "ERROR", "DUPLICATE_SOURCE_ID", f"来源ID重复：{source_id}。")
+            add(findings, "ERROR", "DUPLICATE_SOURCE_ID", f"English textIDEnglish text: {source_id}. ")
         source_ids.add(source_id)
         if not record.get("locator"):
-            add(findings, "WARNING", "SOURCE_LOCATOR", f"{source_id}缺少页码、章节或行号。")
+            add(findings, "WARNING", "SOURCE_LOCATOR", f"{source_id}English text, English text. ")
 
     canonical_terms = set()
     forbidden_aliases = set()
     for item in data.get("terminology_ledger", []):
         canonical = str(item.get("canonical_zh", "")).strip()
         if not canonical:
-            add(findings, "ERROR", "CANONICAL_TERM", "术语表存在空的canonical_zh。")
+            add(findings, "ERROR", "CANONICAL_TERM", "English textcanonical_zh. ")
         elif canonical in canonical_terms:
-            add(findings, "ERROR", "DUPLICATE_TERM", f"规范术语重复：{canonical}。")
+            add(findings, "ERROR", "DUPLICATE_TERM", f"English text: {canonical}. ")
         canonical_terms.add(canonical)
         forbidden_aliases.update(
             str(alias).strip() for alias in item.get("forbidden_aliases", []) if str(alias).strip()
@@ -100,35 +100,35 @@ def validate(data: dict) -> list[Finding]:
     for item in data.get("evidence_ledger", []):
         ledger_id = str(item.get("id", ""))
         if not ledger_id:
-            add(findings, "ERROR", "LEDGER_ID", "证据台账条目缺少ID。")
+            add(findings, "ERROR", "LEDGER_ID", "English textID. ")
         elif ledger_id in ledger_ids:
-            add(findings, "ERROR", "DUPLICATE_LEDGER_ID", f"证据台账ID重复：{ledger_id}。")
+            add(findings, "ERROR", "DUPLICATE_LEDGER_ID", f"English textIDEnglish text: {ledger_id}. ")
         ledger_ids.add(ledger_id)
         status = item.get("support_status")
         if status not in {"explicit", "inherent", "needs-confirmation", "unsupported"}:
-            add(findings, "ERROR", "SUPPORT_STATUS", f"{ledger_id}的支持状态无效：{status}。")
+            add(findings, "ERROR", "SUPPORT_STATUS", f"{ledger_id}English text: {status}. ")
         referenced = item.get("source_ids", [])
         if status in {"explicit", "inherent"} and not referenced:
-            add(findings, "ERROR", "MISSING_SOURCE_LINK", f"{ledger_id}没有来源ID。")
+            add(findings, "ERROR", "MISSING_SOURCE_LINK", f"{ledger_id}English textID. ")
         for source_id in referenced:
             if source_ids and source_id not in source_ids:
-                add(findings, "ERROR", "UNKNOWN_SOURCE_ID", f"{ledger_id}引用未知来源ID：{source_id}。")
+                add(findings, "ERROR", "UNKNOWN_SOURCE_ID", f"{ledger_id}English textID: {source_id}. ")
 
     mapped_claims = set()
     for mapping in data.get("claim_feature_map", []):
         claim_number = mapping.get("claim_number")
         mapped_claims.add(claim_number)
         if claim_number not in numbers:
-            add(findings, "ERROR", "UNKNOWN_CLAIM", f"特征映射引用不存在的权利要求：{claim_number}。")
+            add(findings, "ERROR", "UNKNOWN_CLAIM", f"English text: {claim_number}. ")
         if not str(mapping.get("feature", "")).strip():
-            add(findings, "ERROR", "EMPTY_FEATURE", "权利要求特征映射存在空特征。")
+            add(findings, "ERROR", "EMPTY_FEATURE", "English text. ")
         evidence_ids = mapping.get("evidence_ids", [])
         if not evidence_ids:
             add(
                 findings,
                 "ERROR",
                 "UNMAPPED_FEATURE",
-                f"权利要求{claim_number}的特征“{mapping.get('feature', '')}”没有证据ID。",
+                f"English text{claim_number}English text"{mapping.get('feature', '')}"English textID. ",
             )
         for evidence_id in evidence_ids:
             if evidence_id not in ledger_ids:
@@ -136,16 +136,16 @@ def validate(data: dict) -> list[Finding]:
                     findings,
                     "ERROR",
                     "UNKNOWN_EVIDENCE_ID",
-                    f"权利要求{claim_number}引用未知证据ID：{evidence_id}。",
+                    f"English text{claim_number}English textID: {evidence_id}. ",
                 )
     for number in numbers:
         if number not in mapped_claims:
-            add(findings, "ERROR", "CLAIM_NOT_MAPPED", f"权利要求{number}没有特征证据映射。")
+            add(findings, "ERROR", "CLAIM_NOT_MAPPED", f"English text{number}English text. ")
     formal_text = "\n".join(str(claim.get("text", "")) for claim in claims)
     formal_text += "\n" + json.dumps(data.get("specification", {}), ensure_ascii=False)
     for alias in sorted(forbidden_aliases):
         if alias in formal_text:
-            add(findings, "ERROR", "FORBIDDEN_ALIAS", f"正式文本使用了禁用别名：{alias}。")
+            add(findings, "ERROR", "FORBIDDEN_ALIAS", f"English text: {alias}. ")
 
     source_analysis = data.get("source_analysis", {})
     spec = data.get("specification", {})
@@ -154,63 +154,63 @@ def validate(data: dict) -> list[Finding]:
     for item in formula_inventory:
         source_id = item.get("source_id")
         if source_ids and source_id not in source_ids:
-            add(findings, "ERROR", "FORMULA_INVENTORY_SOURCE", f"公式清单引用未知来源ID：{source_id}。")
+            add(findings, "ERROR", "FORMULA_INVENTORY_SOURCE", f"English textID: {source_id}. ")
         if not item.get("disposition"):
-            add(findings, "ERROR", "FORMULA_DISPOSITION", f"来源公式{source_id}缺少处理去向。")
+            add(findings, "ERROR", "FORMULA_DISPOSITION", f"English text{source_id}English text. ")
     expected_formula_count = source_analysis.get("formula_count_in_source")
     if isinstance(expected_formula_count, int) and expected_formula_count != len(formula_inventory):
         add(
             findings,
             "WARNING",
             "FORMULA_INVENTORY_COUNT",
-            f"来源标记{expected_formula_count}个公式，公式清单记录{len(formula_inventory)}个。",
+            f"English text{expected_formula_count}English text, English text{len(formula_inventory)}English text. ",
         )
     if "equations" not in spec:
-        add(findings, "ERROR", "EQUATIONS_ARRAY", "说明书必须包含equations数组。")
+        add(findings, "ERROR", "EQUATIONS_ARRAY", "English textequationsEnglish text. ")
     if source_analysis.get("contains_core_formulas") and not equations:
-        add(findings, "ERROR", "MISSING_CORE_EQUATIONS", "来源包含核心公式，但说明书未收录公式。")
+        add(findings, "ERROR", "MISSING_CORE_EQUATIONS", "English text, English text. ")
     equation_numbers = [equation.get("number") for equation in equations]
     if equation_numbers and equation_numbers != list(range(1, len(equation_numbers) + 1)):
-        add(findings, "ERROR", "EQUATION_SEQUENCE", f"公式编号不连续：{equation_numbers}。")
+        add(findings, "ERROR", "EQUATION_SEQUENCE", f"English text: {equation_numbers}. ")
     for equation in equations:
         number = equation.get("number")
         if not equation.get("latex"):
-            add(findings, "ERROR", "EQUATION_LATEX", f"公式{number}缺少可转换的LaTeX源。")
+            add(findings, "ERROR", "EQUATION_LATEX", f"English text{number}English textLaTeXEnglish text. ")
         if not equation.get("source_ids"):
-            add(findings, "ERROR", "EQUATION_SOURCE", f"公式{number}缺少来源ID。")
+            add(findings, "ERROR", "EQUATION_SOURCE", f"English text{number}English textID. ")
         for source_id in equation.get("source_ids", []):
             if source_ids and source_id not in source_ids:
-                add(findings, "ERROR", "EQUATION_SOURCE", f"公式{number}引用未知来源ID：{source_id}。")
+                add(findings, "ERROR", "EQUATION_SOURCE", f"English text{number}English textID: {source_id}. ")
         if not equation.get("symbols"):
-            add(findings, "ERROR", "EQUATION_SYMBOLS", f"公式{number}缺少结构化符号定义。")
+            add(findings, "ERROR", "EQUATION_SYMBOLS", f"English text{number}English text. ")
         if not equation.get("technical_role"):
-            add(findings, "ERROR", "EQUATION_ROLE", f"公式{number}缺少技术作用说明。")
+            add(findings, "ERROR", "EQUATION_ROLE", f"English text{number}English text. ")
 
     figures = data.get("figures", [])
     for item in data.get("figure_inventory", []):
         source_id = item.get("source_id")
         if source_ids and source_id not in source_ids:
-            add(findings, "ERROR", "FIGURE_INVENTORY_SOURCE", f"附图清单引用未知来源ID：{source_id}。")
+            add(findings, "ERROR", "FIGURE_INVENTORY_SOURCE", f"English textID: {source_id}. ")
         if not item.get("disposition"):
-            add(findings, "ERROR", "FIGURE_DISPOSITION", f"来源附图{source_id}缺少处理去向。")
+            add(findings, "ERROR", "FIGURE_DISPOSITION", f"English text{source_id}English text. ")
     figure_numbers = [figure.get("number") for figure in figures]
     if not figures:
-        add(findings, "ERROR", "NO_FIGURES", "完整草稿必须包含至少一幅专利附图。")
+        add(findings, "ERROR", "NO_FIGURES", "English text. ")
     elif figure_numbers != list(range(1, len(figure_numbers) + 1)):
-        add(findings, "ERROR", "FIGURE_SEQUENCE", f"附图编号不连续：{figure_numbers}。")
+        add(findings, "ERROR", "FIGURE_SEQUENCE", f"English text: {figure_numbers}. ")
     abstract_figure = data.get("abstract_figure_number")
     if abstract_figure not in figure_numbers:
-        add(findings, "ERROR", "ABSTRACT_FIGURE", "摘要附图编号未指向现有附图。")
+        add(findings, "ERROR", "ABSTRACT_FIGURE", "English text. ")
     for figure in figures:
         if not figure.get("source_ids"):
-            add(findings, "WARNING", "FIGURE_SOURCE", f"图{figure.get('number')}缺少来源ID或重绘依据。")
+            add(findings, "WARNING", "FIGURE_SOURCE", f"English text{figure.get('number')}English textIDEnglish text. ")
         for source_id in figure.get("source_ids", []):
             if source_ids and source_id not in source_ids:
                 add(
                     findings,
                     "ERROR",
                     "FIGURE_SOURCE",
-                    f"图{figure.get('number')}引用未知来源ID：{source_id}。",
+                    f"English text{figure.get('number')}English textID: {source_id}. ",
                 )
         end_nodes = set(str(node.get("id")) for node in figure.get("nodes", []))
         for edge in figure.get("edges", []):
@@ -221,22 +221,22 @@ def validate(data: dict) -> list[Finding]:
                     findings,
                     "ERROR",
                     "VAGUE_FINAL_RESULT",
-                    f"图{figure.get('number')}末端节点使用了模糊结果名称。",
+                    f"English text{figure.get('number')}English text. ",
                 )
 
     for field in ("technical_field", "background", "embodiments", "figure_descriptions"):
         if not spec.get(field):
-            add(findings, "ERROR", "SPEC_SECTION", f"说明书缺少或清空了字段：{field}。")
+            add(findings, "ERROR", "SPEC_SECTION", f"English text: {field}. ")
     invention = spec.get("invention_content", {})
     for field in ("problem", "solution", "beneficial_effects"):
         if not invention.get(field):
-            add(findings, "ERROR", "INVENTION_CONTENT", f"发明内容缺少：{field}。")
+            add(findings, "ERROR", "INVENTION_CONTENT", f"English text: {field}. ")
 
     abstract = re.sub(r"\s+", "", str(data.get("abstract", "")))
     if not abstract:
-        add(findings, "ERROR", "EMPTY_ABSTRACT", "说明书摘要为空。")
+        add(findings, "ERROR", "EMPTY_ABSTRACT", "English text. ")
     elif len(abstract) > 300:
-        add(findings, "WARNING", "ABSTRACT_LENGTH", f"摘要约{len(abstract)}字，建议人工核对篇幅。")
+        add(findings, "WARNING", "ABSTRACT_LENGTH", f"English text{len(abstract)}English text, English text. ")
 
     quality = data.get("quality_assessment", {})
     if quality.get("status") not in {"review-draft", "incomplete-draft"}:
@@ -244,46 +244,46 @@ def validate(data: dict) -> list[Finding]:
             findings,
             "WARNING",
             "DRAFT_STATUS",
-            "quality_assessment.status建议使用review-draft或incomplete-draft。",
+            "quality_assessment.statusEnglish textreview-draftEnglish textincomplete-draft. ",
         )
     scores = quality.get("scores", {})
     for dimension, threshold in QUALITY_THRESHOLDS.items():
         item = scores.get(dimension)
         if not isinstance(item, dict) or not isinstance(item.get("score"), int):
-            add(findings, "ERROR", "QUALITY_SCORE", f"缺少质量评分：{dimension}。")
+            add(findings, "ERROR", "QUALITY_SCORE", f"English text: {dimension}. ")
             continue
         score = item["score"]
         if score < 1 or score > 5:
-            add(findings, "ERROR", "QUALITY_RANGE", f"{dimension}评分超出1-5：{score}。")
+            add(findings, "ERROR", "QUALITY_RANGE", f"{dimension}English text1-5: {score}. ")
         elif score < threshold:
             add(
                 findings,
                 "ERROR",
                 "QUALITY_THRESHOLD",
-                f"{dimension}评分{score}，低于交付阈值{threshold}。",
+                f"{dimension}English text{score}, English text{threshold}. ",
             )
         if not str(item.get("evidence", "")).strip():
-            add(findings, "WARNING", "QUALITY_EVIDENCE", f"{dimension}评分缺少依据。")
+            add(findings, "WARNING", "QUALITY_EVIDENCE", f"{dimension}English text. ")
 
     if source_analysis.get("contains_core_formulas"):
         formula_item = scores.get("formula_coverage", {})
         if formula_item.get("score", 0) < 4:
-            add(findings, "ERROR", "FORMULA_SCORE", "存在核心公式时，formula_coverage必须至少为4。")
+            add(findings, "ERROR", "FORMULA_SCORE", "English text, formula_coverageEnglish text4. ")
     if figures:
         figure_item = scores.get("figure_alignment", {})
         if figure_item.get("score", 0) < 4:
-            add(findings, "ERROR", "FIGURE_SCORE", "存在附图时，figure_alignment必须至少为4。")
+            add(findings, "ERROR", "FIGURE_SCORE", "English text, figure_alignmentEnglish text4. ")
 
     return findings
 
 
 def format_report(findings: list[Finding]) -> str:
     if not findings:
-        return "PASS: 草稿通过结构、溯源和质量门槛检查。\n"
+        return "PASS: English text, English text. \n"
     lines = [f"{item.level}\t{item.code}\t{item.message}" for item in findings]
     errors = sum(item.level == "ERROR" for item in findings)
     warnings = sum(item.level == "WARNING" for item in findings)
-    lines.extend(("", f"汇总: {errors} 个错误, {warnings} 个警告"))
+    lines.extend(("", f"English text: {errors} English text, {warnings} English text"))
     return "\n".join(lines) + "\n"
 
 

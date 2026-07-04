@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
-横纵分析法报告 Markdown → PDF 转换脚本 (WeasyPrint版)
-用法: python md_to_pdf.py input.md output.pdf [--title "报告标题"] [--author "作者"]
+English text Markdown → PDF English text (WeasyPrintEnglish text)
+English text: python md_to_pdf.py input.md output.pdf [--title "English text"] [--author "English text"]
 
-依赖: pip install weasyprint markdown --break-system-packages
+English text: pip install weasyprint markdown --break-system-packages
 """
 
 import sys
@@ -12,7 +12,7 @@ import re
 import argparse
 import markdown
 
-# ── CSS 样式 ──
+# ── CSS English text ──
 CSS_TEMPLATE = """
 @page {
     size: A4;
@@ -28,7 +28,7 @@ CSS_TEMPLATE = """
     }
 
     @bottom-center {
-        content: "第 " counter(page) " 页";
+        content: "English text " counter(page) " English text";
         font-family: "Droid Sans Fallback", Helvetica, Arial, sans-serif;
         font-size: 8pt;
         color: #95a5a6;
@@ -50,7 +50,7 @@ body {
     text-align: justify;
 }
 
-/* 封面 */
+/* English text */
 .cover {
     page-break-after: always;
     text-align: center;
@@ -80,7 +80,7 @@ body {
     border-top: 1.5pt solid #1a5276;
 }
 
-/* 一级标题 */
+/* English text */
 h1 {
     font-size: 20pt;
     color: #1a5276;
@@ -92,7 +92,7 @@ h1 {
     font-weight: bold;
 }
 
-/* 二级标题 */
+/* English text */
 h2 {
     font-size: 14pt;
     color: #1e8449;
@@ -101,7 +101,7 @@ h2 {
     font-weight: bold;
 }
 
-/* 三级标题 */
+/* English text */
 h3 {
     font-size: 12pt;
     color: #2e86c1;
@@ -118,7 +118,7 @@ h4 {
     font-weight: bold;
 }
 
-/* 段落 */
+/* English text */
 p {
     margin-top: 1.5mm;
     margin-bottom: 1.5mm;
@@ -126,7 +126,7 @@ p {
     widows: 3;
 }
 
-/* 引用块 */
+/* English text */
 blockquote {
     margin: 4mm 0;
     padding: 4mm 4mm 4mm 10mm;
@@ -139,13 +139,13 @@ blockquote p {
     margin: 1mm 0;
 }
 
-/* 粗体 */
+/* English text */
 strong, b {
     font-weight: bold;
     color: #1a252f;
 }
 
-/* 行内代码 */
+/* English text */
 code {
     font-family: "Courier New", Courier, monospace;
     background: #fdf2e9;
@@ -155,7 +155,7 @@ code {
     font-size: 9.5pt;
 }
 
-/* 表格 */
+/* English text */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -177,14 +177,14 @@ tbody tr:nth-child(even) {
     background: #f8f9fa;
 }
 
-/* 分隔线 */
+/* English text */
 hr {
     border: none;
     border-top: 0.5pt solid #bdc3c7;
     margin: 4mm 0;
 }
 
-/* 列表 */
+/* English text */
 ul, ol {
     margin: 2mm 0;
     padding-left: 8mm;
@@ -193,7 +193,7 @@ li {
     margin-bottom: 1mm;
 }
 
-/* 链接 */
+/* English text */
 a {
     color: #2e86c1;
     text-decoration: none;
@@ -201,36 +201,36 @@ a {
 """
 
 
-def md_to_html(md_text, title="横纵分析报告", subtitle="横纵分析法深度研究报告",
-               meta_line="", author="数字生命卡兹克"):
-    """将 Markdown 转为带封面的 HTML"""
+def md_to_html(md_text, title="English text", subtitle="English text",
+               meta_line="", author="English text"):
+    """English text Markdown English text HTML"""
 
-    # 用 markdown 库转换正文
+    # English text markdown English text
     html_body = markdown.markdown(
         md_text,
         extensions=['tables', 'fenced_code', 'nl2br'],
         output_format='html5'
     )
 
-    # 移除正文中的第一个 h1（会用在封面上）
+    # English text h1(English text)
     first_h1_match = re.search(r'<h1>(.*?)</h1>', html_body)
     if first_h1_match:
         extracted_title = first_h1_match.group(1)
-        if not title or title == "横纵分析报告":
+        if not title or title == "English text":
             title = extracted_title
         html_body = html_body.replace(first_h1_match.group(0), '', 1)
 
-    # 替换 CSS 中的页眉占位符
-    css = CSS_TEMPLATE.replace("HEADER_TEXT", f"{title}  |  横纵分析法深度研究报告")
+    # English text CSS English text
+    css = CSS_TEMPLATE.replace("HEADER_TEXT", f"{title}  |  English text")
 
-    # 构建封面
+    # English text
     cover_html = f"""
     <div class="cover">
         <h1 style="page-break-before: avoid; border: none;">{title}</h1>
         <div class="subtitle">{subtitle}</div>
         {"<div class='meta'>" + meta_line + "</div>" if meta_line else ""}
         <hr class="divider">
-        <div class="meta">作者: {author}</div>
+        <div class="meta">English text: {author}</div>
     </div>
     """
 
@@ -250,37 +250,37 @@ def md_to_html(md_text, title="横纵分析报告", subtitle="横纵分析法深
 
 
 def main():
-    parser = argparse.ArgumentParser(description="横纵分析法报告 Markdown → PDF")
-    parser.add_argument("input", help="输入的 Markdown 文件路径")
-    parser.add_argument("output", help="输出的 PDF 文件路径")
-    parser.add_argument("--title", default=None, help="报告标题")
-    parser.add_argument("--author", default="数字生命卡兹克", help="作者名")
+    parser = argparse.ArgumentParser(description="English text Markdown → PDF")
+    parser.add_argument("input", help="English text Markdown English text")
+    parser.add_argument("output", help="English text PDF English text")
+    parser.add_argument("--title", default=None, help="English text")
+    parser.add_argument("--author", default="English text", help="English text")
     args = parser.parse_args()
 
     with open(args.input, "r", encoding="utf-8") as f:
         md_text = f.read()
 
-    # 提取元信息
+    # English text
     meta_line = ""
     for line in md_text.split("\n"):
         stripped = line.strip().lstrip(">").strip()
-        if "研究时间" in stripped or "所属领域" in stripped or "研究对象类型" in stripped:
+        if "English text" in stripped or "English text" in stripped or "English text" in stripped:
             meta_line = stripped
             break
 
-    html = md_to_html(md_text, title=args.title or "横纵分析报告", meta_line=meta_line, author=args.author)
+    html = md_to_html(md_text, title=args.title or "English text", meta_line=meta_line, author=args.author)
 
-    # 保存中间 HTML（便于调试）
+    # English text HTML(English text)
     html_path = args.output.replace('.pdf', '.html')
     with open(html_path, 'w', encoding='utf-8') as f:
         f.write(html)
-    print(f"[OK] HTML 已生成: {html_path}")
+    print(f"[OK] HTML English text: {html_path}")
 
-    # 转 PDF
+    # English text PDF
     from weasyprint import HTML
     HTML(string=html).write_pdf(args.output)
     size_kb = os.path.getsize(args.output) / 1024
-    print(f"[OK] PDF 已生成: {args.output} ({size_kb:.1f} KB)")
+    print(f"[OK] PDF English text: {args.output} ({size_kb:.1f} KB)")
 
 
 if __name__ == "__main__":

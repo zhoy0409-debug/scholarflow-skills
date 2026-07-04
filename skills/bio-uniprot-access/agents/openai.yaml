@@ -1,9 +1,9 @@
 interface:
-  display_name: "UniProt Access"
+  display_name: "Bio Uniprot Access"
   short_description: "Query UniProt's REST API (post-2022 endpoint at rest.uniprot.org) for protein sequences, annotations, GO terms, cross-references, ID mappings, and prote..."
-  default_prompt: "Use bio-uniprot-access to design or troubleshoot this bioinformatics workflow."
+  default_prompt: "Use bio-uniprot-access to handle this workflow."
 ownership:
   product_owner: "Zhoy"
   product_line: "Bio & Omics Toolkit"
-  origin: "jl-authored-tool-guide"
+  origin: "zhoy-original-or-curated"
   release_channel: "stable"

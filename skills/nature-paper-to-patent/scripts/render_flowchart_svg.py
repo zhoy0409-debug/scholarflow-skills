@@ -11,7 +11,7 @@ from pathlib import Path
 
 STEP_PATTERN = re.compile(r"\bS\s*(\d+)\b", re.IGNORECASE)
 ASCII_ID = re.compile(r"^[A-Za-z][A-Za-z0-9_-]*$")
-VAGUE_FINAL_RESULT = re.compile(r"(技术结果|处理结果|最终结果)")
+VAGUE_FINAL_RESULT = re.compile(r"(English text|English text|English text)")
 
 
 def normalize_step(value: str) -> str:
@@ -76,7 +76,7 @@ def validate_figure(
         if extra:
             errors.append(f"complete claim flow contains extra steps: {extra}")
 
-    figure_token = f"图{figure.get('number')}"
+    figure_token = f"English text{figure.get('number')}"
     if not any(figure_token in str(description) for description in descriptions):
         errors.append(f"figure description does not reference {figure_token}")
 
@@ -185,7 +185,7 @@ def anchor(box: tuple[int, int, int, int], side: str) -> tuple[float, float]:
 def render(figure: dict) -> str:
     positions, width, height = layout(figure)
     orientation = figure.get("orientation", "vertical")
-    title = f"图{figure['number']} {figure.get('title', '方法流程图')}"
+    title = f"English text{figure['number']} {figure.get('title', 'English text')}"
     parts = [
         '<?xml version="1.0" encoding="UTF-8"?>',
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" '
@@ -270,7 +270,7 @@ def render_png(figure: dict, output: Path) -> None:
     def point(value: float) -> int:
         return int(round(value * scale))
 
-    title = f"图{figure['number']} {figure.get('title', '方法流程图')}"
+    title = f"English text{figure['number']} {figure.get('title', 'English text')}"
     title_box = draw.textbbox((0, 0), title, font=title_font)
     title_x = (width * scale - (title_box[2] - title_box[0])) / 2
     draw.text((title_x, point(8)), title, fill="black", font=title_font)

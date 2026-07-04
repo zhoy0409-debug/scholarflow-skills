@@ -1,30 +1,22 @@
-# Paper type: clinical / population / intervention
+# Clinical
 
-Covers clinical trials, population studies, intervention studies, and meta-analyses or systematic reviews of clinical evidence.
+This reference supports the `nature-paper2ppt` skill. Load it only when the current task needs the additional detail implied by the file name.
 
-## Presentation arc — design-to-inference
+## Purpose
 
-Best when study design and statistical inference carry the credibility. Order the story as:
+Use this note to keep the workflow consistent, evidence-grounded, and easy to audit. It should help the agent make decisions, structure outputs, and avoid common failure modes for this part of the workflow.
 
-1. the clinical or public-health problem,
-2. the study question,
-3. the cohort / trial / design,
-4. endpoints and variables,
-5. the primary result,
-6. subgroup / sensitivity / secondary analyses,
-7. bias, limitations, and practical implication.
+## Use Pattern
 
-## Default slide structure (adapt, do not force)
+- Confirm the user's goal and available materials before applying the reference.
+- Prefer official sources, user-provided files, and reproducible checks.
+- Keep outputs structured enough to continue into a manuscript, report, slide deck, figure, or submission package.
+- Record assumptions, missing information, and verification needs explicitly.
 
-1. 标题页
-2. 研究背景：临床/公共卫生问题
-3. 研究问题与目标
-4. 研究设计：队列/试验/抽样（含 CONSORT/流程图）
-5. 终点指标与变量
-6. 主要结果（生存曲线、森林图、校准曲线等）
-7. 亚组 / 敏感性 / 次要分析
-8. 偏倚与局限性
-9. 临床意义与应用
-10. 总结
+## Checklist
 
-Report effect sizes, confidence intervals, and p-values exactly as in the paper; do not round or restate them loosely. Use survival curves, forest plots, and calibration curves as hero evidence. Be careful not to overstate causal claims beyond the study design.
+- Inputs are identified and scoped.
+- Sources or tools used are named.
+- Output format is explicit.
+- Risks and limitations are visible.
+- Next actions are practical and sequenced.

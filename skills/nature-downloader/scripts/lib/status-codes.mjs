@@ -43,7 +43,7 @@ export const STATUS = Object.freeze({
   FAILED_AFTER_RETRY: "failed_after_retry",
 });
 
-// Hosts that mean "institutional login wall — stop and hand to user".
+// Hosts that mean "institutional login wall - stop and hand to user".
 const INSTITUTIONAL_HOST_RE =
   /jaccount\.sjtu|idp\.sjtu|carsi\.edu|\/shibboleth|\/samlsso|\/wayf|\/sso\b/i;
 
@@ -53,7 +53,7 @@ const ROBOT_CHECK_RE =
 
 // Publisher access-denied signals.
 const ACCESS_DENIED_RE =
-  /access denied|don't have permission|forbidden|403|无权访问|权限不足/i;
+  /access denied|don't have permission|forbidden|403|English text|English text/i;
 
 /**
  * Classify a wall (login / verification / block) from URL + title + body hint.
@@ -72,7 +72,7 @@ export function classifyWall(url, title, bodyHint = "") {
   const s = ((title || "") + " " + (bodyHint || "")).toLowerCase();
 
   // 1. Institutional login wall (jAccount / CARSI / Shibboleth / SSO).
-  //    Only the URL host decides this — publisher pages legitimately contain
+  //    Only the URL host decides this - publisher pages legitimately contain
   //    "Log in" links and must not be misclassified as needing the user.
   if (INSTITUTIONAL_HOST_RE.test(u)) {
     return { status: STATUS.CARSI_WAITING_USER, reason: "institutional login wall" };

@@ -1,39 +1,39 @@
 # Quality Standard
 
-ScholarFlow Skills 不靠数量取胜。一个 skill 被收进这个仓库，必须能帮助科研用户少解释一次流程、少踩一次边界、少返工一次交付物。
+ScholarFlow Skills is not optimized for raw count. A skill belongs in this collection only when it helps research users explain a workflow fewer times, avoid a boundary mistake, or reduce rework on a real deliverable.
 
-## 收录标准
+## Inclusion Criteria
 
-| 标准 | 含义 |
+| Standard | Meaning |
 |---|---|
-| 真实科研痛点 | 任务来自文献、写作、图表、生信、投稿、汇报或文件交付中的反复卡点。 |
-| 清楚的输入要求 | skill 会说明需要论文、数据、图表、引用、目标期刊、输出格式或其他上下文。 |
-| 可复用的执行流程 | 不只是提示词，而是把步骤、判断节点、工具调用和质量检查写成稳定流程。 |
-| 明确的交付结果 | 输出要能继续用于综述、论文段落、图表、PPT、报告、引用核查或分析记录。 |
-| 证据与边界意识 | 不确定的事实要标注；引用不能编造；统计和实验结论以用户材料为准。 |
-| 安全与权限克制 | 涉及文件覆盖、批量删除、联网下载、外部命令和高权限操作时，必须先确认边界。 |
+| Real research pain point | The task comes from repeated friction in literature work, writing, figures, bioinformatics, submission, presentations, or file delivery. |
+| Clear input requirements | The skill states what it needs: papers, data, figures, references, target journal, output format, or other context. |
+| Reusable workflow | The skill is more than a prompt. It defines steps, decision points, tool calls, and quality checks. |
+| Concrete deliverable | The output can continue into a review, manuscript section, figure, slide deck, report, citation audit, or analysis record. |
+| Evidence and boundary awareness | Uncertain facts are marked; citations are not invented; statistical and experimental claims stay grounded in user-provided material. |
+| Safety and permission discipline | File overwrites, bulk deletion, network downloading, external commands, and privileged operations require explicit boundary checks. |
 
-## Skill 类型
+## Skill Types
 
-| 类型 | 价值 |
+| Type | Value |
 |---|---|
-| 核心科研工作流 | 把文献、证据链、论文结构、图表和交付物串起来，适合主推。 |
-| 工具型封装 | 把成熟外部软件放进科研上下文，帮助用户组织输入输出和解释结果。 |
-| 交付物工具 | 面向 PDF、PPT、DOCX、Markdown、截图和格式整理，减少最后阶段返工。 |
-| 工作流治理 | 面向长任务、文件交接、安全审计和 skill 写作，让 Agent 工作更稳定。 |
+| Core research workflow | Connects literature, evidence chains, manuscript structure, figures, and deliverables. These are the primary product surface. |
+| Tool wrapper | Places mature external software inside a research workflow by organizing inputs, outputs, QC checkpoints, and interpretation. |
+| Deliverable utility | Handles PDF, PPT, DOCX, Markdown, screenshots, citations, and formatting cleanup to reduce late-stage rework. |
+| Workflow governance | Keeps long tasks, file handoffs, security audits, and skill authoring stable across sessions. |
 
-## 不收录什么
+## What Does Not Belong
 
-- 只有一句角色设定、没有输入输出约束的提示词。
-- 只是复述外部软件说明书、没有增加科研工作流价值的封装。
-- 无法说明适用场景、交付结果和风险边界的条目。
-- 与科研主线无关的商业诊断、个人决策或内容运营工具。
-- 依赖未授权下载、绕过版权、伪造引用或夸大结果的流程。
+- A one-line role prompt with no input, output, or boundary constraints.
+- A thin restatement of an external tool manual with no added research workflow value.
+- An entry that cannot explain its use case, deliverable, or risk boundary.
+- Business diagnostics, personal decision tools, or content-operations tools that do not serve the research workflow.
+- Any workflow that depends on unauthorized downloading, copyright bypassing, fabricated citations, or overstated results.
 
-## 设计取向
+## Design Orientation
 
-ScholarFlow Skills 更像科研工作台，而不是工具大卖场。
+ScholarFlow Skills is closer to a research workbench than a marketplace of disconnected tools.
 
-它不会替代研究者判断，也不会把 AI 包装成自动发论文的机器。它更适合做这些事：把论文读得更可复用，把证据链整理得更清楚，把图表和结果写得更可交付，把生信分析从命令清单推进到论文叙述，把长任务中的上下文保存下来。
+It does not replace researcher judgment and does not present AI as a paper-production machine. It is built for tasks where structure matters: reading papers in a reusable way, preserving evidence chains, making figures and results manuscript-ready, moving bioinformatics from command lists into scientific interpretation, and carrying long-task context across sessions.
 
-如果一个 skill 只是“能做”，但不能让科研流程更稳、更清楚、更少返工，它就不应该成为主推产品。
+If a skill can technically perform a task but does not make the research process steadier, clearer, or less error-prone, it should not be promoted as a core product.

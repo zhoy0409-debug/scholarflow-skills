@@ -1,9 +1,9 @@
 interface:
-  display_name: "Metagenomics Pipeline"
+  display_name: "Bio Workflows Metagenomics Pipeline"
   short_description: "End-to-end metagenomics workflow from FASTQ to taxonomic and functional profiles. Covers Kraken2 classification, Bracken abundance estimation, and HUMAn..."
-  default_prompt: "Use bio-workflows-metagenomics-pipeline to design or troubleshoot this bioinformatics workflow."
+  default_prompt: "Use bio-workflows-metagenomics-pipeline to handle this workflow."
 ownership:
   product_owner: "Zhoy"
   product_line: "Bio & Omics Toolkit"
-  origin: "jl-authored-tool-guide"
+  origin: "zhoy-original-or-curated"
   release_channel: "stable"

@@ -1,30 +1,22 @@
-# Paper type: materials / chemistry / physics / engineering
+# Materials
 
-Covers materials, chemistry, physics, and engineering performance studies whose core is a designed material, device, or system and its measured performance.
+This reference supports the `nature-paper2ppt` skill. Load it only when the current task needs the additional detail implied by the file name.
 
-## Presentation arc — property-to-mechanism or design-to-performance
+## Purpose
 
-Best when a target property or technical challenge drives a design that is then characterised and explained. Order the story as:
+Use this note to keep the workflow consistent, evidence-grounded, and easy to audit. It should help the agent make decisions, structure outputs, and avoid common failure modes for this part of the workflow.
 
-1. the target property or technical challenge,
-2. the design principle,
-3. synthesis / fabrication / setup,
-4. characterisation,
-5. performance evidence,
-6. mechanism or structure-property relationship,
-7. scalability, stability, or application boundary.
+## Use Pattern
 
-## Default slide structure (adapt, do not force)
+- Confirm the user's goal and available materials before applying the reference.
+- Prefer official sources, user-provided files, and reproducible checks.
+- Keep outputs structured enough to continue into a manuscript, report, slide deck, figure, or submission package.
+- Record assumptions, missing information, and verification needs explicitly.
 
-1. 标题页
-2. 研究背景：目标性能 / 技术挑战
-3. 设计思路 / 原理
-4. 合成 / 制备 / 实验装置
-5. 表征结果
-6-7. 性能证据（关键对比）
-8. 机制 / 构效关系
-9. 稳定性 / 可扩展性 / 应用边界
-10. 局限性
-11. 总结
+## Checklist
 
-Keep characterisation panels (XRD, SEM/TEM, spectra, performance curves) readable — crop to the key panel rather than shrinking a dense multi-panel figure. Keep units, chemical formulae, and material names exact and consistent.
+- Inputs are identified and scoped.
+- Sources or tools used are named.
+- Output format is explicit.
+- Risks and limitations are visible.
+- Next actions are practical and sequenced.

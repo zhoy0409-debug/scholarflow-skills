@@ -1,9 +1,9 @@
 interface:
-  display_name: "researchwrite — proposal-first 科研写作 pipeline"
-  short_description: "Proposal-first scientific writing pipeline. Three modes (compose/revise/hybrid) with four-layer QA pipeline. Enforces evidence-before-prose, argument-be..."
-  default_prompt: "Use nature-proposal-writer for this task."
+  display_name: "Nature Proposal Writer"
+  short_description: "Build research proposals with clear background, gap, aims, methods, feasibility, expected outcomes, risks, timeline, and evaluation criteria."
+  default_prompt: "Use nature-proposal-writer to handle this workflow."
 ownership:
   product_owner: "Zhoy"
-  product_line: "General Skill Library"
-  origin: "jl-original-or-curated"
+  product_line: "Nature Research Suite"
+  origin: "zhoy-original-or-curated"
   release_channel: "stable"

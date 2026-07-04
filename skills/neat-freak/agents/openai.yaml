@@ -1,9 +1,9 @@
 interface:
-  display_name: "洁癖 — Knowledge Base Neat-Freak"
-  short_description: "End-of-session knowledge cleanup with OCD-level rigor — reconciles project docs (CLAUDE.md, README.md, docs/) and agent memory against the code so nothi..."
-  default_prompt: "Use neat-freak for this task."
+  display_name: "Neat Freak"
+  short_description: "Clean up project state at the end of a session by reconciling documentation, memory, open tasks, file changes, and handoff notes so future work does not..."
+  default_prompt: "Use neat-freak to handle this workflow."
 ownership:
   product_owner: "Zhoy"
-  product_line: "Content & Knowledge Work"
-  origin: "jl-original-or-curated"
+  product_line: "Agent Ops & Governance"
+  origin: "zhoy-original-or-curated"
   release_channel: "stable"

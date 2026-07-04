@@ -1,9 +1,9 @@
 interface:
-  display_name: "Genome Annotation Pipeline"
+  display_name: "Bio Workflows Genome Annotation Pipeline"
   short_description: "End-to-end genome annotation pipeline from assembled contigs to functional annotation, covering repeat masking, gene prediction, and functional assignme..."
-  default_prompt: "Use bio-workflows-genome-annotation-pipeline to design or troubleshoot this bioinformatics workflow."
+  default_prompt: "Use bio-workflows-genome-annotation-pipeline to handle this workflow."
 ownership:
   product_owner: "Zhoy"
   product_line: "Bio & Omics Toolkit"
-  origin: "jl-authored-tool-guide"
+  origin: "zhoy-original-or-curated"
   release_channel: "stable"

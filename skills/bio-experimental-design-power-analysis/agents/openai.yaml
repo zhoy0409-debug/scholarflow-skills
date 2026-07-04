@@ -1,9 +1,9 @@
 interface:
-  display_name: "Power Analysis for Genomics Experiments"
+  display_name: "Bio Experimental Design Power Analysis"
   short_description: "Calculates statistical power for high-dimensional genomics experiments (bulk RNA-seq, scRNA-seq, ATAC-seq, ChIP-seq, methylation, proteomics) under nega..."
-  default_prompt: "Use bio-experimental-design-power-analysis to design or troubleshoot this bioinformatics workflow."
+  default_prompt: "Use bio-experimental-design-power-analysis to handle this workflow."
 ownership:
   product_owner: "Zhoy"
   product_line: "Bio & Omics Toolkit"
-  origin: "jl-authored-tool-guide"
+  origin: "zhoy-original-or-curated"
   release_channel: "stable"

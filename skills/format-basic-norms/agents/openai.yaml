@@ -1,9 +1,9 @@
 interface:
   display_name: "Format Basic Norms"
-  short_description: "Universal baseline academic formatting and reference-integrity standard. Use automatically for every conversation involving drafting, rewriting, transla..."
-  default_prompt: "Use format-basic-norms to improve this agent workflow safely."
+  short_description: "Apply basic academic formatting norms to manuscripts and deliverables, including headings, spacing, numbering, captions, references, document consistenc..."
+  default_prompt: "Use format-basic-norms to handle this workflow."
 ownership:
   product_owner: "Zhoy"
-  product_line: "Agent Ops & Governance"
-  origin: "jl-original-or-curated"
+  product_line: "General Utilities"
+  origin: "zhoy-original-or-curated"
   release_channel: "stable"

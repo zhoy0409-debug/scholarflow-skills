@@ -1,9 +1,9 @@
 interface:
-  display_name: "Genome Scaffolding"
+  display_name: "Bio Genome Assembly Scaffolding"
   short_description: "Orders and orients assembled contigs into chromosome-scale scaffolds from long-range linking data, inserting N-gap spacers (adds no sequence). Covers Hi..."
-  default_prompt: "Use bio-genome-assembly-scaffolding to design or troubleshoot this bioinformatics workflow."
+  default_prompt: "Use bio-genome-assembly-scaffolding to handle this workflow."
 ownership:
   product_owner: "Zhoy"
   product_line: "Bio & Omics Toolkit"
-  origin: "jl-authored-tool-guide"
+  origin: "zhoy-original-or-curated"
   release_channel: "stable"

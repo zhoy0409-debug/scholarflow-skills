@@ -1,9 +1,9 @@
 interface:
-  display_name: "Seq Objects"
+  display_name: "Bio Seq Objects"
   short_description: "Create and manipulate Seq, MutableSeq, and SeqRecord objects using Biopython. Use when creating sequences from strings, modifying sequence data in-place..."
-  default_prompt: "Use bio-seq-objects to design or troubleshoot this bioinformatics workflow."
+  default_prompt: "Use bio-seq-objects to handle this workflow."
 ownership:
   product_owner: "Zhoy"
   product_line: "Bio & Omics Toolkit"
-  origin: "jl-authored-tool-guide"
+  origin: "zhoy-original-or-curated"
   release_channel: "stable"

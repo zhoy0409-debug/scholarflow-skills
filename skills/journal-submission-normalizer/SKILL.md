@@ -1,130 +1,123 @@
 ---
 name: journal-submission-normalizer
-description: Find official Chinese or English journal author instructions, extract submission and formatting requirements, and normalize manuscripts before submission. Use when the user asks to prepare a paper for a target journal, check journal formatting, adapt a manuscript to author guidelines, standardize font/size/line spacing/headings/tables/figures/references/declarations, or do a pre-submission academic format compliance pass for DOCX, LaTeX, Markdown, or PDF-derived manuscripts.
+description: Search official journal author instructions, extract submission formatting rules, normalize manuscripts against those rules, and produce a compliance report before submission. Use when the user needs manuscript formatting for a target journal, including font, font size, line spacing, margins, title page, headings, figures, tables, captions, superscripts/subscripts, references, declarations, file naming, cover letter, graphical abstract, highlights, or submission checklist.
 ---
 
 # Journal Submission Normalizer
 
-Normalize a manuscript against the target journal's current official author instructions.
+Normalize a manuscript to the official requirements of a target journal before submission.
 
-This skill does not rely on remembered journal rules. Always search the web first, extract the live requirements into a rule matrix, then edit and verify the manuscript against that matrix.
+This skill is designed for the detail work that often causes avoidable submission delays: formatting rules scattered across author instructions, PDF templates, style files, submission-system checklists, and publisher pages.
 
-## Source Rule
+## Core Principle
 
-Use this source hierarchy:
+Submission formatting should be evidence-based:
 
-1. Target journal's official "Instructions for Authors", "Guide for Authors", "Submission Guidelines", "Author Guidelines", or "投稿须知/稿约".
-2. Publisher-level official guide when the journal page delegates details there.
-3. Discipline standard explicitly required by the journal, such as ICMJE, Vancouver, APA, AMA, IEEE, ACS, CSE, CONSORT, PRISMA, ARRIVE, STROBE, CHEERS, or GB/T 7714.
-4. Recent published articles only for style clues that are not specified in official instructions. Mark these as inferred, not authoritative.
+- use official journal sources first;
+- extract rules into a visible matrix before editing;
+- separate verified rules from uncertain or missing rules;
+- preserve scientific meaning while changing formatting;
+- return both the normalized manuscript and a compliance report.
 
-Never use blogs, templates, examples, or memory as the primary authority when official guidance is available.
+## Reference
 
-## Required References
-
-Read only the needed reference file:
-
-- `references/official-source-playbook.md` when searching for official journal requirements.
-- `references/rule-matrix-template.md` when extracting requirements and preparing the compliance report.
+Load `references/official-source-playbook.md` when searching for author instructions, templates, journal policies, or submission-system requirements.
 
 ## Workflow
 
-### 1. Identify the target
+### 1. Confirm scope
 
 Collect:
 
-- journal name, publisher, ISSN if available, language, and target article type;
-- manuscript file type: DOCX, LaTeX, Markdown, PDF, or mixed files;
-- target stage: initial submission, revision, final accepted manuscript, or camera-ready/proof;
-- whether references are managed by Zotero, EndNote, Mendeley, BibTeX, CSL, or plain text.
+- target journal name and publisher;
+- manuscript file format: DOCX, LaTeX, Markdown, PDF-derived text, or mixed files;
+- article type: original research, review, case report, meta-analysis, short communication, letter, methods, protocol, etc.;
+- submission stage: initial submission, revised submission, final production, or resubmission;
+- required output format: edited DOCX, LaTeX patch, Markdown checklist, or compliance report only.
 
-If the target journal or article type is ambiguous, ask a short clarification before editing.
+If the target journal is not confirmed, ask the user to choose one before applying journal-specific formatting.
 
 ### 2. Search official requirements
 
-Search in both English and Chinese when relevant. Prefer queries like:
+Use current online sources and prioritize:
 
-```text
-"<journal name>" "Guide for Authors"
-"<journal name>" "Instructions for Authors"
-"<journal name>" "submission guidelines"
-"<journal name>" 投稿须知
-"<journal name>" 稿约
-"<journal name>" 参考文献 格式
-```
+1. official journal author instructions;
+2. publisher submission guidelines;
+3. official article templates, style files, or sample manuscripts;
+4. submission-system checklists;
+5. official reference-style examples;
+6. official ethics, data, funding, conflict-of-interest, and AI-use policies.
 
-Capture every official source used with URL, publisher/site owner, access date, and whether it is journal-specific or publisher-level.
+Do not rely on third-party summaries unless official sources are unavailable, and label third-party information as unverified.
 
-### 3. Build the rule matrix
+### 3. Extract a rule matrix
 
-Extract rules into a matrix before editing. Include at least:
+Before editing, build a rule matrix covering:
 
-- article type and word/page limits;
-- file type and upload package requirements;
-- font family, font size, line spacing, margins, page size, line numbers, page numbers;
-- title page, authors, affiliations, ORCID, correspondence, equal contribution;
-- abstract type, abstract word limit, keywords, highlights, graphical abstract;
-- heading levels and section order;
-- tables, figures, figure legends, resolution, color mode, file naming, supplementary files;
-- equations, units, gene/protein/species nomenclature, italics, superscripts/subscripts;
-- in-text citation style, reference list order, author truncation, journal title abbreviations, DOI/URL rules;
-- declarations: ethics approval, consent, competing interests, funding, author contributions, data/code availability, AI disclosure;
-- Chinese-specific rules when applicable: Chinese/English title and abstract, keywords, 中图分类号, 基金项目, 作者简介, 通信作者, GB/T 7714 reference style.
+- article type and word limits;
+- title page fields;
+- abstract type, length, and structure;
+- keywords;
+- font, font size, line spacing, margins, page numbering;
+- heading levels and numbering;
+- figure size, resolution, file format, color mode, and caption rules;
+- table formatting and footnotes;
+- abbreviations, units, symbols, superscripts, and subscripts;
+- reference style, citation style, DOI/PMID requirements, maximum references;
+- ethics approval, consent, trial registration, data availability, funding, author contributions, competing interests, acknowledgements, and AI-use statement;
+- cover letter, highlights, graphical abstract, supplementary files, file naming, and submission checklist.
 
-Label every rule as one of:
+Mark each item as:
 
-- `explicit`: directly stated by an official source;
-- `delegated`: required by an official source through another standard;
-- `inferred`: inferred from published examples because no official rule was found;
-- `unknown`: not found and not safe to assume.
+- `verified`;
+- `not specified`;
+- `conflicting sources`;
+- `needs user confirmation`.
 
 ### 4. Normalize the manuscript
 
-Choose the edit path by file type:
+Apply only changes that are supported by the rule matrix or by standard scholarly formatting norms when the journal is silent.
 
-- DOCX: use document editing tools. Apply styles rather than one-off formatting when possible. Preserve scientific meaning. Render/inspect if a DOCX visual QA tool is available.
-- LaTeX: adjust class/template, packages, bibliography style, sectioning, figure/table environments, and front/back matter. Compile if toolchain is available.
-- Markdown: normalize headings, captions, citations, declarations, and export metadata. Convert only when the user asks.
-- PDF-only input: extract text and structure first; create a normalized DOCX/Markdown draft only if the user accepts possible OCR/layout limitations.
+Typical operations:
 
-Make mechanical changes automatically when they are unambiguous: spacing, font, margins, heading order, title-page layout, declarations, reference punctuation, superscripts/subscripts, figure/table caption placement.
+- normalize title page order and required fields;
+- adjust heading hierarchy;
+- standardize abstract and keyword formatting;
+- normalize font, spacing, paragraph style, and page numbering;
+- standardize figure and table callouts;
+- check captions and legends;
+- fix obvious superscript/subscript formatting issues without changing scientific meaning;
+- align reference and citation style as far as possible from available metadata;
+- add or flag required declarations;
+- prepare a submission file checklist.
 
-Do not silently rewrite scientific claims, statistics, methods, or results. If a rule requires content the manuscript lacks, insert a clearly marked placeholder or produce a blocking item for the user.
+For DOCX, preserve track changes only if the user asks. For LaTeX, prefer a patch or edited source files. For PDF-only input, state that formatting edits require a source file.
 
-### 5. Verify compliance
+### 5. Produce a compliance report
 
-Produce a submission compliance report:
+Return a clear report with:
 
-- `pass`: already compliant or fixed;
-- `fixed`: changed during normalization;
-- `needs author`: requires missing factual content from the user;
-- `unknown`: rule was not found in official sources;
-- `not applicable`: rule does not apply to this article type.
+1. sources consulted;
+2. extracted rule matrix;
+3. changes made;
+4. unresolved requirements;
+5. user confirmations needed;
+6. final submission checklist.
 
-Before final delivery, check:
+## Output Contract
 
-- all official sources are cited in the report;
-- every matrix rule has a status;
-- reference style and in-text citation style agree;
-- figure/table files and legends agree with the journal's file rules;
-- declarations are present or explicitly marked as needing author input;
-- no EndNote/Zotero field codes are removed unless the target journal requires plain text and the user approves.
+Return one or more of:
 
-## Output Package
-
-Return:
-
-- normalized manuscript file or patched project;
-- submission compliance report;
-- source log with official URLs and access date;
-- remaining author-action checklist.
-
-If no reliable official requirements are found, do not pretend. Provide a conservative generic formatting pass only after telling the user what could not be verified.
+- normalized manuscript file or patch;
+- rule matrix;
+- compliance report;
+- unresolved issue list;
+- final submission checklist.
 
 ## Guardrails
 
-- Do not bypass paywalls, login systems, CAPTCHAs, or journal submission portals.
-- Do not invent requirements that are not found.
-- Do not claim acceptance readiness; only claim formatting and submission-rule compliance.
-- Do not use third-party templates or proprietary style files unless their license permits reuse.
-- For high-impact or strict journals, prefer over-reporting uncertainties to making hidden assumptions.
+- Do not invent journal rules.
+- Do not silently change scientific meaning, results, units, author list, affiliations, ethics statements, or references.
+- Do not fabricate missing metadata such as DOI, funding number, ethics approval, trial registration, or author contribution.
+- Do not claim the manuscript is accepted or guaranteed submission-ready; say it is formatted against the checked rules.
+- If official requirements conflict, show the conflict and ask the user or use the most journal-specific current source.

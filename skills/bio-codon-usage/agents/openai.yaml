@@ -1,9 +1,9 @@
 interface:
-  display_name: "Codon Usage"
+  display_name: "Bio Codon Usage"
   short_description: "Analyze codon usage, calculate CAI (Codon Adaptation Index), and examine synonymous codon bias using Biopython. Use when analyzing coding sequences for..."
-  default_prompt: "Use bio-codon-usage to design or troubleshoot this bioinformatics workflow."
+  default_prompt: "Use bio-codon-usage to handle this workflow."
 ownership:
   product_owner: "Zhoy"
   product_line: "Bio & Omics Toolkit"
-  origin: "jl-authored-tool-guide"
+  origin: "zhoy-original-or-curated"
   release_channel: "stable"

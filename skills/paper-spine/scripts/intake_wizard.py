@@ -63,104 +63,104 @@ FIELD_ORDER = (
 
 CHOICE_HELP = {
     "workflow": {
-        "rewrite_existing": ("改进已有初稿", "Improve an existing draft"),
-        "build_from_materials": ("从素材文件夹从零构筑", "Build from a materials folder"),
+        "rewrite_existing": ("English text", "Improve an existing draft"),
+        "build_from_materials": ("English text", "Build from a materials folder"),
     },
     "scene": {
-        "journal": ("期刊论文", "Journal paper"),
-        "conference": ("会议论文", "Conference paper"),
-        "report_review": ("课程报告、技术报告或综述", "Report, technical report, or review"),
-        "competition": ("竞赛论文或竞赛报告", "Competition paper or report"),
+        "journal": ("English text", "Journal paper"),
+        "conference": ("English text", "Conference paper"),
+        "report_review": ("English text, English text", "Report, technical report, or review"),
+        "competition": ("English text", "Competition paper or report"),
     },
     "tier": {
-        "flash": ("轻量调研：3+3 篇样例加官方要求", "Light research: 3+3 examples plus official requirements"),
-        "pro": ("深度调研：6+6 篇样例加官方要求", "Deep research: 6+6 examples plus official requirements"),
+        "flash": ("English text: 3+3 English text", "Light research: 3+3 examples plus official requirements"),
+        "pro": ("English text: 6+6 English text", "Deep research: 6+6 examples plus official requirements"),
     },
     "output_language": {
-        "en": ("英文最终稿", "English final output"),
-        "zh": ("中文最终稿", "Chinese final output"),
+        "en": ("English text", "English final output"),
+        "zh": ("English text", "Chinese final output"),
     },
     "word_output": {
-        "none": ("不额外生成 Word", "Do not generate Word"),
-        "docx": ("生成并检查 Word 文件", "Generate and check DOCX"),
+        "none": ("English text Word", "Do not generate Word"),
+        "docx": ("English text Word English text", "Generate and check DOCX"),
     },
     "translation_package": {
-        "none": ("不翻译", "Do not translate"),
-        "zh": ("生成完整中文翻译包", "Generate complete Chinese translation package"),
+        "none": ("English text", "Do not translate"),
+        "zh": ("English text", "Generate complete Chinese translation package"),
     },
     "reference_mode": {
-        "local_first": ("默认先读取本地/当前工作文件夹，再补充网络来源", "Default: read local/current-folder references first, then supplement from web"),
-        "specified_paths": ("只优先读取用户指定的本地参考文献路径", "Prefer user-specified local reference paths"),
-        "web": ("主要从网络检索参考材料", "Mainly collect references from the web"),
+        "local_first": ("English text/English text, English text", "Default: read local/current-folder references first, then supplement from web"),
+        "specified_paths": ("English text", "Prefer user-specified local reference paths"),
+        "web": ("English text", "Mainly collect references from the web"),
     },
     "ui_language": {
-        "zh": ("中文界面", "Chinese interface"),
+        "zh": ("English text", "Chinese interface"),
         "en": ("English UI", "English interface"),
     },
     "humanize_tier": {
-        "none": ("不降 AI 痕迹", "No humanization"),
-        "light": ("轻度 — 替换连接词，微调句式", "Light — replace connectors, vary sentence length"),
-        "medium": ("中度 — 句式打散 + 信息密度 + 第一人称", "Medium — break patterns + density + first-person"),
-        "heavy": ("强度 — 结构不规整 + 术语变体（保持学术语气）", "Heavy — structural variation + term variants (academic tone)"),
+        "none": ("English text AI English text", "No humanization"),
+        "light": ("English text - English text, English text", "Light - replace connectors, vary sentence length"),
+        "medium": ("English text - English text + English text + English text", "Medium - break patterns + density + first-person"),
+        "heavy": ("English text - English text + English text(English text)", "Heavy - structural variation + term variants (academic tone)"),
     },
     "detection_platform": {
-        "cnki": ("知网 AIGC 检测", "CNKI AIGC detection"),
-        "weipu": ("维普 AIGC 检测", "Weipu AIGC detection"),
-        "general": ("通用策略 — 跨平台兼容", "General — cross-platform compatible"),
+        "cnki": ("English text AIGC English text", "CNKI AIGC detection"),
+        "weipu": ("English text AIGC English text", "Weipu AIGC detection"),
+        "general": ("English text - English text", "General - cross-platform compatible"),
     },
 }
 
 LABELS = {
     "zh": {
-        "banner": "PaperSpine 配置向导",
+        "banner": "PaperSpine English text",
         "welcome": "Welcome back!",
-        "tagline": "动机驱动的论文/报告 Skill Suite",
-        "flowline": "先学习目标场景，再确认动机，最后构筑可审计的 LaTeX 成果",
-        "why_1": "我们做 PaperSpine，是为了让 AI 先学习，再写作。",
-        "why_2": "不是把论文润色得更长，而是把动机、证据与结构连成一条清晰主线。",
-        "why_3": "它面向论文、报告与竞赛写作：调研目标场景，学习优秀样例，再逐段生成。",
-        "continue": "按任意键进入配置",
-        "workflow": "工作流",
-        "scene": "目标场景",
-        "tier": "调研深度",
-        "output_language": "最终输出语言",
-        "word_output": "Word 版本",
-        "translation_package": "生成英文产物后是否翻译",
-        "ui_language": "界面语言",
-        "humanize_tier": "降 AI 痕迹",
-        "detection_platform": "目标检测平台",
-        "target_name": "目标名称",
-        "draft_path": "初稿路径",
-        "materials_dir": "素材文件夹路径",
-        "user_motivation": "初始动机假设",
-        "official_urls": "官方链接",
-        "reference_mode": "文献读取模式",
-        "reference_paths": "本地参考文献路径",
-        "citation_target_count": "最终引用目标数",
-        "special_requirements": "特殊要求",
-        "review": "检查配置",
-        "confirm": "确认写入配置",
-        "edit": "输入要修改的字段编号，或直接回车完成",
-        "invalid": "输入无效，请重新选择。",
-        "wrote": "已写入",
-        "keyboard_help": "←/→ 切换选项；↑/↓ 切换字段；Enter 编辑/确认；S 保存；Q 退出",
-        "keyboard_subtitle": "上下切换字段，左右切换选项，所有路径与清单字段可按 Enter 直接编辑。",
-        "progress": "进度",
-        "current_value": "当前值",
-        "fields_header": "配置字段",
-        "previous": "上一个",
-        "next": "下一个",
-        "current_marker": "当前",
-        "choice_hint": "左右键切换候选项，当前项位于中间。",
-        "text_field_hint": "该字段已尽量从当前文件夹自动读取；Enter 可手动覆盖。",
-        "save_hint": "检查无误后按 S 或 Enter 保存配置。",
-        "text_help": "输入新内容。列表字段可用分号分隔。直接回车保留当前值。",
-        "last_field_hint": "←/→ 切换语言，按 Enter 保存并退出。",
-        "save": "保存并退出",
-        "quit": "退出但不保存",
-        "auto": "自动读取",
-        "enter_edit": "Enter 修改",
-        "empty": "空",
+        "tagline": "English text/English text Skill Suite",
+        "flowline": "English text, English text, English text LaTeX English text",
+        "why_1": "English text PaperSpine, English text AI English text, English text. ",
+        "why_2": "English text, English text, English text. ",
+        "why_3": "English text, English text: English text, English text, English text. ",
+        "continue": "English text",
+        "workflow": "English text",
+        "scene": "English text",
+        "tier": "English text",
+        "output_language": "English text",
+        "word_output": "Word English text",
+        "translation_package": "English text",
+        "ui_language": "English text",
+        "humanize_tier": "English text AI English text",
+        "detection_platform": "English text",
+        "target_name": "English text",
+        "draft_path": "English text",
+        "materials_dir": "English text",
+        "user_motivation": "English text",
+        "official_urls": "English text",
+        "reference_mode": "English text",
+        "reference_paths": "English text",
+        "citation_target_count": "English text",
+        "special_requirements": "English text",
+        "review": "English text",
+        "confirm": "English text",
+        "edit": "English text, English text",
+        "invalid": "English text, English text. ",
+        "wrote": "English text",
+        "keyboard_help": "←/→ English text; ↑/↓ English text; Enter English text/English text; S English text; Q English text",
+        "keyboard_subtitle": "English text, English text, English text Enter English text. ",
+        "progress": "English text",
+        "current_value": "English text",
+        "fields_header": "English text",
+        "previous": "English text",
+        "next": "English text",
+        "current_marker": "English text",
+        "choice_hint": "English text, English text. ",
+        "text_field_hint": "English text; Enter English text. ",
+        "save_hint": "English text S English text Enter English text. ",
+        "text_help": "English text. English text. English text. ",
+        "last_field_hint": "←/→ English text, English text Enter English text. ",
+        "save": "English text",
+        "quit": "English text",
+        "auto": "English text",
+        "enter_edit": "Enter English text",
+        "empty": "English text",
     },
     "en": {
         "banner": "PaperSpine Configuration Wizard",
@@ -352,7 +352,7 @@ def crop_plain(text: str, width: int) -> str:
             break
         chars.append(char)
         current = next_width
-    return "".join(chars) + "…"
+    return "".join(chars) + "..."
 
 
 def pad_ansi(text: str, width: int, align: str = "center") -> str:
@@ -537,7 +537,7 @@ def print_welcome_screen(ui_language: str, wait: bool = False) -> None:
             ansi("X: Wbingo353332", muted),
             ansi("Douyin: 91362158854", muted),
             ansi("Xiaohongshu: 4770513150", muted),
-            ansi("Bilibili: 彬_2023 (ID: 450856661)", muted),
+            ansi("Bilibili: English text_2023 (ID: 450856661)", muted),
             "",
             ansi(str(Path.cwd()), muted),
             "",
@@ -726,7 +726,7 @@ def find_candidate_draft() -> str:
     candidates = [path for path in candidates if not path.name.lower().startswith("readme")]
     if not candidates:
         return ""
-    preferred = ("draft", "manuscript", "paper", "main", "初稿", "论文")
+    preferred = ("draft", "manuscript", "paper", "main", "English text", "English text")
     candidates.sort(key=lambda p: (0 if any(token in p.name.lower() for token in preferred) else 1, len(p.name)))
     return candidates[0].name
 
@@ -747,20 +747,20 @@ def read_small_text_files(root: Path, limit: int = 8) -> str:
 
 
 def infer_motivation(text: str, ui_language: str) -> str:
-    markers = ("核心想法", "核心动机", "motivation", "Motivation", "主线", "创新点")
+    markers = ("English text", "English text", "motivation", "Motivation", "English text", "English text")
     for line in text.splitlines():
-        clean = line.strip(" #：:*-")
+        clean = line.strip(" #: :*-")
         if any(marker in line for marker in markers) and 12 <= len(clean) <= 180:
             return clean
     if ui_language == "zh":
-        return "请先调研目标场景和优秀样例，再生成候选动机并由用户确认。"
+        return "English text, English text. "
     return "Research the target scene and strong examples first, then propose motivation options for user confirmation."
 
 
 def infer_urls(text: str) -> list[str]:
     seen: list[str] = []
     for match in URL_RE.findall(text):
-        url = match.rstrip(".,;，。；")
+        url = match.rstrip(".,;, . ; ")
         if url not in seen:
             seen.append(url)
     return seen[:6]
@@ -768,7 +768,7 @@ def infer_urls(text: str) -> list[str]:
 
 def auto_config_project(config: PaperSpineConfig, args: argparse.Namespace) -> None:
     cwd = Path.cwd()
-    materials_dir = find_first_existing_dir(("materials", "素材", "source_materials", "data"))
+    materials_dir = find_first_existing_dir(("materials", "English text", "source_materials", "data"))
     draft_path = find_candidate_draft()
     if not args.workflow:
         if materials_dir and not draft_path:
@@ -793,19 +793,19 @@ def auto_config_project(config: PaperSpineConfig, args: argparse.Namespace) -> N
             for path in cwd.iterdir()
             if path.is_dir()
             and path.name.lower()
-            in {"reference_materials", "references", "literature", "papers", "citations", "文献", "参考文献"}
+            in {"reference_materials", "references", "literature", "papers", "citations", "English text", "English text"}
         ]
         config.reference_paths = reference_dirs or ["."]
     if not args.special_requirement:
         requirements = [
-            "必须输出 final_paper/main.tex；如果本机有 LaTeX 编译器则编译 paper.pdf。",
-            "必须生成详细 writing_rationale_matrix.md，逐段解释写作逻辑。",
+            "English text final_paper/main.tex; English text LaTeX English text paper.pdf. ",
+            "English text writing_rationale_matrix.md, English text. ",
         ]
         figures_dir = material_root / "figures"
         if figures_dir.exists() and any(figures_dir.glob("*.*")):
-            requirements.append("复制并引用素材图片到最终 LaTeX 项目的 figures/。")
+            requirements.append("English text LaTeX English text figures/. ")
         if config.workflow == "build_from_materials":
-            requirements.append("从素材从零构筑，不把技术说明当成初稿润色。")
+            requirements.append("English text, English text. ")
         config.special_requirements = requirements
     normalize_config(config)
 
@@ -875,7 +875,7 @@ def right_panel_lines(config: PaperSpineConfig, field: str, width: int, index: i
 
     title = tr(config.ui_language, field)
     value = rendered_value(config, field) or tr(config.ui_language, "empty")
-    header = f"{tr(config.ui_language, 'progress')} {index + 1}/{total - 1} · {title}"
+    header = f"{tr(config.ui_language, 'progress')} {index + 1}/{total - 1} - {title}"
     lines = [
         style(header, "1;97", color),
         style(f"{tr(config.ui_language, 'current_value')}: {crop_plain(value, max(12, width - 18))}", "90", color),

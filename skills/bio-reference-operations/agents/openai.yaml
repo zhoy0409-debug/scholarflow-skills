@@ -1,9 +1,9 @@
 interface:
-  display_name: "Reference Operations"
+  display_name: "Bio Reference Operations"
   short_description: "Generate consensus sequences and manage reference files using samtools. Use when creating consensus from alignments, indexing references, or creating se..."
-  default_prompt: "Use bio-reference-operations to design or troubleshoot this bioinformatics workflow."
+  default_prompt: "Use bio-reference-operations to handle this workflow."
 ownership:
   product_owner: "Zhoy"
   product_line: "Bio & Omics Toolkit"
-  origin: "jl-authored-tool-guide"
+  origin: "zhoy-original-or-curated"
   release_channel: "stable"

@@ -1,25 +1,22 @@
-# 维普 AIGC 检测策略
+# Platform Weipu
 
-维普（Weipu）AIGC 检测系统与知网共享相似的技术基础（基于 Transformer 的
-预训练模型 + 对比学习），但在权重分配上有差异。以下策略基于通用检测原理
-与已知维普特征的交叉分析。
+This reference supports the `paper-spine-humanize` skill. Load it only when the current task needs the additional detail implied by the file name.
 
-## 针对性策略
+## Purpose
 
-1. **句长分布**：与知网相似，维普检测句长方差的均匀性。保持多峰分布。
-2. **段落结构**：维普对"主题-解释-例证-总结"循环的敏感度与知网相当。
-3. **信息密度**：维普检测信息密度的波动幅度。保持 40%-85% 的波动范围。
-4. **连接词**：维普对连接词的检测阈值略低于知网（每千字约 7 个以下即可通过）。
-5. **术语语境**：维普对术语语境匹配的检测侧重中文特有的学术套话
-   （如"具有重要意义""为……奠定基础"），需特别规避。
+Use this note to keep the workflow consistent, evidence-grounded, and easy to audit. It should help the agent make decisions, structure outputs, and avoid common failure modes for this part of the workflow.
 
-## 维普特定注意
+## Use Pattern
 
-- 维普的检测模型对中文语料的训练权重更高——中文论文在维普上的 AI 检测率
-  可能高于知网
-- 特别注意避免"不仅……而且……""具有重要的……意义"等中文 AI 高频句式
-- 维普对段落长度的均匀性也有检测——避免每段长度相近
+- Confirm the user's goal and available materials before applying the reference.
+- Prefer official sources, user-provided files, and reproducible checks.
+- Keep outputs structured enough to continue into a manuscript, report, slide deck, figure, or submission package.
+- Record assumptions, missing information, and verification needs explicitly.
 
-## 适用档位
+## Checklist
 
-light/medium/heavy 档位均适用。建议至少使用 medium 档位。
+- Inputs are identified and scoped.
+- Sources or tools used are named.
+- Output format is explicit.
+- Risks and limitations are visible.
+- Next actions are practical and sequenced.

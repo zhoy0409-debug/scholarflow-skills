@@ -1,45 +1,55 @@
 # Intake and Routing
 
-Use this reference to choose how much guidance the user needs.
+Use this reference when the user has not provided enough information for reliable journal selection.
 
-## User Modes
+## Routing Modes
 
-| Mode | Signs | Approach |
+| Mode | User signal | Agent behavior |
 |---|---|---|
-| guided | "帮我选刊", no abstract, unclear discipline, does not know JCR/CAS/论著 | Ask 5-7 essential questions, explain terms only when needed. |
-| standard | Has title/abstract, knows field, has rough target tier or deadline | Build manuscript positioning and candidate matrix. |
-| advanced | Provides target tier, article type, metrics, institutional constraints, known candidates | Skip basic explanations; verify data and compare candidates. |
+| Guided | The user is unsure about field, article type, journal tier, or institutional requirements. | Ask a short staged intake. Explain terms only when needed. |
+| Standard | The user provides title, abstract, keywords, and a rough goal. | Build a journal-fit matrix after 3-5 focused clarifying questions. |
+| Advanced | The user provides manuscript, target tier, field, article type, and constraints. | Skip basic education. Return candidate evidence, tiers, and strategy. |
 
-## Minimum Questions for Guided Users
+## Minimum Intake
 
-Ask in a friendly, non-judgmental tone:
+Ask only what is missing:
 
-1. 你的文章属于什么专业或研究方向？如果不确定，可以发题目/摘要/关键词。
-2. 这篇文章是什么类型：论著/原创研究、综述、Meta 分析、病例报告、方法学、短文、Letter，还是其他？
-3. 你的主要目标是什么：毕业、职称、基金结题、单位考核、尽快见刊、高影响力、低版面费，还是特定分区？
-4. 学校或单位有没有硬性要求：SCI/SSCI/EI/CSSCI/北大核心/CSCD、中科院几区、JCR 几区、必须论著、预警期刊限制、通讯/第一作者要求？
-5. 是否有时间限制和版面费/APC 预算？
-6. 文章目前有什么材料：题目、摘要、全文、图表、数据、投稿信、已有目标期刊？
-7. 你愿意走更稳妥路线，还是可以接受更高拒稿风险去冲更高档次？
+1. Manuscript title and abstract, or a 200-300 word summary.
+2. Discipline and subfield.
+3. Article type.
+4. User goal: graduation, promotion, rapid acceptance, high impact, institutional assessment, or visibility.
+5. Target tier: JCR, CAS partition, IF range, index type, or preferred journal.
+6. Hard requirements: original article, indexing, deadline, APC ceiling, OA restrictions, warning list, authorship rules.
+7. Current manuscript stage and whether figures, statistics, ethics, or registration are complete.
 
-## Fast Intake for Advanced Users
+## Novice-Friendly Prompt
 
-Use this compact prompt:
+When the user only says "help me choose a journal", ask:
 
 ```text
-请给我：题目/摘要/关键词、文章类型、目标领域、希望的 JCR/CAS/IF/索引要求、单位硬性要求、时间/APC限制、已有候选期刊。我会直接做候选期刊矩阵和投稿顺序建议。
+I can help you choose journals, but I need a few things to avoid guessing:
+1. What is the manuscript title or topic?
+2. Is it original research, review, case report, meta-analysis, methods, or something else?
+3. What is your goal: graduation, promotion, speed, high impact, low APC, or a required index/tier?
+4. Does your school, hospital, funder, or unit require a specific index, original article, JCR/CAS tier, or deadline?
+5. Can you share the abstract or a short summary?
 ```
 
-## User Goal Labels
+## Advanced Fast Path
 
-- `graduation`: prioritize rule compliance, acceptable indexing, realistic timeline.
-- `promotion`: prioritize institutional recognition, quartile/indexing, author-position rules.
-- `high-impact`: prioritize scope/novelty fit and evidence strength; warn about rejection risk.
-- `fast-publication`: prioritize speed only after excluding questionable journals.
-- `low-cost`: prioritize non-OA/hybrid no-fee routes or APC waivers.
-- `Chinese-core`: prioritize CSSCI/CSCD/北大核心/科技核心 and unit rules.
-- `international-visibility`: prioritize WoS/Scopus/PubMed/field audience and journal reputation.
+If the user provides a manuscript and concrete constraints, do not over-question. Move directly to:
 
-## Tone
+- manuscript positioning;
+- target-tier feasibility;
+- candidate search;
+- tiered matrix;
+- submission sequence.
 
-Assume the user may not know journal publishing terminology. Explain without condescension. If the user overestimates or underestimates the paper, calibrate with evidence: methods, dataset, novelty, validation, and match to recent articles.
+## Positioning Cues
+
+Use the following signals to calibrate ambition:
+
+- Stronger fit for reach journals: clear novelty, rigorous methods, sufficient sample/data scale, validation, strong figures, broad audience.
+- Stronger fit for target journals: solid evidence, field-specific relevance, incremental but useful contribution, complete reporting.
+- Safer route needed: limited sample size, weak controls, narrow audience, incomplete validation, case-level evidence, rushed timeline.
+- Avoid recommendation: journal scope mismatch, suspicious review promises, unclear indexing, excessive APC, institutional warning status.

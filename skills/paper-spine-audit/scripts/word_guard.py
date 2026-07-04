@@ -80,12 +80,12 @@ def check_docx(path: Path, min_chars: int) -> WordGuardResult:
     if len(text) < min_chars:
         findings.append(f"text is too short: {len(text)} chars < {min_chars}")
     if paragraph_count == 0:
-        findings.append("no non-empty paragraphs found — docx may be empty or corrupted")
+        findings.append("no non-empty paragraphs found - docx may be empty or corrupted")
         # Check if images exist but text was lost (broken image conversion)
         has_images = any(name.startswith("word/media/") for name in names)
         if has_images:
             findings.append(
-                "Images found in docx but no text — pandoc image conversion likely failed. "
+                "Images found in docx but no text - pandoc image conversion likely failed. "
                 "Verify: (1) images are PNG/JPG format, (2) `--resource-path` and `--extract-media` flags used, "
                 "(3) pandoc ran from the `final_paper/` directory so relative paths resolve."
             )
@@ -94,13 +94,13 @@ def check_docx(path: Path, min_chars: int) -> WordGuardResult:
             findings.append(f"unresolved placeholder pattern found: {pattern}")
 
     # Chinese encoding checks: detect garbled text / mojibake
-    has_chinese = bool(re.search(r"[一-鿿]", text))
+    has_chinese = bool(re.search(r"[English text-English text]", text))
     if has_chinese:
         garbled = re.findall(r"[\x80-\xff]{4,}", text)
         if garbled:
             findings.append(f"Possible garbled Chinese text: {len(garbled)} suspicious byte sequences. Re-export with UTF-8 encoding.")
         # Check for common encoding corruption patterns
-        corruption = re.findall(r"鍚堛[劧渚佃繚閫嗘]", text)  # common gbk-decoded-as-utf8 pattern
+        corruption = re.findall(r"English text[English text]", text)  # common gbk-decoded-as-utf8 pattern
         if corruption:
             findings.append("Chinese encoding corruption detected: GBK text decoded as UTF-8. Re-export with proper encoding.")
 

@@ -5,7 +5,7 @@ description: >
   decide which fragments to load for a given polishing request.
 
 always_load:
-  # Shared layer — common to nature-polishing and nature-writing
+  # Shared layer - common to nature-polishing and nature-writing
   - ../_shared/core/reader-workflow.md
   - ../_shared/core/paper-type-taxonomy.md
   - ../_shared/core/ethics.md
@@ -71,7 +71,7 @@ references:
   on_demand:
     - condition: needs Nature/Nature Communications article-level patterns for abstracts, intros, Results openings, Discussion, conclusions, titles
       path: references/published-article-patterns.md
-    - condition: empirical 2025 Nat Commun diction calibration — connector frequencies, the significantly red line, hedge/booster/tense word choices
+    - condition: empirical 2025 Nat Commun diction calibration - connector frequencies, the significantly red line, hedge/booster/tense word choices
       path: references/nat-comms-2025-diction.md
     - condition: needs section-specific move orders or phrase patterns
       path: references/section-moves.md
@@ -81,5 +81,5 @@ references:
       path: references/style-guardrails.md
     - condition: needs deeper writing-strategy principles
       path: references/writing-strategy.md
-    - condition: needs LaTeX layout/typesetting help (排版) — loose or sparse pages, stranded section headings, figures that don't fill the page or split across pages, "Float too large", multi-panel figure arrangement, or Supplementary Information that looks empty
+    - condition: needs LaTeX layout/typesetting help (English text) - loose or sparse pages, stranded section headings, figures that don't fill the page or split across pages, "Float too large", multi-panel figure arrangement, or Supplementary Information that looks empty
       path: references/latex-layout.md

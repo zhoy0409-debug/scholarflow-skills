@@ -1,9 +1,9 @@
 interface:
-  display_name: "fastp — Fast FASTQ Quality Control and Adapter Trimming"
+  display_name: "Fastp Fastq Preprocessing"
   short_description: "All-in-one FASTQ QC and adapter trimming. Auto-detects Illumina adapters, filters low-quality reads, corrects paired-end overlaps, emits HTML+JSON QC in..."
-  default_prompt: "Use fastp-fastq-preprocessing to design or troubleshoot this bioinformatics workflow."
+  default_prompt: "Use fastp-fastq-preprocessing to handle this workflow."
 ownership:
   product_owner: "Zhoy"
   product_line: "Bio & Omics Toolkit"
-  origin: "jl-authored-tool-guide"
+  origin: "zhoy-original-or-curated"
   release_channel: "stable"

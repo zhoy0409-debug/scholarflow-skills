@@ -55,7 +55,7 @@ def cmd_infer(args: argparse.Namespace) -> int:
 def cmd_show(_: argparse.Namespace) -> int:
     cfg = load_config()
     if cfg is None:
-        print(f"尚未配置，配置文件路径：{CONFIG_FILE}")
+        print(f"English text, English text: {CONFIG_FILE}")
         return 2
     errors = validate(cfg)
     print(json.dumps({"ok": not errors, "path": str(CONFIG_FILE), "errors": errors, "config": cfg}, ensure_ascii=False, indent=2))
@@ -79,7 +79,7 @@ def build_parser() -> argparse.ArgumentParser:
     sub = parser.add_subparsers(dest="command", required=True)
 
     preset = sub.add_parser("preset", help="Configure from bundled school preset.")
-    preset.add_argument("school", help="School name or alias, for example 上海交通大学 / 交大 / SJTU")
+    preset.add_argument("school", help="School name or alias, for example English text / English text / SJTU")
     preset.set_defaults(func=cmd_preset)
 
     url = sub.add_parser("url", help="Configure from a library resource portal or authentication URL.")

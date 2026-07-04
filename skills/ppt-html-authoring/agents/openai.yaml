@@ -1,9 +1,9 @@
 interface:
-  display_name: "Single-page PPT authoring"
+  display_name: "PPT HTML Authoring"
   short_description: "Author a single PPT slide as a self-contained slide.html + design.md, given one outline entry. Use when the user asks to design, draft, or rewrite an in..."
-  default_prompt: "Use ppt-html-authoring to create or verify this deliverable."
+  default_prompt: "Use ppt-html-authoring to handle this workflow."
 ownership:
   product_owner: "Zhoy"
   product_line: "Delivery Stack"
-  origin: "jl-original-or-curated"
+  origin: "zhoy-original-or-curated"
   release_channel: "stable"

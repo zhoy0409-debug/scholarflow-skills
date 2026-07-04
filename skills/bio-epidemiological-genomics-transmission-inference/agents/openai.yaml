@@ -1,9 +1,9 @@
 interface:
-  display_name: "Transmission Inference"
+  display_name: "Bio Epidemiological Genomics Transmission Inference"
   short_description: "Infers person-to-person transmission from pathogen genomes using outbreaker2 (Campbell 2018), TransPhylo (Didelot 2017), phybreak (Klinkenberg 2017), Ba..."
-  default_prompt: "Use bio-epidemiological-genomics-transmission-inference to design or troubleshoot this bioinformatics workflow."
+  default_prompt: "Use bio-epidemiological-genomics-transmission-inference to handle this workflow."
 ownership:
   product_owner: "Zhoy"
   product_line: "Bio & Omics Toolkit"
-  origin: "jl-authored-tool-guide"
+  origin: "zhoy-original-or-curated"
   release_channel: "stable"

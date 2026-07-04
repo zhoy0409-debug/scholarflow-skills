@@ -1,9 +1,9 @@
 interface:
-  display_name: "Sequence Properties"
+  display_name: "Bio Sequence Properties"
   short_description: "Calculate sequence properties like GC content, molecular weight, isoelectric point, and GC skew using Biopython. Use when analyzing sequence composition..."
-  default_prompt: "Use bio-sequence-properties to design or troubleshoot this bioinformatics workflow."
+  default_prompt: "Use bio-sequence-properties to handle this workflow."
 ownership:
   product_owner: "Zhoy"
   product_line: "Bio & Omics Toolkit"
-  origin: "jl-authored-tool-guide"
+  origin: "zhoy-original-or-curated"
   release_channel: "stable"

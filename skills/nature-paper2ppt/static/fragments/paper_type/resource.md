@@ -1,31 +1,22 @@
-# Paper type: resource / dataset / atlas / omics / benchmark
+# Resource
 
-Covers resource, dataset, atlas, and benchmark papers, and large-scale omics or mapping efforts whose value is the resource itself.
+This reference supports the `nature-paper2ppt` skill. Load it only when the current task needs the additional detail implied by the file name.
 
-## Presentation arc — workflow-to-validation
+## Purpose
 
-Best when the contribution is a resource that must be shown to be well-built and reusable. Order the story as:
+Use this note to keep the workflow consistent, evidence-grounded, and easy to audit. It should help the agent make decisions, structure outputs, and avoid common failure modes for this part of the workflow.
 
-1. why the resource is needed,
-2. dataset / cohort / sample design,
-3. generation and quality-control workflow,
-4. the main landscape or map,
-5. validation and reproducibility,
-6. example biological or technical insights,
-7. access, reuse, and boundaries.
+## Use Pattern
 
-## Default slide structure (adapt, do not force)
+- Confirm the user's goal and available materials before applying the reference.
+- Prefer official sources, user-provided files, and reproducible checks.
+- Keep outputs structured enough to continue into a manuscript, report, slide deck, figure, or submission package.
+- Record assumptions, missing information, and verification needs explicitly.
 
-1. 标题页
-2. 研究背景：为什么需要这个资源
-3. 资源概览：规模、覆盖、特点
-4. 样本 / 队列 / 数据设计
-5. 生成与质量控制流程（full-width 流程图）
-6. 主要图谱 / landscape
-7-8. 关键发现 / 示例洞见
-9. 验证与可复现性
-10. 访问、复用与许可
-11. 局限性与边界
-12. 总结
+## Checklist
 
-The landscape/map slide is usually the hero figure — let it own the page. Keep access details (accession numbers, URLs, licences) accurate and consistent.
+- Inputs are identified and scoped.
+- Sources or tools used are named.
+- Output format is explicit.
+- Risks and limitations are visible.
+- Next actions are practical and sequenced.

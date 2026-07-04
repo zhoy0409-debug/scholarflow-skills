@@ -1,9 +1,9 @@
 interface:
-  display_name: "Functional Profiling"
+  display_name: "Bio Metagenomics Functional Profiling"
   short_description: "Profile functional potential of metagenomes using HUMAnN3 and similar tools. Use when obtaining pathway abundances, gene family counts, or functional an..."
-  default_prompt: "Use bio-metagenomics-functional-profiling to design or troubleshoot this bioinformatics workflow."
+  default_prompt: "Use bio-metagenomics-functional-profiling to handle this workflow."
 ownership:
   product_owner: "Zhoy"
   product_line: "Bio & Omics Toolkit"
-  origin: "jl-authored-tool-guide"
+  origin: "zhoy-original-or-curated"
   release_channel: "stable"

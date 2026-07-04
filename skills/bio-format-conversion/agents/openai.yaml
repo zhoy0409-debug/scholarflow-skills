@@ -1,9 +1,9 @@
 interface:
-  display_name: "Format Conversion"
+  display_name: "Bio Format Conversion"
   short_description: "Convert between sequence file formats (FASTA, FASTQ, GenBank, EMBL) using Biopython Bio.SeqIO. Use when changing file formats or preparing data for diff..."
-  default_prompt: "Use bio-format-conversion to design or troubleshoot this bioinformatics workflow."
+  default_prompt: "Use bio-format-conversion to handle this workflow."
 ownership:
   product_owner: "Zhoy"
   product_line: "Bio & Omics Toolkit"
-  origin: "jl-authored-tool-guide"
+  origin: "zhoy-original-or-curated"
   release_channel: "stable"

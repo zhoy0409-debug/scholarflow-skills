@@ -86,7 +86,7 @@ def main() -> int:
     validator_spec.loader.exec_module(validator)
     validation_findings = validator.validate(data)
     args.output_dir.mkdir(parents=True, exist_ok=True)
-    validation_report = args.output_dir / f"{args.prefix}-草稿验证报告.txt"
+    validation_report = args.output_dir / f"{args.prefix}-English text.txt"
     validation_report.write_text(
         validator.format_report(validation_findings), encoding="utf-8"
     )
@@ -111,11 +111,11 @@ def main() -> int:
     )
 
     outputs = {
-        "claims": args.output_dir / f"{args.prefix}-权利要求书.docx",
-        "specification": args.output_dir / f"{args.prefix}-说明书.docx",
-        "abstract": args.output_dir / f"{args.prefix}-说明书摘要.docx",
-        "abstract-figure": args.output_dir / f"{args.prefix}-摘要附图.docx",
-        "all": args.output_dir / f"{args.prefix}-完整审阅稿.docx",
+        "claims": args.output_dir / f"{args.prefix}-English text.docx",
+        "specification": args.output_dir / f"{args.prefix}-English text.docx",
+        "abstract": args.output_dir / f"{args.prefix}-English text.docx",
+        "abstract-figure": args.output_dir / f"{args.prefix}-English text.docx",
+        "all": args.output_dir / f"{args.prefix}-English text.docx",
     }
     for part, output in outputs.items():
         command = [
@@ -131,12 +131,12 @@ def main() -> int:
             command.extend(["--figure-dir", str(figure_dir)])
         run(command)
 
-    claims_text = args.output_dir / f"{args.prefix}-权利要求书.txt"
+    claims_text = args.output_dir / f"{args.prefix}-English text.txt"
     claims_text.write_text(
         "\n".join(f"{claim['number']}. {claim['text']}" for claim in data["claims"]) + "\n",
         encoding="utf-8",
     )
-    audit = args.output_dir / f"{args.prefix}-权利要求检查.txt"
+    audit = args.output_dir / f"{args.prefix}-English text.txt"
     audit_script = root / "audit_claims.py"
     spec = importlib.util.spec_from_file_location("patent_claim_audit", audit_script)
     audit_module = importlib.util.module_from_spec(spec)
@@ -146,17 +146,17 @@ def main() -> int:
     if findings:
         lines = []
         for finding in findings:
-            location = f"权利要求{finding.claim}" if finding.claim else "整体"
+            location = f"English text{finding.claim}" if finding.claim else "English text"
             lines.append(
                 f"{finding.level}\t{location}\t{finding.code}\t{finding.message}"
             )
     else:
-        lines = ["PASS: 未发现权利要求结构性问题。"]
+        lines = ["PASS: English text. "]
     audit.write_text("\n".join(lines) + "\n", encoding="utf-8")
     if any(finding.level == "ERROR" for finding in findings):
         raise SystemExit(1)
 
-    json_copy = args.output_dir / f"{args.prefix}-结构化草稿.json"
+    json_copy = args.output_dir / f"{args.prefix}-English text.json"
     if args.draft.resolve() != json_copy.resolve():
         shutil.copy2(args.draft, json_copy)
 

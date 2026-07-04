@@ -1,32 +1,22 @@
-# Workflow and output format
+# Workflow
 
-## Workflow
+This reference supports the `nature-data` skill. Load it only when the current task needs the additional detail implied by the file name.
 
-1. Identify the target journal and article type. If journal-specific instructions conflict with this skill, follow the journal.
-2. Inventory every dataset needed to support the main and supplementary results: generated raw data, processed data, figure source data, secondary data, software outputs, models, tables, images, and files underlying statistical analysis.
-3. Classify each dataset into one access route: `public repository`, `controlled access repository`, `within paper or supplement`, `reused public source`, `third-party restricted`, `available on justified request`, or `not applicable`.
-4. Choose repository and identifier strategy before drafting text. Prefer DOI, accession number, Handle, ARK, or stable repository record over personal websites and temporary cloud links.
-5. Draft the Data Availability statement using explicit dataset-to-location mapping.
-6. Add formal dataset citations for public data that support conclusions.
-7. Run the FAIR and metadata audit before finalizing.
-8. Return ready-to-paste statement text plus any unresolved fields the author must confirm.
+## Purpose
 
-## Output format
+Use this note to keep the workflow consistent, evidence-grounded, and easy to audit. It should help the agent make decisions, structure outputs, and avoid common failure modes for this part of the workflow.
 
-Unless the user asks for another format, return:
+## Use Pattern
 
-```text
-Data Availability
-[ready-to-paste statement]
+- Confirm the user's goal and available materials before applying the reference.
+- Prefer official sources, user-provided files, and reproducible checks.
+- Keep outputs structured enough to continue into a manuscript, report, slide deck, figure, or submission package.
+- Record assumptions, missing information, and verification needs explicitly.
 
-Repository and citation actions
-- [specific actions or "None"]
+## Checklist
 
-Missing information / risk flags
-- [specific flags or "None"]
-
-中文核对
-- [用中文列出作者需要确认的字段或 "无"]
-```
-
-When auditing an existing statement, lead with blocking issues first, then provide a revised version.
+- Inputs are identified and scoped.
+- Sources or tools used are named.
+- Output format is explicit.
+- Risks and limitations are visible.
+- Next actions are practical and sequenced.

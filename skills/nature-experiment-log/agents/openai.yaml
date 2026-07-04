@@ -1,9 +1,9 @@
 interface:
-  display_name: "experiment-log — 实验日志标准化"
-  short_description: "标准化实验日志记录——接收原始材料（图/语音/文字），产出带 YAML frontmatter 的标准日志到 Obsidian vault。需配合飞书 CLI 或手动输入使用。"
-  default_prompt: "Use nature-experiment-log to help with my research workflow."
+  display_name: "Nature Experiment Log"
+  short_description: "Convert raw experiment notes, images, voice-derived notes, and observations into structured experiment logs with metadata, protocol context, anomaly tra..."
+  default_prompt: "Use nature-experiment-log to handle this workflow."
 ownership:
   product_owner: "Zhoy"
   product_line: "Nature Research Suite"
-  origin: "jl-original-or-curated"
+  origin: "zhoy-original-or-curated"
   release_channel: "stable"

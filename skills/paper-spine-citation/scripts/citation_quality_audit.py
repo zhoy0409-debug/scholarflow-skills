@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Citation Quality Audit — teaching-oriented citation analysis for PaperSpine.
+"""Citation Quality Audit - teaching-oriented citation analysis for PaperSpine.
 
 Goes beyond DOI verification.  Each citation is scored across three axes
 (resolvability, recency, field relevance).  The report identifies diversity gaps,
@@ -7,7 +7,7 @@ recommends replacements for dead citations, and produces a scene-specific
 citation strategy section that teaches the user *why* certain citation types
 matter for their target venue.
 
-Pattern: follows the writing_rationale_matrix philosophy — every analysis row
+Pattern: follows the writing_rationale_matrix philosophy - every analysis row
 teaches the user something about citation strategy.
 """
 
@@ -218,13 +218,13 @@ def fetch_crossref(doi: str, timeout: int) -> dict | None:
 
 def classify_citation_type(reference: str) -> str:
     text = reference.lower()
-    if any(w in text for w in ("survey", "review", "meta-analysis", "综述", "回顾")):
+    if any(w in text for w in ("survey", "review", "meta-analysis", "English text", "English text")):
         return "survey"
-    if any(w in text for w in ("benchmark", "dataset", "corpus", "evaluation", "数据集")):
+    if any(w in text for w in ("benchmark", "dataset", "corpus", "evaluation", "English text")):
         return "benchmark"
     if any(w in text for w in ("limitation", "robustness", "reproducib", "bias", "fairness")):
         return "critique"
-    if any(w in text for w in ("application", "real-world", "deployment", "clinical", "应用")):
+    if any(w in text for w in ("application", "real-world", "deployment", "clinical", "English text")):
         return "application"
     if any(w in text for w in ("foundation", "seminal", "classic", "theory", "theorem")):
         return "foundational"
@@ -325,7 +325,7 @@ def audit_citations(output_dir: Path, no_api: bool, timeout: int, delay: float, 
             else:
                 entry.status = "mismatched"
                 entry.resolvability_score = 20
-                entry.issues.append(f"Title similarity {sim:.2f} — likely wrong DOI. Crossref title: '{entry.crossref_title[:100]}'")
+                entry.issues.append(f"Title similarity {sim:.2f} - likely wrong DOI. Crossref title: '{entry.crossref_title[:100]}'")
                 entry.teaching_note = f"Poor title match ({sim:.0%}). This likely means the DOI points to a different paper than the one you're citing. Verify manually."
         else:
             entry.status = "verified"
@@ -338,7 +338,7 @@ def audit_citations(output_dir: Path, no_api: bool, timeout: int, delay: float, 
                 pass
             if not entry.year_matches:
                 entry.issues.append(f"Year mismatch: bank={entry.year}, API={entry.api_year}")
-                entry.teaching_note += " Year mismatch between citation bank and API — verify the publication date."
+                entry.teaching_note += " Year mismatch between citation bank and API - verify the publication date."
 
         report.entries.append(entry)
 
@@ -398,7 +398,7 @@ def to_markdown(report: CitationQualityReport) -> str:
     ]
     for e in report.entries:
         lines.append(
-            f"| {e.candidate_id} | {e.doi[:30] if e.doi else '—'} | {e.citation_type} | "
+            f"| {e.candidate_id} | {e.doi[:30] if e.doi else '-'} | {e.citation_type} | "
             f"{'yes' if e.doi_resolves else 'no'} | {e.title_similarity:.0%} | "
             f"{'yes' if e.year_matches else 'no'} | {((e.resolvability_score + e.recency_score) // 2)} | "
             f"{e.status} |"
@@ -409,7 +409,7 @@ def to_markdown(report: CitationQualityReport) -> str:
     for e in report.entries:
         if e.status == "verified":
             continue
-        lines.append(f"### {e.candidate_id} — {e.doi}")
+        lines.append(f"### {e.candidate_id} - {e.doi}")
         lines.append("")
         lines.append(f"Status: **{e.status}**")
         if e.issues:

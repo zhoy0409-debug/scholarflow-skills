@@ -1,9 +1,9 @@
 interface:
-  display_name: "Nature Literature Downloader"
-  short_description: "Use this skill whenever the user wants to configure school/library access, reuse a logged-in Chrome institutional session, search library databases, dow..."
-  default_prompt: "Use nature-downloader to help with my research workflow."
+  display_name: "Nature Downloader"
+  short_description: "Assist with authorized literature and research-file retrieval workflows while respecting access rights, copyright, institutional permissions, and user-p..."
+  default_prompt: "Use nature-downloader to handle this workflow."
 ownership:
   product_owner: "Zhoy"
   product_line: "Nature Research Suite"
-  origin: "jl-original-or-curated"
+  origin: "zhoy-original-or-curated"
   release_channel: "stable"

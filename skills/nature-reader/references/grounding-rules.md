@@ -1,45 +1,22 @@
 # Grounding Rules
 
-## Answering questions
+This reference supports the `nature-reader` skill. Load it only when the current task needs the additional detail implied by the file name.
 
-When the user asks a follow-up question about the paper:
+## Purpose
 
-1. Find the most relevant source blocks.
-2. Answer from those blocks first.
-3. Cite the exact page and block IDs.
-4. Include the figure or table if it is part of the evidence.
-5. Say `原文未明确说明` if the paper does not support the claim.
+Use this note to keep the workflow consistent, evidence-grounded, and easy to audit. It should help the agent make decisions, structure outputs, and avoid common failure modes for this part of the workflow.
 
-## Good answer pattern
+## Use Pattern
 
-- `结论`
-- `原文依据: p.5 S014-S016, Fig. 3 caption`
-- `补充说明: 这是译文中的概括，不是原文逐字表述`
+- Confirm the user's goal and available materials before applying the reference.
+- Prefer official sources, user-provided files, and reproducible checks.
+- Keep outputs structured enough to continue into a manuscript, report, slide deck, figure, or submission package.
+- Record assumptions, missing information, and verification needs explicitly.
 
-## Bad answer pattern
+## Checklist
 
-- vague paraphrase without source IDs
-- answer based only on the title or abstract when the question needs body text
-- claiming support from a figure without citing the figure or caption
-- inventing missing detail when OCR or extraction is uncertain
-
-## Translation rules
-
-- Keep specialized terms stable.
-- Keep equations, units, symbols, and citations unchanged.
-- Do not over-simplify method steps.
-- If a term has no clear Chinese equivalent, keep the original term and add a short note.
-- Preserve paragraph-level original/Chinese alignment in `paper.md`.
-- Do not convert a full-paper translation request into a Chinese-only summary or critique.
-- If a full English paragraph cannot be included because of source restrictions or extraction failure, keep the block anchor and explain the limitation in `translation_notes.md`.
-
-## Figure and table rules
-
-- Cite the caption when explaining a figure.
-- Cite the relevant table row or table block when explaining a table.
-- If the claim relies on both text and figure, cite both.
-- If figure placement is uncertain, mark it as a layout approximation.
-- Extract figures/tables to `assets/` whenever possible.
-- Place each figure/table card near the first substantive mention in the bilingual text.
-- Include original caption, Chinese caption translation, and a short reading note.
-- Do not use whole-page screenshots as figure/table replacements unless no tighter crop is possible; mark those as approximate.
+- Inputs are identified and scoped.
+- Sources or tools used are named.
+- Output format is explicit.
+- Risks and limitations are visible.
+- Next actions are practical and sequenced.

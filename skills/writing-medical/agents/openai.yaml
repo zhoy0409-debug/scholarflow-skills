@@ -1,9 +1,9 @@
 interface:
-  display_name: "医学写作专项"
-  short_description: "Use when writing medical, biological, or clinical research papers - provides IMRaD structure and reporting guidelines"
-  default_prompt: "Use writing-medical for this task."
+  display_name: "Writing Medical"
+  short_description: "Draft, revise, and quality-check medical or biomedical manuscripts with conservative claims, clinical context, reporting guidance, terminology disciplin..."
+  default_prompt: "Use writing-medical to handle this workflow."
 ownership:
   product_owner: "Zhoy"
-  product_line: "General Skill Library"
-  origin: "jl-original-or-curated"
+  product_line: "Academic Writing & Integrity"
+  origin: "zhoy-original-or-curated"
   release_channel: "stable"

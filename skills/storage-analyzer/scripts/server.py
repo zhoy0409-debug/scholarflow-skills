@@ -8,10 +8,10 @@ or delete them outright. Stop with Ctrl+C.
 Usage:
     server.py <analysis.json>
 
-SAFETY MODEL — read before changing:
+SAFETY MODEL - read before changing:
 - Allowlist: only paths listed in this report's green items `trash_paths` are
   accepted. Every request path is realpath-resolved and must be in the allowlist
-  AND under $HOME. Anything else is rejected. This is the core guard — the
+  AND under $HOME. Anything else is rejected. This is the core guard - the
   endpoint cannot be used to delete arbitrary files.
 - Bound to 127.0.0.1 only; every POST requires the session token; Host header
   must be 127.0.0.1 (blocks DNS-rebinding from a malicious page).
@@ -49,10 +49,10 @@ def load(src):
         data = json.load(f)
     with open(TEMPLATE, encoding="utf-8") as f:
         tpl = f.read()
-    # 三套白名单，权限从严到宽：
-    #   rm    = 仅绿灯 trash_paths（可直接删的纯缓存）
-    #   trash = 绿灯 + 橙灯 trash_paths（橙灯只准移废纸篓，不准直接删）
-    #   open  = trash 全集 + 橙灯 path + 红灯 app_paths（仅"在文件管理器打开"，非破坏性）
+    # English text, English text: 
+    #   rm    = English text trash_paths(English text)
+    #   trash = English text + English text trash_paths(English text, English text)
+    #   open  = trash English text + English text path + English text app_paths(English text"English text", English text)
     rm_allow, trash_allow, open_allow = set(), set(), set()
     for it in data.get("green", []):
         for p in (it.get("trash_paths") or []):
@@ -66,7 +66,7 @@ def load(src):
             rp = expand(it["path"])
             if os.path.exists(rp):
                 open_allow.add(rp)
-    # 红灯只允许"打开"（应用本体在 /Applications，删除让用户在访达里自己卸）
+    # English text"English text"(English text /Applications, English text)
     for it in data.get("red", []):
         for p in (it.get("app_paths") or []):
             rp = expand(p)
@@ -81,7 +81,7 @@ def move_to_trash(path):
     elif sys.platform.startswith("win"):
         _trash_windows(path)
     else:
-        raise OSError("移到废纸篓仅支持 macOS / Windows")
+        raise OSError("English text macOS / Windows")
 
 
 def _trash_macos(path):
@@ -97,7 +97,7 @@ def _trash_macos(path):
 
 def _trash_windows(path):
     # Send to Recycle Bin via SHFileOperationW with FOF_ALLOWUNDO (stdlib ctypes).
-    # UNTESTED on this build — verify on a real Windows machine.
+    # UNTESTED on this build - verify on a real Windows machine.
     import ctypes
     from ctypes import wintypes
 
@@ -134,26 +134,26 @@ def hard_delete(path):
 
 
 def open_in_file_manager(path):
-    # 非破坏性：在访达 / 资源管理器里打开该位置，方便用户自己审查删除
+    # English text: English text / English text, English text
     target = path if os.path.isdir(path) else os.path.dirname(path)
     if sys.platform == "darwin":
-        # .app 是 bundle，对它用 open 会"启动应用"而非显示；必须用 open -R 在访达里选中。
+        # .app English text bundle, English text open English text"English text"English text; English text open -R English text. 
         if target.rstrip("/").endswith(".app"):
             r = subprocess.run(["open", "-R", target], capture_output=True, text=True)
             if r.returncode != 0:
-                raise OSError((r.stderr or "open -R 失败").strip())
+                raise OSError((r.stderr or "open -R English text").strip())
             return
-        # 普通文件夹：先试直接打开看内容；沙盒容器（如微信）open 会报 -10814，
-        # 退回 open -R 在父目录里选中它。两者都失败才算错。
+        # English text: English text; English text(English text)open English text -10814, 
+        # English text open -R English text. English text. 
         r = subprocess.run(["open", target], capture_output=True, text=True)
         if r.returncode != 0:
             r2 = subprocess.run(["open", "-R", target], capture_output=True, text=True)
             if r2.returncode != 0:
-                raise OSError((r.stderr or r2.stderr or "open 失败").strip())
+                raise OSError((r.stderr or r2.stderr or "open English text").strip())
     elif sys.platform.startswith("win"):
-        subprocess.run(["explorer", target])  # explorer 退出码不可靠，不据此判成败
+        subprocess.run(["explorer", target])  # explorer English text, English text
     else:
-        raise OSError("打开文件夹仅支持 macOS / Windows")
+        raise OSError("English text macOS / Windows")
 
 
 class Handler(BaseHTTPRequestHandler):
@@ -184,32 +184,32 @@ class Handler(BaseHTTPRequestHandler):
         # DNS-rebinding guard: only accept local Host
         host = (self.headers.get("Host") or "").split(":")[0]
         if host not in ("127.0.0.1", "localhost"):
-            self._send(403, json.dumps({"ok": False, "error": "host 不被允许"}))
+            self._send(403, json.dumps({"ok": False, "error": "host English text"}))
             return
         n = int(self.headers.get("Content-Length", 0))
         try:
             req = json.loads(self.rfile.read(n) or b"{}")
         except Exception:
-            self._send(400, json.dumps({"ok": False, "error": "请求格式错误"}))
+            self._send(400, json.dumps({"ok": False, "error": "English text"}))
             return
         if req.get("token") != TOKEN:
-            self._send(403, json.dumps({"ok": False, "error": "token 校验失败"}))
+            self._send(403, json.dumps({"ok": False, "error": "token English text"}))
             return
         mode = req.get("mode")
         allow = {"rm": RM_ALLOW, "trash": TRASH_ALLOW, "open": OPEN_ALLOW}.get(mode)
         if allow is None:
-            self._send(400, json.dumps({"ok": False, "error": "未知操作"}))
+            self._send(400, json.dumps({"ok": False, "error": "English text"}))
             return
         done = []
         for p in (req.get("paths") or []):
             rp = expand(p)
             if rp not in allow:
-                self._send(403, json.dumps({"ok": False, "error": "路径不在白名单：%s" % p}))
+                self._send(403, json.dumps({"ok": False, "error": "English text: %s" % p}))
                 return
-            # 二级护栏：只允许用户目录或 /Applications（后者仅 open 用，删除白名单不含它）
+            # English text: English text /Applications(English text open English text, English text)
             roots = (HOME, "/Applications")
             if not any(rp == base or rp.startswith(base + os.sep) for base in roots):
-                self._send(403, json.dumps({"ok": False, "error": "路径越界：%s" % p}))
+                self._send(403, json.dumps({"ok": False, "error": "English text: %s" % p}))
                 return
             try:
                 if mode == "open":
@@ -236,14 +236,14 @@ def main():
     srv = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
     port = srv.server_address[1]
     url = "http://127.0.0.1:%d/" % port
-    print("报告服务已启动：" + url)
-    print("绿灯可删 %d 项 | 橙灯可移废纸篓/打开文件夹 %d 项 | 页面上点" % (len(RM_ALLOW), len(TRASH_ALLOW) - len(RM_ALLOW)))
-    print("用完按 Ctrl+C 停止服务（服务关掉后按钮即失效）")
+    print("English text: " + url)
+    print("English text %d English text | English text/English text %d English text | English text" % (len(RM_ALLOW), len(TRASH_ALLOW) - len(RM_ALLOW)))
+    print("English text Ctrl+C English text(English text)")
     webbrowser.open(url)
     try:
         srv.serve_forever()
     except KeyboardInterrupt:
-        print("\n已停止服务。")
+        print("\nEnglish text. ")
 
 
 if __name__ == "__main__":

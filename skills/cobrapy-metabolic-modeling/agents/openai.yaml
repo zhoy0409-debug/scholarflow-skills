@@ -1,9 +1,9 @@
 interface:
-  display_name: "COBRApy — Constraint-Based Metabolic Modeling"
+  display_name: "Cobrapy Metabolic Modeling"
   short_description: "Constraint-based (COBRA) analysis of genome-scale metabolic models: FBA, FVA, knockouts, flux sampling, production envelopes, gapfilling, media optimiza..."
-  default_prompt: "Use cobrapy-metabolic-modeling to design or troubleshoot this bioinformatics workflow."
+  default_prompt: "Use cobrapy-metabolic-modeling to handle this workflow."
 ownership:
   product_owner: "Zhoy"
   product_line: "Bio & Omics Toolkit"
-  origin: "jl-authored-tool-guide"
+  origin: "zhoy-original-or-curated"
   release_channel: "stable"

@@ -1,9 +1,9 @@
 interface:
   display_name: "Journal Submission Normalizer"
-  short_description: "Normalize manuscripts to official journal submission rules."
-  default_prompt: "Use journal-submission-normalizer to check official journal requirements and normalize this manuscript before submission."
+  short_description: "Search official journal author instructions, extract submission formatting rules, normalize manuscripts against those rules, and return a compliance rep..."
+  default_prompt: "Use journal-submission-normalizer to handle this workflow."
 ownership:
   product_owner: "Zhoy"
   product_line: "Academic Writing & Integrity"
-  origin: "zhoy-original"
+  origin: "zhoy-original-or-curated"
   release_channel: "stable"

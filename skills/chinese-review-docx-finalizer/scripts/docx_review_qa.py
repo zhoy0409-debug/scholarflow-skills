@@ -24,18 +24,18 @@ except Exception:  # pragma: no cover - optional dependency
 
 EMU_PER_INCH = 914400
 REF_START_RE = re.compile(r"^\s*\[(\d+)\]")
-NUM_CIT_RE = re.compile(r"\[(\d+(?:\s*[-,，]\s*\d+)*)\]")
-HEADING_RE = re.compile(r"^(引言|[1-9]\d?(?:\.\d+)*\s+\S+)")
-CAPTION_RE = re.compile(r"^(图\s*\d+|Figure\s+\d+|表\s*\d+|Table\s+\d+)")
+NUM_CIT_RE = re.compile(r"\[(\d+(?:\s*[-,, ]\s*\d+)*)\]")
+HEADING_RE = re.compile(r"^(English text|[1-9]\d?(?:\.\d+)*\s+\S+)")
+CAPTION_RE = re.compile(r"^(English text\s*\d+|Figure\s+\d+|English text\s*\d+|Table\s+\d+)")
 FORBIDDEN = [
-    "本节宜",
-    "正式发表",
-    "提示词式表达",
-    "AI式表达",
-    "潜在切入点",
-    "潜在研究方向",
-    "双向机制框架",
-    "进一步讨论",
+    "English text",
+    "English text",
+    "English text",
+    "AIEnglish text",
+    "English text",
+    "English text",
+    "English text",
+    "English text",
 ]
 
 
@@ -57,7 +57,7 @@ def has_child(element, local_name: str) -> bool:
 def expand_citations(text: str) -> set[int]:
     refs: set[int] = set()
     for match in NUM_CIT_RE.finditer(text):
-        token = match.group(1).replace("，", ",")
+        token = match.group(1).replace(", ", ",")
         for part in token.split(","):
             part = part.strip()
             if "-" in part:
@@ -232,4 +232,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-

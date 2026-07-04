@@ -1,9 +1,9 @@
 interface:
-  display_name: "文献综述"
-  short_description: "Use when writing literature review sections - guides searching, organizing, and synthesizing academic sources"
-  default_prompt: "Use literature-review for this task."
+  display_name: "Literature Review"
+  short_description: "Build source-grounded literature reviews by searching, organizing, mapping evidence to claims, drafting synthesis, and verifying that every citation is..."
+  default_prompt: "Use literature-review to handle this workflow."
 ownership:
   product_owner: "Zhoy"
-  product_line: "General Skill Library"
-  origin: "jl-original-or-curated"
+  product_line: "Academic Writing & Integrity"
+  origin: "zhoy-original-or-curated"
   release_channel: "stable"

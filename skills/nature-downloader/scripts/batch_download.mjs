@@ -71,13 +71,13 @@ function parseArgs(argv) {
 async function handleWosAuthPreference(proxy, target) {
   const info = await proxyGet(proxy, "/info", { target }, 8000).catch(() => ({}));
   const marker = `${info.url || ""} ${info.title || ""}`;
-  if (!/AUTH_PREFERENCE_ERROR|身份验证首选项|Authentication Preference/i.test(marker)) {
+  if (!/AUTH_PREFERENCE_ERROR|English text|Authentication Preference/i.test(marker)) {
     return false;
   }
   const clicked = await evalJs(
     proxy,
     target,
-    `(()=>{const r=document.querySelector('#radio-shibboleth,input[value="shibboleth"]');if(r)r.click();const b=[...document.querySelectorAll('button,a,input[type=button],input[type=submit]')].find(e=>/(继续|Continue)/i.test(e.innerText||e.value||''));if(b)b.click();return !!b;})()`
+    `(()=>{const r=document.querySelector('#radio-shibboleth,input[value="shibboleth"]');if(r)r.click();const b=[...document.querySelectorAll('button,a,input[type=button],input[type=submit]')].find(e=>/(English text|Continue)/i.test(e.innerText||e.value||''));if(b)b.click();return !!b;})()`
   ).catch(() => false);
   if (clicked) {
     await new Promise((r) => setTimeout(r, 3000));

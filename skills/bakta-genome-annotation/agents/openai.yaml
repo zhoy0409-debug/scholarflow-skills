@@ -1,9 +1,9 @@
 interface:
   display_name: "Bakta Genome Annotation"
   short_description: "Annotate bacterial and archaeal genomes and plasmids with Bakta's Prodigal/HMM/diamond pipeline. Identifies CDS, ncRNA, tRNA, rRNA, tmRNA, sORFs, CRISPR..."
-  default_prompt: "Use bakta-genome-annotation to design or troubleshoot this bioinformatics workflow."
+  default_prompt: "Use bakta-genome-annotation to handle this workflow."
 ownership:
   product_owner: "Zhoy"
   product_line: "Bio & Omics Toolkit"
-  origin: "jl-authored-tool-guide"
+  origin: "zhoy-original-or-curated"
   release_channel: "stable"

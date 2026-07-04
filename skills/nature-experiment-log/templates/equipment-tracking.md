@@ -1,30 +1,22 @@
-# 设备与试剂追踪
+# Equipment Tracking
 
-追踪实验室设备和试剂的编号、状态和维护记录。
+This reference supports the `nature-experiment-log` skill. Load it only when the current task needs the additional detail implied by the file name.
 
-## 设备
+## Purpose
 
-| 设备代码 | 名称 | 型号 | 编号 | 状态 | 上次校准 | 备注 |
-|---------|------|------|------|------|---------|------|
-| M1 | 马弗炉 | — | — | 正常 | — | |
-| T1 | 管式炉 | — | — | 正常 | — | |
-| E1 | 电化学工作站 | — | — | 正常 | — | |
+Use this note to keep the workflow consistent, evidence-grounded, and easy to audit. It should help the agent make decisions, structure outputs, and avoid common failure modes for this part of the workflow.
 
-## 坩埚
+## Use Pattern
 
-| 编号 | 材质 | 容量 | 使用次数 | 状态 | 备注 |
-|------|------|------|:---:|------|------|
-| AL-001 | 刚玉 | 50ml | 0 | 新 | |
-| AL-002 | 刚玉 | 100ml | 0 | 新 | |
+- Confirm the user's goal and available materials before applying the reference.
+- Prefer official sources, user-provided files, and reproducible checks.
+- Keep outputs structured enough to continue into a manuscript, report, slide deck, figure, or submission package.
+- Record assumptions, missing information, and verification needs explicitly.
 
-## 试剂
+## Checklist
 
-| 试剂 | 纯度 | 批次 | 库存 | 开封日期 | 备注 |
-|------|------|------|------|---------|------|
-| — | — | — | — | — | |
-
-## 使用
-
-- 每次实验引用设备代码和坩埚编号
-- 定期更新校准和库存状态
-- 异常设备标记为"停用"
+- Inputs are identified and scoped.
+- Sources or tools used are named.
+- Output format is explicit.
+- Risks and limitations are visible.
+- Next actions are practical and sequenced.

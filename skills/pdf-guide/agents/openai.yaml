@@ -1,9 +1,9 @@
 interface:
   display_name: "PDF Guide"
   short_description: "Use when tasks involve reading, creating, or reviewing PDF files where rendering and layout matter; prefer visual checks by rendering pages (Poppler) an..."
-  default_prompt: "Use pdf-guide to create or verify this deliverable."
+  default_prompt: "Use pdf-guide to handle this workflow."
 ownership:
   product_owner: "Zhoy"
   product_line: "Delivery Stack"
-  origin: "jl-original-or-curated"
+  origin: "zhoy-original-or-curated"
   release_channel: "stable"

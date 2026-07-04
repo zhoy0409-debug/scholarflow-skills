@@ -1,9 +1,9 @@
 interface:
-  display_name: "Reference Checker Skill"
-  short_description: "Exhaustively verify English and Chinese manuscript references before journal submission. Use when checking whether references are real, accurate, comple..."
-  default_prompt: "Use reference-checker for this task."
+  display_name: "Reference Checker"
+  short_description: "Verify references and citation metadata against reliable sources, detect mismatches, duplicates, missing fields, formatting issues, and unsupported claims."
+  default_prompt: "Use reference-checker to handle this workflow."
 ownership:
   product_owner: "Zhoy"
   product_line: "Academic Writing & Integrity"
-  origin: "jl-original-or-curated"
+  origin: "zhoy-original-or-curated"
   release_channel: "stable"

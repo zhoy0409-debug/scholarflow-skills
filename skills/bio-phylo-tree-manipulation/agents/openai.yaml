@@ -1,9 +1,9 @@
 interface:
-  display_name: "Tree Manipulation"
+  display_name: "Bio Phylo Tree Manipulation"
   short_description: "Modify phylogenetic tree structure using Biopython Bio.Phylo. Use when rooting trees with outgroups, midpoint, or MAD methods, pruning taxa, collapsing..."
-  default_prompt: "Use bio-phylo-tree-manipulation to design or troubleshoot this bioinformatics workflow."
+  default_prompt: "Use bio-phylo-tree-manipulation to handle this workflow."
 ownership:
   product_owner: "Zhoy"
   product_line: "Bio & Omics Toolkit"
-  origin: "jl-authored-tool-guide"
+  origin: "zhoy-original-or-curated"
   release_channel: "stable"

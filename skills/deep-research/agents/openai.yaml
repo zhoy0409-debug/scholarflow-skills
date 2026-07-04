@@ -1,9 +1,9 @@
 interface:
-  display_name: "Deep Research Router"
-  short_description: "Deep Research Router"
-  default_prompt: "Use deep-research for this task."
+  display_name: "Deep Research"
+  short_description: "Route deep research, literature review, systematic review, meta-analysis, fact-checking, research question refinement, and evidence mapping requests to..."
+  default_prompt: "Use deep-research to handle this workflow."
 ownership:
   product_owner: "Zhoy"
-  product_line: "Academic Writing & Integrity"
-  origin: "jl-original-or-curated"
+  product_line: "General Utilities"
+  origin: "zhoy-original-or-curated"
   release_channel: "stable"

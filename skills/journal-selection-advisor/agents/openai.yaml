@@ -1,9 +1,9 @@
 interface:
   display_name: "Journal Selection Advisor"
-  short_description: "Guide journal selection by fit, tier, and user goals."
-  default_prompt: "Use journal-selection-advisor to help choose suitable journals for this manuscript."
+  short_description: "Help users choose suitable journals for a manuscript through guided intake, manuscript-journal fit analysis, tiered recommendations, JCR/CAS/discipline..."
+  default_prompt: "Use journal-selection-advisor to handle this workflow."
 ownership:
   product_owner: "Zhoy"
   product_line: "Academic Writing & Integrity"
-  origin: "zhoy-original"
+  origin: "zhoy-original-or-curated"
   release_channel: "stable"

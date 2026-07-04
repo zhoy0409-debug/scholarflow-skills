@@ -1,9 +1,9 @@
 interface:
-  display_name: "Variant Calling with bcftools"
+  display_name: "Bio Variant Calling"
   short_description: "Call SNPs and indels from aligned reads using bcftools mpileup and call. Use when detecting variants from BAM files or generating VCF from alignments."
-  default_prompt: "Use bio-variant-calling to design or troubleshoot this bioinformatics workflow."
+  default_prompt: "Use bio-variant-calling to handle this workflow."
 ownership:
   product_owner: "Zhoy"
   product_line: "Bio & Omics Toolkit"
-  origin: "jl-authored-tool-guide"
+  origin: "zhoy-original-or-curated"
   release_channel: "stable"

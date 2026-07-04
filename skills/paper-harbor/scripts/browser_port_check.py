@@ -18,7 +18,7 @@ SITES = {
     },
     "cnki": {
         "port": 9226,
-        "name": "中国知网/CNKI",
+        "name": "English text/CNKI",
         "url": "https://www.cnki.net/",
     },
 }
@@ -27,8 +27,8 @@ ALIASES = {
     "science-direct": "sciencedirect",
     "science_direct": "sciencedirect",
     "elsevier": "sciencedirect",
-    "知网": "cnki",
-    "中国知网": "cnki",
+    "English text": "cnki",
+    "English text": "cnki",
 }
 
 

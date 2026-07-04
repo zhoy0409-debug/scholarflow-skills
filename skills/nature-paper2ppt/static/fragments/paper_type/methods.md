@@ -1,32 +1,22 @@
-# Paper type: methods / AI / tool / algorithm
+# Methods
 
-Covers methods, algorithm, tool, model, and system papers across fields, including AI and computational methods.
+This reference supports the `nature-paper2ppt` skill. Load it only when the current task needs the additional detail implied by the file name.
 
-## Presentation arc — problem-to-solution
+## Purpose
 
-Best when the paper proposes a procedure and must show it works and is better. Order the story as:
+Use this note to keep the workflow consistent, evidence-grounded, and easy to audit. It should help the agent make decisions, structure outputs, and avoid common failure modes for this part of the workflow.
 
-1. the current bottleneck or limitation,
-2. the proposed method,
-3. the workflow or architecture,
-4. the evaluation design,
-5. performance compared with baselines,
-6. ablation, robustness, or failure cases,
-7. reuse scenarios and limitations.
+## Use Pattern
 
-## Default slide structure (adapt, do not force)
+- Confirm the user's goal and available materials before applying the reference.
+- Prefer official sources, user-provided files, and reproducible checks.
+- Keep outputs structured enough to continue into a manuscript, report, slide deck, figure, or submission package.
+- Record assumptions, missing information, and verification needs explicitly.
 
-1. 标题页
-2. 研究背景：当前方法的瓶颈
-3. 核心问题：要解决什么
-4. 方法总览 / 架构图（通常 full-width 流程图）
-5. 关键设计 / 模块
-6. 评测设置：数据集、基线、指标
-7-8. 主要性能结果（与基线对比）
-9. 消融 / 稳健性 / 失败案例
-10. 方法优势与适用边界
-11. 复用场景与开源情况
-12. 局限性
-13. 总结
+## Checklist
 
-Use editable PPT-native tables/charts for benchmark numbers when values are explicit. Keep model names, dataset names, and metric names identical to the paper via the Terminology Ledger. The architecture/workflow slide is usually a full-width process diagram, not a two-column split.
+- Inputs are identified and scoped.
+- Sources or tools used are named.
+- Output format is explicit.
+- Risks and limitations are visible.
+- Next actions are practical and sequenced.

@@ -1,9 +1,9 @@
 interface:
   display_name: "Prokka Genome Annotation"
   short_description: "Annotate prokaryotic genomes (bacteria, archaea, viruses) via Prokka's BLAST/HMM pipeline. Identifies CDS, rRNA, tRNA, tmRNA, signal peptides against Pf..."
-  default_prompt: "Use prokka-genome-annotation to design or troubleshoot this bioinformatics workflow."
+  default_prompt: "Use prokka-genome-annotation to handle this workflow."
 ownership:
   product_owner: "Zhoy"
   product_line: "Bio & Omics Toolkit"
-  origin: "jl-authored-tool-guide"
+  origin: "zhoy-original-or-curated"
   release_channel: "stable"

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>存储分析报告</title>
+<title>English text</title>
 <style>
   :root{
     --bg:#f6f7f9; --card:#ffffff; --ink:#1d2129; --sub:#86909c;
@@ -145,26 +145,26 @@
 <body>
 <div class="wrap">
   <header>
-    <h1>存储分析报告</h1>
+    <h1>English text</h1>
     <div class="meta" id="meta"></div>
   </header>
   <div id="app"></div>
-  <footer>storage-analyzer · 只读分析 · 删除命令请自行在终端确认后执行</footer>
+  <footer>storage-analyzer - English text - English text</footer>
 </div>
 
 <script>
 const DATA = __REPORT_DATA__;
-const DELETE = __DELETE_CONFIG__; // null=静态只读报告；{token,endpoint}=server.py 提供一键删除
-const FM = (DATA.system && /win/i.test(DATA.system.os||'')) ? '资源管理器' : '访达'; // 文件管理器名，按系统
+const DELETE = __DELETE_CONFIG__; // null=English text; {token,endpoint}=server.py English text
+const FM = (DATA.system && /win/i.test(DATA.system.os||'')) ? 'English text' : 'English text'; // English text, English text
 
 const esc = s => String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-// "约" 已表示估算，去掉冗余的"（估算…）"括号让大小显示更干净专业
-const cleanSize = s => String(s==null?'':s).replace(/[（(]\s*估算[^）)]*[）)]/g, '').trim();
+// "English text" English text, English text"(English text...)"English text
+const cleanSize = s => String(s==null?'':s).replace(/[((]\s*English text[^))]*[))]/g, '').trim();
 
 function copyBtn(text){
   const id='c'+Math.random().toString(36).slice(2);
   // store raw text on element via data attribute (base64 to survive quotes)
-  return `<button class="copy" data-cmd="${btoa(unescape(encodeURIComponent(text)))}">复制</button>`;
+  return `<button class="copy" data-cmd="${btoa(unescape(encodeURIComponent(text)))}">English text</button>`;
 }
 
 function cmdBlock(c){
@@ -174,40 +174,40 @@ function cmdBlock(c){
 
 function renderSystem(s, sm){
   document.getElementById('meta').textContent =
-    `生成于 ${DATA.generated_at}　·　扫描耗时 ${DATA.scan_seconds||'?'}s`;
-  // 已用部分分段：绿(可自动清)+橙(需手动)+红(已识别的不建议动项)+蓝(其他/系统等未归类的已用)，余下灰底为可用
+    `English text ${DATA.generated_at}　-　English text ${DATA.scan_seconds||'?'}s`;
+  // English text: English text(English text)+English text(English text)+English text(English text)+English text(English text/English text), English text
   const total = parseGB(s.disk_total) || 1;
   const used = parseGB(s.disk_used);
   const ts = sm && sm.tier_stats;
   const g = ts ? parseGB(ts.green) : 0;
   const y = ts ? parseGB(ts.yellow) : 0;
   const r = ts ? parseGB(ts.red) : 0;
-  const other = Math.max(0, used - g - y - r); // 既非红黄绿、也未单独列出的已用空间（系统+零碎文件）
+  const other = Math.max(0, used - g - y - r); // English text, English text(English text+English text)
   let bar;
   if(g > 0 || y > 0 || r > 0){
-    const seg=(v,cls,label)=> v>0?`<i class="${cls}" style="width:${(v/total*100).toFixed(2)}%" title="${label}：约 ${v.toFixed(1)} GB"></i>`:'';
-    bar = seg(g,'seg-green','可自动清')+seg(y,'seg-yellow','需手动')+seg(r,'seg-red','谨慎清理')+seg(other,'seg-blue','系统及其他');
+    const seg=(v,cls,label)=> v>0?`<i class="${cls}" style="width:${(v/total*100).toFixed(2)}%" title="${label}: English text ${v.toFixed(1)} GB"></i>`:'';
+    bar = seg(g,'seg-green','English text')+seg(y,'seg-yellow','English text')+seg(r,'seg-red','English text')+seg(other,'seg-blue','English text');
   } else {
     bar = `<i class="used" style="width:${(used/total*100).toFixed(2)}%"></i>`;
   }
-  const fmtGB = v => v>0?`约 ${v.toFixed(1)} GB`:'-';
-  const otherPill = other>0?`<span class="pill"><span class="dot blue"></span>系统及其他 <b>${fmtGB(other)}</b></span>`:'';
+  const fmtGB = v => v>0?`English text ${v.toFixed(1)} GB`:'-';
+  const otherPill = other>0?`<span class="pill"><span class="dot blue"></span>English text <b>${fmtGB(other)}</b></span>`:'';
   let pills='';
   if(sm && sm.tier_stats){
     pills=`<div class="pills">
-      <span class="pill"><span class="dot green"></span>可自动清 <b>${fmtGB(g)}</b></span>
-      <span class="pill"><span class="dot yellow"></span>需手动 <b>${fmtGB(y)}</b></span>
-      <span class="pill"><span class="dot red"></span>谨慎清理 <b>${fmtGB(r)}</b></span>
+      <span class="pill"><span class="dot green"></span>English text <b>${fmtGB(g)}</b></span>
+      <span class="pill"><span class="dot yellow"></span>English text <b>${fmtGB(y)}</b></span>
+      <span class="pill"><span class="dot red"></span>English text <b>${fmtGB(r)}</b></span>
       ${otherPill}
     </div>`;
   }
-  // 多盘符（Windows）：主盘用上面的分段条，其余盘紧凑列出
+  // English text(Windows): English text, English text
   const allDisks = s.disks || [];
   const others = allDisks.filter(d => d.name !== s.disk_name);
   const barLabel = allDisks.length > 1
-    ? `<div class="bar-label">系统盘 ${esc(s.disk_name||'')} · 已用部分按清理分级着色</div>` : '';
+    ? `<div class="bar-label">English text ${esc(s.disk_name||'')} - English text</div>` : '';
   const otherDisksBlock = others.length ? `<div class="other-disks">
-      <div class="label">其他磁盘</div>
+      <div class="label">English text</div>
       ${others.map(d=>{
         const u=parseGB(d.used), t=parseGB(d.total)||1;
         const pct=Math.min(100, u/t*100).toFixed(1);
@@ -217,25 +217,25 @@ function renderSystem(s, sm){
       }).join('')}</div>` : '';
   return `<div class="overview">
     <div class="stats">
-      <div class="stat"><div class="k">总容量</div><div class="v">${esc(s.disk_total)}</div></div>
-      <div class="stat"><div class="k">已用</div><div class="v">${esc(s.disk_used)}</div></div>
-      <div class="stat"><div class="k">可用</div><div class="v">${esc(s.disk_free)}</div></div>
-      ${s.purgeable?`<div class="stat"><div class="k">可清除(系统)</div><div class="v">${esc(s.purgeable)}</div></div>`:''}
+      <div class="stat"><div class="k">English text</div><div class="v">${esc(s.disk_total)}</div></div>
+      <div class="stat"><div class="k">English text</div><div class="v">${esc(s.disk_used)}</div></div>
+      <div class="stat"><div class="k">English text</div><div class="v">${esc(s.disk_free)}</div></div>
+      ${s.purgeable?`<div class="stat"><div class="k">English text(English text)</div><div class="v">${esc(s.purgeable)}</div></div>`:''}
     </div>
     ${barLabel}
     <div class="bar">${bar}</div>
     ${pills}
     ${otherDisksBlock}
     <div class="sysgrid">
-      <div><span>系统　</span>${esc(s.os)} (${esc(s.build)})</div>
-      <div><span>架构　</span>${esc(s.arch)}</div>
-      <div><span>文件系统　</span>${esc(s.filesystem)}</div>
-      <div><span>用户　</span>${esc(s.user)}</div>
-      <div><span>主目录　</span>${esc(s.home)}</div>
+      <div><span>English text　</span>${esc(s.os)} (${esc(s.build)})</div>
+      <div><span>English text　</span>${esc(s.arch)}</div>
+      <div><span>English text　</span>${esc(s.filesystem)}</div>
+      <div><span>English text　</span>${esc(s.user)}</div>
+      <div><span>English text　</span>${esc(s.home)}</div>
     </div>
   </div>`;
 }
-// 从 "约 27.8 GB（…）" / "300.3 GB" 这类字符串里取数值，统一换算成 GB
+// English text "English text 27.8 GB(...)" / "300.3 GB" English text, English text GB
 function parseGB(str){
   if(!str) return 0;
   const m=String(str).match(/([\d.]+)\s*(TB|GB|MB)?/i);
@@ -256,8 +256,8 @@ function renderTop5(rows){
     <td class="path">${esc(r.path)}</td>
     <td>${esc(r.note)}</td>
   </tr>`).join('');
-  return `<div class="sec"><h2>占用排行 Top 5</h2>
-    <div class="table-scroll"><table><thead><tr><th>#</th><th>级</th><th>大小</th><th>类型</th><th>项目</th><th>路径</th><th>说明</th></tr></thead>
+  return `<div class="sec"><h2>English text Top 5</h2>
+    <div class="table-scroll"><table><thead><tr><th>#</th><th>English text</th><th>English text</th><th>English text</th><th>English text</th><th>English text</th><th>English text</th></tr></thead>
     <tbody>${body}</tbody></table></div></div>`;
 }
 
@@ -265,105 +265,105 @@ function renderGreen(items){
   if(!items||!items.length) return '';
   const cards = items.map(it=>{
     const procs=(it.kill_processes&&it.kill_processes.length)
-      ? `<div class="field"><div class="label">清理前需关闭</div>${it.kill_processes.map(p=>`<span class="tag">${esc(p)}</span>`).join('')}</div>`
-      : `<div class="field"><div class="label">清理前需关闭</div><span class="note">无需关闭任何进程</span></div>`;
+      ? `<div class="field"><div class="label">English text</div>${it.kill_processes.map(p=>`<span class="tag">${esc(p)}</span>`).join('')}</div>`
+      : `<div class="field"><div class="label">English text</div><span class="note">English text</span></div>`;
     const cmds=(it.commands||[]).map(cmdBlock).join('');
     return card('green', it.name, it.size_estimate, it.path,
-      procs + `<div class="field"><div class="label">清理命令（自行确认后执行）</div>${cmds}</div>` + delBlock(it));
+      procs + `<div class="field"><div class="label">English text(English text)</div>${cmds}</div>` + delBlock(it));
   }).join('');
-  return section('🟢 可自动清理（纯缓存/临时文件，可再生）', items.length, cards, greenBatchActions(items));
+  return section('🟢 English text(English text/English text, English text)', items.length, cards, greenBatchActions(items));
 }
 
-// 分组级批量按钮：绿灯每项都是无条件安全的可再生缓存，给「全部移废纸篓/全部删除」一次清完。
-// 橙灯/红灯需逐项判断，不给批量。仅 server.py 模式且至少一项有 trash_paths 时渲染。
+// English text: English text, English text「English text/English text」English text. 
+// English text/English text, English text. English text server.py English text trash_paths English text. 
 function greenBatchActions(items){
   if(!DELETE) return '';
   if(!items.some(it => it.trash_paths && it.trash_paths.length)) return '';
   return `<span class="sec-actions">
-    <button class="del-btn trash" onclick="doBatch(this,'trash')">全部移废纸篓</button>
-    <button class="del-btn danger" onclick="doBatch(this,'rm')">全部删除</button>
+    <button class="del-btn trash" onclick="doBatch(this,'trash')">English text</button>
+    <button class="del-btn danger" onclick="doBatch(this,'rm')">English text</button>
     <span class="del-status sec-status"></span>
   </span>`;
 }
 
-// 批量处理：收集本组所有未清理项的 trash_paths，确认一次，一次性提交。
+// English text: English text trash_paths, English text, English text. 
 function doBatch(btn, mode){
   const secActions = btn.closest('.sec-actions');
   const sec = btn.closest('.sec');
   const status = secActions.querySelector('.del-status');
   const wraps = [...sec.querySelectorAll('.item.green .del-actions')]
     .filter(w => !w.closest('.item').classList.contains('cleaned'));
-  if(!wraps.length){ status.textContent='没有可清理的项了'; status.className='del-status sec-status'; return; }
+  if(!wraps.length){ status.textContent='English text'; status.className='del-status sec-status'; return; }
   const allPaths=[]; let gb=0;
   wraps.forEach(w=>{
     JSON.parse(decodeURIComponent(escape(atob(w.dataset.paths)))).forEach(p=>allPaths.push(p));
     const sz=w.closest('.item').querySelector('.item-size'); if(sz) gb+=parseGB(sz.textContent);
   });
-  const verb = mode==='rm' ? '直接删除（不可恢复）' : '移到废纸篓（可逆，清空后释放）';
-  const sizeStr = gb>0 ? `，约 ${gb.toFixed(1)} GB` : '';
-  if(!confirm(`确认将这组 ${wraps.length} 项缓存全部${verb}？\n共 ${allPaths.length} 个路径${sizeStr}。`)) return;
+  const verb = mode==='rm' ? 'English text(English text)' : 'English text(English text, English text)';
+  const sizeStr = gb>0 ? `, English text ${gb.toFixed(1)} GB` : '';
+  if(!confirm(`English text ${wraps.length} English text${verb}? \nEnglish text ${allPaths.length} English text${sizeStr}. `)) return;
   postAction(secActions, allPaths, mode).then(res=>{
     if(res.ok){
-      status.textContent = mode==='rm' ? `✓ 已删除 ${wraps.length} 项` : `✓ 已移 ${wraps.length} 项到废纸篓`;
+      status.textContent = mode==='rm' ? `✓ English text ${wraps.length} English text` : `✓ English text ${wraps.length} English text`;
       status.className='del-status sec-status ok';
       wraps.forEach(w=>{
         const item=w.closest('.item'); item.classList.add('cleaned');
         const badge=item.querySelector('.item-head .item-badge');
-        if(badge) badge.textContent = mode==='rm' ? '已删除' : '已移废纸篓';
+        if(badge) badge.textContent = mode==='rm' ? 'English text' : 'English text';
         const ist=w.querySelector('.del-status');
-        if(ist){ ist.textContent = mode==='rm'?'✓ 已删除':'✓ 已移到废纸篓'; ist.className='del-status ok'; }
+        if(ist){ ist.textContent = mode==='rm'?'✓ English text':'✓ English text'; ist.className='del-status ok'; }
         w.querySelectorAll('.del-btn.trash,.del-btn.danger').forEach(b=>b.remove());
       });
       secActions.querySelectorAll('.del-btn').forEach(b=>b.remove());
-    } else { status.textContent='✗ '+(res.error||'失败'); status.className='del-status sec-status err'; }
+    } else { status.textContent='✗ '+(res.error||'English text'); status.className='del-status sec-status err'; }
   });
 }
 
-// 一键删除按钮：仅当 server.py 提供了 DELETE 配置、且该项有具体 trash_paths 时渲染
+// English text: English text server.py English text DELETE English text, English text trash_paths English text
 function delBlock(it){
   if(!DELETE || !it.trash_paths || !it.trash_paths.length) return '';
   const payload = btoa(unescape(encodeURIComponent(JSON.stringify(it.trash_paths))));
   return `<div class="field del-actions" data-paths="${payload}">
-    <div class="label">在网页上直接处理（${it.trash_paths.length} 个路径）</div>
+    <div class="label">English text(${it.trash_paths.length} English text)</div>
     <div class="del-row">
-      <button class="del-btn trash" onclick="doDelete(this,'trash')">移到废纸篓</button>
-      <button class="del-btn danger" onclick="doDelete(this,'rm')">直接删除</button>
+      <button class="del-btn trash" onclick="doDelete(this,'trash')">English text</button>
+      <button class="del-btn danger" onclick="doDelete(this,'rm')">English text</button>
       <span class="del-status"></span>
     </div>
-    <div class="del-note"><b>移到废纸篓</b>：可逆，删错能从${FM}废纸篓捞回，但要清空废纸篓才真正释放空间。<b>直接删除</b>：立即释放、不可恢复。绿灯都是可再生缓存，删了会自动重建。</div>
+    <div class="del-note"><b>English text</b>: English text, English text${FM}English text, English text. <b>English text</b>: English text, English text. English text, English text. </div>
   </div>`;
 }
 
 function postAction(wrap, paths, mode){
   const status = wrap.querySelector('.del-status');
   const btns = wrap.querySelectorAll('.del-btn');
-  status.textContent = '处理中…'; status.className='del-status';
+  status.textContent = 'English text...'; status.className='del-status';
   btns.forEach(b=>b.disabled=true);
   return fetch(DELETE.endpoint, {method:'POST', headers:{'Content-Type':'application/json'},
     body:JSON.stringify({token:DELETE.token, paths, mode})})
     .then(r=>r.json()).then(res=>{ btns.forEach(b=>b.disabled=false); return res; })
-    .catch(e=>{ btns.forEach(b=>b.disabled=false); return {ok:false, error:'连接失败：'+e}; });
+    .catch(e=>{ btns.forEach(b=>b.disabled=false); return {ok:false, error:'English text: '+e}; });
 }
 
 function doDelete(btn, mode){
   const wrap = btn.closest('.del-actions');
   const paths = JSON.parse(decodeURIComponent(escape(atob(wrap.dataset.paths))));
-  const verb = mode==='rm' ? '直接删除（不可恢复）' : '移到废纸篓（访达可恢复）';
-  if(!confirm(`确认${verb}以下 ${paths.length} 个路径？\n\n`+paths.join('\n'))) return;
+  const verb = mode==='rm' ? 'English text(English text)' : 'English text(English text)';
+  if(!confirm(`English text${verb}English text ${paths.length} English text? \n\n`+paths.join('\n'))) return;
   postAction(wrap, paths, mode).then(res=>{
     const status = wrap.querySelector('.del-status');
     if(res.ok){
-      status.textContent = mode==='rm' ? '✓ 已删除，空间已释放' : '✓ 已移到废纸篓（访达可恢复，清空后释放空间）';
+      status.textContent = mode==='rm' ? '✓ English text, English text' : '✓ English text(English text, English text)';
       status.className='del-status ok';
       wrap.querySelectorAll('.del-btn.trash,.del-btn.danger').forEach(b=>b.remove());
-      // 折叠状态下也能看到：标题行打上徽标 + 整行变灰
+      // English text: English text + English text
       const item = wrap.closest('.item');
       if(item){
         item.classList.add('cleaned');
         const badge = item.querySelector('.item-head .item-badge');
-        if(badge) badge.textContent = mode==='rm' ? '已删除' : '已移废纸篓';
+        if(badge) badge.textContent = mode==='rm' ? 'English text' : 'English text';
       }
-    } else { status.textContent='✗ '+(res.error||'失败'); status.className='del-status err'; }
+    } else { status.textContent='✗ '+(res.error||'English text'); status.className='del-status err'; }
   });
 }
 
@@ -372,8 +372,8 @@ function doOpen(btn){
   const paths = JSON.parse(decodeURIComponent(escape(atob(wrap.dataset.open))));
   postAction(wrap, paths, 'open').then(res=>{
     const status = wrap.querySelector('.del-status');
-    if(res.ok){ status.textContent='✓ 已在'+FM+'打开，自行审查删除'; status.className='del-status ok'; }
-    else { status.textContent='✗ '+(res.error||'失败'); status.className='del-status err'; }
+    if(res.ok){ status.textContent='✓ English text'+FM+'English text, English text'; status.className='del-status ok'; }
+    else { status.textContent='✗ '+(res.error||'English text'); status.className='del-status err'; }
   });
 }
 
@@ -382,52 +382,52 @@ const b64 = o => btoa(unescape(encodeURIComponent(JSON.stringify(o))));
 function renderYellow(items){
   if(!items||!items.length) return '';
   const cards = items.map(it=>card('yellow', it.name, it.size, it.path,
-    `<div class="field"><div class="label">内容画像</div>${esc(it.content_profile)}</div>
-     <div class="field"><div class="label">为什么需要人工判断</div>${esc(it.why_manual)}</div>
-     <div class="field"><div class="label">处置路径</div>${esc(it.disposal)}</div>
+    `<div class="field"><div class="label">English text</div>${esc(it.content_profile)}</div>
+     <div class="field"><div class="label">English text</div>${esc(it.why_manual)}</div>
+     <div class="field"><div class="label">English text</div>${esc(it.disposal)}</div>
      <div class="risk">⚠️ ${esc(it.risk)}</div>` + yellowActions(it))).join('');
-  return section('🟡 需你参与的手动清理（含用户数据）', items.length, cards);
+  return section('🟡 English text(English text)', items.length, cards);
 }
 
-// 橙灯操作：打开文件夹（去自己审查删）+ 仅当有核实过的安全子路径时给「移到废纸篓」（只可逆，不直接删）
+// English text: English text(English text)+ English text「English text」(English text, English text)
 function yellowActions(it){
   if(!DELETE) return '';
   const hasTrash = it.trash_paths && it.trash_paths.length;
   const trashBtn = hasTrash
-    ? `<button class="del-btn trash" onclick="doDelete(this,'trash')">移到废纸篓（仅安全部分）</button>` : '';
+    ? `<button class="del-btn trash" onclick="doDelete(this,'trash')">English text(English text)</button>` : '';
   const trashNote = hasTrash
-    ? `<b>移到废纸篓（仅安全部分）</b>：只移这一项核实过可安全清理的子目录，可逆、需清空废纸篓才释放空间。` : '';
+    ? `<b>English text(English text)</b>: English text, English text, English text. ` : '';
   const openNote = it.open_note ? esc(it.open_note) : '';
   return `<div class="field del-actions" data-paths="${hasTrash?b64(it.trash_paths):''}" data-open="${b64([it.path])}">
-    <div class="label">在网页上处理</div>
+    <div class="label">English text</div>
     <div class="del-row">
-      <button class="del-btn open" onclick="doOpen(this)">在${FM}里打开</button>
+      <button class="del-btn open" onclick="doOpen(this)">English text${FM}English text</button>
       ${trashBtn}
       <span class="del-status"></span>
     </div>
-    <div class="del-note"><b>在${FM}里打开</b>：只打开文件夹供你自己查看，不删任何东西。注意 App 托管的数据（B站/微信/Chrome 等）在${FM}里是程序内部格式、文件名看不懂，想清优先去对应 App 内删。${trashNote}${openNote?'<br>'+openNote:''}</div>
+    <div class="del-note"><b>English text${FM}English text</b>: English text, English text. English text App English text(BEnglish text/English text/Chrome English text)English text${FM}English text, English text, English text App English text. ${trashNote}${openNote?'<br>'+openNote:''}</div>
   </div>`;
 }
 
 function renderRed(items){
   if(!items||!items.length) return '';
   const cards = items.map(it=>card('red', it.name, it.size||'', it.path,
-    `<div class="field"><div class="label">为什么不建议手删</div>${esc(it.why_keep)}</div>
-     <div class="field"><div class="label">卸载 / 释放建议</div>${esc(it.indirect_release)}</div>
-     ${it.auto_reclaim?`<div class="field"><div class="label">是否自动回收</div>${esc(it.auto_reclaim)}</div>`:''}` + redActions(it))).join('');
-  return section('🔴 谨慎清理（建议走正规卸载，别手动拖删）', items.length, cards);
+    `<div class="field"><div class="label">English text</div>${esc(it.why_keep)}</div>
+     <div class="field"><div class="label">English text / English text</div>${esc(it.indirect_release)}</div>
+     ${it.auto_reclaim?`<div class="field"><div class="label">English text</div>${esc(it.auto_reclaim)}</div>`:''}` + redActions(it))).join('');
+  return section('🔴 English text(English text, English text)', items.length, cards);
 }
 
-// 红灯操作：只给「在文件管理器里打开并选中该 App」，让用户自己正规卸载（不后台代删，App 需谨慎）
+// English text: English text「English text App」, English text(English text, App English text)
 function redActions(it){
   if(!DELETE || !it.app_paths || !it.app_paths.length) return '';
   return `<div class="field del-actions" data-open="${b64(it.app_paths)}">
-    <div class="label">在网页上处理</div>
+    <div class="label">English text</div>
     <div class="del-row">
-      <button class="del-btn open" onclick="doOpen(this)">在${FM}里打开（去卸载）</button>
+      <button class="del-btn open" onclick="doOpen(this)">English text${FM}English text(English text)</button>
       <span class="del-status"></span>
     </div>
-    <div class="del-note"><b>在${FM}里打开</b>：定位到该应用，你可以右键「移到废纸篓」卸载，或用它自带的卸载器。应用本体放在系统目录、可能需要管理员密码，所以由你在${FM}里手动操作更稳妥，本页不代删。</div>
+    <div class="del-note"><b>English text${FM}English text</b>: English text, English text「English text」English text, English text. English text, English text, English text${FM}English text, English text. </div>
   </div>`;
 }
 
@@ -446,29 +446,29 @@ function card(tier,name,size,path,inner){
     </div></div>`;
 }
 function section(title,count,inner,actions){
-  return `<div class="sec"><h2>${esc(title)} <span class="count">${count} 项</span>${actions||''}</h2>${inner}</div>`;
+  return `<div class="sec"><h2>${esc(title)} <span class="count">${count} English text</span>${actions||''}</h2>${inner}</div>`;
 }
 
 const sumList=a=>(a&&a.length)?`<ul>${a.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`:'';
 
-// 执行建议：放在 Top5 之后、三级明细之前（先看处方，再看每项怎么做）
-// 开头用 overview 一句洞察作引子，下面是优先级清单
+// English text: English text Top5 English text, English text(English text, English text)
+// English text overview English text, English text
 function renderPriority(sm){
   if(!sm || (!sm.priority && !sm.overview)) return '';
   const intro = sm.overview?`<p class="lead">${esc(sm.overview)}</p>`:'';
   const body = sm.priority?(Array.isArray(sm.priority)?sumList(sm.priority):`<p>${esc(sm.priority)}</p>`):'';
-  return `<div class="sec"><h2>执行建议</h2><div class="summary">${intro}${body}</div></div>`;
+  return `<div class="sec"><h2>English text</h2><div class="summary">${intro}${body}</div></div>`;
 }
 
-// 长期优化建议：留在报告最后
+// English text: English text
 function renderLongTerm(sm){
   if(!sm || !sm.long_term || !sm.long_term.length) return '';
-  return `<div class="sec"><h2>长期优化建议</h2><div class="summary">${sumList(sm.long_term)}</div></div>`;
+  return `<div class="sec"><h2>English text</h2><div class="summary">${sumList(sm.long_term)}</div></div>`;
 }
 
 function renderDenied(){
   if(!DATA.denied||!DATA.denied.length) return '';
-  return `<div class="denied"><b>以下目录权限不足未能读取，可能遗漏体量：</b><br>${DATA.denied.map(esc).join('<br>')}</div>`;
+  return `<div class="denied"><b>English text, English text: </b><br>${DATA.denied.map(esc).join('<br>')}</div>`;
 }
 
 // mount
@@ -488,8 +488,8 @@ document.addEventListener('click', e=>{
   e.stopPropagation();
   const text=decodeURIComponent(escape(atob(b.dataset.cmd)));
   navigator.clipboard.writeText(text).then(()=>{
-    b.textContent='已复制'; b.classList.add('done');
-    setTimeout(()=>{b.textContent='复制';b.classList.remove('done');},1500);
+    b.textContent='English text'; b.classList.add('done');
+    setTimeout(()=>{b.textContent='English text';b.classList.remove('done');},1500);
   });
 });
 </script>

@@ -1,9 +1,9 @@
 interface:
-  display_name: "SRA Data"
+  display_name: "Bio Sra Data"
   short_description: "Download raw sequencing reads from NCBI SRA using sra-tools (prefetch, fasterq-dump, vdb-validate) or the ENA mirror. Use when pulling FASTQ for SRR/ERR..."
-  default_prompt: "Use bio-sra-data to design or troubleshoot this bioinformatics workflow."
+  default_prompt: "Use bio-sra-data to handle this workflow."
 ownership:
   product_owner: "Zhoy"
   product_line: "Bio & Omics Toolkit"
-  origin: "jl-authored-tool-guide"
+  origin: "zhoy-original-or-curated"
   release_channel: "stable"

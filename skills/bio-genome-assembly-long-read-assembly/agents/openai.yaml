@@ -1,9 +1,9 @@
 interface:
-  display_name: "Long-Read Assembly (Noisy Reads)"
+  display_name: "Bio Genome Assembly Long Read Assembly"
   short_description: "Assembles genomes de novo from noisy long reads (Oxford Nanopore R9/R10/Dorado, PacBio CLR) with Flye (repeat graph), Canu (correct-trim-assemble OLC),..."
-  default_prompt: "Use bio-genome-assembly-long-read-assembly to design or troubleshoot this bioinformatics workflow."
+  default_prompt: "Use bio-genome-assembly-long-read-assembly to handle this workflow."
 ownership:
   product_owner: "Zhoy"
   product_line: "Bio & Omics Toolkit"
-  origin: "jl-authored-tool-guide"
+  origin: "zhoy-original-or-curated"
   release_channel: "stable"

@@ -1,9 +1,9 @@
 interface:
-  display_name: "AMR Detection"
+  display_name: "Bio Metagenomics Amr Detection"
   short_description: "Detect antimicrobial resistance genes using AMRFinderPlus, ResFinder, and CARD. Screen isolates and metagenomes for resistance determinants. Use when ch..."
-  default_prompt: "Use bio-metagenomics-amr-detection to design or troubleshoot this bioinformatics workflow."
+  default_prompt: "Use bio-metagenomics-amr-detection to handle this workflow."
 ownership:
   product_owner: "Zhoy"
   product_line: "Bio & Omics Toolkit"
-  origin: "jl-authored-tool-guide"
+  origin: "zhoy-original-or-curated"
   release_channel: "stable"

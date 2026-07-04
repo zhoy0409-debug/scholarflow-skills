@@ -1,9 +1,9 @@
 interface:
-  display_name: "Randomization and Blocking"
+  display_name: "Bio Experimental Design Randomization Blocking"
   short_description: "Structures biological experiments so inference is valid by construction, covering Fisher's principles (randomization, replication, local control), the e..."
-  default_prompt: "Use bio-experimental-design-randomization-blocking to design or troubleshoot this bioinformatics workflow."
+  default_prompt: "Use bio-experimental-design-randomization-blocking to handle this workflow."
 ownership:
   product_owner: "Zhoy"
   product_line: "Bio & Omics Toolkit"
-  origin: "jl-authored-tool-guide"
+  origin: "zhoy-original-or-curated"
   release_channel: "stable"

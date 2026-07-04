@@ -42,13 +42,13 @@ def main():
         tpl = f.read()
 
     blob = json.dumps(data, ensure_ascii=False)
-    # 静态报告不带删除能力（DELETE=null），删除按钮只在 server.py 服务时出现
+    # English text(DELETE=null), English text server.py English text
     html = tpl.replace("__REPORT_DATA__", blob).replace("__DELETE_CONFIG__", "null")
 
     with open(out, "w", encoding="utf-8") as f:
         f.write(html)
-    print(f"报告已生成: {out}")
-    print(f"打开: open '{out}'")
+    print(f"English text: {out}")
+    print(f"English text: open '{out}'")
 
 
 if __name__ == "__main__":

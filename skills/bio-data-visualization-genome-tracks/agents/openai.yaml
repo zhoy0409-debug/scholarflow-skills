@@ -1,9 +1,9 @@
 interface:
-  display_name: "Genome Browser Tracks"
+  display_name: "Bio Data Visualization Genome Tracks"
   short_description: "Build genome-browser-style multi-track figures with pyGenomeTracks (config-driven), Gviz (R), and IGV batch screenshotting. Covers BigWig coverage track..."
-  default_prompt: "Use bio-data-visualization-genome-tracks to design or troubleshoot this bioinformatics workflow."
+  default_prompt: "Use bio-data-visualization-genome-tracks to handle this workflow."
 ownership:
   product_owner: "Zhoy"
   product_line: "Bio & Omics Toolkit"
-  origin: "jl-authored-tool-guide"
+  origin: "zhoy-original-or-curated"
   release_channel: "stable"

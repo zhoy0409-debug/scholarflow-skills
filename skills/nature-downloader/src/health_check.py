@@ -1,7 +1,7 @@
-"""连通性自检模块。
+"""English text. 
 
-下载前对配置做轻量可达性探测，结果缓存 10 分钟。
-失败时给出具体排查建议。
+English text, English text 10 English text. 
+English text. 
 """
 
 from __future__ import annotations
@@ -14,9 +14,9 @@ from typing import Any, Optional
 from config import CONFIG_DIR, load_config
 from validators import validate_carsi_entry, validate_sso_domain
 
-# 缓存文件
+# English text
 CACHE_FILE = CONFIG_DIR / "health_cache.json"
-CACHE_TTL = 600  # 10 分钟
+CACHE_TTL = 600  # 10 English text
 
 
 def _load_cache() -> Optional[dict[str, Any]]:
@@ -41,46 +41,46 @@ def _clear_cache() -> None:
 
 
 def _diagnose_failure(cfg: dict[str, Any]) -> list[str]:
-    """根据配置内容给出排查建议。"""
+    """English text. """
     suggestions: list[str] = []
     auth = cfg.get("auth", {})
     sso_domain = auth.get("sso_domain", "")
     carsi_entry = auth.get("carsi_entry", "")
 
-    suggestions.append("可能原因与建议：")
+    suggestions.append("English text: ")
 
     if sso_domain:
         suggestions.append(
-            f"1. 检查网络：当前是否在校园网内或已连 VPN？"
-            f"校外访问 {sso_domain} 可能需要 VPN。"
+            f"1. English text: English text VPN? "
+            f"English text {sso_domain} English text VPN. "
         )
     if carsi_entry:
         suggestions.append(
-            f"2. CARSI 入口可能变更：访问 https://www.carsi.edu.cn/ "
-            f"确认贵校当前入口，或说「换学校」重新配置。"
+            f"2. CARSI English text: English text https://www.carsi.edu.cn/ "
+            f"English text, English text「English text」English text. "
         )
-    suggestions.append("3. 学校认证服务可能临时不可用，稍后重试。")
-    suggestions.append("4. 如持续失败，说「重新配置」进入向导修正参数。")
+    suggestions.append("3. English text, English text. ")
+    suggestions.append("4. English text, English text「English text」English text. ")
 
     return suggestions
 
 
 def health_check(force: bool = False) -> dict[str, Any]:
-    """执行连通性自检。
+    """English text. 
 
-    参数：
-        force: 是否跳过缓存强制检测
+    English text: 
+        force: English text
 
-    返回：
+    English text: 
         {
             "ok": bool,
             "checked_at": str,
             "cached": bool,
             "details": [...],
-            "suggestions": [...]  # 仅失败时
+            "suggestions": [...]  # English text
         }
     """
-    # 检查缓存
+    # English text
     if not force:
         cache = _load_cache()
         if cache and (time.time() - cache.get("checked_at_ts", 0)) < CACHE_TTL:
@@ -93,8 +93,8 @@ def health_check(force: bool = False) -> dict[str, Any]:
             "ok": False,
             "checked_at": time.strftime("%Y-%m-%d %H:%M:%S"),
             "cached": False,
-            "details": ["未找到配置，请先运行配置向导"],
-            "suggestions": ["说「配置学校」或「/reconfig」进入配置向导"],
+            "details": ["English text, English text"],
+            "suggestions": ["English text「English text」English text「/reconfig」English text"],
         }
 
     details: list[str] = []
@@ -104,24 +104,24 @@ def health_check(force: bool = False) -> dict[str, Any]:
     sso_domain = auth.get("sso_domain", "")
     carsi_entry = auth.get("carsi_entry", "")
 
-    # 1. SSO 域名探测
+    # 1. SSO English text
     if sso_domain:
         ok, msg = validate_sso_domain(sso_domain)
         details.append(f"[SSO] {msg}")
         if not ok:
             all_ok = False
     else:
-        details.append("[SSO] 未配置 sso_domain")
+        details.append("[SSO] English text sso_domain")
         all_ok = False
 
-    # 2. CARSI 入口探测（如配置了）
+    # 2. CARSI English text(English text)
     if carsi_entry:
         ok, msg = validate_carsi_entry(carsi_entry)
         details.append(f"[CARSI] {msg}")
         if not ok:
             all_ok = False
     else:
-        details.append("[CARSI] 未配置 CARSI 入口（如该校无 CARSI 可忽略）")
+        details.append("[CARSI] English text CARSI English text(English text CARSI English text)")
 
     result: dict[str, Any] = {
         "ok": all_ok,
@@ -134,21 +134,21 @@ def health_check(force: bool = False) -> dict[str, Any]:
     if not all_ok:
         result["suggestions"] = _diagnose_failure(cfg)
 
-    # 写缓存
+    # English text
     _save_cache(result)
 
     return result
 
 
 def clear_cache() -> None:
-    """清除自检缓存（配置变更后调用）。"""
+    """English text(English text). """
     _clear_cache()
 
 
 if __name__ == "__main__":
     result = health_check(force=True)
-    print(f"自检结果：{'通过' if result['ok'] else '失败'}")
-    print(f"检测时间：{result['checked_at']}")
+    print(f"English text: {'English text' if result['ok'] else 'English text'}")
+    print(f"English text: {result['checked_at']}")
     for d in result.get("details", []):
         print(f"  {d}")
     for s in result.get("suggestions", []):

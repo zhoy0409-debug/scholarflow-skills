@@ -1,9 +1,9 @@
 interface:
-  display_name: "Kraken2 Classification"
+  display_name: "Bio Metagenomics Kraken"
   short_description: "Taxonomic classification of metagenomic reads using Kraken2. Fast k-mer based classification against RefSeq database. Use when performing initial taxono..."
-  default_prompt: "Use bio-metagenomics-kraken to design or troubleshoot this bioinformatics workflow."
+  default_prompt: "Use bio-metagenomics-kraken to handle this workflow."
 ownership:
   product_owner: "Zhoy"
   product_line: "Bio & Omics Toolkit"
-  origin: "jl-authored-tool-guide"
+  origin: "zhoy-original-or-curated"
   release_channel: "stable"

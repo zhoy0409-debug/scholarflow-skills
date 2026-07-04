@@ -1,9 +1,9 @@
 interface:
-  display_name: "Full-Paper Markdown Reader"
-  short_description: "Build full-paper Chinese-English side-by-side, figure/table-aware, source-grounded Markdown readers for journal or conference papers from PDF, DOI, arXi..."
-  default_prompt: "Use nature-reader to help with my research workflow."
+  display_name: "Nature Reader"
+  short_description: "Read research papers deeply and produce structured notes that preserve article logic, figures, methods, evidence chains, limitations, and reusable citat..."
+  default_prompt: "Use nature-reader to handle this workflow."
 ownership:
   product_owner: "Zhoy"
   product_line: "Nature Research Suite"
-  origin: "jl-refactored-community"
+  origin: "zhoy-original-or-curated"
   release_channel: "stable"

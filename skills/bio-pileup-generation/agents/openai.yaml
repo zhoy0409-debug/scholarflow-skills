@@ -1,9 +1,9 @@
 interface:
-  display_name: "Pileup Generation"
+  display_name: "Bio Pileup Generation"
   short_description: "Generate pileup data for variant calling using samtools mpileup and pysam. Use when preparing data for variant calling, analyzing per-position read data..."
-  default_prompt: "Use bio-pileup-generation to design or troubleshoot this bioinformatics workflow."
+  default_prompt: "Use bio-pileup-generation to handle this workflow."
 ownership:
   product_owner: "Zhoy"
   product_line: "Bio & Omics Toolkit"
-  origin: "jl-authored-tool-guide"
+  origin: "zhoy-original-or-curated"
   release_channel: "stable"

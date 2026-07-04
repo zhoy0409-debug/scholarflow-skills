@@ -1,9 +1,9 @@
 interface:
-  display_name: "Primer Validation"
+  display_name: "Bio Primer Design Primer Validation"
   short_description: "Validate PCR primers for specificity, dimers, hairpins, and secondary structures using primer3-py thermodynamic calculations. Check self-complementarity..."
-  default_prompt: "Use bio-primer-design-primer-validation to design or troubleshoot this bioinformatics workflow."
+  default_prompt: "Use bio-primer-design-primer-validation to handle this workflow."
 ownership:
   product_owner: "Zhoy"
   product_line: "Bio & Omics Toolkit"
-  origin: "jl-authored-tool-guide"
+  origin: "zhoy-original-or-curated"
   release_channel: "stable"

@@ -1,88 +1,41 @@
 ---
 name: nature-paper-to-patent
-description: Convert scientific papers, theses, technical reports, source code, figures, or research manuscripts into evidence-grounded Chinese invention patent drafts. Use when an AI agent must extract patentable technical contributions, map every claimed feature to source evidence, preserve core formulas as editable Office Math, generate claim-aligned flowcharts and methodology figures, compare a paper with an existing patent, audit support and consistency, or deliver separate Chinese DOCX files for claims, specification, abstract, and abstract figure.
+description: Transform research-paper content into patent-oriented drafts, including invention extraction, claims thinking, embodiment structure, figures, novelty boundaries, and review checklists.
 ---
 
-# Paper to Chinese Patent
+# Nature Paper To Patent
 
-Use this file as the router for the patent-drafting workflow. Do not draft the
-application directly from the paper abstract or contribution list.
+Use this skill to execute the workflow described in the frontmatter description. Keep the workflow practical, source-grounded, and deliverable-oriented.
 
-## 1. Load the workflow
+## Operating Principles
 
-Read `manifest.yaml`, then read every file under `always_load`.
+- Start from the user's actual goal, materials, constraints, and desired deliverable.
+- Ask only the questions needed to avoid a wrong workflow or unsafe assumption.
+- Prefer official sources, user-provided files, and reproducible commands over memory.
+- Keep claims conservative when evidence, metrics, journal data, or source materials are incomplete.
+- Preserve a clear audit trail for citations, file edits, external tools, and decisions.
 
-Detect these axes from the user's files and request:
+## Workflow
 
-- `source_format`: selectable PDF, scanned PDF, pasted text, or mixed project;
-- `task_mode`: full draft, claim set, disclosure analysis, or paper-patent audit;
-- `invention_type`: algorithm/software, apparatus/system, process/material, or mixed.
+1. Clarify the task outcome, required inputs, deadline, and risk boundaries.
+2. Inspect the available materials before proposing a final route.
+3. Choose the smallest workflow that can produce a usable result.
+4. Use bundled references or scripts only when they materially improve reliability.
+5. Produce a structured deliverable that the user can continue using without re-explaining the context.
+6. Run a final quality check for completeness, evidence grounding, formatting, and safety boundaries.
 
-State the detected values in one short line. Load only the matching fragments
-declared in the manifest. Load detailed references only when their condition
-applies.
+## Expected Outputs
 
-## 2. Preserve source grounding
+- a concise summary of the user's goal and constraints;
+- the selected workflow and reasoning;
+- concrete outputs such as notes, tables, reports, manuscript text, slide structure, figures, code, or file changes;
+- quality checks and unresolved items;
+- next-step recommendations when useful.
 
-Create stable source IDs before drafting:
+## Guardrails
 
-- `P001...` for paper text blocks;
-- `E001...` for equations;
-- `F001...` for source figures;
-- `C001...` for source-code or supplementary evidence.
-
-Every material feature in a formal claim must map to one or more source IDs.
-Use only `explicit`, `inherent`, `needs-confirmation`, or `unsupported` as
-support states. Exclude `unsupported` features from formal claims.
-
-Never infer inventorship, ownership, unpublished implementation details,
-publication dates, prior-art conclusions, or legal sufficiency. Use
-`[TO CONFIRM: specific question]` outside formal claims when facts are missing.
-
-## 3. Draft through stage gates
-
-Complete the stages in `static/core/workflow.md` in order. Persist the
-intermediate artifacts specified there. Do not move to formal claims until the
-source map, terminology ledger, inventories, evidence ledger, and invention
-concept pass their gates.
-
-For a full application, draft claims first, then align the specification,
-figures, embodiments, and abstract to the claim terminology and step order.
-
-## 4. Produce Chinese formal documents
-
-Agent-facing analysis may use the user's preferred language. Produce formal
-Chinese patent deliverables in Chinese:
-
-- 权利要求书;
-- 说明书;
-- 说明书摘要;
-- 摘要附图;
-- figure labels and descriptions.
-
-For algorithmic inventions, retain source-supported core formulas, define every
-symbol, explain each formula's technical operation, and render formulas as
-native editable Office Math in DOCX. Do not use plain LaTeX strings as the
-visible formula.
-
-Generate the main flowchart from the ordered steps of the principal method
-claim. Its final node must name the concrete domain output, such as a defect
-detection result, target pose, state estimate, or control instruction. Reuse
-the same main figure as the abstract figure and a specification figure.
-
-## 5. Validate before delivery
-
-Populate the structured draft described in `references/draft-schema.md`, then
-run:
-
-```bash
-python scripts/validate_patent_draft.py draft.json
-python scripts/build_patent_package.py draft.json --output-dir outputs --prefix patent
-```
-
-Resolve all validation `ERROR` findings. Review every `WARNING` against the
-source. Label the result `incomplete draft` when a required quality threshold
-in `static/core/output-contract.md` is not met.
-
-The generated package is a drafting aid for inventor and patent-professional
-review, not a patentability opinion, infringement opinion, or filing guarantee.
+- Do not fabricate sources, citations, metrics, journal rules, results, or tool outputs.
+- Do not bypass copyright, paywalls, account restrictions, CAPTCHAs, or institutional access controls.
+- Do not delete, overwrite, or externally publish files without explicit user confirmation.
+- Mark uncertainty instead of hiding it.
+- Keep external software, databases, and platforms clearly attributed to their own providers.

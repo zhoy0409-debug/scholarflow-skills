@@ -1,9 +1,9 @@
 interface:
-  display_name: "Clair3 Variant Calling"
+  display_name: "Bio Long Read Sequencing Clair3 Variants"
   short_description: "Deep learning-based variant calling from long reads using Clair3 for SNPs and small indels. Use when calling germline variants from ONT or PacBio alignm..."
-  default_prompt: "Use bio-long-read-sequencing-clair3-variants to design or troubleshoot this bioinformatics workflow."
+  default_prompt: "Use bio-long-read-sequencing-clair3-variants to handle this workflow."
 ownership:
   product_owner: "Zhoy"
   product_line: "Bio & Omics Toolkit"
-  origin: "jl-authored-tool-guide"
+  origin: "zhoy-original-or-curated"
   release_channel: "stable"

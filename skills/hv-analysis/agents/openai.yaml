@@ -1,9 +1,9 @@
 interface:
-  display_name: "横纵分析法深度研究"
-  short_description: "横纵分析法（Horizontal-Vertical Analysis）深度研究Skill。由数字生命卡兹克提出，融合了索绪尔的历时-共时分析、社会科学的纵向-横截面研究设计、商学院案例研究法与竞争战略分析的核心思想。 当用户想要系统性研究一个产品、公司、概念、技术或人物时使用。核心是双轴分析：纵轴追踪从..."
-  default_prompt: "Use hv-analysis for this task."
+  display_name: "Horizontal-Vertical Analysis"
+  short_description: "Conduct Horizontal-Vertical Analysis for deep research on a product, company, concept, technology, or person. Use when the user needs a source-grounded..."
+  default_prompt: "Use hv-analysis to handle this workflow."
 ownership:
   product_owner: "Zhoy"
   product_line: "Content & Knowledge Work"
-  origin: "jl-original-or-curated"
+  origin: "zhoy-original-or-curated"
   release_channel: "stable"

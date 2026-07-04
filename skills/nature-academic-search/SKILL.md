@@ -1,75 +1,41 @@
 ---
 name: nature-academic-search
-description: >-
-  Multi-source literature search, citation verification, MeSH search strategy,
-  citation file management (.nbib/.ris/.bib conversion), and reference management
-  (BibTeX, related articles, ID conversion) via MCP tools (PubMed, CrossRef,
-  arXiv, Scopus, ScienceDirect).
-  Use when the user needs coordinated multi-step literature workflows beyond a
-  single MCP call.
-  Also trigger on general literature-search needs during academic writing even without the word
-  "Nature", such as searching for papers/literature, doing a literature review, verifying a
-  citation, converting citation files, and Chinese phrasings like 文献检索、查文献、找文献、
-  文献综述检索、查论文、引文核对、参考文献管理、文献去重.
-version: 2.0.0
-author: Community contribution, refactored into static/dynamic layers
+description: Run academic search workflows across scholarly sources, prioritize reliable evidence, build search strategies, screen results, and return traceable literature findings.
 ---
 
-# Academic Search — Router
+# Nature Academic Search
 
-This skill is split into two layers:
+Use this skill to execute the workflow described in the frontmatter description. Keep the workflow practical, source-grounded, and deliverable-oriented.
 
-- A **static layer** under `static/` that holds versioned, reusable content fragments (the MCP tool inventory and shared modules, and source routing plus operational rules).
-- A **dynamic layer** (this file plus `manifest.yaml`) that detects which workflow the user needs and loads that workflow, reaching for shared modules and scripts only when a step needs them.
+## Operating Principles
 
-Do not try to apply the search logic from memory or from this router. Always load fragments from disk as described below.
+- Start from the user's actual goal, materials, constraints, and desired deliverable.
+- Ask only the questions needed to avoid a wrong workflow or unsafe assumption.
+- Prefer official sources, user-provided files, and reproducible commands over memory.
+- Keep claims conservative when evidence, metrics, journal data, or source materials are incomplete.
+- Preserve a clear audit trail for citations, file edits, external tools, and decisions.
 
-## Routing protocol
+## Workflow
 
-Follow these five steps every time the skill is invoked.
+1. Clarify the task outcome, required inputs, deadline, and risk boundaries.
+2. Inspect the available materials before proposing a final route.
+3. Choose the smallest workflow that can produce a usable result.
+4. Use bundled references or scripts only when they materially improve reliability.
+5. Produce a structured deliverable that the user can continue using without re-explaining the context.
+6. Run a final quality check for completeness, evidence grounding, formatting, and safety boundaries.
 
-### 1. Load the manifest and the core layer
+## Expected Outputs
 
-Read [manifest.yaml](manifest.yaml). It declares the `workflow` axis, the allowed values, and the file paths each value maps to.
+- a concise summary of the user's goal and constraints;
+- the selected workflow and reasoning;
+- concrete outputs such as notes, tables, reports, manuscript text, slide structure, figures, code, or file changes;
+- quality checks and unresolved items;
+- next-step recommendations when useful.
 
-Also read every file listed under `always_load`:
+## Guardrails
 
-- `static/core/tools.md` — the MCP tool inventory (core search, extended search, PubMed utilities) and the shared-module map.
-- `static/core/routing-and-ops.md` — the T1→T2→T3 source routing quick guide, environment setup, error handling, and limitations.
-
-### 2. Detect the workflow
-
-Map the user's need to one or more `workflow` values:
-
-- `multi-source-search` — find literature across sources.
-- `citation-verification` — verify citations extracted from a document.
-- `mesh-strategy` — build a MeSH/PubMed search strategy.
-- `citation-file-mgmt` — convert/manage `.nbib`/`.ris`/`.bib` files.
-- `reference-mgmt` — BibTeX, related-article discovery, ID conversion.
-
-A combined request (for example search then export) may need more than one. State the detected workflow(s) in one short line before proceeding.
-
-### 3. Load the matching workflow fragment(s)
-
-Read the file mapped for each detected workflow (under `references/workflows/`). Do **not** read every workflow. Each workflow file links to the shared modules it needs.
-
-### 4. Run the workflow using the loaded material
-
-Apply the loaded material in this order:
-
-1. Core tools and routing (`core/tools.md`, `core/routing-and-ops.md`) — which MCP tool for which need, and the T1→T2→T3 fallback chain that is the standard execution order across all workflows.
-2. The workflow fragment — its specific steps.
-3. Shared modules and scripts on demand (dedup, citation parser, search strategy, RIS/BibTeX format, format converter).
-
-Report specific tool failures and continue with remaining tools; broaden terms when there are no results; fall back to manual generation from MCP-fetched metadata if a script fails twice.
-
-### 5. Reach for references only when needed
-
-The files under `references/` (and `scripts/`) are deep references, not defaults. Open them on demand per the `references.on_demand` table in the manifest — for example `references/source-tiers.md` for the full reliability classification, `references/dedup-engine.md` / `references/citation-parser.md` / `references/search-strategy.md` / `references/ris-bibtex-format.md` for the shared modules, and `scripts/academic_search.py` (no-MCP fallback discovery search) / `scripts/format-converter.py` / `scripts/preflight.py` for the tooling.
-
-## Why this split
-
-- The static layer is versioned and reviewable; the workflow files and shared modules were already factored this way.
-- The dynamic layer keeps each invocation cheap: only the workflow the user needs enters context, instead of all five plus every module.
-- The router itself is short on purpose. Update fragments and references, not this file, when adding scope.
-- This structure mirrors the other nature-* skills (`nature-writing`, `nature-polishing`, `nature-reader`, `nature-paper2ppt`, `nature-figure`, `nature-citation`, `nature-response`, `nature-data`).
+- Do not fabricate sources, citations, metrics, journal rules, results, or tool outputs.
+- Do not bypass copyright, paywalls, account restrictions, CAPTCHAs, or institutional access controls.
+- Do not delete, overwrite, or externally publish files without explicit user confirmation.
+- Mark uncertainty instead of hiding it.
+- Keep external software, databases, and platforms clearly attributed to their own providers.

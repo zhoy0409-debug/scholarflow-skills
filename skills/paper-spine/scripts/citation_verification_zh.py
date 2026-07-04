@@ -2,7 +2,7 @@
 """Verify Chinese-language citations for authenticity and completeness.
 
 Checks citation format, DOI resolveability, and structural integrity for
-中文参考文献 (Chinese-language references). Produces a structured report
+English text (Chinese-language references). Produces a structured report
 flagging SUSPICIOUS / INCOMPLETE / FAKE citations.
 """
 
@@ -24,10 +24,10 @@ USER_AGENT = "PaperSpine/3.0 (citation-zh; https://github.com/WUBING2023/PaperSp
 DOI_RE = re.compile(r"(?:doi\s*[:=]\s*|https?://doi\.org/)?(10\.\d{4,}/[^\s,;)]+)", re.IGNORECASE)
 
 # Chinese citation format patterns
-CN_AUTHOR_RE = re.compile(r"[^\x00-\x7f]{2,4}(?:[,，、\s]+[^\x00-\x7f]{2,4})*")  # Chinese author names
-CN_JOURNAL_RE = re.compile(r"《([^》]+)》")  # 《期刊名》
-CN_YEAR_RE = re.compile(r"(\d{4})[年]?")
-CN_VOLUME_RE = re.compile(r"(\d+)\s*[卷\(（]")
+CN_AUTHOR_RE = re.compile(r"[^\x00-\x7f]{2,4}(?:[,, , \s]+[^\x00-\x7f]{2,4})*")  # Chinese author names
+CN_JOURNAL_RE = re.compile(r""([^"]+)"")  # "English text"
+CN_YEAR_RE = re.compile(r"(\d{4})[English text]?")
+CN_VOLUME_RE = re.compile(r"(\d+)\s*[English text\((]")
 CN_PAGES_RE = re.compile(r"(\d+)[-~]\s*(\d+)")
 
 @dataclass
@@ -117,11 +117,11 @@ def check_citation_bank_zh(out_dir: Path) -> CitationVerificationZHResult:
         # Check for obvious fabrications
         if len(ref.strip()) < 20:
             check.status = "FAKE"
-            check.issues.append("Citation text too short — likely fabricated")
+            check.issues.append("Citation text too short - likely fabricated")
 
         elif not check.has_author and not check.has_journal:
             check.status = "FAKE"
-            check.issues.append("No author or journal found — likely fabricated")
+            check.issues.append("No author or journal found - likely fabricated")
 
         elif not check.has_author or not check.has_journal or not check.has_year:
             check.status = "INCOMPLETE"
@@ -144,7 +144,7 @@ def check_citation_bank_zh(out_dir: Path) -> CitationVerificationZHResult:
                     check.status = "VERIFIED"
             else:
                 check.status = "SUSPICIOUS"
-                check.issues.append("No DOI — cannot verify authenticity. Add DOI or verify manually")
+                check.issues.append("No DOI - cannot verify authenticity. Add DOI or verify manually")
 
         if check.status == "VERIFIED": result.verified += 1
         elif check.status == "SUSPICIOUS": result.suspicious += 1

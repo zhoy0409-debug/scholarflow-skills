@@ -1,9 +1,9 @@
 interface:
-  display_name: "Nature-Style Academic Polishing"
-  short_description: "Polish, restructure, or translate academic prose into Nature-leaning English using writing-strategy principles, curated Nature/Nature Communications art..."
-  default_prompt: "Use nature-polishing to help with my research workflow."
+  display_name: "Nature Polishing"
+  short_description: "Polish academic manuscripts for clarity, conservative claims, journal tone, paragraph function, citation grounding, and submission-ready language."
+  default_prompt: "Use nature-polishing to handle this workflow."
 ownership:
   product_owner: "Zhoy"
   product_line: "Nature Research Suite"
-  origin: "jl-original-or-curated"
+  origin: "zhoy-original-or-curated"
   release_channel: "stable"

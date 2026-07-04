@@ -314,7 +314,7 @@ def slug_from_text(text: str, max_words: int = 6) -> str:
     """Derive a filename slug from the first meaningful words of manuscript text."""
     text = clean_text(text)
     text = re.sub(r"\[[^\]]+\]|\([A-Za-z]+ et al\.,? \d{4}\)", " ", text)
-    words = re.findall(r"[A-Za-z0-9]+|[一-鿿]+", text)
+    words = re.findall(r"[A-Za-z0-9]+|[English text-English text]+", text)
     stopwords = {
         "the", "a", "an", "and", "or", "of", "to", "in", "for", "by", "with", "on", "at",
         "from", "is", "are", "was", "were", "be", "been", "being", "that", "this", "these",
@@ -509,7 +509,7 @@ def split_sentences(text: str) -> list[str]:
     text = re.sub(r"\s+", " ", text.strip())
     if not text:
         return []
-    pattern = r"(?<=[.!?。！？])\s+|(?<=[。！？])"
+    pattern = r"(?<=[.!?. ! ? ])\s+|(?<=[. ! ? ])"
     return [part.strip() for part in re.split(pattern, text) if part.strip()]
 
 
@@ -517,10 +517,10 @@ def looks_like_heading(text: str) -> bool:
     stripped = text.strip()
     if len(stripped) > 90:
         return False
-    if stripped.endswith((".", "。", "!", "！", "?", "？")):
+    if stripped.endswith((".", ". ", "!", "! ", "?", "? ")):
         return False
     words = stripped.split()
-    if 0 < len(words) <= 8 and not any(char in stripped for char in ",;，；"):
+    if 0 < len(words) <= 8 and not any(char in stripped for char in ",;, ; "):
         return True
     return False
 
@@ -1241,7 +1241,7 @@ def write_html(
                         <span>{idx} / {len(refs)}</span>
                       </div>
                       <h3>{html.escape(candidate.title)}</h3>
-                      <p class="meta">{html.escape(candidate.journal)} · {html.escape(candidate.family or "Unclassified")} · {html.escape(candidate.year or "n.d.")}</p>
+                      <p class="meta">{html.escape(candidate.journal)} - {html.escape(candidate.family or "Unclassified")} - {html.escape(candidate.year or "n.d.")}</p>
                       <p class="authors">{html.escape("; ".join(candidate.authors[:6]))}</p>
                       <p class="abstract">{html.escape(candidate.abstract[:380] + ('...' if len(candidate.abstract) > 380 else '')) if candidate.abstract else 'No abstract snippet available from Crossref metadata.'}</p>
                       <a href="{html.escape(candidate.doi_url)}" target="_blank" rel="noreferrer">{html.escape(candidate.doi_url)}</a>
@@ -1254,7 +1254,7 @@ def write_html(
             f"""
             <section class="segment-card" id="{html.escape(segment.id)}">
               <div class="segment-head">
-                <span class="segment-id">{html.escape(segment.id)} · Sentence {segment.order}</span>
+                <span class="segment-id">{html.escape(segment.id)} - Sentence {segment.order}</span>
                 <span class="query">Query: {html.escape(segment.search_query)}</span>
               </div>
               <p class="segment-text">{html.escape(segment.text)}</p>
@@ -1828,7 +1828,7 @@ def write_html(
       for (const item of items) {{
         const wrapper = document.createElement('div');
         wrapper.className = 'selection-item';
-        wrapper.innerHTML = `<h4>${{item.title}}</h4><p>${{item.journal}} · ${{item.year || 'n.d.'}}</p>`;
+        wrapper.innerHTML = `<h4>${{item.title}}</h4><p>${{item.journal}} - ${{item.year || 'n.d.'}}</p>`;
         selectionList.appendChild(wrapper);
       }}
       updateDownloadLink();
@@ -1976,7 +1976,7 @@ def main(argv: list[str]) -> int:
     errors.extend(doi_errors)
     references = dedupe([*references, *doi_candidates])[: args.max_candidates]
 
-    # 最终导出
+    # English text
     if args.format == "enw":
         write_enw(references, output_path)
     elif args.format == "ris":

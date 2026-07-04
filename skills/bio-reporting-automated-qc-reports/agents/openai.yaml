@@ -1,9 +1,9 @@
 interface:
-  display_name: "Automated QC Reports with MultiQC"
+  display_name: "Bio Reporting Automated QC Reports"
   short_description: "Generates standardized quality control reports by aggregating metrics from FastQC, alignment, and other tools using MultiQC. Use when summarizing QC met..."
-  default_prompt: "Use bio-reporting-automated-qc-reports to design or troubleshoot this bioinformatics workflow."
+  default_prompt: "Use bio-reporting-automated-qc-reports to handle this workflow."
 ownership:
   product_owner: "Zhoy"
   product_line: "Bio & Omics Toolkit"
-  origin: "jl-authored-tool-guide"
+  origin: "zhoy-original-or-curated"
   release_channel: "stable"

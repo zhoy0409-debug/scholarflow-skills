@@ -1,9 +1,9 @@
 interface:
-  display_name: "VCF Statistics"
+  display_name: "Bio Vcf Statistics"
   short_description: "Generate variant statistics, sample concordance, and quality metrics using bcftools stats and gtcheck. Use when evaluating variant quality, comparing sa..."
-  default_prompt: "Use bio-vcf-statistics to design or troubleshoot this bioinformatics workflow."
+  default_prompt: "Use bio-vcf-statistics to handle this workflow."
 ownership:
   product_owner: "Zhoy"
   product_line: "Bio & Omics Toolkit"
-  origin: "jl-authored-tool-guide"
+  origin: "zhoy-original-or-curated"
   release_channel: "stable"

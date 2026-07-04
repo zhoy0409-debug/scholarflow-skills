@@ -1,9 +1,9 @@
 interface:
-  display_name: "Functional Annotation"
+  display_name: "Bio Genome Annotation Functional Annotation"
   short_description: "Assigns GO terms, Pfam/InterPro domains, KEGG orthologs, EC numbers, and product names to predicted proteins using eggNOG-mapper (orthology), InterProSc..."
-  default_prompt: "Use bio-genome-annotation-functional-annotation to design or troubleshoot this bioinformatics workflow."
+  default_prompt: "Use bio-genome-annotation-functional-annotation to handle this workflow."
 ownership:
   product_owner: "Zhoy"
   product_line: "Bio & Omics Toolkit"
-  origin: "jl-authored-tool-guide"
+  origin: "zhoy-original-or-curated"
   release_channel: "stable"

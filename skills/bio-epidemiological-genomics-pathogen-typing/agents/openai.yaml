@@ -1,9 +1,9 @@
 interface:
-  display_name: "Pathogen Typing"
+  display_name: "Bio Epidemiological Genomics Pathogen Typing"
   short_description: "Assigns isolate identity at the right resolution for the question -- ANI / Mash species triage, 7-locus MLST historical comparability, cgMLST / wgMLST o..."
-  default_prompt: "Use bio-epidemiological-genomics-pathogen-typing to design or troubleshoot this bioinformatics workflow."
+  default_prompt: "Use bio-epidemiological-genomics-pathogen-typing to handle this workflow."
 ownership:
   product_owner: "Zhoy"
   product_line: "Bio & Omics Toolkit"
-  origin: "jl-authored-tool-guide"
+  origin: "zhoy-original-or-curated"
   release_channel: "stable"
