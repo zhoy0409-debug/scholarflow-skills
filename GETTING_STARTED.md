@@ -36,7 +36,7 @@ assets/
 | 查文献、做综述、核引用 | `nature-academic-search`, `reference-checker` |
 | 精读论文、中英文对照 | `nature-reader` |
 | 写论文、改论文、润色英文 | `nature-writing`, `nature-polishing`, `paper-spine` |
-| 投稿前质量检查 | `research-integrity-guardrail`, `paper-self-review` |
+| 投稿前质量检查 | `journal-submission-normalizer`, `research-integrity-guardrail`, `paper-self-review` |
 | 做论文图表 | `nature-figure`, `sci-figure-composer` |
 | 做组会/汇报 PPT | `nature-paper2ppt`, `ppt` |
 | 做生信/组学分析 | `omics-analysis`, `bio-*`, `samtools-bam-processing`, `bcftools-variant-manipulation` |
@@ -62,6 +62,12 @@ assets/
 
 ```text
 请对这篇稿子做投稿前质量检查，重点看引用真实性、过度声称、结果一致性、AI 写作痕迹和审稿风险。
+```
+
+### 期刊格式规范化
+
+```text
+请用 journal-submission-normalizer 先联网检索目标期刊的官方投稿要求，再把这篇稿件按字体、字号、行距、标题层级、图表、上下标、参考文献和声明部分逐项规范化，并输出投稿合规报告。
 ```
 
 ### 科研作图
