@@ -1,0 +1,9 @@
+interface:
+  display_name: "Consensus Sequences"
+  short_description: "Generate consensus FASTA sequences by applying VCF variants to a reference using bcftools consensus. Use when creating sample-specific reference sequenc..."
+  default_prompt: "Use bio-consensus-sequences to design or troubleshoot this bioinformatics workflow."
+ownership:
+  product_owner: "JL Skill Collection"
+  product_line: "Bio & Omics Toolkit"
+  origin: "jl-authored-tool-guide"
+  release_channel: "stable"

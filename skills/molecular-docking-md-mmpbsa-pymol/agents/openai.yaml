@@ -1,0 +1,9 @@
+interface:
+  display_name: "Small Molecule-Target Protein Docking, MD, MMPBSA, and Visualization"
+  short_description: "Automate small molecule-target protein docking, MD, MM-PBSA/MM-GBSA, and visualization. Default system is one or more protein receptor chains plus an or..."
+  default_prompt: "Use molecular-docking-md-mmpbsa-pymol to design or troubleshoot this bioinformatics workflow."
+ownership:
+  product_owner: "JL Skill Collection"
+  product_line: "Bio & Omics Toolkit"
+  origin: "jl-authored-tool-guide"
+  release_channel: "stable"

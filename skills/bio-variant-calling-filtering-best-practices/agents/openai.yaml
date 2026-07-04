@@ -1,0 +1,9 @@
+interface:
+  display_name: "Variant Filtering Best Practices"
+  short_description: "Comprehensive variant filtering including GATK VQSR, hard filters, bcftools expressions, and quality metric interpretation for SNPs and indels. Use when..."
+  default_prompt: "Use bio-variant-calling-filtering-best-practices to design or troubleshoot this bioinformatics workflow."
+ownership:
+  product_owner: "JL Skill Collection"
+  product_line: "Bio & Omics Toolkit"
+  origin: "jl-authored-tool-guide"
+  release_channel: "stable"

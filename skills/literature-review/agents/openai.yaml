@@ -1,0 +1,9 @@
+interface:
+  display_name: "文献综述"
+  short_description: "Use when writing literature review sections - guides searching, organizing, and synthesizing academic sources"
+  default_prompt: "Use literature-review for this task."
+ownership:
+  product_owner: "JL Skill Collection"
+  product_line: "General Skill Library"
+  origin: "jl-original-or-curated"
+  release_channel: "stable"

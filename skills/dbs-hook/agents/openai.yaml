@@ -1,0 +1,9 @@
+interface:
+  display_name: "dbs-hook：短视频开头优化"
+  short_description: "dontbesilent 短视频开头优化。诊断开头问题 + 生成优化方案。 触发方式：/dbs-hook、/hook、「帮我优化开头」「开头怎么写」 Short video opening optimization with diagnosis and solutions. Trigger: /dbs-..."
+  default_prompt: "Use dbs-hook to diagnose this business or content problem."
+ownership:
+  product_owner: "JL Skill Collection"
+  product_line: "DBS Business Toolkit"
+  origin: "jl-original-or-curated"
+  release_channel: "stable"

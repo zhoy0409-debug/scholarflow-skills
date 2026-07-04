@@ -1,0 +1,9 @@
+interface:
+  display_name: "impeccable"
+  short_description: "impeccable"
+  default_prompt: "Use impeccable for this task."
+ownership:
+  product_owner: "JL Skill Collection"
+  product_line: "General Skill Library"
+  origin: "jl-original-or-curated"
+  release_channel: "stable"

@@ -1,0 +1,9 @@
+interface:
+  display_name: "Compressed Files"
+  short_description: "Read and write compressed sequence files (gzip, bzip2, BGZF) using Biopython. Use when working with .gz or .bz2 sequence files. Use BGZF for indexable c..."
+  default_prompt: "Use bio-compressed-files to design or troubleshoot this bioinformatics workflow."
+ownership:
+  product_owner: "JL Skill Collection"
+  product_line: "Bio & Omics Toolkit"
+  origin: "jl-authored-tool-guide"
+  release_channel: "stable"

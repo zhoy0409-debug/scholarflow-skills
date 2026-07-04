@@ -1,0 +1,9 @@
+interface:
+  display_name: "Batch Design"
+  short_description: "Designs genomics experiments so technical nuisance variation (batch, lane, plate, flow cell, operator, reagent lot, processing day) is balanced against..."
+  default_prompt: "Use bio-experimental-design-batch-design to design or troubleshoot this bioinformatics workflow."
+ownership:
+  product_owner: "JL Skill Collection"
+  product_line: "Bio & Omics Toolkit"
+  origin: "jl-authored-tool-guide"
+  release_channel: "stable"

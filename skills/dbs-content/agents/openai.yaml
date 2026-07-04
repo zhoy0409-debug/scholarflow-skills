@@ -1,0 +1,9 @@
+interface:
+  display_name: "dbs-content：内容创作诊断"
+  short_description: "dontbesilent 内容创作诊断。选题通过后，诊断怎么把这个选题做成好内容。 触发方式：/dbs-content、/内容诊断、「这个内容怎么做」「帮我看看这个文案」 Content creation diagnosis. After topic passes, diagnose how to tu..."
+  default_prompt: "Use dbs-content to diagnose this business or content problem."
+ownership:
+  product_owner: "JL Skill Collection"
+  product_line: "DBS Business Toolkit"
+  origin: "jl-original-or-curated"
+  release_channel: "stable"

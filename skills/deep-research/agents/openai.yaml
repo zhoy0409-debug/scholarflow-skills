@@ -1,0 +1,9 @@
+interface:
+  display_name: "Deep Research Router"
+  short_description: "Deep Research Router"
+  default_prompt: "Use deep-research for this task."
+ownership:
+  product_owner: "JL Skill Collection"
+  product_line: "Academic Writing & Integrity"
+  origin: "jl-original-or-curated"
+  release_channel: "stable"

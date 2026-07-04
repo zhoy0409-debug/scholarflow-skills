@@ -1,0 +1,9 @@
+interface:
+  display_name: "DeepVariant Variant Calling"
+  short_description: "Deep learning-based variant calling with Google DeepVariant. Provides high accuracy for germline SNPs and indels from Illumina, PacBio, and ONT data. Us..."
+  default_prompt: "Use bio-variant-calling-deepvariant to design or troubleshoot this bioinformatics workflow."
+ownership:
+  product_owner: "JL Skill Collection"
+  product_line: "Bio & Omics Toolkit"
+  origin: "jl-authored-tool-guide"
+  release_channel: "stable"

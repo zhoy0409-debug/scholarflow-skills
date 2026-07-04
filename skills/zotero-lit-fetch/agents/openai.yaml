@@ -1,0 +1,9 @@
+interface:
+  display_name: "Zotero 文献自动抓取 (zotero-lit-fetch)"
+  short_description: "全自动抓取中英文文献到 Zotero，优先获取 PDF，跨 Windows / macOS。当用户想把 知网(CNKI)、万方(Wanfang)、维普(VIP)、PubMed、Web of Science、Google Scholar、 Scopus、CrossRef、bioRxiv、Semantic..."
+  default_prompt: "Use zotero-lit-fetch for this task."
+ownership:
+  product_owner: "JL Skill Collection"
+  product_line: "Content & Knowledge Work"
+  origin: "jl-original-or-curated"
+  release_channel: "stable"

@@ -1,0 +1,9 @@
+interface:
+  display_name: "Reference Checker Skill"
+  short_description: "Exhaustively verify English and Chinese manuscript references before journal submission. Use when checking whether references are real, accurate, comple..."
+  default_prompt: "Use reference-checker for this task."
+ownership:
+  product_owner: "JL Skill Collection"
+  product_line: "Academic Writing & Integrity"
+  origin: "jl-original-or-curated"
+  release_channel: "stable"

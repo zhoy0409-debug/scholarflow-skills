@@ -1,0 +1,9 @@
+interface:
+  display_name: "MetaPhlAn 4 Profiling"
+  short_description: "Marker gene-based taxonomic profiling using MetaPhlAn 4. Provides accurate species-level relative abundances using clade-specific markers. Use when accu..."
+  default_prompt: "Use bio-metagenomics-metaphlan to design or troubleshoot this bioinformatics workflow."
+ownership:
+  product_owner: "JL Skill Collection"
+  product_line: "Bio & Omics Toolkit"
+  origin: "jl-authored-tool-guide"
+  release_channel: "stable"

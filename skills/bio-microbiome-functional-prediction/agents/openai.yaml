@@ -1,0 +1,9 @@
+interface:
+  display_name: "Functional Prediction with PICRUSt2"
+  short_description: "Predict metagenome functional content from 16S rRNA marker gene data using PICRUSt2. Infer KEGG, MetaCyc, and EC abundances from ASV tables. Use when fu..."
+  default_prompt: "Use bio-microbiome-functional-prediction to design or troubleshoot this bioinformatics workflow."
+ownership:
+  product_owner: "JL Skill Collection"
+  product_line: "Bio & Omics Toolkit"
+  origin: "jl-authored-tool-guide"
+  release_channel: "stable"

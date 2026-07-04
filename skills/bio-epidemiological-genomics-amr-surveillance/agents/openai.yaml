@@ -1,0 +1,9 @@
+interface:
+  display_name: "AMR Surveillance"
+  short_description: "Detects acquired antimicrobial-resistance determinants and chromosomal point-mutation resistance in bacterial assemblies using AMRFinderPlus, ResFinder..."
+  default_prompt: "Use bio-epidemiological-genomics-amr-surveillance to design or troubleshoot this bioinformatics workflow."
+ownership:
+  product_owner: "JL Skill Collection"
+  product_line: "Bio & Omics Toolkit"
+  origin: "jl-authored-tool-guide"
+  release_channel: "stable"

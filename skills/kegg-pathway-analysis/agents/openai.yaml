@@ -1,0 +1,9 @@
+interface:
+  display_name: "KEGG Pathway Enrichment Analysis Guide"
+  short_description: "Guide to KEGG pathway enrichment for DEG results. Covers ORA vs GSEA, mandatory directionality splitting, KEGG organism codes, API failure handling with..."
+  default_prompt: "Use kegg-pathway-analysis to design or troubleshoot this bioinformatics workflow."
+ownership:
+  product_owner: "JL Skill Collection"
+  product_line: "Bio & Omics Toolkit"
+  origin: "jl-authored-tool-guide"
+  release_channel: "stable"

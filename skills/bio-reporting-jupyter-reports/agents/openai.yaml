@@ -1,0 +1,9 @@
+interface:
+  display_name: "Jupyter Reports with Papermill"
+  short_description: "Creates reproducible Jupyter notebooks for bioinformatics analysis with parameterization using papermill. Use when generating automated analysis reports..."
+  default_prompt: "Use bio-reporting-jupyter-reports to design or troubleshoot this bioinformatics workflow."
+ownership:
+  product_owner: "JL Skill Collection"
+  product_line: "Bio & Omics Toolkit"
+  origin: "jl-authored-tool-guide"
+  release_channel: "stable"

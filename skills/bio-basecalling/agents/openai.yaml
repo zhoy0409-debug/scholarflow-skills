@@ -1,0 +1,9 @@
+interface:
+  display_name: "Nanopore Basecalling"
+  short_description: "Convert raw Nanopore signal data (FAST5/POD5) to nucleotide sequences using Dorado basecaller. Covers model selection, GPU acceleration, modified base d..."
+  default_prompt: "Use bio-basecalling to design or troubleshoot this bioinformatics workflow."
+ownership:
+  product_owner: "JL Skill Collection"
+  product_line: "Bio & Omics Toolkit"
+  origin: "jl-authored-tool-guide"
+  release_channel: "stable"

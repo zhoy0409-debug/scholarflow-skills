@@ -1,0 +1,9 @@
+interface:
+  display_name: "Alignment Validation"
+  short_description: "Validate alignment quality with insert size distribution, proper pairing rates, GC bias, strand balance, and other post-alignment metrics. Use when veri..."
+  default_prompt: "Use bio-alignment-validation to design or troubleshoot this bioinformatics workflow."
+ownership:
+  product_owner: "JL Skill Collection"
+  product_line: "Bio & Omics Toolkit"
+  origin: "jl-authored-tool-guide"
+  release_channel: "stable"

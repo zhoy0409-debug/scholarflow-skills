@@ -1,0 +1,9 @@
+interface:
+  display_name: "QIIME2 Amplicon Workflow"
+  short_description: "QIIME2 command-line workflow for 16S/ITS amplicon analysis. Alternative to DADA2/phyloseq R workflow with built-in provenance tracking. Use when preferr..."
+  default_prompt: "Use bio-microbiome-qiime2-workflow to design or troubleshoot this bioinformatics workflow."
+ownership:
+  product_owner: "JL Skill Collection"
+  product_line: "Bio & Omics Toolkit"
+  origin: "jl-authored-tool-guide"
+  release_channel: "stable"

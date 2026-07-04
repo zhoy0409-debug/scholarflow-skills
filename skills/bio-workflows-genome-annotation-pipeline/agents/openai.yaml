@@ -1,0 +1,9 @@
+interface:
+  display_name: "Genome Annotation Pipeline"
+  short_description: "End-to-end genome annotation pipeline from assembled contigs to functional annotation, covering repeat masking, gene prediction, and functional assignme..."
+  default_prompt: "Use bio-workflows-genome-annotation-pipeline to design or troubleshoot this bioinformatics workflow."
+ownership:
+  product_owner: "JL Skill Collection"
+  product_line: "Bio & Omics Toolkit"
+  origin: "jl-authored-tool-guide"
+  release_channel: "stable"

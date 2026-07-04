@@ -1,0 +1,9 @@
+interface:
+  display_name: "Sequence Slicing"
+  short_description: "Slice, extract, and concatenate biological sequences using Biopython. Use when extracting subsequences, joining sequences, or manipulating sequence regi..."
+  default_prompt: "Use bio-sequence-slicing to design or troubleshoot this bioinformatics workflow."
+ownership:
+  product_owner: "JL Skill Collection"
+  product_line: "Bio & Omics Toolkit"
+  origin: "jl-authored-tool-guide"
+  release_channel: "stable"

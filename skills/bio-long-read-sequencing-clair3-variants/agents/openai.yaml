@@ -1,0 +1,9 @@
+interface:
+  display_name: "Clair3 Variant Calling"
+  short_description: "Deep learning-based variant calling from long reads using Clair3 for SNPs and small indels. Use when calling germline variants from ONT or PacBio alignm..."
+  default_prompt: "Use bio-long-read-sequencing-clair3-variants to design or troubleshoot this bioinformatics workflow."
+ownership:
+  product_owner: "JL Skill Collection"
+  product_line: "Bio & Omics Toolkit"
+  origin: "jl-authored-tool-guide"
+  release_channel: "stable"

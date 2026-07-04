@@ -1,0 +1,9 @@
+interface:
+  display_name: "Coalescent-Based Species Tree Estimation"
+  short_description: "Estimate species trees using coalescent methods including ASTRAL-III, wASTRAL, ASTRAL-Pro, SVDQuartets, and BPP. Use when multi-locus data shows gene tr..."
+  default_prompt: "Use bio-phylo-species-trees to design or troubleshoot this bioinformatics workflow."
+ownership:
+  product_owner: "JL Skill Collection"
+  product_line: "Bio & Omics Toolkit"
+  origin: "jl-authored-tool-guide"
+  release_channel: "stable"

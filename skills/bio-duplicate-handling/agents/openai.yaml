@@ -1,0 +1,9 @@
+interface:
+  display_name: "Duplicate Handling"
+  short_description: "Mark and remove PCR/optical duplicates using samtools fixmate and markdup. Use when preparing alignments for variant calling or when duplicate reads wou..."
+  default_prompt: "Use bio-duplicate-handling to design or troubleshoot this bioinformatics workflow."
+ownership:
+  product_owner: "JL Skill Collection"
+  product_line: "Bio & Omics Toolkit"
+  origin: "jl-authored-tool-guide"
+  release_channel: "stable"

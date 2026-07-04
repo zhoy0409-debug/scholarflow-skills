@@ -1,0 +1,9 @@
+interface:
+  display_name: "Transcription and Translation"
+  short_description: "Transcribe DNA to RNA and translate to protein using Biopython. Use when converting between DNA, RNA, and protein sequences, finding ORFs, or using alte..."
+  default_prompt: "Use bio-transcription-translation to design or troubleshoot this bioinformatics workflow."
+ownership:
+  product_owner: "JL Skill Collection"
+  product_line: "Bio & Omics Toolkit"
+  origin: "jl-authored-tool-guide"
+  release_channel: "stable"

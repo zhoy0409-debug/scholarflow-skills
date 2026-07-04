@@ -1,0 +1,9 @@
+interface:
+  display_name: "Structural Variant Detection"
+  short_description: "Detect structural variants from long-read alignments using Sniffles, cuteSV, and SVIM. Use when detecting deletions, insertions, inversions, translocati..."
+  default_prompt: "Use bio-longread-structural-variants to design or troubleshoot this bioinformatics workflow."
+ownership:
+  product_owner: "JL Skill Collection"
+  product_line: "Bio & Omics Toolkit"
+  origin: "jl-authored-tool-guide"
+  release_channel: "stable"

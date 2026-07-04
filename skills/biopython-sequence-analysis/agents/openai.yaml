@@ -1,0 +1,9 @@
+interface:
+  display_name: "Biopython: Sequence Analysis Toolkit"
+  short_description: "Biopython sequence analysis: parse FASTA/FASTQ/GenBank/GFF (SeqIO), NCBI Entrez (esearch/efetch/elink), remote/local BLAST, pairwise/MSA alignment (Pair..."
+  default_prompt: "Use biopython-sequence-analysis to design or troubleshoot this bioinformatics workflow."
+ownership:
+  product_owner: "JL Skill Collection"
+  product_line: "Bio & Omics Toolkit"
+  origin: "jl-authored-tool-guide"
+  release_channel: "stable"

@@ -1,0 +1,9 @@
+interface:
+  display_name: "Adapter Trimming"
+  short_description: "Remove sequencing adapters from FASTQ files using Cutadapt and Trimmomatic. Supports single-end and paired-end reads, Illumina TruSeq, Nextera, and cust..."
+  default_prompt: "Use bio-read-qc-adapter-trimming to design or troubleshoot this bioinformatics workflow."
+ownership:
+  product_owner: "JL Skill Collection"
+  product_line: "Bio & Omics Toolkit"
+  origin: "jl-authored-tool-guide"
+  release_channel: "stable"

@@ -1,0 +1,9 @@
+interface:
+  display_name: "Annotation Transfer"
+  short_description: "Transfers gene annotations between genome assemblies via coordinate liftover (UCSC liftOver, CrossMap for same-species version updates) or feature/seque..."
+  default_prompt: "Use bio-genome-annotation-annotation-transfer to design or troubleshoot this bioinformatics workflow."
+ownership:
+  product_owner: "JL Skill Collection"
+  product_line: "Bio & Omics Toolkit"
+  origin: "jl-authored-tool-guide"
+  release_channel: "stable"

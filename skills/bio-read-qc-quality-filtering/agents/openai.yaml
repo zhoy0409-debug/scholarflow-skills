@@ -1,0 +1,9 @@
+interface:
+  display_name: "Quality Filtering"
+  short_description: "Filter reads by quality scores, length, and N content using Trimmomatic and fastp. Apply sliding window trimming, remove low-quality bases from read end..."
+  default_prompt: "Use bio-read-qc-quality-filtering to design or troubleshoot this bioinformatics workflow."
+ownership:
+  product_owner: "JL Skill Collection"
+  product_line: "Bio & Omics Toolkit"
+  origin: "jl-authored-tool-guide"
+  release_channel: "stable"

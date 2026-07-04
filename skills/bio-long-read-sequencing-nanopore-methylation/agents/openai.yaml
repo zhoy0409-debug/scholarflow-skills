@@ -1,0 +1,9 @@
+interface:
+  display_name: "Nanopore Methylation Calling"
+  short_description: "Calls DNA methylation from Oxford Nanopore sequencing data using signal-level analysis. Use when detecting 5mC or 6mA modifications directly from nanopo..."
+  default_prompt: "Use bio-long-read-sequencing-nanopore-methylation to design or troubleshoot this bioinformatics workflow."
+ownership:
+  product_owner: "JL Skill Collection"
+  product_line: "Bio & Omics Toolkit"
+  origin: "jl-authored-tool-guide"
+  release_channel: "stable"

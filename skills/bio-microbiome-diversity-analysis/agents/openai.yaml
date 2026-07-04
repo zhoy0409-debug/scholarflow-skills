@@ -1,0 +1,9 @@
+interface:
+  display_name: "Diversity Analysis"
+  short_description: "Alpha and beta diversity analysis for microbiome data. Calculate within-sample richness, evenness, and between-sample dissimilarity with phyloseq and ve..."
+  default_prompt: "Use bio-microbiome-diversity-analysis to design or troubleshoot this bioinformatics workflow."
+ownership:
+  product_owner: "JL Skill Collection"
+  product_line: "Bio & Omics Toolkit"
+  origin: "jl-authored-tool-guide"
+  release_channel: "stable"

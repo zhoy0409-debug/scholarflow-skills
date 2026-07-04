@@ -1,0 +1,9 @@
+interface:
+  display_name: "Nature Figure Making"
+  short_description: "Submission-grade Nature/high-impact journal figure workflow for Python or R. Use whenever the user asks to create, revise, audit, or polish manuscript f..."
+  default_prompt: "Use nature-figure to help with my research workflow."
+ownership:
+  product_owner: "JL Skill Collection"
+  product_line: "Nature Research Suite"
+  origin: "jl-refactored-community"
+  release_channel: "stable"

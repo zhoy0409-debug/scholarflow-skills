@@ -1,0 +1,9 @@
+interface:
+  display_name: "dbs-goal：目标清晰化"
+  short_description: "dontbesilent 目标清晰化。用维特根斯坦的语言哲学把模糊的目标审计成可检查的交付物。 触发方式：/dbs-goal、/目标、「帮我搞清楚目标」「我想做个人 IP」「我的目标是成为...」「我想变得更...」 Goal clarification using Wittgenstein's phi..."
+  default_prompt: "Use dbs-goal to diagnose this business or content problem."
+ownership:
+  product_owner: "JL Skill Collection"
+  product_line: "DBS Business Toolkit"
+  origin: "jl-original-or-curated"
+  release_channel: "stable"

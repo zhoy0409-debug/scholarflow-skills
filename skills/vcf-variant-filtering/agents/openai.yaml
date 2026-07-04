@@ -1,0 +1,9 @@
+interface:
+  display_name: "VCF Variant Filtering Guide"
+  short_description: "Guide to quality filtering raw VCF files before computing summary stats (Ts/Tv ratio, variant counts, AF distributions). Covers detecting raw VCFs via F..."
+  default_prompt: "Use vcf-variant-filtering to design or troubleshoot this bioinformatics workflow."
+ownership:
+  product_owner: "JL Skill Collection"
+  product_line: "Bio & Omics Toolkit"
+  origin: "jl-authored-tool-guide"
+  release_channel: "stable"

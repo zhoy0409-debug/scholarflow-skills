@@ -1,0 +1,9 @@
+interface:
+  display_name: "Support-to-Repro-Pack"
+  short_description: "Convert support tickets, logs, and screenshots into sanitized, reproducible engineering issue packs"
+  default_prompt: "Use support-to-repro-pack for this task."
+ownership:
+  product_owner: "JL Skill Collection"
+  product_line: "General Skill Library"
+  origin: "jl-original-or-curated"
+  release_channel: "stable"

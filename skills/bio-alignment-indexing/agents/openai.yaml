@@ -1,0 +1,9 @@
+interface:
+  display_name: "Alignment Indexing"
+  short_description: "Create and use BAI/CSI indices for BAM/CRAM files using samtools and pysam. Use when enabling random access to alignment files or fetching specific geno..."
+  default_prompt: "Use bio-alignment-indexing to design or troubleshoot this bioinformatics workflow."
+ownership:
+  product_owner: "JL Skill Collection"
+  product_line: "Bio & Omics Toolkit"
+  origin: "jl-authored-tool-guide"
+  release_channel: "stable"

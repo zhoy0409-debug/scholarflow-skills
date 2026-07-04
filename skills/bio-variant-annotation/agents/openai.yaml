@@ -1,0 +1,9 @@
+interface:
+  display_name: "Variant Annotation"
+  short_description: "Comprehensive variant annotation using bcftools annotate/csq, VEP, SnpEff, and ANNOVAR. Add database annotations, predict functional consequences, and a..."
+  default_prompt: "Use bio-variant-annotation to design or troubleshoot this bioinformatics workflow."
+ownership:
+  product_owner: "JL Skill Collection"
+  product_line: "Bio & Omics Toolkit"
+  origin: "jl-authored-tool-guide"
+  release_channel: "stable"

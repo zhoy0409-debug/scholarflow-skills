@@ -1,0 +1,9 @@
+interface:
+  display_name: "Research Paper Writing"
+  short_description: "Improve academic paper writing quality for ML/CV/NLP-style papers with clear section structure, paragraph flow, and reviewer-facing presentation. Use wh..."
+  default_prompt: "Use research-paper-writing for this task."
+ownership:
+  product_owner: "JL Skill Collection"
+  product_line: "Academic Writing & Integrity"
+  origin: "jl-original-or-curated"
+  release_channel: "stable"

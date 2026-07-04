@@ -1,0 +1,9 @@
+interface:
+  display_name: "Jupyter Notebook Skill"
+  short_description: "Use when the user asks to create, scaffold, or edit Jupyter notebooks (`.ipynb`) for experiments, explorations, or tutorials; prefer the bundled templat..."
+  default_prompt: "Use jupyter-notebook for this task."
+ownership:
+  product_owner: "JL Skill Collection"
+  product_line: "General Skill Library"
+  origin: "jl-original-or-curated"
+  release_channel: "stable"

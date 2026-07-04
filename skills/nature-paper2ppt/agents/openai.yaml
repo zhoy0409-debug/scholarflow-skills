@@ -1,0 +1,9 @@
+interface:
+  display_name: "Paper-to-PPTX"
+  short_description: "Build a complete but efficient Nature-style Chinese PPTX presentation from a scientific paper, preprint, PDF, article text, abstract, figure legends, or..."
+  default_prompt: "Use nature-paper2ppt to help with my research workflow."
+ownership:
+  product_owner: "JL Skill Collection"
+  product_line: "Nature Research Suite"
+  origin: "jl-refactored-community"
+  release_channel: "stable"

@@ -1,0 +1,9 @@
+interface:
+  display_name: "Metagenome Visualization"
+  short_description: "Visualize metagenomic profiles using R (phyloseq, microbiome) and Python (matplotlib, seaborn). Create stacked bar plots, heatmaps, PCA plots, and diver..."
+  default_prompt: "Use bio-metagenomics-visualization to design or troubleshoot this bioinformatics workflow."
+ownership:
+  product_owner: "JL Skill Collection"
+  product_line: "Bio & Omics Toolkit"
+  origin: "jl-authored-tool-guide"
+  release_channel: "stable"

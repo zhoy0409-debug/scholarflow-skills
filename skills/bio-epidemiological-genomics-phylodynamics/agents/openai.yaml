@@ -1,0 +1,9 @@
+interface:
+  display_name: "Phylodynamics"
+  short_description: "Estimates time-scaled phylogenies, molecular clock rates, effective reproduction number R_e (or R_t), and population dynamics from dated pathogen genome..."
+  default_prompt: "Use bio-epidemiological-genomics-phylodynamics to design or troubleshoot this bioinformatics workflow."
+ownership:
+  product_owner: "JL Skill Collection"
+  product_line: "Bio & Omics Toolkit"
+  origin: "jl-authored-tool-guide"
+  release_channel: "stable"

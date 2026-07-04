@@ -1,0 +1,9 @@
+interface:
+  display_name: "AIGC Down Router"
+  short_description: "AIGC Down Router"
+  default_prompt: "Use aigc-down-skill for this task."
+ownership:
+  product_owner: "JL Skill Collection"
+  product_line: "Academic Writing & Integrity"
+  origin: "jl-original-or-curated"
+  release_channel: "stable"

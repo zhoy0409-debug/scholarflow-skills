@@ -1,0 +1,9 @@
+interface:
+  display_name: "Omics Analysis Router"
+  short_description: "Omics Analysis Router"
+  default_prompt: "Use omics-analysis for this task."
+ownership:
+  product_owner: "JL Skill Collection"
+  product_line: "Academic Writing & Integrity"
+  origin: "jl-original-or-curated"
+  release_channel: "stable"

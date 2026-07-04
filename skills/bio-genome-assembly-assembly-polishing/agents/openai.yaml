@@ -1,0 +1,9 @@
+interface:
+  display_name: "Assembly Polishing"
+  short_description: "Decides whether and how to polish a draft genome assembly to raise consensus accuracy (QV) with read-type-matched tools - Racon and medaka (ONT consensu..."
+  default_prompt: "Use bio-genome-assembly-assembly-polishing to design or troubleshoot this bioinformatics workflow."
+ownership:
+  product_owner: "JL Skill Collection"
+  product_line: "Bio & Omics Toolkit"
+  origin: "jl-authored-tool-guide"
+  release_channel: "stable"

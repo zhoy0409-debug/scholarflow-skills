@@ -1,0 +1,9 @@
+interface:
+  display_name: "Screenshot docs"
+  short_description: "Capture screenshots of a running app and embed them into README.md and docs/ to make GitHub landing pages novice-friendly. Classifies the app as PySide6..."
+  default_prompt: "Use screenshot-docs to create or verify this deliverable."
+ownership:
+  product_owner: "JL Skill Collection"
+  product_line: "Delivery Stack"
+  origin: "jl-original-or-curated"
+  release_channel: "stable"

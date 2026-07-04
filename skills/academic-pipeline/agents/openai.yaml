@@ -1,0 +1,9 @@
+interface:
+  display_name: "Academic Pipeline Router"
+  short_description: "Academic Pipeline Router"
+  default_prompt: "Use academic-pipeline for this task."
+ownership:
+  product_owner: "JL Skill Collection"
+  product_line: "Academic Writing & Integrity"
+  origin: "jl-original-or-curated"
+  release_channel: "stable"

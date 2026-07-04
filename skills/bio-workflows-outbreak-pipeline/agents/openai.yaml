@@ -1,0 +1,9 @@
+interface:
+  display_name: "Outbreak Pipeline"
+  short_description: "End-to-end outbreak investigation from pathogen isolates to transmission networks. Orchestrates MLST typing, AMR surveillance, phylodynamic dating, and..."
+  default_prompt: "Use bio-workflows-outbreak-pipeline to design or troubleshoot this bioinformatics workflow."
+ownership:
+  product_owner: "JL Skill Collection"
+  product_line: "Bio & Omics Toolkit"
+  origin: "jl-authored-tool-guide"
+  release_channel: "stable"

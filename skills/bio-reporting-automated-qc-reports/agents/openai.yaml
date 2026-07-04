@@ -1,0 +1,9 @@
+interface:
+  display_name: "Automated QC Reports with MultiQC"
+  short_description: "Generates standardized quality control reports by aggregating metrics from FastQC, alignment, and other tools using MultiQC. Use when summarizing QC met..."
+  default_prompt: "Use bio-reporting-automated-qc-reports to design or troubleshoot this bioinformatics workflow."
+ownership:
+  product_owner: "JL Skill Collection"
+  product_line: "Bio & Omics Toolkit"
+  origin: "jl-authored-tool-guide"
+  release_channel: "stable"

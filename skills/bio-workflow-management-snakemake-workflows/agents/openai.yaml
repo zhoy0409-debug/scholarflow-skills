@@ -1,0 +1,9 @@
+interface:
+  display_name: "Snakemake Workflows"
+  short_description: "Build reproducible bioinformatics pipelines with Snakemake using rules, wildcards, and automatic dependency resolution. Use when creating Python-based w..."
+  default_prompt: "Use bio-workflow-management-snakemake-workflows to design or troubleshoot this bioinformatics workflow."
+ownership:
+  product_owner: "JL Skill Collection"
+  product_line: "Bio & Omics Toolkit"
+  origin: "jl-authored-tool-guide"
+  release_channel: "stable"

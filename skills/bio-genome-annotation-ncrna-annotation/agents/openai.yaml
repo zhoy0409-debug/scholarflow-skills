@@ -1,0 +1,9 @@
+interface:
+  display_name: "Non-Coding RNA Annotation"
+  short_description: "Identifies non-coding RNAs (tRNA, rRNA, snoRNA, snRNA, riboswitches, sRNAs) using Infernal covariance-model search against Rfam, tRNAscan-SE 2.0 for tRN..."
+  default_prompt: "Use bio-genome-annotation-ncrna-annotation to design or troubleshoot this bioinformatics workflow."
+ownership:
+  product_owner: "JL Skill Collection"
+  product_line: "Bio & Omics Toolkit"
+  origin: "jl-authored-tool-guide"
+  release_channel: "stable"

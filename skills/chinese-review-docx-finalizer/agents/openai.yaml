@@ -1,0 +1,9 @@
+interface:
+  display_name: "Chinese Review DOCX Finalizer"
+  short_description: "Use when doing targeted pre-submission revision or final formatting of Chinese academic review manuscripts in Word DOCX, especially preserving an establ..."
+  default_prompt: "Use chinese-review-docx-finalizer for this task."
+ownership:
+  product_owner: "JL Skill Collection"
+  product_line: "General Skill Library"
+  origin: "jl-original-or-curated"
+  release_channel: "stable"

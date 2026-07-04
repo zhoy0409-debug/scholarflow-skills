@@ -1,0 +1,9 @@
+interface:
+  display_name: "dbs-chatroom：定向聊天室"
+  short_description: "定向聊天室：根据话题推荐或接受用户指定的专家，模拟多角色对话。触发方式：/dbs-chatroom、/定向聊天室、「定向聊天室」"
+  default_prompt: "Use dbs-chatroom to diagnose this business or content problem."
+ownership:
+  product_owner: "JL Skill Collection"
+  product_line: "DBS Business Toolkit"
+  origin: "jl-original-or-curated"
+  release_channel: "stable"

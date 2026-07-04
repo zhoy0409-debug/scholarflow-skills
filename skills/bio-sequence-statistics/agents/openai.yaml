@@ -1,0 +1,9 @@
+interface:
+  display_name: "Sequence Statistics"
+  short_description: "Calculate sequence statistics (N50, length distribution, GC content, summary reports) using Biopython. Use when analyzing sequence datasets, generating..."
+  default_prompt: "Use bio-sequence-statistics to design or troubleshoot this bioinformatics workflow."
+ownership:
+  product_owner: "JL Skill Collection"
+  product_line: "Bio & Omics Toolkit"
+  origin: "jl-authored-tool-guide"
+  release_channel: "stable"

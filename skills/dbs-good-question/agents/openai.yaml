@@ -1,0 +1,9 @@
+interface:
+  display_name: "dbs-good-question：好问题生成器"
+  short_description: "dontbesilent 好问题生成器。把模糊问题改写成 Agent 可推理、可批评、可验证的问题说明书，并判断它能被自动化解决到什么程度。 触发方式：/dbs-good-question、/好问题、/问题说明书、/Agent可解性、「这个问题能不能自动化解决」「帮我把问题说清楚」 Turn fuzzy..."
+  default_prompt: "Use dbs-good-question to diagnose this business or content problem."
+ownership:
+  product_owner: "JL Skill Collection"
+  product_line: "DBS Business Toolkit"
+  origin: "jl-original-or-curated"
+  release_channel: "stable"

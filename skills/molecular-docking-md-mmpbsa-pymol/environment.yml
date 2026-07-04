@@ -1,0 +1,32 @@
+name: mol-mmpbsa
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - python=3.11
+  - numpy
+  - pandas
+  - scipy
+  - matplotlib
+  - seaborn
+  - rdkit
+  - openbabel
+  - meeko
+  - vina
+  - pymol-open-source
+  - plip
+  - gromacs
+  - ambertools
+  - acpype
+  - gmx_mmpbsa
+  - mdanalysis
+  - mdtraj
+  - biopython
+  - parmed
+  - networkx
+  - cairosvg
+  - svgwrite
+  - pillow
+  - pip
+  - pip:
+      - prolif

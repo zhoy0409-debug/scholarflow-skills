@@ -1,0 +1,9 @@
+interface:
+  display_name: "Heatmaps and Hierarchical Clustering"
+  short_description: "Build clustered heatmaps for expression matrices and other features-by-samples data with rigorous distance/linkage/scaling choices, robust color mapping..."
+  default_prompt: "Use bio-data-visualization-heatmaps-clustering to design or troubleshoot this bioinformatics workflow."
+ownership:
+  product_owner: "JL Skill Collection"
+  product_line: "Bio & Omics Toolkit"
+  origin: "jl-authored-tool-guide"
+  release_channel: "stable"

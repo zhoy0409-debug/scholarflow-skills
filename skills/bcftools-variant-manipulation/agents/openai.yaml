@@ -1,0 +1,9 @@
+interface:
+  display_name: "bcftools — VCF/BCF Variant Manipulation Toolkit"
+  short_description: "CLI for VCF/BCF: filter, merge, annotate, query, normalize, compute stats. Core post-variant-calling: quality filtering, multi-sample merging, rsID anno..."
+  default_prompt: "Use bcftools-variant-manipulation to design or troubleshoot this bioinformatics workflow."
+ownership:
+  product_owner: "JL Skill Collection"
+  product_line: "Bio & Omics Toolkit"
+  origin: "jl-authored-tool-guide"
+  release_channel: "stable"

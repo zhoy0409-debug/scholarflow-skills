@@ -1,0 +1,106 @@
+{
+  "canvas": {
+    "width": 1400,
+    "height": 1000,
+    "background": "#ffffff",
+    "font_family": "Arial, Helvetica, sans-serif"
+  },
+  "ligand": {
+    "width": 560,
+    "height": 420,
+    "bond_line_width": 2.1,
+    "atom_label_font_size": 18,
+    "offset_y": -10
+  },
+  "residue_bubbles": {
+    "radius": 42,
+    "stroke": "#5f6368",
+    "stroke_width": 1.6,
+    "font_size": 17,
+    "subfont_size": 13,
+    "hydrophobic": "#cdebc5",
+    "polar": "#cfe8f7",
+    "acidic": "#f6c37b",
+    "basic": "#c7b7f3",
+    "unknown": "#eeeeee"
+  },
+  "interactions": {
+    "hydrogen_bond": {
+      "color": "#2f8f4e",
+      "stroke_width": 2.2,
+      "dasharray": "7 5",
+      "arrow": true,
+      "label": "H-bond"
+    },
+    "hydrophobic": {
+      "color": "#74a65b",
+      "stroke_width": 2.0,
+      "dasharray": "4 6",
+      "arrow": false,
+      "label": "Hydrophobic"
+    },
+    "pi_stacking": {
+      "color": "#8e44ad",
+      "stroke_width": 2.4,
+      "dasharray": "10 4",
+      "arrow": false,
+      "label": "pi-pi"
+    },
+    "pi_cation": {
+      "color": "#4d4bb3",
+      "stroke_width": 2.4,
+      "dasharray": "3 4",
+      "arrow": true,
+      "label": "pi-cation"
+    },
+    "salt_bridge": {
+      "color": "#d35400",
+      "stroke_width": 2.6,
+      "dasharray": "",
+      "arrow": true,
+      "label": "Salt bridge"
+    },
+    "halogen_bond": {
+      "color": "#0097a7",
+      "stroke_width": 2.0,
+      "dasharray": "8 4",
+      "arrow": true,
+      "label": "Halogen"
+    },
+    "water_bridge": {
+      "color": "#42a5f5",
+      "stroke_width": 2.0,
+      "dasharray": "2 5",
+      "arrow": true,
+      "label": "Water bridge"
+    },
+    "metal_complex": {
+      "color": "#607d8b",
+      "stroke_width": 2.4,
+      "dasharray": "8 4 2 4",
+      "arrow": false,
+      "label": "Metal"
+    },
+    "contact": {
+      "color": "#9e9e9e",
+      "stroke_width": 1.8,
+      "dasharray": "3 5",
+      "arrow": false,
+      "label": "Contact"
+    }
+  },
+  "pocket": {
+    "enabled": true,
+    "stroke": "#9ccc65",
+    "stroke_width": 2.0,
+    "fill": "#eaf6df",
+    "fill_opacity": 0.25,
+    "dasharray": "10 8"
+  },
+  "legend": {
+    "enabled": true,
+    "x": 36,
+    "y": 815,
+    "font_size": 14
+  }
+}

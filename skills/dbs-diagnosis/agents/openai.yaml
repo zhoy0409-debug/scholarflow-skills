@@ -1,0 +1,9 @@
+interface:
+  display_name: "dbs-diagnosis：商业模式诊断"
+  short_description: "dontbesilent 商业模式诊断。两种模式：问诊（消解你的问题）和体检（拆解你的商业模式）。 触发方式：/dbs-diagnosis、/问诊、「帮我看看商业模式」「诊断一下我的业务」「我有个商业问题」 Business model diagnosis using dontbesilent's on..."
+  default_prompt: "Use dbs-diagnosis to diagnose this business or content problem."
+ownership:
+  product_owner: "JL Skill Collection"
+  product_line: "DBS Business Toolkit"
+  origin: "jl-original-or-curated"
+  release_channel: "stable"

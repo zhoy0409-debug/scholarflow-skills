@@ -1,0 +1,9 @@
+interface:
+  display_name: "Multiple Testing Correction"
+  short_description: "Controls error rates across thousands of simultaneous tests in genomics discovery using false-discovery-rate methods (Benjamini-Hochberg 1995; Benjamini..."
+  default_prompt: "Use bio-experimental-design-multiple-testing to design or troubleshoot this bioinformatics workflow."
+ownership:
+  product_owner: "JL Skill Collection"
+  product_line: "Bio & Omics Toolkit"
+  origin: "jl-authored-tool-guide"
+  release_channel: "stable"

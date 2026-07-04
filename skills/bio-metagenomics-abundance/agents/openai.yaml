@@ -1,0 +1,9 @@
+interface:
+  display_name: "Abundance Estimation with Bracken"
+  short_description: "Species abundance estimation using Bracken with Kraken2 output. Redistributes reads from higher taxonomic levels to species for more accurate estimates...."
+  default_prompt: "Use bio-metagenomics-abundance to design or troubleshoot this bioinformatics workflow."
+ownership:
+  product_owner: "JL Skill Collection"
+  product_line: "Bio & Omics Toolkit"
+  origin: "jl-authored-tool-guide"
+  release_channel: "stable"

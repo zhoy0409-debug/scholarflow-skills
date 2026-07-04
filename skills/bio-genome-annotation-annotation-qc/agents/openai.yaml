@@ -1,0 +1,9 @@
+interface:
+  display_name: "Annotation QC"
+  short_description: "Assesses the quality and completeness of a genome annotation with BUSCO (conserved single-copy ortholog recovery), OMArk (proteome completeness, consist..."
+  default_prompt: "Use bio-genome-annotation-annotation-qc to design or troubleshoot this bioinformatics workflow."
+ownership:
+  product_owner: "JL Skill Collection"
+  product_line: "Bio & Omics Toolkit"
+  origin: "jl-authored-tool-guide"
+  release_channel: "stable"

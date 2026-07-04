@@ -1,0 +1,9 @@
+interface:
+  display_name: "ENA Database — European Nucleotide Archive Programmatic Access"
+  short_description: "ENA REST API for sequences, reads, assemblies, and annotations. Portal API search, Browser API retrieval (XML/FASTA/EMBL), file reports for FASTQ/BAM UR..."
+  default_prompt: "Use ena-database to design or troubleshoot this bioinformatics workflow."
+ownership:
+  product_owner: "JL Skill Collection"
+  product_line: "Bio & Omics Toolkit"
+  origin: "jl-authored-tool-guide"
+  release_channel: "stable"

@@ -1,0 +1,9 @@
+interface:
+  display_name: "Distance Calculations and Tree Building"
+  short_description: "Compute evolutionary distances and build phylogenetic trees using Biopython Bio.Phylo.TreeConstruction. Use when creating distance matrices from alignme..."
+  default_prompt: "Use bio-phylo-distance-calculations to design or troubleshoot this bioinformatics workflow."
+ownership:
+  product_owner: "JL Skill Collection"
+  product_line: "Bio & Omics Toolkit"
+  origin: "jl-authored-tool-guide"
+  release_channel: "stable"
