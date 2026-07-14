@@ -1,6 +1,11 @@
 ---
 name: "bwa-mem2-dna-aligner"
-description: "Fast short-read DNA aligner for WGS/WES/ChIP-seq. 2× faster BWA-MEM successor; outputs SAM/BAM with read group headers for GATK. Primary plus supplementary records for chimeric reads. Use STAR for RNA-seq splice-aware alignment; Bowtie2 is a comparable alternative."
+description: >-
+  Fast short-read DNA aligner for WGS/WES/ChIP-seq. **Reference manual for bwa-mem2, not a task
+  skill.** The task-oriented skills route first — bio-read-alignment-bwa-alignment. Come here only
+  when you need a flag, subcommand, or edge case those do not cover, or when you want the full
+  tool surface in one place. **Do not trigger this on a plain task request** like "sort my BAM" or
+  "annotate this genome" — that belongs to the task skill.
 license: "MIT"
 ---
 

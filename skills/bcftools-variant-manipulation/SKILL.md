@@ -1,6 +1,12 @@
 ---
 name: "bcftools-variant-manipulation"
-description: "CLI for VCF/BCF: filter, merge, annotate, query, normalize, compute stats. Core post-variant-calling: quality filtering, multi-sample merging, rsID annotation, genotype extraction. Samtools companion in HTSlib. Use GATK for complex indel realignment during calling; use VCFtools for population genetics stats."
+description: >-
+  CLI for VCF/BCF: filter, merge, annotate, query, normalize, compute stats. **Reference manual
+  for bcftools, not a task skill.** The task-oriented skills route first — bio-vcf-basics /
+  bio-vcf-manipulation / bio-variant-calling / bio-variant-normalization. Come here only when you
+  need a flag, subcommand, or edge case those do not cover, or when you want the full tool surface
+  in one place. **Do not trigger this on a plain task request** like "sort my BAM" or "annotate
+  this genome" — that belongs to the task skill.
 license: "MIT"
 ---
 

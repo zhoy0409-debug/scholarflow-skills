@@ -1,6 +1,12 @@
 ---
 name: "samtools-bam-processing"
-description: "CLI toolkit for SAM/BAM/CRAM: sort, index, convert, filter, QC alignments. Core commands: view, sort, index, flagstat, stats, depth, markdup, merge. Required between alignment and variant/peak calling. Use pysam for Python-native BAM access; deeptools for normalized coverage tracks."
+description: >-
+  CLI toolkit for SAM/BAM/CRAM: sort, index, convert, filter, QC alignments. **Reference manual
+  for samtools, not a task skill.** The task-oriented skills route first — bio-alignment-sorting /
+  bio-alignment-indexing / bio-alignment-filtering / bio-bam-statistics / bio-sam-bam-basics. Come
+  here only when you need a flag, subcommand, or edge case those do not cover, or when you want
+  the full tool surface in one place. **Do not trigger this on a plain task request** like "sort
+  my BAM" or "annotate this genome" — that belongs to the task skill.
 license: "MIT"
 ---
 

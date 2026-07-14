@@ -181,18 +181,18 @@
 | skill | 做什么 |
 |---|---|
 | `artifact-staging-and-render-qa` | Stage external files into a writable workspace, normalize fragile paths, check local toolchain readiness, and render-verify deliverables before handoff. Use when… |
-| `bakta-genome-annotation` | "Annotate bacterial and archaeal genomes and plasmids with Bakta's Prodigal/HMM/diamond pipeline. Identifies CDS, ncRNA, tRNA, rRNA, tmRNA, sORFs, CRISPR arrays,… |
-| `bcftools-variant-manipulation` | "CLI for VCF/BCF: filter, merge, annotate, query, normalize, compute stats. Core post-variant-calling: quality filtering, multi-sample merging, rsID annotation,… |
+| `bakta-genome-annotation` | Annotate bacterial and archaeal genomes and plasmids with Bakta's Prodigal/HMM/diamond pipeline. **Reference manual for Bakta, not a task skill.** The task-oriented… |
+| `bcftools-variant-manipulation` | CLI for VCF/BCF: filter, merge, annotate, query, normalize, compute stats. **Reference manual for bcftools, not a task skill.** The task-oriented skills route first —… |
 | `biopython-molecular-biology` | "Molecular biology toolkit: sequence manipulation, FASTA/GenBank/PDB I/O, NCBI Entrez, BLAST automation, pairwise/MSA alignment, Bio.PDB, phylogenetic trees. Use for… |
 | `biopython-sequence-analysis` | "Biopython sequence analysis: parse FASTA/FASTQ/GenBank/GFF (SeqIO), NCBI Entrez (esearch/efetch/elink), remote/local BLAST, pairwise/MSA alignment (PairwiseAligner,… |
 | `busco-status-interpretation` | "Guide to interpreting BUSCO completeness statuses: why Duplicated BUSCOs count as complete, parsing output files, computing/comparing completeness across… |
-| `bwa-mem2-dna-aligner` | "Fast short-read DNA aligner for WGS/WES/ChIP-seq. 2× faster BWA-MEM successor; outputs SAM/BAM with read group headers for GATK. Primary plus supplementary records… |
+| `bwa-mem2-dna-aligner` | Fast short-read DNA aligner for WGS/WES/ChIP-seq. **Reference manual for bwa-mem2, not a task skill.** The task-oriented skills route first —… |
 | `chinese-docx-reference-unifier` | Normalize references and in-text citations in Chinese-language DOCX manuscripts, including numbering, bibliography order, punctuation, duplicates, and consistency… |
 | `chinese-review-docx-finalizer` | Finalize Chinese-language review manuscripts in DOCX by checking structure, headings, citations, references, formatting, figure/table callouts, acknowledgements,… |
 | `cobrapy-metabolic-modeling` | "Constraint-based (COBRA) analysis of genome-scale metabolic models: FBA, FVA, knockouts, flux sampling, production envelopes, gapfilling, media optimization. Use for… |
 | `dispatching-parallel-agents` | Use when facing 2+ independent tasks that can be worked on without shared state or sequential dependencies |
 | `ena-database` | "ENA REST API for sequences, reads, assemblies, and annotations. Portal API search, Browser API retrieval (XML/FASTA/EMBL), file reports for FASTQ/BAM URLs, taxonomy,… |
-| `fastp-fastq-preprocessing` | "All-in-one FASTQ QC and adapter trimming. Auto-detects Illumina adapters, filters low-quality reads, corrects paired-end overlaps, emits HTML+JSON QC in one pass.… |
+| `fastp-fastq-preprocessing` | All-in-one FASTQ QC and adapter trimming. **Reference manual for fastp, not a task skill.** The task-oriented skills route first — bio-read-qc-fastp-workflow /… |
 | `find-docs` | Retrieves up-to-date documentation, API references, and code examples for any developer technology. Use this skill whenever the user asks about a specific library,… |
 | `gget-genomic-databases` | "Unified CLI/Python interface to 20+ genomic databases. Gene lookups (Ensembl search/info/seq), BLAST/BLAT, AlphaFold, Enrichr enrichment, OpenTargets disease/drug,… |
 | `humanize` | Judge whether a text reads as AI-written, and — only if asked — rewrite it to lower an AI-detection or text-similarity score without changing facts, numbers, or… |
@@ -204,7 +204,7 @@
 | `kegg-pathway-analysis` | "Guide to KEGG pathway enrichment for DEG results. Covers ORA vs GSEA, mandatory directionality splitting, KEGG organism codes, API failure handling with offline… |
 | `local-md-mermaid-pdf` | Converts Markdown files with Mermaid diagrams to PDF using local tools (mmdc, md-to-pdf, Puppeteer) with CSS styling and page numbers. Use when the user asks to… |
 | `molecular-docking-md-mmpbsa-pymol` | Automate small molecule-target protein docking, MD, MM-PBSA/MM-GBSA, and visualization. Default system is one or more protein receptor chains plus an organic… |
-| `multiqc-qc-reports` | "Aggregates QC from 150+ bioinformatics tools into one interactive HTML report. Scans FastQC, samtools, STAR, HISAT2, Trim Galore, featureCounts, Kallisto, Salmon,… |
+| `multiqc-qc-reports` | Aggregates QC from 150+ bioinformatics tools into one interactive HTML report. **Reference manual for MultiQC, not a task skill.** The task-oriented skills route… |
 | `neat-freak` | Clean up project state at the end of a session by reconciling documentation, memory, open tasks, file changes, and handoff notes so future work does not rot. |
 | `notebooklm` | Use this skill to query your Google NotebookLM notebooks directly from Claude Code for source-grounded, citation-backed answers from Gemini. Browser automation,… |
 | `paper-harbor` | Batch-scrape literature metadata from CNKI / ScienceDirect via browser automation (DrissionPage), then bridge it into Zotero-ready form. For bulk runs against… |
@@ -213,24 +213,24 @@
 | `plannotate-plasmid-annotation` | "Auto-annotate plasmids with features (promoters, terminators, resistance, origins, tags, fluorescent proteins) via BLAST against curated DBs (Addgene, fpbase,… |
 | `ppt` | Plan, author, verify, screenshot, and export PowerPoint slide decks through a filesystem-based deck workflow. |
 | `ppt-html-authoring` | Author a single PPT slide as a self-contained slide.html + design.md, given one outline entry. Use when the user asks to design, draft, or rewrite an individual slide… |
-| `prokka-genome-annotation` | "Annotate prokaryotic genomes (bacteria, archaea, viruses) via Prokka's BLAST/HMM pipeline. Identifies CDS, rRNA, tRNA, tmRNA, signal peptides against Pfam, TIGRFAMs,… |
-| `pysam-genomic-files` | "Read/write SAM/BAM/CRAM, VCF/BCF, FASTA/FASTQ. Region queries, pileup, variant filtering, read groups. Python htslib wrapper exposing samtools/bcftools CLI. Use… |
+| `prokka-genome-annotation` | Annotate prokaryotic genomes (bacteria, archaea, viruses) via Prokka's BLAST/HMM pipeline. **Reference manual for Prokka, not a task skill.** The task-oriented skills… |
+| `pysam-genomic-files` | Read/write SAM/BAM/CRAM, VCF/BCF, FASTA/FASTQ. **Reference manual for pysam, not a task skill.** The task-oriented skills route first — bio-sam-bam-basics /… |
 | `reference-checker` | Verify references and citation metadata against reliable sources, detect mismatches, duplicates, missing fields, formatting issues, and unsupported claims. |
 | `research-integrity-guardrail` | Mechanical pre-submission audit. Finds and locates errors; never rewrites. Checks that numbers in the abstract agree with the tables, that figure and reference… |
-| `roary-pangenome` | "Compute the bacterial pan-genome from Prokka/Bakta GFF3 annotations with Roary's CD-HIT + BLAST + MCL clustering pipeline. Builds gene presence/absence matrices,… |
-| `samtools-bam-processing` | "CLI toolkit for SAM/BAM/CRAM: sort, index, convert, filter, QC alignments. Core commands: view, sort, index, flagstat, stats, depth, markdup, merge. Required between… |
+| `roary-pangenome` | Compute the bacterial pan-genome from Prokka/Bakta GFF3 annotations with Roary's CD-HIT + BLAST + MCL clustering pipeline. **Reference manual for Roary, not a task… |
+| `samtools-bam-processing` | CLI toolkit for SAM/BAM/CRAM: sort, index, convert, filter, QC alignments. **Reference manual for samtools, not a task skill.** The task-oriented skills route first —… |
 | `sci-figure-composer` | Turn scattered panels that already exist into one submission-grade composite figure: layout grid, panel labels on a shared axis, consistent fonts and colors, and… |
 | `screenshot-docs` | "Capture screenshots of a running app and embed them into README.md and docs/ to make GitHub landing pages novice-friendly. Classifies the app as PySide6 GUI, Swift… |
 | `securityauditor` | Static security audit workflow for Codex skills, agent skills, SKILL.md files, bundled scripts, hooks, shell snippets, suspicious file operations, prompt-injection… |
 | `session-handoff` | Creates a safe en-US handoff markdown file from the current session, including the session timestamp, status, objective, expected result, work done, wins, failures,… |
 | `sgrna-design-guide` | Three-tiered sgRNA design guide using validated Addgene sequences, CRISPick pre-computed datasets, or de novo design rules for CRISPR experiments |
 | `skill-writing-guide` | "Guide for authoring Agent Skills (SKILL.md). Covers the open standard format, required frontmatter, directory layout, progressive disclosure, description writing,… |
-| `snpeff-variant-annotation` | "Annotate and filter VCF variants with SnpEff and SnpSift. SnpEff predicts functional effects (HIGH/MODERATE/LOW/MODIFIER), genes, transcripts, AA changes, HGVS;… |
+| `snpeff-variant-annotation` | Annotate and filter VCF variants with SnpEff and SnpSift. **Reference manual for SnpEff / SnpSift, not a task skill.** The task-oriented skills route first —… |
 | `storage-analyzer` | Run read-only storage analysis on macOS or Windows, classify large disk usage into actionable cleanup tiers, and generate an interactive local HTML report with safe… |
 | `support-to-repro-pack` | Convert support materials into a reproducibility package with organized files, metadata, methods notes, environment details, redaction checks, and reviewer-friendly… |
 | `survey-builder` | Generate pre/post/pulse surveys tied to learning outcomes. Copy-ready for Nancy. Use for "build surveys", "create survey", "post-survey". |
 | `transcribe` | "Transcribe audio files to text with optional diarization and known-speaker hints. Use when a user asks to transcribe speech from audio/video, extract text from… |
 | `user-workflow-orchestrator` | Use ONLY when the user explicitly does not know which skill or workflow they need, or the request spans several domains and needs triage first. It picks the lane and… |
-| `vcf-variant-filtering` | "Guide to quality filtering raw VCF files before computing summary stats (Ts/Tv ratio, variant counts, AF distributions). Covers detecting raw VCFs via FILTER column… |
+| `vcf-variant-filtering` | Guide to quality filtering raw VCF files before computing summary stats (Ts/Tv ratio, variant counts, AF distributions). **Reference manual for VCF 质控过滤, not a task… |
 | `zotero-lit-fetch` | Fetch and organize literature metadata into Zotero-oriented workflows across English and Chinese-language scholarly databases while respecting authorization and… |
 

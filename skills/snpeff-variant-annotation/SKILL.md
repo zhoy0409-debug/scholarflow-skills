@@ -1,6 +1,11 @@
 ---
 name: "snpeff-variant-annotation"
-description: "Annotate and filter VCF variants with SnpEff and SnpSift. SnpEff predicts functional effects (HIGH/MODERATE/LOW/MODIFIER), genes, transcripts, AA changes, HGVS; SnpSift filters and adds ClinVar/dbSNP. Java CLI with Python subprocess integration. Use ANNOVAR for multi-database annotation; Ensembl VEP for REST API; SnpEff for fast CLI with pre-built genomes."
+description: >-
+  Annotate and filter VCF variants with SnpEff and SnpSift. **Reference manual for SnpEff /
+  SnpSift, not a task skill.** The task-oriented skills route first — bio-variant-annotation. Come
+  here only when you need a flag, subcommand, or edge case those do not cover, or when you want
+  the full tool surface in one place. **Do not trigger this on a plain task request** like "sort
+  my BAM" or "annotate this genome" — that belongs to the task skill.
 license: "MIT"
 ---
 

@@ -1,6 +1,12 @@
 ---
 name: "prokka-genome-annotation"
-description: "Annotate prokaryotic genomes (bacteria, archaea, viruses) via Prokka's BLAST/HMM pipeline. Identifies CDS, rRNA, tRNA, tmRNA, signal peptides against Pfam, TIGRFAMs, RefSeq. Outputs GFF3, GenBank, FASTA, TSV. Use PGAP for NCBI GenBank submission; Bakta for faster NCBI-compatible annotation."
+description: >-
+  Annotate prokaryotic genomes (bacteria, archaea, viruses) via Prokka's BLAST/HMM pipeline.
+  **Reference manual for Prokka, not a task skill.** The task-oriented skills route first —
+  bio-genome-annotation-prokaryotic-annotation. Come here only when you need a flag, subcommand,
+  or edge case those do not cover, or when you want the full tool surface in one place. **Do not
+  trigger this on a plain task request** like "sort my BAM" or "annotate this genome" — that
+  belongs to the task skill.
 license: "GPL-3.0"
 ---
 

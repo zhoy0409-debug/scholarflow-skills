@@ -1,6 +1,12 @@
 ---
 name: vcf-variant-filtering
-description: "Guide to quality filtering raw VCF files before computing summary stats (Ts/Tv ratio, variant counts, AF distributions). Covers detecting raw VCFs via FILTER column and QUAL inspection, QUAL-based filtering with bcftools, Ts/Tv interpretation, and when NOT to filter. Read before any variant-level QC task. See bcftools-variant-manipulation for advanced filters, gatk-variant-calling for caller config, samtools-bam-processing for upstream alignment QC."
+description: >-
+  Guide to quality filtering raw VCF files before computing summary stats (Ts/Tv ratio, variant
+  counts, AF distributions). **Reference manual for VCF 质控过滤, not a task skill.** The
+  task-oriented skills route first — bio-variant-calling-filtering-best-practices. Come here only
+  when you need a flag, subcommand, or edge case those do not cover, or when you want the full
+  tool surface in one place. **Do not trigger this on a plain task request** like "sort my BAM" or
+  "annotate this genome" — that belongs to the task skill.
 license: CC-BY-4.0
 ---
 

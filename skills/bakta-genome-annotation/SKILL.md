@@ -1,6 +1,12 @@
 ---
 name: "bakta-genome-annotation"
-description: "Annotate bacterial and archaeal genomes and plasmids with Bakta's Prodigal/HMM/diamond pipeline. Identifies CDS, ncRNA, tRNA, rRNA, tmRNA, sORFs, CRISPR arrays, oriC/oriV/oriT, and gaps against a curated UniRef-derived database. Produces NCBI-compatible GFF3, GenBank, EMBL, JSON, FASTA, TSV, and a circular genome plot. Use Prokka for legacy pipelines or non-bacterial kingdoms; PGAP for NCBI GenBank submission."
+description: >-
+  Annotate bacterial and archaeal genomes and plasmids with Bakta's Prodigal/HMM/diamond pipeline.
+  **Reference manual for Bakta, not a task skill.** The task-oriented skills route first —
+  bio-genome-annotation-prokaryotic-annotation. Come here only when you need a flag, subcommand,
+  or edge case those do not cover, or when you want the full tool surface in one place. **Do not
+  trigger this on a plain task request** like "sort my BAM" or "annotate this genome" — that
+  belongs to the task skill.
 license: "GPL-3.0"
 ---
 
