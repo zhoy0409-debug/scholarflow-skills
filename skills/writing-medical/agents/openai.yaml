@@ -1,9 +1,0 @@
-interface:
-  display_name: "Writing Medical"
-  short_description: "Draft, revise, and quality-check medical or biomedical manuscripts with conservative claims, clinical context, reporting guidance, terminology disciplin..."
-  default_prompt: "Use writing-medical to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "Academic Writing & Integrity"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

@@ -3,39 +3,49 @@ name: reference-checker
 description: Verify references and citation metadata against reliable sources, detect mismatches, duplicates, missing fields, formatting issues, and unsupported claims.
 ---
 
-# Reference Checker
+# Reference Checker —— 这条引用是真的吗
 
-Use this skill to execute the workflow described in the frontmatter description. Keep the workflow practical, source-grounded, and deliverable-oriented.
+**核验，不是检索。** 输入是一条已经存在的引用，输出是一个判定。
 
-## Operating Principles
+（要找新论文 → `nature-academic-search`。要给一段文字配引用 → `nature-citation`。）
 
-- Start from the user's actual goal, materials, constraints, and desired deliverable.
-- Ask only the questions needed to avoid a wrong workflow or unsafe assumption.
-- Prefer official sources, user-provided files, and reproducible commands over memory.
-- Keep claims conservative when evidence, metrics, journal data, or source materials are incomplete.
-- Preserve a clear audit trail for citations, file edits, external tools, and decisions.
+## 三个层次，从便宜到贵
 
-## Workflow
+### 1. 它存在吗（必查）
 
-1. Clarify the task outcome, required inputs, deadline, and risk boundaries.
-2. Inspect the available materials before proposing a final route.
-3. Choose the smallest workflow that can produce a usable result.
-4. Use bundled references or scripts only when they materially improve reliability.
-5. Produce a structured deliverable that the user can continue using without re-explaining the context.
-6. Run a final quality check for completeness, evidence grounding, formatting, and safety boundaries.
+- 有 DOI → 查 `https://doi.org/<DOI>`，看是否解析到真实条目。
+- 有 PMID → 查 PubMed。
+- 都没有 → 用标题在 CrossRef / PubMed 精确匹配。**标题对不上就是红旗。**
 
-## Expected Outputs
+**编造的引用长什么样**：作者是真的、期刊是真的、年份是真的，但这三者的**组合**不存在。
+所以不能只看"这些名字我听说过"，必须**真的去查这个组合**。
 
-- a concise summary of the user's goal and constraints;
-- the selected workflow and reasoning;
-- concrete outputs such as notes, tables, reports, manuscript text, slide structure, figures, code, or file changes;
-- quality checks and unresolved items;
-- next-step recommendations when useful.
+### 2. 元数据对得上吗
 
-## Guardrails
+作者、年份、卷期页、期刊名 —— 逐项和权威源比对。
+**只错一项也要报**：年份差一年、卷号错一位，都是引用被"记忆生成"出来的痕迹。
 
-- Do not fabricate sources, citations, metrics, journal rules, results, or tool outputs.
-- Do not bypass copyright, paywalls, account restrictions, CAPTCHAs, or institutional access controls.
-- Do not delete, overwrite, or externally publish files without explicit user confirmation.
-- Mark uncertainty instead of hiding it.
-- Keep external software, databases, and platforms clearly attributed to their own providers.
+### 3. 它真的支持这句话吗（最贵，也最重要）
+
+这一步不能跳过，而且**只有它能抓到最危险的错误**：引用是真的，但它根本没说那句话。
+
+- 取出正文里那句断言。
+- 打开被引文献，找到对应的段落/图表。
+- 判定：**直接支持 / 部分支持 / 不支持 / 说的是相反的事**。
+- 「部分支持」要说清差在哪：样本不同？条件不同？作者的原话更保守？
+
+## 还要查
+
+- **撤稿**：查 Retraction Watch / PubMed 的 retraction 标记。引用一篇被撤稿的文献是硬伤。
+- **预印本 vs 正式发表**：预印本被引用时必须标明，且要查它后来有没有正式发表（结论可能变了）。
+- **二手引用**：A 引 B 说的话，但 B 其实是引的 C。**要引 C。**
+
+## 输出
+
+一张表，一条引用一行：
+
+| # | 引用 | 存在 | 元数据 | 支持断言 | 备注 |
+|---|---|---|---|---|---|
+| 12 | Smith 2021 | ✓ | ✗ 年份应为 2022 | 部分支持 | 原文是小鼠，正文写成了人 |
+
+**判定不确定时，说不确定。** 不要为了让表格好看而猜。
