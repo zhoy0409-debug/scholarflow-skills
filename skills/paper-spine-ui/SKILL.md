@@ -1,6 +1,10 @@
 ---
 name: paper-spine-ui
-description: Launches the PaperSpine external terminal configuration UI for Codex and Claude Code.
+description: >-
+  Internal module of the PaperSpine pipeline — it launches the terminal config wizard. Invoked by
+  `paper-spine`, never by the user. It assumes PaperSpine's config (`paper_spine_config.json`),
+  `source_map.md`, and a confirmed motivation already exist; run outside that context it produces
+  wrong results. **Do not trigger this on a user request.**
 ---
 
 # PaperSpine UI

@@ -1,6 +1,11 @@
 ---
 name: paper-spine-research
-description: Researches target requirements, downloads reference materials, learns strong examples, and prepares motivation options.
+description: >-
+  Internal module of the PaperSpine pipeline — it researches target requirements and motivation
+  options. Invoked by `paper-spine`, never by the user. It assumes PaperSpine's config
+  (`paper_spine_config.json`), `source_map.md`, and a confirmed motivation already exist; run
+  outside that context it produces wrong results. **Do not trigger this on a user request.**
+  Standalone alternative: finding papers on a topic → nature-academic-search.
 ---
 
 # PaperSpine Research

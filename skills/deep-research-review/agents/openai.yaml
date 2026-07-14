@@ -1,9 +1,0 @@
-interface:
-  display_name: "Deep Research Review"
-  short_description: "Review, audit, and stress-test deep research outputs, literature reviews, evidence maps, systematic review drafts, and research claims with ScholarFlow..."
-  default_prompt: "Use deep-research-review to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "General Utilities"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

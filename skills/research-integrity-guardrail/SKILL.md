@@ -1,6 +1,12 @@
 ---
 name: research-integrity-guardrail
-description: Research-paper integrity and quality guardrail for academic manuscripts, AutoResearch-style outputs, literature reviews, methods/results sections, appendices, rebuttals, grant text, and any thread involving drafting, polishing, translating, reviewing, or auditing scholarly work. Use when the user asks to avoid low-quality AI/autoresearch artifacts, check for "red flags", improve paper credibility, verify novelty claims, reconcile numbers, validate ground truth or experiments, inspect related work/citations, or make research writing defensible and reproducible.
+description: >-
+  Mechanical pre-submission audit. Finds and locates errors; never rewrites. Checks that numbers
+  in the abstract agree with the tables, that figure and reference cross-references survived
+  renumbering, that every reference is both cited and listed, that percentages add up, that
+  P-values carry the right test label. Runs the executable gates in `gates/`. Not for: judgment on
+  novelty or scientific merit → nature-reviewer. 触发：一致性核查、核对数字、对不对得上、引了没列、列了没引、编号错位、交叉引用、终稿核对。
+  Triggers: do the numbers match, are all figures cited, consistency check, cross-reference audit.
 ---
 
 # Research Integrity Guardrail

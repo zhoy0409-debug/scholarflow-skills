@@ -1,6 +1,11 @@
 ---
 name: paper-spine-audit
-description: Audits PaperSpine outputs for missing artifacts, shallow revisions, logic transfer, unsupported claims, and translation coverage.
+description: >-
+  Internal module of the PaperSpine pipeline — it audits PaperSpine's own outputs for missing
+  artifacts. Invoked by `paper-spine`, never by the user. It assumes PaperSpine's config
+  (`paper_spine_config.json`), `source_map.md`, and a confirmed motivation already exist; run
+  outside that context it produces wrong results. **Do not trigger this on a user request.**
+  Standalone alternative: auditing any manuscript for consistency → research-integrity-guardrail.
 ---
 
 # PaperSpine Audit

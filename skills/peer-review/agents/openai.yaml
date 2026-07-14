@@ -1,9 +1,0 @@
-interface:
-  display_name: "Peer Review"
-  short_description: "Structured manuscript/grant review with checklist-based evaluation. Use when writing formal peer reviews with specific criteria methodology assessment,..."
-  default_prompt: "Use peer-review to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "General Utilities"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

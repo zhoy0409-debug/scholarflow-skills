@@ -1,6 +1,11 @@
 ---
 name: paper-spine-humanize
-description: Reduces AI detection rates via tiered stylistic constraints mapped to real AIGC detection dimensions. Produces a teaching humanize_matrix.md.
+description: >-
+  Internal module of the PaperSpine pipeline — it runs the tiered AI-detection rewrite. Invoked by
+  `paper-spine`, never by the user. It assumes PaperSpine's config (`paper_spine_config.json`),
+  `source_map.md`, and a confirmed motivation already exist; run outside that context it produces
+  wrong results. **Do not trigger this on a user request.** Standalone alternative: lowering an
+  AI-detection score outside PaperSpine → humanize.
 ---
 
 # PaperSpine Humanize

@@ -1,6 +1,10 @@
 ---
 name: paper-spine-intake
-description: Collects PaperSpine workflow options and writes config for flash/pro, scene, language, and inputs.
+description: >-
+  Internal module of the PaperSpine pipeline — it collects workflow config. Invoked by
+  `paper-spine`, never by the user. It assumes PaperSpine's config (`paper_spine_config.json`),
+  `source_map.md`, and a confirmed motivation already exist; run outside that context it produces
+  wrong results. **Do not trigger this on a user request.**
 ---
 
 # PaperSpine Intake

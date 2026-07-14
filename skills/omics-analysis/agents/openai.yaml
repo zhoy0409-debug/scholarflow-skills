@@ -1,9 +1,0 @@
-interface:
-  display_name: "Omics Analysis"
-  short_description: "Route omics analysis planning, QC, bioinformatics workflow design, multi-omics data interpretation, figures, reproducibility checks, and manuscript-read..."
-  default_prompt: "Use omics-analysis to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "Bio & Omics Toolkit"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

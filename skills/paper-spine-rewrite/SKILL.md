@@ -1,6 +1,11 @@
 ---
 name: paper-spine-rewrite
-description: Rewrites an existing manuscript from confirmed motivation, research, paragraph-level rationale, and evidence.
+description: >-
+  Internal module of the PaperSpine pipeline — it rewrites an existing manuscript from confirmed
+  motivation. Invoked by `paper-spine`, never by the user. It assumes PaperSpine's config
+  (`paper_spine_config.json`), `source_map.md`, and a confirmed motivation already exist; run
+  outside that context it produces wrong results. **Do not trigger this on a user request.**
+  Standalone alternative: improving the English of finished prose → nature-polishing.
 ---
 
 # PaperSpine Rewrite

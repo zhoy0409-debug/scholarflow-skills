@@ -1,6 +1,10 @@
 ---
 name: paper-spine-translate
-description: Produces the complete translation_zh/ package with row-by-row translation of all required artifacts and full-paper translation.
+description: >-
+  Internal module of the PaperSpine pipeline — it produces the translation_zh/ package. Invoked by
+  `paper-spine`, never by the user. It assumes PaperSpine's config (`paper_spine_config.json`),
+  `source_map.md`, and a confirmed motivation already exist; run outside that context it produces
+  wrong results. **Do not trigger this on a user request.**
 ---
 
 # PaperSpine Translate

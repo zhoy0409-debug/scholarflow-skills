@@ -1,6 +1,11 @@
 ---
 name: paper-spine-citation
-description: Builds a citation support bank for Introduction, Discussion, and background claims.
+description: >-
+  Internal module of the PaperSpine pipeline — it builds the citation support bank. Invoked by
+  `paper-spine`, never by the user. It assumes PaperSpine's config (`paper_spine_config.json`),
+  `source_map.md`, and a confirmed motivation already exist; run outside that context it produces
+  wrong results. **Do not trigger this on a user request.** Standalone alternative: adding
+  citations to a paragraph → nature-citation.
 ---
 
 # PaperSpine Citation

@@ -1,9 +1,0 @@
-interface:
-  display_name: "Impeccable"
-  short_description: "Run a rigorous final-quality pass on a document or deliverable, focusing on internal consistency, wording precision, factual boundaries, formatting, and..."
-  default_prompt: "Use impeccable to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "General Utilities"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"
