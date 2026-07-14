@@ -38,10 +38,12 @@ Start from the task, not from the full list.
 | Search literature, build a review, or verify citations | `nature-academic-search`, `reference-checker` |
 | Read papers deeply and preserve figure logic | `nature-reader` |
 | Draft, revise, or polish a manuscript | `nature-writing`, `nature-polishing`, `paper-spine` |
-| Select journals or run pre-submission checks | `journal-selection-advisor`, `journal-submission-normalizer`, `research-integrity-guardrail`, `paper-self-review` |
+| Select a journal or normalize submission formatting | `journal-selection-advisor`, `journal-submission-normalizer` |
+| Pre-submission: **is the science defensible?** | `nature-reviewer` |
+| Pre-submission: **do the numbers and cross-references hold up?** | `research-integrity-guardrail` + `gates/` |
 | Build scientific figures | `nature-figure`, `sci-figure-composer` |
 | Prepare journal club or research slides | `nature-paper2ppt`, `ppt` |
-| Run bioinformatics or omics workflows | `omics-analysis`, `bio-*`, `samtools-bam-processing`, `bcftools-variant-manipulation` |
+| Run bioinformatics or omics workflows | `bio-*` (130 skills), `samtools-bam-processing`, `bcftools-variant-manipulation` |
 | Convert or clean PDF, DOCX, PPTX, XLSX, and Markdown deliverables | `pdf-guide`, `local-md-mermaid-pdf`, `ppt`, `chinese-docx-reference-unifier` |
 | Write or audit your own skill | `skill-writing-guide`, `securityauditor` |
 | Keep long tasks from losing context | `planning-with-files`, `session-handoff` |

@@ -1,0 +1,47 @@
+# 仓库健康检查 —— 把「静态可查的错误」全部变成 CI fail。
+#
+# 这个 CI 里的每一条，都对应一个**已经发生过、而且发布给了别人**的错误：
+#
+#   check_health  —— 15 个 nature-* 的 SKILL.md 被模板重生成，冲成了同一份空话。
+#                    manifest 还在、400KB 的 static/references 还在，但没有一行指令
+#                    让模型去读它们。skill 变成空壳，没有任何东西发现。
+#
+#   check_docs    —— 删掉 11 个 skill 之后，README 仍然在让人用 `manuscript-writing`。
+#                    用户会照着做。
+#
+#   sync_shared   —— shared/ 和 skills/_shared/ 曾经是 9 份 md5 相同的复制品。
+#                    改一次要同步九处。现在还没漂移，只是因为还没人改过。
+#
+#   gates/tests   —— 门禁本身也会坏。
+#
+# 静态可查的东西，不该靠人肉发现。
+name: health
+on: [push, pull_request]
+jobs:
+  health:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.11" }
+      - run: pip install pyyaml pytest pillow
+
+      - name: skill 不是空壳，manifest 无断链
+        run: python3 tools/check_health.py --root .
+
+      - name: 文档没有推荐不存在的 skill
+        run: python3 tools/check_docs.py --root .
+
+      - name: shared/ 与 skills/_shared/ 一致
+        run: python3 tools/sync_shared.py check --root .
+
+      - name: SKILL_INDEX 是最新的（生成后不应有 diff）
+        run: |
+          python3 tools/gen_index.py --root .
+          git diff --exit-code SKILL_INDEX.md || {
+            echo "SKILL_INDEX.md 过期了。跑：python3 tools/gen_index.py --root ."
+            exit 1
+          }
+
+      - name: 门禁测试
+        run: python3 -m pytest gates/tests -q
