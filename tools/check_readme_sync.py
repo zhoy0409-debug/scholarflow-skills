@@ -16,6 +16,11 @@
 import argparse, re, sys
 from pathlib import Path
 
+# Windows 控制台默认 GBK —— 打一个 ✓ 就 UnicodeEncodeError 崩掉。Linux CI 撞不到。
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+
 
 def shape(p: Path):
     t = p.read_text(encoding="utf-8")
