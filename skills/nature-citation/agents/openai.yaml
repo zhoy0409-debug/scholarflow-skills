@@ -1,0 +1,9 @@
+interface:
+  display_name: "Nature Citation"
+  short_description: "Audit citations and reference lists for scholarly manuscripts, including source verification, metadata consistency, journal-style formatting, and eviden..."
+  default_prompt: "Use nature-citation to handle this workflow."
+ownership:
+  product_owner: "Zhoy"
+  product_line: "Nature Research Suite"
+  origin: "zhoy-original-or-curated"
+  release_channel: "stable"

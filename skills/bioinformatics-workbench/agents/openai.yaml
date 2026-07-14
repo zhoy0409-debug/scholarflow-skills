@@ -1,0 +1,4 @@
+interface:
+  display_name: Bioinformatics Workbench
+  short_description: Design reproducible omics workflows with QC gates.
+  default_prompt: Build a realistic bioinformatics workflow from my research question, data inventory, and constraints. State missing prerequisites and QC gates before proposing analysis commands.

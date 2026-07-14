@@ -8,7 +8,8 @@ import sys
 from pathlib import Path
 
 
-EXPECTED_SKILLS = {
+CORE_SKILLS = {
+    "bioinformatics-workbench",
     "journal-selection-advisor",
     "journal-submission-normalizer",
     "polish-sci-figures",
@@ -22,12 +23,17 @@ REQUIRED_ROOT_FILES = {
     "LICENSE",
 }
 LINK = re.compile(r"\[[^]]+\]\(([^)]+)\)")
+NON_ENGLISH = re.compile(r"[\u4e00-\u9fff\ufffd]")
 
 
-def public_text_files(root: Path) -> list[Path]:
+def skill_dirs(skill_root: Path) -> list[Path]:
+    return sorted(path for path in skill_root.iterdir() if path.is_dir() and (path / "SKILL.md").is_file())
+
+
+def public_text_files(root: Path, skills: list[Path]) -> list[Path]:
     files = [root / name for name in REQUIRED_ROOT_FILES if name != "LICENSE"]
-    files += list((root / "skills").glob("*/SKILL.md"))
-    files += list((root / "skills").glob("*/agents/openai.yaml"))
+    files += [path for skill in skills for path in skill.rglob("*.md")]
+    files += [path for skill in skills for path in skill.rglob("*.yaml")]
     files += [root / "showcase/elife-tea-seq-figure-3/README.md"]
     return files
 
@@ -43,22 +49,23 @@ def validate_frontmatter(path: Path, expected_name: str, errors: list[str]) -> N
         errors.append(f"{path}: missing closing frontmatter delimiter")
         return
     fields = dict(line.split(":", 1) for line in lines[1:end] if ":" in line)
-    if fields.get("name", "").strip() != expected_name:
+    name = fields.get("name", "").strip().strip("\"'")
+    if name != expected_name:
         errors.append(f"{path}: frontmatter name must be {expected_name}")
     if not fields.get("description", "").strip():
         errors.append(f"{path}: missing frontmatter description")
 
 
-def validate_links(path: Path, root: Path, errors: list[str]) -> None:
+def validate_text(path: Path, root: Path, errors: list[str]) -> None:
     text = path.read_text(encoding="utf-8")
-    if re.search(r"[\u4e00-\u9fff\ufffd]|鈥", text):
+    if NON_ENGLISH.search(text):
         errors.append(f"{path}: public text contains non-English or corrupted characters")
     for raw_link in LINK.findall(text):
         link = raw_link.split("#", 1)[0]
         if not link or "://" in link or link.startswith("mailto:"):
             continue
         target = (path.parent / link).resolve()
-        if not target.exists() or root not in target.parents and target != root:
+        if not target.exists() or (root not in target.parents and target != root):
             errors.append(f"{path}: broken local link {raw_link}")
 
 
@@ -70,23 +77,21 @@ def main() -> int:
             errors.append(f"missing root file: {name}")
 
     skill_root = root / "skills"
-    actual_skills = {path.name for path in skill_root.iterdir() if path.is_dir()} if skill_root.is_dir() else set()
-    if actual_skills != EXPECTED_SKILLS:
-        errors.append(f"skills must be exactly {sorted(EXPECTED_SKILLS)}, found {sorted(actual_skills)}")
+    skills = skill_dirs(skill_root) if skill_root.is_dir() else []
+    actual_names = {skill.name for skill in skills}
+    missing_core = CORE_SKILLS - actual_names
+    if missing_core:
+        errors.append(f"missing Core skills: {sorted(missing_core)}")
 
-    for name in EXPECTED_SKILLS:
-        skill = skill_root / name / "SKILL.md"
-        metadata = skill_root / name / "agents/openai.yaml"
-        if not skill.is_file() or not metadata.is_file():
-            errors.append(f"{name}: missing SKILL.md or agents/openai.yaml")
-            continue
-        validate_frontmatter(skill, name, errors)
-        if "display_name:" not in metadata.read_text(encoding="utf-8"):
-            errors.append(f"{metadata}: missing display_name")
+    for skill in skills:
+        metadata = skill / "agents/openai.yaml"
+        validate_frontmatter(skill / "SKILL.md", skill.name, errors)
+        if not metadata.is_file() or "display_name:" not in metadata.read_text(encoding="utf-8"):
+            errors.append(f"{skill.name}: missing display_name metadata")
 
-    for path in public_text_files(root):
+    for path in public_text_files(root, skills):
         if path.is_file():
-            validate_links(path, root, errors)
+            validate_text(path, root, errors)
 
     for path in [root / ".claude-plugin/plugin.json", root / ".claude-plugin/marketplace.json"]:
         try:
@@ -103,7 +108,7 @@ def main() -> int:
         print("Release check failed:")
         print("\n".join(f"- {error}" for error in errors))
         return 1
-    print("Release check passed.")
+    print(f"Release check passed for {len(skills)} skills.")
     return 0
 
 

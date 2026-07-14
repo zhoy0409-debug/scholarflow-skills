@@ -5,20 +5,20 @@
     "url": "https://github.com/zhoy0409-debug"
   },
   "metadata": {
-    "description": "Research workflows for journal selection, submission readiness, scientific figures, and integrity review.",
-    "version": "2.0.0"
+    "description": "Research workflows for evidence search, manuscripts, journal readiness, bioinformatics planning, scientific figures, and integrity review.",
+    "version": "2.1.0"
   },
   "plugins": [
     {
       "name": "scholarflow",
       "source": "./",
-      "description": "Zhoy's maintained research workflow collection.",
-      "version": "2.0.0",
+      "description": "Zhoy's maintained research workflow collection for the full research cycle.",
+      "version": "2.1.0",
       "author": { "name": "Zhoy" },
       "homepage": "https://github.com/zhoy0409-debug/scholarflow-skills",
       "license": "MIT",
       "category": "research",
-      "keywords": ["research", "academic-writing", "journal-selection", "scientific-figures"]
+      "keywords": ["research", "academic-writing", "journal-selection", "bioinformatics", "scientific-figures"]
     }
   ]
 }

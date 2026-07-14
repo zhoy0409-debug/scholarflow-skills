@@ -1,8 +1,8 @@
 {
   "name": "scholarflow",
   "displayName": "ScholarFlow Skills",
-  "version": "2.0.0",
-  "description": "Zhoy's research workflows for journal selection, submission readiness, scientific figures, and integrity review.",
+  "version": "2.1.0",
+  "description": "Zhoy's research workflows for evidence search, manuscripts, journal readiness, bioinformatics planning, scientific figures, and integrity review.",
   "author": {
     "name": "Zhoy",
     "url": "https://github.com/zhoy0409-debug"
@@ -15,7 +15,10 @@
     "journal-selection",
     "journal-submission",
     "scientific-figures",
-    "research-integrity"
+    "research-integrity",
+    "bioinformatics",
+    "literature-review",
+    "research-presentation"
   ],
   "skills": "./skills"
 }

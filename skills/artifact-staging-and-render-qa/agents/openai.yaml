@@ -1,0 +1,9 @@
+interface:
+  display_name: "Artifact Staging And Render Qa"
+  short_description: "Stage external files into a writable workspace, normalize fragile paths, check local toolchain readiness, and render-verify deliverables before handoff...."
+  default_prompt: "Use artifact-staging-and-render-qa to handle this workflow."
+ownership:
+  product_owner: "Zhoy"
+  product_line: "Agent Ops & Governance"
+  origin: "zhoy-original-or-curated"
+  release_channel: "stable"
