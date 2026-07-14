@@ -1,6 +1,11 @@
 ---
 name: sci-figure-composer
-description: Use when the user asks to compose, redesign, audit, polish, resize, align, label, or export SCI/journal manuscript figures, especially large multi-panel figures made from plots, microscopy images, diagrams, western blots, heatmaps, UMAP/tSNE, volcano plots, survival curves, workflow schematics, or mixed evidence panels. Use for figure layout problems, panel hierarchy, journal-size fitting, typography, line weights, legends, annotations, color consistency, image resolution, Illustrator/PowerPoint/PDF/SVG/TIFF handoff, and reviewer-facing figure quality. Complements nature-figure: use nature-figure for generating plots in Python/R; use this skill for arranging and auditing the full manuscript figure.
+description: >-
+  Turn scattered panels that already exist into one submission-grade composite figure: layout
+  grid, panel labels on a shared axis, consistent fonts and colors, and export. Input is existing
+  panels (from any tool); output is one assembled figure. Not for: generating a plot from raw data
+  → nature-figure. Not for: slides → nature-paper2ppt. 触发：拼版、组图、多面板图、把这几张图拼成一张、panel 标号对不齐、图注排版。
+  Triggers: compose these panels, assemble a multi-panel figure, align panel labels.
 ---
 
 # SCI Figure Composer

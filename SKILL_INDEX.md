@@ -3,7 +3,7 @@
 > **这份文件是生成的。** 不要手改 —— 改动会在下次 `python3 tools/gen_index.py` 时被覆盖。
 > 手写的索引必然过期（曾经删了 11 个 skill，索引里 11 个全在）。生成的不会。
 
-共 **213** 个 skill。
+共 **209** 个 skill。
 
 ## 写作与投稿 · 轻量（打开就用）（15）
 
@@ -176,7 +176,7 @@
 | `bio-workflows-outbreak-pipeline` | End-to-end outbreak investigation from pathogen isolates to transmission networks. Orchestrates MLST typing, AMR surveillance, phylodynamic dating, and transmission… |
 | `bio-write-sequences` | Write biological sequences to files (FASTA, FASTQ, GenBank, EMBL) using Biopython Bio.SeqIO. Use when saving sequences, creating new sequence files, or outputting… |
 
-## 其他（57）
+## 其他（53）
 
 | skill | 做什么 |
 |---|---|
@@ -190,10 +190,8 @@
 | `chinese-docx-reference-unifier` | Normalize references and in-text citations in Chinese-language DOCX manuscripts, including numbering, bibliography order, punctuation, duplicates, and consistency… |
 | `chinese-review-docx-finalizer` | Finalize Chinese-language review manuscripts in DOCX by checking structure, headings, citations, references, formatting, figure/table callouts, acknowledgements,… |
 | `cobrapy-metabolic-modeling` | "Constraint-based (COBRA) analysis of genome-scale metabolic models: FBA, FVA, knockouts, flux sampling, production envelopes, gapfilling, media optimization. Use for… |
-| `content-research-writer` | Assists in writing high-quality content by conducting research, adding citations, improving hooks, iterating on outlines, and providing real-time feedback on each… |
 | `dispatching-parallel-agents` | Use when facing 2+ independent tasks that can be worked on without shared state or sequential dependencies |
 | `ena-database` | "ENA REST API for sequences, reads, assemblies, and annotations. Portal API search, Browser API retrieval (XML/FASTA/EMBL), file reports for FASTQ/BAM URLs, taxonomy,… |
-| `evidence-driven-writing` | Use when writing or revising Introduction, Related Work, background, literature synthesis, or any section where references must drive claims |
 | `fastp-fastq-preprocessing` | "All-in-one FASTQ QC and adapter trimming. Auto-detects Illumina adapters, filters low-quality reads, corrects paired-end overlaps, emits HTML+JSON QC in one pass.… |
 | `find-docs` | Retrieves up-to-date documentation, API references, and code examples for any developer technology. Use this skill whenever the user asks about a specific library,… |
 | `gget-genomic-databases` | "Unified CLI/Python interface to 20+ genomic databases. Gene lookups (Ensembl search/info/seq), BLAST/BLAT, AlphaFold, Enrichr enrichment, OpenTargets disease/drug,… |
@@ -209,7 +207,7 @@
 | `multiqc-qc-reports` | "Aggregates QC from 150+ bioinformatics tools into one interactive HTML report. Scans FastQC, samtools, STAR, HISAT2, Trim Galore, featureCounts, Kallisto, Salmon,… |
 | `neat-freak` | Clean up project state at the end of a session by reconciling documentation, memory, open tasks, file changes, and handoff notes so future work does not rot. |
 | `notebooklm` | Use this skill to query your Google NotebookLM notebooks directly from Claude Code for source-grounded, citation-backed answers from Gemini. Browser automation,… |
-| `paper-harbor` | Discover, screen, and organize literature metadata into Zotero-ready outputs from authorized scholarly sources. Use for traceable candidate lists, prioritization, and… |
+| `paper-harbor` | Batch-scrape literature metadata from CNKI / ScienceDirect via browser automation (DrissionPage), then bridge it into Zotero-ready form. For bulk runs against… |
 | `pdf` | "Use when tasks involve reading, creating, or reviewing PDF files where rendering and layout matter; prefer visual checks by rendering pages (Poppler) and use Python… |
 | `planning-with-files` | "Manus-style persistent file-based planning for AI coding agents: keeps task_plan.md, findings.md, and progress.md on disk so work survives context loss and /clear.… |
 | `plannotate-plasmid-annotation` | "Auto-annotate plasmids with features (promoters, terminators, resistance, origins, tags, fluorescent proteins) via BLAST against curated DBs (Addgene, fpbase,… |
@@ -219,11 +217,9 @@
 | `pysam-genomic-files` | "Read/write SAM/BAM/CRAM, VCF/BCF, FASTA/FASTQ. Region queries, pileup, variant filtering, read groups. Python htslib wrapper exposing samtools/bcftools CLI. Use… |
 | `reference-checker` | Verify references and citation metadata against reliable sources, detect mismatches, duplicates, missing fields, formatting issues, and unsupported claims. |
 | `research-integrity-guardrail` | Mechanical pre-submission audit. Finds and locates errors; never rewrites. Checks that numbers in the abstract agree with the tables, that figure and reference… |
-| `research-paper-writing` | Improve academic paper writing quality for ML/CV/NLP-style papers with clear section structure, paragraph flow, and reviewer-facing presentation. Use when drafting or… |
-| `review-response` | Systematic review response workflow from comment analysis to professional rebuttal writing. Use when the user asks to "write rebuttal", "respond to reviewers", "draft… |
 | `roary-pangenome` | "Compute the bacterial pan-genome from Prokka/Bakta GFF3 annotations with Roary's CD-HIT + BLAST + MCL clustering pipeline. Builds gene presence/absence matrices,… |
 | `samtools-bam-processing` | "CLI toolkit for SAM/BAM/CRAM: sort, index, convert, filter, QC alignments. Core commands: view, sort, index, flagstat, stats, depth, markdup, merge. Required between… |
-| `sci-figure-composer` | Use when the user asks to compose, redesign, audit, polish, resize, align, label, or export SCI/journal manuscript figures, especially large multi-panel figures made… |
+| `sci-figure-composer` | Turn scattered panels that already exist into one submission-grade composite figure: layout grid, panel labels on a shared axis, consistent fonts and colors, and… |
 | `screenshot-docs` | "Capture screenshots of a running app and embed them into README.md and docs/ to make GitHub landing pages novice-friendly. Classifies the app as PySide6 GUI, Swift… |
 | `securityauditor` | Static security audit workflow for Codex skills, agent skills, SKILL.md files, bundled scripts, hooks, shell snippets, suspicious file operations, prompt-injection… |
 | `session-handoff` | Creates a safe en-US handoff markdown file from the current session, including the session timestamp, status, objective, expected result, work done, wins, failures,… |
@@ -234,7 +230,7 @@
 | `support-to-repro-pack` | Convert support materials into a reproducibility package with organized files, metadata, methods notes, environment details, redaction checks, and reviewer-friendly… |
 | `survey-builder` | Generate pre/post/pulse surveys tied to learning outcomes. Copy-ready for Nancy. Use for "build surveys", "create survey", "post-survey". |
 | `transcribe` | "Transcribe audio files to text with optional diarization and known-speaker hints. Use when a user asks to transcribe speech from audio/video, extract text from… |
-| `user-workflow-orchestrator` | Use when the user asks Codex to decide what skill/workflow they need, summarize recurring needs, handle ambiguous or cross-domain work, recover from previously poor… |
+| `user-workflow-orchestrator` | Use ONLY when the user explicitly does not know which skill or workflow they need, or the request spans several domains and needs triage first. It picks the lane and… |
 | `vcf-variant-filtering` | "Guide to quality filtering raw VCF files before computing summary stats (Ts/Tv ratio, variant counts, AF distributions). Covers detecting raw VCFs via FILTER column… |
 | `zotero-lit-fetch` | Fetch and organize literature metadata into Zotero-oriented workflows across English and Chinese-language scholarly databases while respecting authorization and… |
 

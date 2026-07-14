@@ -115,7 +115,7 @@ Give a practical sequence:
 - what to strengthen before submitting to reach-tier journals;
 - how to adapt title, abstract, cover letter, and keywords for the top candidates;
 - when to use `journal-submission-normalizer` after choosing a target;
-- when to use `reference-checker`, `paper-self-review`, or `research-integrity-guardrail`.
+- when to use `reference-checker`, `nature-reviewer`, or `research-integrity-guardrail`.
 
 Do not recommend simultaneous submissions unless journal policy explicitly permits them.
 

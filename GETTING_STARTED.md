@@ -44,7 +44,7 @@ Start from the task, not from the full list.
 | Build scientific figures | `nature-figure`, `sci-figure-composer` |
 | Prepare journal club or research slides | `nature-paper2ppt`, `ppt` |
 | Run bioinformatics or omics workflows | `bio-*` (130 skills), `samtools-bam-processing`, `bcftools-variant-manipulation` |
-| Convert or clean PDF, DOCX, PPTX, XLSX, and Markdown deliverables | `pdf-guide`, `local-md-mermaid-pdf`, `ppt`, `chinese-docx-reference-unifier` |
+| Convert or clean PDF, DOCX, PPTX, XLSX, and Markdown deliverables | `pdf`, `local-md-mermaid-pdf`, `ppt`, `chinese-docx-reference-unifier` |
 | Write or audit your own skill | `skill-writing-guide`, `securityauditor` |
 | Keep long tasks from losing context | `planning-with-files`, `session-handoff` |
 

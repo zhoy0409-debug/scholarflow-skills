@@ -1,6 +1,11 @@
 ---
 name: user-workflow-orchestrator
-description: Use when the user asks Codex to decide what skill/workflow they need, summarize recurring needs, handle ambiguous or cross-domain work, recover from previously poor results, plan academic/research/writing/slides/PDF/bioinformatics/code tasks, or turn a messy goal into a verified deliverable. Especially use for requests about reviewing past work, summarizing needs, choosing a personalized workflow, fixing poor results, unresolved blockers, installing skills, paper writing, Nature-style manuscripts, PPT, PDF, bioinformatics, grants, LaTeX, figures, or deliverables.
+description: >-
+  Use ONLY when the user explicitly does not know which skill or workflow they need, or the
+  request spans several domains and needs triage first. It picks the lane and hands off — it does
+  not do the work itself. Do not trigger on a request that already names its own task clearly.
+  触发：我不知道该用哪个、你帮我决定、这事该怎么做、帮我看看该走哪条流程。 Triggers: which skill should I use, help me decide, I don't
+  know where to start.
 ---
 
 # User Workflow Orchestrator
