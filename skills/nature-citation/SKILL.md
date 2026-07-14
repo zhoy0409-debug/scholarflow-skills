@@ -3,39 +3,50 @@ name: nature-citation
 description: Audit citations and reference lists for scholarly manuscripts, including source verification, metadata consistency, journal-style formatting, and evidence-to-claim alignment.
 ---
 
-# Nature Citation
+# Citation Attachment — Router
 
-Use this skill to execute the workflow described in the frontmatter description. Keep the workflow practical, source-grounded, and deliverable-oriented.
+**Do not answer from memory, and do not answer from this file.**
+The actual logic lives in `static/` and `references/`. This file only decides
+which fragments to load for the request in front of you. Loading them is not optional.
 
-## Operating Principles
+## Routing protocol
 
-- Start from the user's actual goal, materials, constraints, and desired deliverable.
-- Ask only the questions needed to avoid a wrong workflow or unsafe assumption.
-- Prefer official sources, user-provided files, and reproducible commands over memory.
-- Keep claims conservative when evidence, metrics, journal data, or source materials are incomplete.
-- Preserve a clear audit trail for citations, file edits, external tools, and decisions.
+### 1. Load the core layer
 
-## Workflow
+Read [manifest.yaml](manifest.yaml). Then Read **every** file it lists under `always_load`:
 
-1. Clarify the task outcome, required inputs, deadline, and risk boundaries.
-2. Inspect the available materials before proposing a final route.
-3. Choose the smallest workflow that can produce a usable result.
-4. Use bundled references or scripts only when they materially improve reliability.
-5. Produce a structured deliverable that the user can continue using without re-explaining the context.
-6. Run a final quality check for completeness, evidence grounding, formatting, and safety boundaries.
+- `static/core/principles.md`
+- `static/core/chinese-mode.md`
+- `static/core/workflow.md`
 
-## Expected Outputs
+These carry the default stance, workflow, and output format for every job in this skill.
 
-- a concise summary of the user's goal and constraints;
-- the selected workflow and reasoning;
-- concrete outputs such as notes, tables, reports, manuscript text, slide structure, figures, code, or file changes;
-- quality checks and unresolved items;
-- next-step recommendations when useful.
+### 2. Do the work
 
-## Guardrails
+This skill has no axes. Apply the core layer directly.
+If required input is missing, write a placeholder and list it under
+`Assumptions or missing inputs:` — **do not invent it.**
 
-- Do not fabricate sources, citations, metrics, journal rules, results, or tool outputs.
-- Do not bypass copyright, paywalls, account restrictions, CAPTCHAs, or institutional access controls.
-- Do not delete, overwrite, or externally publish files without explicit user confirmation.
-- Mark uncertainty instead of hiding it.
-- Keep external software, databases, and platforms clearly attributed to their own providers.
+### 3. Open `references/` only on demand
+
+`references/` is a deep library, not a default. Opening all of it wastes the context
+you need for the actual work.
+
+The manifest's `references.on_demand` table says which file answers which question.
+Consult it, then Read only that file.
+
+## Gates — BLOCK, not advice
+
+These are not suggestions. If a gate fails, **fix it and re-run; do not deliver.**
+
+- Read `../_shared/core/claim-ledger.md` — 无出处的断言不许进正文；certainty 必须是受控枚举
+
+The repo ships an executable version of these checks:
+
+```bash
+python3 gates/gate_checks.py claims    --claims c.csv --evidence e.csv --manuscript draft.md
+python3 gates/gate_checks.py data      --file raw.xlsx
+python3 gates/gate_checks.py narrative --matrix slides.csv
+```
+
+Exit code 2 means a BLOCK fired. Run them when the artefacts exist.

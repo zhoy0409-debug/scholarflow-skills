@@ -3,39 +3,72 @@ name: nature-polishing
 description: Polish academic manuscripts for clarity, conservative claims, journal tone, paragraph function, citation grounding, and submission-ready language.
 ---
 
-# Nature Polishing
+# Language Polishing — Router
 
-Use this skill to execute the workflow described in the frontmatter description. Keep the workflow practical, source-grounded, and deliverable-oriented.
+**Do not answer from memory, and do not answer from this file.**
+The actual logic lives in `static/` and `references/`. This file only decides
+which fragments to load for the request in front of you. Loading them is not optional.
 
-## Operating Principles
+## Routing protocol
 
-- Start from the user's actual goal, materials, constraints, and desired deliverable.
-- Ask only the questions needed to avoid a wrong workflow or unsafe assumption.
-- Prefer official sources, user-provided files, and reproducible commands over memory.
-- Keep claims conservative when evidence, metrics, journal data, or source materials are incomplete.
-- Preserve a clear audit trail for citations, file edits, external tools, and decisions.
+### 1. Load the core layer
 
-## Workflow
+Read [manifest.yaml](manifest.yaml). Then Read **every** file it lists under `always_load`:
 
-1. Clarify the task outcome, required inputs, deadline, and risk boundaries.
-2. Inspect the available materials before proposing a final route.
-3. Choose the smallest workflow that can produce a usable result.
-4. Use bundled references or scripts only when they materially improve reliability.
-5. Produce a structured deliverable that the user can continue using without re-explaining the context.
-6. Run a final quality check for completeness, evidence grounding, formatting, and safety boundaries.
+- `../_shared/core/reader-workflow.md`
+- `../_shared/core/paper-type-taxonomy.md`
+- `../_shared/core/ethics.md`
+- `../_shared/core/terminology-ledger.md`
+- `static/core/stance.md`
+- `static/core/failure-modes.md`
+- `static/core/output-format.md`
 
-## Expected Outputs
+These carry the default stance, workflow, and output format for every job in this skill.
 
-- a concise summary of the user's goal and constraints;
-- the selected workflow and reasoning;
-- concrete outputs such as notes, tables, reports, manuscript text, slide structure, figures, code, or file changes;
-- quality checks and unresolved items;
-- next-step recommendations when useful.
+### 2. Detect the axes
 
-## Guardrails
+The manifest declares these axes. Decide a value for each from the user's input:
 
-- Do not fabricate sources, citations, metrics, journal rules, results, or tool outputs.
-- Do not bypass copyright, paywalls, account restrictions, CAPTCHAs, or institutional access controls.
-- Do not delete, overwrite, or externally publish files without explicit user confirmation.
-- Mark uncertainty instead of hiding it.
-- Keep external software, databases, and platforms clearly attributed to their own providers.
+- **`paper_type`** — `research` / `methods` / `hypothesis` / `algorithmic` / `review` · default `research`
+- **`section`** — `abstract` / `intro` / `results` / `discussion` / `conclusion` / `title` / `methods`
+- **`language`** — `en` / `zh-to-en` · default `en`
+- **`journal`** — `nature` / `nat-comms` / `generic` · default `generic`
+
+State the detected values in one short line before you start, so the user can
+correct you cheaply instead of after you have produced the wrong thing.
+If an axis is genuinely ambiguous **and it changes the output**, ask. Otherwise pick the default.
+
+### 3. Load only the matching fragments
+
+For each axis value, Read the file the manifest maps it to.
+**Do not read every file in `static/`** — load only what step 2 selected.
+
+### 4. Do the work
+
+Apply the loaded fragments. The `always_load` core wins on stance; the axis
+fragments win on specifics. If required input is missing, write a placeholder and
+list it under `Assumptions or missing inputs:` — **do not invent it.**
+
+### 5. Open `references/` only on demand
+
+`references/` is a deep library, not a default. Opening all of it wastes the context
+you need for the actual work.
+
+The manifest's `references.on_demand` table says which file answers which question.
+Consult it, then Read only that file.
+
+## Gates — BLOCK, not advice
+
+These are not suggestions. If a gate fails, **fix it and re-run; do not deliver.**
+
+- Read `../_shared/core/claim-ledger.md` — 无出处的断言不许进正文；certainty 必须是受控枚举
+
+The repo ships an executable version of these checks:
+
+```bash
+python3 gates/gate_checks.py claims    --claims c.csv --evidence e.csv --manuscript draft.md
+python3 gates/gate_checks.py data      --file raw.xlsx
+python3 gates/gate_checks.py narrative --matrix slides.csv
+```
+
+Exit code 2 means a BLOCK fired. Run them when the artefacts exist.
