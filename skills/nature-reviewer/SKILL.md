@@ -1,6 +1,13 @@
 ---
 name: nature-reviewer
-description: Review manuscripts like a careful internal reviewer, identifying claims, evidence gaps, structure issues, citation problems, figures, methods, and submission risks.
+description: >-
+  Act as a referee and judge the science: novelty, significance, evidence chain, technical
+  soundness, and whether the claims are actually supported. Returns reviewer reports and an accept
+  / revise / reject verdict. Not for: mechanical errors — numbers that disagree between abstract
+  and tables, broken figure cross-references, references cited but not listed →
+  research-integrity-guardrail. Not for: writing a reply to reviewers who already reviewed you →
+  nature-response. 触发：模拟审稿、审稿人视角、预审、投稿前看看有什么问题、创新性够吗、能发子刊吗、证据链站得住吗。 Triggers: mock peer review,
+  referee report, review my manuscript, novelty assessment, is this defensible.
 ---
 
 # Referee Simulation — Router

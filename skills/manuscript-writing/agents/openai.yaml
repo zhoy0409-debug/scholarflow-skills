@@ -1,9 +1,0 @@
-interface:
-  display_name: "Manuscript Writing"
-  short_description: "Route manuscript drafting, restructuring, abstract writing, results narration, discussion framing, cover letters, and journal-style polishing to PaperSp..."
-  default_prompt: "Use manuscript-writing to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "Academic Writing & Integrity"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

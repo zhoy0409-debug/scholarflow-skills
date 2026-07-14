@@ -1,9 +1,0 @@
-interface:
-  display_name: "Ai Check"
-  short_description: "Audit academic text for AI-like patterns, disclosure needs, citation integrity, unsupported claims, writing artifacts, and manuscript quality risks. Rou..."
-  default_prompt: "Use ai-check to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "General Utilities"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

@@ -1,9 +1,0 @@
-interface:
-  display_name: "Academic Paper"
-  short_description: "Route academic paper outlining, drafting, abstract writing, revision, citation formatting, AI disclosure, LaTeX/DOCX/PDF formatting guidance, and manusc..."
-  default_prompt: "Use academic-paper to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "Academic Writing & Integrity"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

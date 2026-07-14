@@ -1,6 +1,11 @@
 ---
 name: paper-spine-build
-description: Builds a paper or report from materials using the shared PaperSpine research, motivation, and rationale workflow.
+description: >-
+  Internal module of the PaperSpine pipeline — it drafts the paper from confirmed motivation.
+  Invoked by `paper-spine`, never by the user. It assumes PaperSpine's config
+  (`paper_spine_config.json`), `source_map.md`, and a confirmed motivation already exist; run
+  outside that context it produces wrong results. **Do not trigger this on a user request.**
+  Standalone alternative: drafting a section from notes → nature-writing.
 ---
 
 # PaperSpine Build From Materials
