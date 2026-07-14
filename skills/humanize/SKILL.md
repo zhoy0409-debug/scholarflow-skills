@@ -3,14 +3,14 @@ name: humanize
 description: >-
   Judge whether a text reads as AI-written, and — only if asked — rewrite it to lower an
   AI-detection or text-similarity score without changing facts, numbers, or citations. Two modes:
-  **verdict** (name the specific tells; say "send it as is" when the text is already fine) and
-  **rewrite**. Works on any text, not just manuscripts. Not for: general English quality with no
+  verdict (name the specific tells; say "send it as is" when the text is already fine) and
+  rewrite. Works on any text, not just manuscripts. Not for: general English quality with no
   detector involved → nature-polishing. 触发：AI率、查AI、AIGC检测、降重、去AI味、一股ChatGPT味、改得像人写的、知网查重。
   Triggers: AI detection score, similarity score, humanize, sounds like ChatGPT, is this
   AI-written.
 ---
 
-# Humanize — 判定 or 改写
+# Humanize —— 判定 or 改写
 
 **先分模式。这一步不能跳。**
 
@@ -37,7 +37,7 @@ description: >-
 
 1. 读 `references/humanize-tiers-zh.md`（或 `-en.md`）确定改写强度分级。
 2. 目标平台不同，特征不同 —— 按需读 `references/platform-cnki.md` /
-   `platform-weipu.md` / `platform-general.md`。
+   `references/platform-weipu.md` / `references/platform-general.md`。
 3. 改写，然后跑 `scripts/humanize_check.py` 复核。
 4. 输出一张**改动矩阵**：改了哪句、为什么、改动前后。
 

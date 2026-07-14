@@ -1,9 +1,0 @@
-interface:
-  display_name: "Literature Review"
-  short_description: "Build source-grounded literature reviews by searching, organizing, mapping evidence to claims, drafting synthesis, and verifying that every citation is..."
-  default_prompt: "Use literature-review to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "Academic Writing & Integrity"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

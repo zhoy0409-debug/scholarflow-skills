@@ -3,7 +3,7 @@
 > **这份文件是生成的。** 不要手改 —— 改动会在下次 `python3 tools/gen_index.py` 时被覆盖。
 > 手写的索引必然过期（曾经删了 11 个 skill，索引里 11 个全在）。生成的不会。
 
-共 **218** 个 skill。
+共 **213** 个 skill。
 
 ## 写作与投稿 · 轻量（打开就用）（15）
 
@@ -176,7 +176,7 @@
 | `bio-workflows-outbreak-pipeline` | End-to-end outbreak investigation from pathogen isolates to transmission networks. Orchestrates MLST typing, AMR surveillance, phylodynamic dating, and transmission… |
 | `bio-write-sequences` | Write biological sequences to files (FASTA, FASTQ, GenBank, EMBL) using Biopython Bio.SeqIO. Use when saving sequences, creating new sequence files, or outputting… |
 
-## 其他（62）
+## 其他（57）
 
 | skill | 做什么 |
 |---|---|
@@ -196,7 +196,6 @@
 | `evidence-driven-writing` | Use when writing or revising Introduction, Related Work, background, literature synthesis, or any section where references must drive claims |
 | `fastp-fastq-preprocessing` | "All-in-one FASTQ QC and adapter trimming. Auto-detects Illumina adapters, filters low-quality reads, corrects paired-end overlaps, emits HTML+JSON QC in one pass.… |
 | `find-docs` | Retrieves up-to-date documentation, API references, and code examples for any developer technology. Use this skill whenever the user asks about a specific library,… |
-| `format-basic-norms` | Apply basic academic formatting norms to manuscripts and deliverables, including headings, spacing, numbering, captions, references, document consistency, and… |
 | `gget-genomic-databases` | "Unified CLI/Python interface to 20+ genomic databases. Gene lookups (Ensembl search/info/seq), BLAST/BLAT, AlphaFold, Enrichr enrichment, OpenTargets disease/drug,… |
 | `humanize` | Judge whether a text reads as AI-written, and — only if asked — rewrite it to lower an AI-detection or text-similarity score without changing facts, numbers, or… |
 | `hv-analysis` | Conduct Horizontal-Vertical Analysis for deep research on a product, company, concept, technology, or person. Use when the user needs a source-grounded report that… |
@@ -205,16 +204,13 @@
 | `jupyter-notebook` | "Use when the user asks to create, scaffold, or edit Jupyter notebooks (`.ipynb`) for experiments, explorations, or tutorials; prefer the bundled templates and run… |
 | `kegg-database` | "KEGG REST API (academic only). Pathways, genes, compounds, enzymes, diseases, drugs via 7 ops (info/list/find/get/conv/link/ddi). ID conversion… |
 | `kegg-pathway-analysis` | "Guide to KEGG pathway enrichment for DEG results. Covers ORA vs GSEA, mandatory directionality splitting, KEGG organism codes, API failure handling with offline… |
-| `literature-review` | Build source-grounded literature reviews by searching, organizing, mapping evidence to claims, drafting synthesis, and verifying that every citation is traceable. Use… |
 | `local-md-mermaid-pdf` | Converts Markdown files with Mermaid diagrams to PDF using local tools (mmdc, md-to-pdf, Puppeteer) with CSS styling and page numbers. Use when the user asks to… |
-| `markitdown` | Convert documents and research materials into clean Markdown while preserving usable structure, tables, headings, links, and content needed for downstream analysis or… |
 | `molecular-docking-md-mmpbsa-pymol` | Automate small molecule-target protein docking, MD, MM-PBSA/MM-GBSA, and visualization. Default system is one or more protein receptor chains plus an organic… |
 | `multiqc-qc-reports` | "Aggregates QC from 150+ bioinformatics tools into one interactive HTML report. Scans FastQC, samtools, STAR, HISAT2, Trim Galore, featureCounts, Kallisto, Salmon,… |
 | `neat-freak` | Clean up project state at the end of a session by reconciling documentation, memory, open tasks, file changes, and handoff notes so future work does not rot. |
 | `notebooklm` | Use this skill to query your Google NotebookLM notebooks directly from Claude Code for source-grounded, citation-backed answers from Gemini. Browser automation,… |
 | `paper-harbor` | Discover, screen, and organize literature metadata into Zotero-ready outputs from authorized scholarly sources. Use for traceable candidate lists, prioritization, and… |
 | `pdf` | "Use when tasks involve reading, creating, or reviewing PDF files where rendering and layout matter; prefer visual checks by rendering pages (Poppler) and use Python… |
-| `pdf-guide` | "Use when tasks involve reading, creating, or reviewing PDF files where rendering and layout matter; prefer visual checks by rendering pages (Poppler) and use Python… |
 | `planning-with-files` | "Manus-style persistent file-based planning for AI coding agents: keeps task_plan.md, findings.md, and progress.md on disk so work survives context loss and /clear.… |
 | `plannotate-plasmid-annotation` | "Auto-annotate plasmids with features (promoters, terminators, resistance, origins, tags, fluorescent proteins) via BLAST against curated DBs (Addgene, fpbase,… |
 | `ppt` | Plan, author, verify, screenshot, and export PowerPoint slide decks through a filesystem-based deck workflow. |
@@ -240,6 +236,5 @@
 | `transcribe` | "Transcribe audio files to text with optional diarization and known-speaker hints. Use when a user asks to transcribe speech from audio/video, extract text from… |
 | `user-workflow-orchestrator` | Use when the user asks Codex to decide what skill/workflow they need, summarize recurring needs, handle ambiguous or cross-domain work, recover from previously poor… |
 | `vcf-variant-filtering` | "Guide to quality filtering raw VCF files before computing summary stats (Ts/Tv ratio, variant counts, AF distributions). Covers detecting raw VCFs via FILTER column… |
-| `writing-medical` | Draft, revise, and quality-check medical or biomedical manuscripts with conservative claims, clinical context, reporting guidance, terminology discipline, and… |
 | `zotero-lit-fetch` | Fetch and organize literature metadata into Zotero-oriented workflows across English and Chinese-language scholarly databases while respecting authorization and… |
 
