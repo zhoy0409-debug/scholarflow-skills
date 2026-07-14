@@ -1,9 +1,0 @@
-interface:
-  display_name: "Evidence Driven Writing"
-  short_description: "Use when writing or revising Introduction, Related Work, background, literature synthesis, or any section where references must drive claims"
-  default_prompt: "Use evidence-driven-writing to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "Academic Writing & Integrity"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

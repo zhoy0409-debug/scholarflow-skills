@@ -1,6 +1,12 @@
 ---
 name: paper-harbor
-description: Discover, screen, and organize literature metadata into Zotero-ready outputs from authorized scholarly sources. Use for traceable candidate lists, prioritization, and literature intake without bypassing access restrictions.
+description: >-
+  Batch-scrape literature metadata from CNKI / ScienceDirect via browser automation
+  (DrissionPage), then bridge it into Zotero-ready form. For bulk runs against databases you are
+  logged into. Not for: saving a page you already have open via the Zotero Connector →
+  zotero-lit-fetch. Not for: running a topic search → nature-academic-search.
+  触发：批量抓知网、批量抓ScienceDirect、爬文献题录、把检索结果整批导出。 Triggers: batch scrape CNKI, bulk-export search
+  results, scrape reference metadata.
 ---
 
 # Paper Harbor — Router

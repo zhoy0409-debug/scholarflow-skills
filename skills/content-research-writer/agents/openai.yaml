@@ -1,9 +1,0 @@
-interface:
-  display_name: "Content Research Writer"
-  short_description: "Assists in writing high-quality content by conducting research, adding citations, improving hooks, iterating on outlines, and providing real-time feedba..."
-  default_prompt: "Use content-research-writer to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "General Utilities"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"
