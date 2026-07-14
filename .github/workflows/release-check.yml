@@ -1,15 +1,30 @@
-name: Release check
+name: Release Check
 
 on:
   push:
+    branches: [main]
   pull_request:
+
+permissions:
+  contents: read
 
 jobs:
   validate:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - run: python scripts/release_check.py
+
+      - name: Compile Python utilities
+        run: python -m compileall -q scripts skills
+
+      - name: Validate release structure
+        run: python scripts/release_check.py
+
+      - name: Validate optional MCP installer syntax
+        run: bash -n skills/scholarflow-literature-search/install.sh
