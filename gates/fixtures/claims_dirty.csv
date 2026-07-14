@@ -1,0 +1,6 @@
+claim_id,claim,evidence_id,source,certainty,certainty_note,status
+C001,CRAB is a WHO critical-priority pathogen,E01,10.1016/S1473-3099(24)00000-0,established,,used
+C002,OXA-23 is the dominant carbapenemase,E02,,supported,,used
+C003,Efflux pumps drive tigecycline resistance,E99,PMID:1,candidate_supported_moderate_to_strong,,used
+C004,Colistin resistance is rising,E03,PMID:2,contested,,used
+C005,This claim never made it into the text,E03,PMID:3,supported,,used

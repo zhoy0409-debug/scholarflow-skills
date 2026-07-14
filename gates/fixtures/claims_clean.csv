@@ -1,0 +1,4 @@
+claim_id,claim,evidence_id,source,certainty,certainty_note,status
+C001,CRAB is a WHO critical-priority pathogen,E01,10.1016/S1473-3099(24)00000-0,established,WHO 2024 官方清单,used
+C002,OXA-23 is the dominant carbapenemase in Chinese CRAB,E02,PMID:35123456,supported,多中心监测一致,used
+C003,Environmental reservoirs drive ICU transmission,E03,PMID:33987654,contested,证据以单中心为主,used
