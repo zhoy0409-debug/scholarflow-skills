@@ -1,6 +1,11 @@
 ---
 name: "fastp-fastq-preprocessing"
-description: "All-in-one FASTQ QC and adapter trimming. Auto-detects Illumina adapters, filters low-quality reads, corrects paired-end overlaps, emits HTML+JSON QC in one pass. 3-10x faster than Trim Galore/Trimmomatic. First step before STAR, BWA-MEM2, or Salmon."
+description: >-
+  All-in-one FASTQ QC and adapter trimming. **Reference manual for fastp, not a task skill.** The
+  task-oriented skills route first — bio-read-qc-fastp-workflow / bio-read-qc-adapter-trimming.
+  Come here only when you need a flag, subcommand, or edge case those do not cover, or when you
+  want the full tool surface in one place. **Do not trigger this on a plain task request** like
+  "sort my BAM" or "annotate this genome" — that belongs to the task skill.
 license: "MIT"
 ---
 

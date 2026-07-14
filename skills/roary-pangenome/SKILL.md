@@ -1,6 +1,12 @@
 ---
 name: "roary-pangenome"
-description: "Compute the bacterial pan-genome from Prokka/Bakta GFF3 annotations with Roary's CD-HIT + BLAST + MCL clustering pipeline. Builds gene presence/absence matrices, core/soft-core/shell/cloud partitions, multi-FASTA core gene alignments (with `-e`), and a pan-genome reference. Use Panaroo for higher-accuracy pan-genomes from highly fragmented assemblies, PIRATE for paralog-aware clustering, or PPanGGOLiN for graph-based partitioning."
+description: >-
+  Compute the bacterial pan-genome from Prokka/Bakta GFF3 annotations with Roary's CD-HIT + BLAST
+  + MCL clustering pipeline. **Reference manual for Roary, not a task skill.** The task-oriented
+  skills route first — bio-comparative-genomics-pangenome-analysis. Come here only when you need a
+  flag, subcommand, or edge case those do not cover, or when you want the full tool surface in one
+  place. **Do not trigger this on a plain task request** like "sort my BAM" or "annotate this
+  genome" — that belongs to the task skill.
 license: "GPL-3.0"
 ---
 

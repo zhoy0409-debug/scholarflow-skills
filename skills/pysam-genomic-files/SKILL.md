@@ -1,6 +1,11 @@
 ---
 name: pysam-genomic-files
-description: "Read/write SAM/BAM/CRAM, VCF/BCF, FASTA/FASTQ. Region queries, pileup, variant filtering, read groups. Python htslib wrapper exposing samtools/bcftools CLI. Use STAR/BWA for alignment; GATK/DeepVariant for variant calling."
+description: >-
+  Read/write SAM/BAM/CRAM, VCF/BCF, FASTA/FASTQ. **Reference manual for pysam, not a task skill.**
+  The task-oriented skills route first — bio-sam-bam-basics / bio-pileup-generation. Come here
+  only when you need a flag, subcommand, or edge case those do not cover, or when you want the
+  full tool surface in one place. **Do not trigger this on a plain task request** like "sort my
+  BAM" or "annotate this genome" — that belongs to the task skill.
 license: MIT
 ---
 

@@ -1,6 +1,12 @@
 ---
 name: "multiqc-qc-reports"
-description: "Aggregates QC from 150+ bioinformatics tools into one interactive HTML report. Scans FastQC, samtools, STAR, HISAT2, Trim Galore, featureCounts, Kallisto, Salmon, Picard, GATK logs; merges per-sample stats with plots. For NGS pipeline-wide QC. Use FastQC directly for single-sample; MultiQC for multi-sample reporting."
+description: >-
+  Aggregates QC from 150+ bioinformatics tools into one interactive HTML report. **Reference
+  manual for MultiQC, not a task skill.** The task-oriented skills route first —
+  bio-reporting-automated-qc-reports / bio-read-qc-quality-reports. Come here only when you need a
+  flag, subcommand, or edge case those do not cover, or when you want the full tool surface in one
+  place. **Do not trigger this on a plain task request** like "sort my BAM" or "annotate this
+  genome" — that belongs to the task skill.
 license: "GPL-3.0"
 ---
 
