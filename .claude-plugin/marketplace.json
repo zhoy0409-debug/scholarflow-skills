@@ -1,0 +1,24 @@
+{
+  "name": "scholarflow",
+  "owner": {
+    "name": "Zhoy",
+    "url": "https://github.com/zhoy0409-debug"
+  },
+  "metadata": {
+    "description": "ScholarFlow —— 科研写作全流程 Agent Skills",
+    "version": "2.0.0"
+  },
+  "plugins": [
+    {
+      "name": "scholarflow",
+      "source": "./",
+      "description": "科研写作全流程：文献检索、引用核验、起草、润色、配图、汇报、审稿、投稿前核查。中英双语。",
+      "version": "2.0.0",
+      "author": { "name": "Zhoy" },
+      "homepage": "https://github.com/zhoy0409-debug/scholarflow-skills",
+      "license": "MIT",
+      "category": "research",
+      "keywords": ["academic-writing", "research", "科研写作", "论文"]
+    }
+  ]
+}
