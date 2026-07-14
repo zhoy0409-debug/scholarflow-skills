@@ -10,6 +10,9 @@ ScholarFlow 门禁引擎 —— 把 SHOULD 变成 BLOCK。
   gates claims    --claims c.csv --evidence e.csv --manuscript draft.md
   gates data      --file raw.xlsx
   gates narrative --matrix slides.csv
+  gates figure    --file fig1.png --width-mm 180
+  gates figure    --file fig1.svg --width-mm 180 --claim-editable
+  gates figure    --panels panels.csv
   gates all       --config gates.yaml
 
 退出码：0 = 全过（并写指纹）  2 = 有 BLOCK  （WARN 不阻塞）
@@ -18,6 +21,13 @@ from __future__ import annotations
 
 import argparse, hashlib, json, re, sys
 from dataclasses import dataclass, field
+
+# Windows 控制台默认 GBK。门禁的输出里有 ✓ / ✗（U+2713 / U+2717），
+# 直接打过去会 UnicodeEncodeError 崩掉 —— 而 Linux 的 CI 永远撞不到这个。
+# 一个只在 CI 上跑得通的门禁，等于没有门禁。
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    sys.stderr.reconfigure(encoding="utf-8", errors="replace")
 from pathlib import Path
 
 # ── 受控词表 ──────────────────────────────────────────────
@@ -239,11 +249,20 @@ def main():
     ap = argparse.ArgumentParser(prog="gates")
     sub = ap.add_subparsers(dest="cmd", required=True)
 
+    f = sub.add_parser("figure")
+    f.add_argument("--file", help="fig1.png / fig1.svg")
+    f.add_argument("--width-mm", type=float, default=180.0,
+                   help="最终插入宽度（mm）。单栏常见 85-90，双栏 170-180")
+    f.add_argument("--line-art", action="store_true", help="线条图 —— DPI 门槛提到 600")
+    f.add_argument("--claim-editable", action="store_true",
+                   help="你打算把它当「可编辑源文件」交出去")
+    f.add_argument("--panels", help="panel 标号网格表（panel,row,col,label_x,label_y）")
+
     c = sub.add_parser("claims");    c.add_argument("--claims", required=True)
     c.add_argument("--evidence");    c.add_argument("--manuscript")
     d = sub.add_parser("data");      d.add_argument("--file", required=True)
     n = sub.add_parser("narrative"); n.add_argument("--matrix", required=True)
-    for p in (c, d, n):
+    for p in (c, d, n, f):
         p.add_argument("--provenance", help="通过时把 sha256 指纹写到这里")
 
     a = ap.parse_args()
@@ -255,6 +274,13 @@ def main():
         srcs = [P(a.claims), P(a.evidence), P(a.manuscript)]
     elif a.cmd == "data":
         res = check_data(P(a.file));      srcs = [P(a.file)]
+    elif a.cmd == "figure":
+        from figure_gate import check_figure
+        if not a.file and not a.panels:
+            sys.exit("figure 门禁需要 --file 或 --panels（或两者）")
+        res = Result()
+        check_figure(P(a.file), a.width_mm, a.line_art, a.claim_editable, P(a.panels), res)
+        srcs = [P(a.file), P(a.panels)]
     else:
         res = check_narrative(P(a.matrix)); srcs = [P(a.matrix)]
 

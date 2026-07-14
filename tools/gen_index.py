@@ -7,9 +7,14 @@ SKILL_INDEX.md 从文件系统生成 —— 它永远不可能过期。
 
   python3 gen_index.py --root <repo>
 """
-import argparse, re
+import argparse, re, sys
 from pathlib import Path
 from collections import defaultdict
+
+# Windows 控制台默认 GBK —— 打一个 ✓ 就 UnicodeEncodeError 崩掉。Linux CI 撞不到。
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    sys.stderr.reconfigure(encoding="utf-8", errors="replace")
 
 # skill 归属哪一族。顺序即输出顺序。
 FAMILY = [

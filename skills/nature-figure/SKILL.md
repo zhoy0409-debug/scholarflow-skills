@@ -65,3 +65,33 @@ python3 gates/gate_checks.py narrative --matrix slides.csv
 ```
 
 Exit code 2 means a BLOCK fired. Run them when the artefacts exist.
+## Gates — BLOCK, not advice
+
+**代码跑通 ≠ 图做好了。** matplotlib 不会因为
+标签被裁掉、panel 标号错位、字小到印不出、你把位图当「可编辑产物」交付
+而报错。**代码零报错，图是废的。**
+
+出图之后、交付之前，必须跑：
+
+```bash
+# 位图：DPI 够不够（按最终插入宽度算）、内容有没有被画布裁掉
+python3 gates/gate_checks.py figure --file fig1.png --width-mm 180
+
+# 线条图门槛更高（600 dpi）
+python3 gates/gate_checks.py figure --file fig1.png --width-mm 180 --line-art
+
+# 矢量：最终尺寸下最小字号够不够；若声称「可编辑」，必须有真的 <text>
+python3 gates/gate_checks.py figure --file fig1.svg --width-mm 180 --claim-editable
+
+# 多面板：同一行的标号必须同一个 y，同一列必须同一个 x
+python3 gates/gate_checks.py figure --panels panels.csv
+```
+
+`--width-mm` 是**最终插进版面的宽度**，不是画布宽度。
+单栏常见 85–90 mm，双栏 170–180 mm。**这个数填错，DPI 检查就没意义。**
+
+退出码 2 = 有 BLOCK。**修完重跑，不许交付。**
+
+深层规范见 `../_shared/core/figure-qa.md`（QA 环、release blockers、按结论选图形形式）
+和 `../_shared/core/visual-honesty.md`（AI 配图的科学正确性）。
+
