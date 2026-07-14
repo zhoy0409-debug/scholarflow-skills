@@ -1,9 +1,0 @@
-interface:
-  display_name: "Storage Analyzer"
-  short_description: "Run read-only storage analysis on macOS or Windows, classify large disk usage into actionable cleanup tiers, and generate an interactive local HTML repo..."
-  default_prompt: "Use storage-analyzer to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "Agent Ops & Governance"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

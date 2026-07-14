@@ -1,9 +1,0 @@
-interface:
-  display_name: "Bio Read QC Quality Reports"
-  short_description: "Generate and interpret quality reports from FASTQ files using FastQC and MultiQC. Assess per-base quality, adapter content, GC bias, duplication levels,..."
-  default_prompt: "Use bio-read-qc-quality-reports to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "Bio & Omics Toolkit"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

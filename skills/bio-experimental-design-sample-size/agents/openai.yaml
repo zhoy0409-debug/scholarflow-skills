@@ -1,9 +1,0 @@
-interface:
-  display_name: "Bio Experimental Design Sample Size"
-  short_description: "Estimates the minimum biological replicates (or cells/events) for a target power at a target FDR in genomics experiments using ssizeRNA, PROPER, powsimR..."
-  default_prompt: "Use bio-experimental-design-sample-size to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "Bio & Omics Toolkit"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

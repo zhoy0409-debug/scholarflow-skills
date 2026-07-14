@@ -1,9 +1,0 @@
-interface:
-  display_name: "Bio Microbiome Diversity Analysis"
-  short_description: "Alpha and beta diversity analysis for microbiome data. Calculate within-sample richness, evenness, and between-sample dissimilarity with phyloseq and ve..."
-  default_prompt: "Use bio-microbiome-diversity-analysis to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "Bio & Omics Toolkit"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

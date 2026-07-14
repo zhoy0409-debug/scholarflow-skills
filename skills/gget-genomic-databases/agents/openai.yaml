@@ -1,9 +1,0 @@
-interface:
-  display_name: "Gget Genomic Databases"
-  short_description: "Unified CLI/Python interface to 20+ genomic databases. Gene lookups (Ensembl search/info/seq), BLAST/BLAT, AlphaFold, Enrichr enrichment, OpenTargets di..."
-  default_prompt: "Use gget-genomic-databases to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "Bio & Omics Toolkit"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

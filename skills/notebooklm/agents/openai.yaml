@@ -1,9 +1,0 @@
-interface:
-  display_name: "Notebooklm"
-  short_description: "Use this skill to query your Google NotebookLM notebooks directly from Claude Code for source-grounded, citation-backed answers from Gemini. Browser aut..."
-  default_prompt: "Use notebooklm to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "General Utilities"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

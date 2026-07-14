@@ -1,9 +1,0 @@
-interface:
-  display_name: "Biopython Molecular Biology"
-  short_description: "Molecular biology toolkit: sequence manipulation, FASTA/GenBank/PDB I/O, NCBI Entrez, BLAST automation, pairwise/MSA alignment, Bio.PDB, phylogenetic tr..."
-  default_prompt: "Use biopython-molecular-biology to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "General Utilities"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

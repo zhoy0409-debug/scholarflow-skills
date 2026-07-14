@@ -1,9 +1,0 @@
-interface:
-  display_name: "Bio Primer Design Primer Basics"
-  short_description: "Design PCR primers for a target sequence using primer3-py. Specify target regions, product size, melting temperature, and other constraints. Returns ran..."
-  default_prompt: "Use bio-primer-design-primer-basics to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "Bio & Omics Toolkit"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

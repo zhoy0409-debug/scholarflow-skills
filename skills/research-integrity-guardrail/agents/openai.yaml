@@ -1,9 +1,4 @@
 interface:
   display_name: "Research Integrity Guardrail"
-  short_description: "Research-paper integrity and quality guardrail for academic manuscripts, AutoResearch-style outputs, literature reviews, methods/results sections, appen..."
-  default_prompt: "Use research-integrity-guardrail to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "General Utilities"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"
+  short_description: "Audit claims, numbers, citations, and reproducibility before research work is released."
+  default_prompt: "Use $research-integrity-guardrail to audit this research artifact before submission."

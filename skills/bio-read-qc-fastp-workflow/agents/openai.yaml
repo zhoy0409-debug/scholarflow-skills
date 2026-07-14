@@ -1,9 +1,0 @@
-interface:
-  display_name: "Bio Read QC Fastp Workflow"
-  short_description: "All-in-one read preprocessing with fastp including adapter trimming, quality filtering, deduplication, base correction, and HTML report generation. Use..."
-  default_prompt: "Use bio-read-qc-fastp-workflow to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "Bio & Omics Toolkit"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

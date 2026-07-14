@@ -1,9 +1,0 @@
-interface:
-  display_name: "Bio Filter Sequences"
-  short_description: "Filter and select sequences by criteria (length, ID, GC content, patterns) using Biopython. Use when subsetting sequences, removing unwanted records, or..."
-  default_prompt: "Use bio-filter-sequences to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "Bio & Omics Toolkit"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

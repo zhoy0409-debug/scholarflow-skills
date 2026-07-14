@@ -1,9 +1,0 @@
-interface:
-  display_name: "Bio Workflows Fastq To Variants"
-  short_description: "End-to-end DNA sequencing workflow from FASTQ files to variant calls. Covers QC, alignment with BWA, BAM processing, and variant calling with bcftools o..."
-  default_prompt: "Use bio-workflows-fastq-to-variants to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "Bio & Omics Toolkit"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

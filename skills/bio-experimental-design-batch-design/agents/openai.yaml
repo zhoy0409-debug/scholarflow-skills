@@ -1,9 +1,0 @@
-interface:
-  display_name: "Bio Experimental Design Batch Design"
-  short_description: "Designs genomics experiments so technical nuisance variation (batch, lane, plate, flow cell, operator, reagent lot, processing day) is balanced against..."
-  default_prompt: "Use bio-experimental-design-batch-design to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "Bio & Omics Toolkit"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

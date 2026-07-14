@@ -1,9 +1,0 @@
-interface:
-  display_name: "Support To Repro Pack"
-  short_description: "Convert support materials into a reproducibility package with organized files, metadata, methods notes, environment details, redaction checks, and revie..."
-  default_prompt: "Use support-to-repro-pack to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "General Utilities"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

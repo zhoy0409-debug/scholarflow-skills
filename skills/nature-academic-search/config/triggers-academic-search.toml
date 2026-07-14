@@ -1,4 +1,0 @@
-[academic-search]
-trigger = ["trigger", "trigger", "trigger", "triggerEndNote", "triggerRIS", "trigger", "triggerDOI", "trigger", "trigger", "trigger", "trigger", "MeSH", "trigger", "search papers", "find articles", "academic search", "literature search", "verify references", "check DOI", "verify citations", "download citation", "export .nbib", "export .ris", "BibTeX", "DOI", "PMID"]
-priority = 5
-suppress_active_skills = ["lit-process"]

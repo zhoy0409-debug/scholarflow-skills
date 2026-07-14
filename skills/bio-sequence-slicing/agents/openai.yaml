@@ -1,9 +1,0 @@
-interface:
-  display_name: "Bio Sequence Slicing"
-  short_description: "Slice, extract, and concatenate biological sequences using Biopython. Use when extracting subsequences, joining sequences, or manipulating sequence regi..."
-  default_prompt: "Use bio-sequence-slicing to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "Bio & Omics Toolkit"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

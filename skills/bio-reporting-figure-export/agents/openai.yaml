@@ -1,9 +1,0 @@
-interface:
-  display_name: "Bio Reporting Figure Export"
-  short_description: "Exports publication-ready figures in various formats with proper resolution, sizing, and typography. Use when preparing figures for journal submission,..."
-  default_prompt: "Use bio-reporting-figure-export to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "Bio & Omics Toolkit"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

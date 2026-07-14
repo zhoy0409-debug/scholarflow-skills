@@ -1,9 +1,0 @@
-interface:
-  display_name: "Bcftools Variant Manipulation"
-  short_description: "CLI for VCF/BCF: filter, merge, annotate, query, normalize, compute stats. Core post-variant-calling: quality filtering, multi-sample merging, rsID anno..."
-  default_prompt: "Use bcftools-variant-manipulation to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "Bio & Omics Toolkit"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

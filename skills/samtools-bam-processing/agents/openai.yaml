@@ -1,9 +1,0 @@
-interface:
-  display_name: "Samtools Bam Processing"
-  short_description: "CLI toolkit for SAM/BAM/CRAM: sort, index, convert, filter, QC alignments. Core commands: view, sort, index, flagstat, stats, depth, markdup, merge. Req..."
-  default_prompt: "Use samtools-bam-processing to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "Bio & Omics Toolkit"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

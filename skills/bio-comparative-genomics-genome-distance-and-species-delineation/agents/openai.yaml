@@ -1,9 +1,0 @@
-interface:
-  display_name: "Bio Comparative Genomics Genome Distance And Species Delineation"
-  short_description: "Compute genome-to-genome distances (ANI, AAI, dDDH, k-mer Mash) and assign taxonomic classifications using skani (Shaw 2023), FastANI (Jain 2018), pyani..."
-  default_prompt: "Use bio-comparative-genomics-genome-distance-and-species-delineation to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "Bio & Omics Toolkit"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

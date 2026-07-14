@@ -1,9 +1,0 @@
-interface:
-  display_name: "Nature Downloader"
-  short_description: "Assist with authorized literature and research-file retrieval workflows while respecting access rights, copyright, institutional permissions, and user-p..."
-  default_prompt: "Use nature-downloader to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "Nature Research Suite"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

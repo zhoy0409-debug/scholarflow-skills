@@ -1,8 +1,8 @@
 {
   "name": "scholarflow",
-  "displayName": "ScholarFlow",
+  "displayName": "ScholarFlow Skills",
   "version": "2.0.0",
-  "description": "科研写作全流程 Agent Skills：文献检索与引用核验、论文起草与润色、投稿级配图、学术汇报、审稿模拟、投稿前一致性核查。中英双语，带可执行门禁。",
+  "description": "Zhoy's research workflows for journal selection, submission readiness, scientific figures, and integrity review.",
   "author": {
     "name": "Zhoy",
     "url": "https://github.com/zhoy0409-debug"
@@ -11,8 +11,11 @@
   "repository": "https://github.com/zhoy0409-debug/scholarflow-skills",
   "license": "MIT",
   "keywords": [
-    "academic-writing", "literature-review", "scientific-figures",
-    "peer-review", "manuscript", "科研写作", "论文", "文献", "审稿"
+    "academic-writing",
+    "journal-selection",
+    "journal-submission",
+    "scientific-figures",
+    "research-integrity"
   ],
   "skills": "./skills"
 }

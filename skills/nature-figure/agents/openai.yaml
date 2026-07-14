@@ -1,9 +1,0 @@
-interface:
-  display_name: "Nature Figure"
-  short_description: "Plan, build, and quality-check scientific figures so panels, statistics, legends, visual hierarchy, and export settings support the manuscript argument."
-  default_prompt: "Use nature-figure to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "Nature Research Suite"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

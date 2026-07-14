@@ -1,9 +1,0 @@
-interface:
-  display_name: "Bio Experimental Design Multiple Testing"
-  short_description: "Controls error rates across thousands of simultaneous tests in genomics discovery using false-discovery-rate methods (Benjamini-Hochberg 1995; Benjamini..."
-  default_prompt: "Use bio-experimental-design-multiple-testing to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "Bio & Omics Toolkit"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

@@ -1,9 +1,0 @@
-interface:
-  display_name: "Bio Data Visualization Circos Plots"
-  short_description: "Build circular genome visualizations using circlize (R), pyCirclize (Python), or Circos (Perl CLI) with ideogram tracks, multi-data tracks (scatter, his..."
-  default_prompt: "Use bio-data-visualization-circos-plots to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "Bio & Omics Toolkit"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

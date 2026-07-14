@@ -1,9 +1,0 @@
-interface:
-  display_name: "Bio Phylo Modern Tree Inference"
-  short_description: "Build maximum likelihood phylogenetic trees using IQ-TREE2 and RAxML-NG with expert model selection, branch support assessment, and topology testing. Us..."
-  default_prompt: "Use bio-phylo-modern-tree-inference to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "Bio & Omics Toolkit"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

@@ -1,9 +1,0 @@
-interface:
-  display_name: "Bio Comparative Genomics Whole Genome Alignment"
-  short_description: "Build whole-genome alignments using Progressive Cactus (Armstrong 2020 reference-free clade-level WGA), Minigraph-Cactus (Hickey 2024 pangenome-aware),..."
-  default_prompt: "Use bio-comparative-genomics-whole-genome-alignment to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "Bio & Omics Toolkit"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

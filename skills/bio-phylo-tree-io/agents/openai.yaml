@@ -1,9 +1,0 @@
-interface:
-  display_name: "Bio Phylo Tree Io"
-  short_description: "Read, write, and convert phylogenetic tree files using Biopython Bio.Phylo. Use when parsing Newick, Nexus, PhyloXML, or NeXML tree formats, converting..."
-  default_prompt: "Use bio-phylo-tree-io to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "Bio & Omics Toolkit"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

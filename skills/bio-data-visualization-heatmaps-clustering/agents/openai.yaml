@@ -1,9 +1,0 @@
-interface:
-  display_name: "Bio Data Visualization Heatmaps Clustering"
-  short_description: "Build clustered heatmaps for expression matrices and other features-by-samples data with rigorous distance/linkage/scaling choices, robust color mapping..."
-  default_prompt: "Use bio-data-visualization-heatmaps-clustering to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "Bio & Omics Toolkit"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

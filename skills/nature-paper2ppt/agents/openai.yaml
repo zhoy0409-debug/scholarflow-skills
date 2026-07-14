@@ -1,9 +1,0 @@
-interface:
-  display_name: "Nature Paper2ppt"
-  short_description: "Turn research papers into clear slide decks for journal clubs, group meetings, lectures, or presentations while preserving research question, methods, f..."
-  default_prompt: "Use nature-paper2ppt to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "Nature Research Suite"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

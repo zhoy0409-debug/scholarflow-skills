@@ -1,9 +1,0 @@
-interface:
-  display_name: "Paper Harbor"
-  short_description: "Discover, screen, and organize literature metadata into Zotero-ready outputs from authorized scholarly sources. Use for traceable candidate lists, prior..."
-  default_prompt: "Use paper-harbor to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "PaperSpine & Literature Ops"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

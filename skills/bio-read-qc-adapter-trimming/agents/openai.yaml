@@ -1,9 +1,0 @@
-interface:
-  display_name: "Bio Read QC Adapter Trimming"
-  short_description: "Remove sequencing adapters from FASTQ files using Cutadapt and Trimmomatic. Supports single-end and paired-end reads, Illumina TruSeq, Nextera, and cust..."
-  default_prompt: "Use bio-read-qc-adapter-trimming to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "Bio & Omics Toolkit"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

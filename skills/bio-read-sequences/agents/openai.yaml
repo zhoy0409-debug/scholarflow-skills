@@ -1,9 +1,0 @@
-interface:
-  display_name: "Bio Read Sequences"
-  short_description: "Read biological sequence files (FASTA, FASTQ, GenBank, EMBL, ABI, SFF) using Biopython Bio.SeqIO. Use when parsing sequence files, iterating multi-seque..."
-  default_prompt: "Use bio-read-sequences to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "Bio & Omics Toolkit"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

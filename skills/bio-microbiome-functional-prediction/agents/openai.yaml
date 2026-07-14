@@ -1,9 +1,0 @@
-interface:
-  display_name: "Bio Microbiome Functional Prediction"
-  short_description: "Predict metagenome functional content from 16S rRNA marker gene data using PICRUSt2. Infer KEGG, MetaCyc, and EC abundances from ASV tables. Use when fu..."
-  default_prompt: "Use bio-microbiome-functional-prediction to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "Bio & Omics Toolkit"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

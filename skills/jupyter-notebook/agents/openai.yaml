@@ -1,9 +1,0 @@
-interface:
-  display_name: "Jupyter Notebook"
-  short_description: "Use when the user asks to create, scaffold, or edit Jupyter notebooks (`.ipynb`) for experiments, explorations, or tutorials; prefer the bundled templat..."
-  default_prompt: "Use jupyter-notebook to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "General Utilities"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

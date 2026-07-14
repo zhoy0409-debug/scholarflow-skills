@@ -1,9 +1,0 @@
-interface:
-  display_name: "Zotero Lit Fetch"
-  short_description: "Fetch and organize literature metadata into Zotero-oriented workflows across English and Chinese-language scholarly databases while respecting authoriza..."
-  default_prompt: "Use zotero-lit-fetch to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "PaperSpine & Literature Ops"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

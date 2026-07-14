@@ -1,9 +1,0 @@
-interface:
-  display_name: "Neat Freak"
-  short_description: "Clean up project state at the end of a session by reconciling documentation, memory, open tasks, file changes, and handoff notes so future work does not..."
-  default_prompt: "Use neat-freak to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "Agent Ops & Governance"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

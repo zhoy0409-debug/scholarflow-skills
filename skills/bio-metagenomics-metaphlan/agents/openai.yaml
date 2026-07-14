@@ -1,9 +1,0 @@
-interface:
-  display_name: "Bio Metagenomics Metaphlan"
-  short_description: "Marker gene-based taxonomic profiling using MetaPhlAn 4. Provides accurate species-level relative abundances using clade-specific markers. Use when accu..."
-  default_prompt: "Use bio-metagenomics-metaphlan to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "Bio & Omics Toolkit"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

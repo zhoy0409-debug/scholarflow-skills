@@ -1,9 +1,0 @@
-interface:
-  display_name: "Nature Data"
-  short_description: "Prepare data availability statements, dataset descriptions, repository guidance, and data-integrity checks for research manuscripts."
-  default_prompt: "Use nature-data to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "Nature Research Suite"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

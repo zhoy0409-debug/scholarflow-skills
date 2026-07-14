@@ -1,9 +1,0 @@
-interface:
-  display_name: "Bio Metagenomics Visualization"
-  short_description: "Visualize metagenomic profiles using R (phyloseq, microbiome) and Python (matplotlib, seaborn). Create stacked bar plots, heatmaps, PCA plots, and diver..."
-  default_prompt: "Use bio-metagenomics-visualization to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "Bio & Omics Toolkit"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

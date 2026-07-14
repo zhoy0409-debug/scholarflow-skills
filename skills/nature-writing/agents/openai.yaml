@@ -1,9 +1,0 @@
-interface:
-  display_name: "Nature Writing"
-  short_description: "Draft and revise research manuscripts by building section function, evidence chains, conservative claims, citation support, and journal-appropriate acad..."
-  default_prompt: "Use nature-writing to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "Nature Research Suite"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

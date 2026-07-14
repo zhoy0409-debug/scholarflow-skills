@@ -1,9 +1,0 @@
-interface:
-  display_name: "Skill Writing Guide"
-  short_description: "Guide for authoring Agent Skills (SKILL.md). Covers the open standard format, required frontmatter, directory layout, progressive disclosure, descriptio..."
-  default_prompt: "Use skill-writing-guide to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "Academic Writing & Integrity"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

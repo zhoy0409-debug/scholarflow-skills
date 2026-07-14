@@ -1,9 +1,0 @@
-interface:
-  display_name: "Bio Microbiome Qiime2 Workflow"
-  short_description: "QIIME2 command-line workflow for 16S/ITS amplicon analysis. Alternative to DADA2/phyloseq R workflow with built-in provenance tracking. Use when preferr..."
-  default_prompt: "Use bio-microbiome-qiime2-workflow to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "Bio & Omics Toolkit"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

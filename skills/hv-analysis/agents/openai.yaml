@@ -1,9 +1,0 @@
-interface:
-  display_name: "Horizontal-Vertical Analysis"
-  short_description: "Conduct Horizontal-Vertical Analysis for deep research on a product, company, concept, technology, or person. Use when the user needs a source-grounded..."
-  default_prompt: "Use hv-analysis to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "Content & Knowledge Work"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

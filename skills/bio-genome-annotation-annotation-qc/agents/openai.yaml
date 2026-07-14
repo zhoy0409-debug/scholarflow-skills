@@ -1,9 +1,0 @@
-interface:
-  display_name: "Bio Genome Annotation Annotation QC"
-  short_description: "Assesses the quality and completeness of a genome annotation with BUSCO (conserved single-copy ortholog recovery), OMArk (proteome completeness, consist..."
-  default_prompt: "Use bio-genome-annotation-annotation-qc to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "Bio & Omics Toolkit"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

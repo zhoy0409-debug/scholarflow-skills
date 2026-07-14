@@ -1,9 +1,0 @@
-interface:
-  display_name: "Ena Database"
-  short_description: "ENA REST API for sequences, reads, assemblies, and annotations. Portal API search, Browser API retrieval (XML/FASTA/EMBL), file reports for FASTQ/BAM UR..."
-  default_prompt: "Use ena-database to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "Bio & Omics Toolkit"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

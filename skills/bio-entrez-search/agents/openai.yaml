@@ -1,9 +1,0 @@
-interface:
-  display_name: "Bio Entrez Search"
-  short_description: "Search NCBI databases using Biopython Bio.Entrez (ESearch, EInfo, EGQuery, ESpell). Use when finding records by keyword, building reproducible field-qua..."
-  default_prompt: "Use bio-entrez-search to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "Bio & Omics Toolkit"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

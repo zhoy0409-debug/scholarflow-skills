@@ -1,9 +1,0 @@
-interface:
-  display_name: "Bio Workflows Microbiome Pipeline"
-  short_description: "End-to-end 16S amplicon workflow from FASTQ reads to differential abundance. Orchestrates DADA2 ASV inference, taxonomy assignment, diversity analysis,..."
-  default_prompt: "Use bio-workflows-microbiome-pipeline to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "Bio & Omics Toolkit"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

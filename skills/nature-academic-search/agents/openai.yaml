@@ -1,9 +1,0 @@
-interface:
-  display_name: "Nature Academic Search"
-  short_description: "Run academic search workflows across scholarly sources, prioritize reliable evidence, build search strategies, screen results, and return traceable lite..."
-  default_prompt: "Use nature-academic-search to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "Nature Research Suite"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

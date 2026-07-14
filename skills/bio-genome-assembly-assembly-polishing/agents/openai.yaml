@@ -1,9 +1,0 @@
-interface:
-  display_name: "Bio Genome Assembly Assembly Polishing"
-  short_description: "Decides whether and how to polish a draft genome assembly to raise consensus accuracy (QV) with read-type-matched tools - Racon and medaka (ONT consensu..."
-  default_prompt: "Use bio-genome-assembly-assembly-polishing to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "Bio & Omics Toolkit"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

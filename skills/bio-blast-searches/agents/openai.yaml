@@ -1,9 +1,0 @@
-interface:
-  display_name: "Bio Blast Searches"
-  short_description: "Run remote BLAST searches against NCBI servers using Biopython Bio.Blast.NCBIWWW. Use when identifying unknown sequences, finding homologs, picking the..."
-  default_prompt: "Use bio-blast-searches to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "Bio & Omics Toolkit"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

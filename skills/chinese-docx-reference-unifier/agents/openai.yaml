@@ -1,9 +1,0 @@
-interface:
-  display_name: "Chinese DOCX Reference Unifier"
-  short_description: "Normalize references and in-text citations in Chinese-language DOCX manuscripts, including numbering, bibliography order, punctuation, duplicates, and c..."
-  default_prompt: "Use chinese-docx-reference-unifier to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "Delivery Stack"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

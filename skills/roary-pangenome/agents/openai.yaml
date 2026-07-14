@@ -1,9 +1,0 @@
-interface:
-  display_name: "Roary Pangenome"
-  short_description: "Compute the bacterial pan-genome from Prokka/Bakta GFF3 annotations with Roary's CD-HIT + BLAST + MCL clustering pipeline. Builds gene presence/absence..."
-  default_prompt: "Use roary-pangenome to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "Bio & Omics Toolkit"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

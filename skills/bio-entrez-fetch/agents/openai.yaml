@@ -1,9 +1,0 @@
-interface:
-  display_name: "Bio Entrez Fetch"
-  short_description: "Retrieve records from NCBI databases using Biopython Bio.Entrez (EFetch, ESummary). Use when downloading sequences, fetching GenBank/GenPept records, ge..."
-  default_prompt: "Use bio-entrez-fetch to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "Bio & Omics Toolkit"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

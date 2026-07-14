@@ -1,9 +1,0 @@
-interface:
-  display_name: "Bio Data Visualization Network Visualization"
-  short_description: "Visualize biological networks (PPI, gene-regulatory, co-expression, pathway) with layout algorithm choice (ForceAtlas2, Fruchterman-Reingold, Kamada-Kaw..."
-  default_prompt: "Use bio-data-visualization-network-visualization to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "Bio & Omics Toolkit"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

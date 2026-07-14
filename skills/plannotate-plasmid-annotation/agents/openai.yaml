@@ -1,9 +1,0 @@
-interface:
-  display_name: "Plannotate Plasmid Annotation"
-  short_description: "Auto-annotate plasmids with features (promoters, terminators, resistance, origins, tags, fluorescent proteins) via BLAST against curated DBs (Addgene, f..."
-  default_prompt: "Use plannotate-plasmid-annotation to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "Bio & Omics Toolkit"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

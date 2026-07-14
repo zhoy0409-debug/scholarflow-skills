@@ -1,9 +1,0 @@
-interface:
-  display_name: "Bio Reporting Quarto Reports"
-  short_description: "Build reproducible scientific documents, presentations, and websites with Quarto supporting R, Python, Julia, and Observable JS. Use when creating repro..."
-  default_prompt: "Use bio-reporting-quarto-reports to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "Bio & Omics Toolkit"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

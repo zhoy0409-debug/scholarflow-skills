@@ -1,9 +1,0 @@
-interface:
-  display_name: "Nature Polishing"
-  short_description: "Polish academic manuscripts for clarity, conservative claims, journal tone, paragraph function, citation grounding, and submission-ready language."
-  default_prompt: "Use nature-polishing to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "Nature Research Suite"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

@@ -1,9 +1,0 @@
-interface:
-  display_name: "Humanize"
-  short_description: "Humanize academic or professional writing by reducing formulaic AI-like patterns while preserving meaning, evidence, tone, and citation integrity. Alias..."
-  default_prompt: "Use humanize to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "General Utilities"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

@@ -1,9 +1,0 @@
-interface:
-  display_name: "Bio Consensus Sequences"
-  short_description: "Generate consensus FASTA sequences by applying VCF variants to a reference using bcftools consensus. Use when creating sample-specific reference sequenc..."
-  default_prompt: "Use bio-consensus-sequences to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "Bio & Omics Toolkit"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

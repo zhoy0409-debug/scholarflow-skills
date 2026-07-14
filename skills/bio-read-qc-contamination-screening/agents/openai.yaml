@@ -1,9 +1,0 @@
-interface:
-  display_name: "Bio Read QC Contamination Screening"
-  short_description: "Detect sample contamination and cross-species reads using FastQ Screen. Screen reads against multiple reference genomes to identify bacterial, viral, ad..."
-  default_prompt: "Use bio-read-qc-contamination-screening to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "Bio & Omics Toolkit"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

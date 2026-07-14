@@ -1,9 +1,0 @@
-interface:
-  display_name: "Bio Genome Assembly Metagenome Assembly"
-  short_description: "Assembles microbial-community sequencing into metagenome-assembled genomes (MAGs) with metaFlye (ONT), metaSPAdes/MEGAHIT (Illumina), and hifiasm-meta/m..."
-  default_prompt: "Use bio-genome-assembly-metagenome-assembly to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "Bio & Omics Toolkit"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

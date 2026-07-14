@@ -1,9 +1,0 @@
-interface:
-  display_name: "Bio Comparative Genomics Ortholog Inference"
-  short_description: "Infer orthologous genes and gene families across species using OrthoFinder3 (HOG-based phylogenetic orthology), SonicParanoid2, Broccoli, ProteinOrtho,..."
-  default_prompt: "Use bio-comparative-genomics-ortholog-inference to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "Bio & Omics Toolkit"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

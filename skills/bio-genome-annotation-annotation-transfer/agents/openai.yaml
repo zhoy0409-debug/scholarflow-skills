@@ -1,9 +1,0 @@
-interface:
-  display_name: "Bio Genome Annotation Annotation Transfer"
-  short_description: "Transfers gene annotations between genome assemblies via coordinate liftover (UCSC liftOver, CrossMap for same-species version updates) or feature/seque..."
-  default_prompt: "Use bio-genome-annotation-annotation-transfer to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "Bio & Omics Toolkit"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

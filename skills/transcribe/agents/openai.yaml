@@ -1,9 +1,0 @@
-interface:
-  display_name: "Transcribe"
-  short_description: "Transcribe audio files to text with optional diarization and known-speaker hints. Use when a user asks to transcribe speech from audio/video, extract te..."
-  default_prompt: "Use transcribe to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "General Utilities"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

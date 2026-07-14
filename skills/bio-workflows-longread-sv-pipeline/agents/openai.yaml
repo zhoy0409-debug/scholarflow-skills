@@ -1,9 +1,0 @@
-interface:
-  display_name: "Bio Workflows Longread Sv Pipeline"
-  short_description: "End-to-end workflow for detecting structural variants from long-read sequencing data. Covers ONT/PacBio alignment with minimap2 and SV calling with Snif..."
-  default_prompt: "Use bio-workflows-longread-sv-pipeline to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "Bio & Omics Toolkit"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

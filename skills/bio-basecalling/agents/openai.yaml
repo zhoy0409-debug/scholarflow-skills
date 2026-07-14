@@ -1,9 +1,0 @@
-interface:
-  display_name: "Bio Basecalling"
-  short_description: "Convert raw Nanopore signal data (FAST5/POD5) to nucleotide sequences using Dorado basecaller. Covers model selection, GPU acceleration, modified base d..."
-  default_prompt: "Use bio-basecalling to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "Bio & Omics Toolkit"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

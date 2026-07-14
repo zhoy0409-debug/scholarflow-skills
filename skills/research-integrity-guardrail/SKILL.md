@@ -1,101 +1,57 @@
 ---
 name: research-integrity-guardrail
-description: >-
-  Mechanical pre-submission audit. Finds and locates errors; never rewrites. Checks that numbers
-  in the abstract agree with the tables, that figure and reference cross-references survived
-  renumbering, that every reference is both cited and listed, that percentages add up, that
-  P-values carry the right test label. Runs the executable gates in `gates/`. Not for: judgment on
-  novelty or scientific merit → nature-reviewer. 触发：一致性核查、核对数字、对不对得上、引了没列、列了没引、编号错位、交叉引用、终稿核对。
-  Triggers: do the numbers match, are all figures cited, consistency check, cross-reference audit.
+description: Audit research manuscripts, reports, and study materials for unsupported claims, inconsistent numbers, citation gaps, reproducibility omissions, and overstatement. Use before major revision, submission, defence, or public release when the user needs findings and an evidence ledger rather than a prose rewrite.
 ---
 
 # Research Integrity Guardrail
 
-## Principle
+Protect the evidence chain before polishing language. This skill audits a research artifact; it does not invent evidence, conceal uncertainty, or make unsupported work sound more convincing.
 
-Use this skill to prevent real research-quality failures, not to evade detectors or disguise AI-written work. If the user frames the request as hiding automation, bypassing an Anti-Autoresearch detector, or covering tracks, redirect to a substantive integrity audit and revision plan.
+## Establish the audit boundary
 
-For every research-facing task, preserve traceability: claims must point to evidence, numbers must reconcile, methods must be reproducible, and novelty must be bounded by related work.
+Identify the artifact, its audience, the claimed contribution, and the materials available for verification: manuscript, figures, tables, reference list, raw calculations, methods, code, protocol, or supplementary files. Mark any missing material as unverified rather than inferring it.
 
-## Default Workflow
+## Build an evidence ledger
 
-1. Identify the artifact type: abstract, intro, related work, method, experiments, appendix, rebuttal, grant text, or full manuscript.
-2. Run the red-flag audit below before polishing style.
-3. Create an evidence ledger for risky claims when the task involves claims, results, or novelty:
+For each consequential claim or result, record:
 
-| Claim/result | Evidence source | Numbers/tables/figures | Status | Required fix |
-| --- | --- | --- | --- | --- |
-|  |  |  | Supported / weak / missing / inconsistent |  |
+| Claim or result | Evidence location | Verification status | Required action |
+| --- | --- | --- | --- |
+|  | Table, figure, source, calculation, method, or code | Supported / unclear / inconsistent / unsupported |  |
 
-4. Fix substance first: data, citations, logic, limitations, reproducibility, and consistency.
-5. Polish language only after the evidence chain is sound.
-6. In the final response, call out unresolved risks instead of smoothing them over.
+Do not treat a citation as verification unless it actually supports the claim being made.
 
-## Red-Flag Audit
+## Audit in this order
 
-Check for these common low-quality research artifacts:
+1. **Numbers and cross-references**: reconcile repeated counts, percentages, ratios, *P* values, figure labels, table values, and appendix references.
+2. **Claims and citations**: locate each major claim's support; flag orphaned citations, unused references, missing close comparators, and statements stronger than their evidence.
+3. **Methods and reproducibility**: check that datasets, preprocessing, exclusions, controls, parameters, statistics, code, and evaluation splits are sufficiently described for the stated result.
+4. **Interpretation**: distinguish observed findings from mechanism, causality, clinical meaning, novelty, and generalization. Require limitations where they materially affect interpretation.
+5. **Presentation integrity**: identify selective reporting, missing negative cases, unexplained visual choices, and claims that do not trace to a figure, table, calculation, or source.
 
-- Over-defensive patch writing: minor points get repeated explanations or local add-ons while the global story, hypothesis, and contribution become incoherent.
-- Invented or unnecessary terminology: new coined phrases, broken abbreviations, awkward hyphenation, sudden bolding, fragmented abstracts, or jargon that does not buy precision.
-- Numeric inconsistency: counts, percentages, ratios, table entries, figure labels, appendix values, and text claims do not reconcile.
-- Suspicious number patterns: the same number or same digit multiples recur too often, especially after long-distance editing or across unrelated sections.
-- Novelty overclaim: the method claims to be first, new, universal, or superior without careful comparison to related work.
-- Related-work and citation errors: missing close baselines, miscited papers, citations that do not support the sentence, or unsupported contrastive claims.
-- Ground-truth problems: undefined labels, questionable evaluation datasets, mismatch between appendix experiments and main-text experiments, or unclear provenance.
-- Selective reporting: only favorable metrics appear; failed settings, excluded data, negative cases, variance, confidence intervals, and ablations are absent without explanation.
-- Phantom or impossible results: results appear in text without an experiment path, code path, data path, table, figure, appendix entry, or reproducible calculation.
-- Circular proof: the appendix only rephrases the claim or proves assumptions with outputs from the same method instead of independent validation.
-- Trivial A-plus-B framing: the idea is merely a combination of two known components, with no clear mechanism, non-obvious insight, or empirical justification.
+## Return findings before revisions
 
-## Audit Actions
+Lead with material risks, ordered by severity. Separate facts from judgment:
 
-When drafting or revising:
+- **Blocked**: demonstrably inconsistent, unsupported, or missing evidence.
+- **Needs verification**: cannot be checked from the supplied materials.
+- **Conservative rewrite needed**: evidence exists but the wording overstates it.
+- **Editorial**: clarity or structure issue with no integrity implication.
 
-- Replace vague novelty language with bounded claims: "we evaluate", "we extend", "we adapt", "we observe", or "under these settings".
-- Add the closest related work before making comparative claims.
-- Require each key result to trace to a table, figure, dataset, script, appendix item, or calculation.
-- Recalculate percentages from raw counts and check that rounding rules are consistent.
-- Cross-check every number that appears in multiple places.
-- Mark unknowns explicitly instead of inventing ground truth, datasets, baselines, or citations.
-- Include limitations, failure cases, and selection criteria when they materially affect interpretation.
-- Keep terminology stable; define necessary terms once and remove decorative formatting.
-- Make appendix material support the main text with independent detail: protocols, prompts, parameters, data splits, ablations, statistics, or reproducibility notes.
-
-When reviewing:
-
-- Lead with integrity risks before prose suggestions.
-- Separate "unsupported", "inconsistent", "overclaimed", and "unclear" findings.
-- Ask for raw evidence only when the answer cannot be verified from the available artifact.
-- Do not recommend superficial humanizing, paraphrasing, or stylistic camouflage as a substitute for fixing evidence, logic, or reproducibility.
-
-## Output Formats
-
-For a quick audit, use:
+Use this format:
 
 ```markdown
-**Integrity Check**
-- Supported:
-- Needs Evidence:
-- Numeric/Logic Issues:
-- Overclaim/Related Work:
-- Reproducibility Gaps:
-- Priority Fixes:
+## Integrity Findings
+1. [Blocked] Location - issue - evidence - required fix
+
+## Evidence Ledger
+| Claim or result | Evidence location | Verification status | Required action |
+| --- | --- | --- | --- |
+
+## Release Decision
+- Ready items:
+- Blocking items:
+- Items requiring author confirmation:
 ```
 
-For a deep audit, use:
-
-```markdown
-**Findings**
-1. [Severity] Issue - location - why it matters - concrete fix.
-
-**Evidence Ledger**
-| Claim/result | Evidence source | Numbers/tables/figures | Status | Required fix |
-| --- | --- | --- | --- | --- |
-
-**Ready Criteria**
-- All key claims have sources.
-- All repeated numbers reconcile.
-- Novelty is bounded and related work is represented.
-- Methods and evaluation can be reproduced from the paper plus appendix.
-- Limitations and exclusions are disclosed.
-```
+Only after the user resolves the material risks should this skill help revise wording. For journal formatting, use `journal-submission-normalizer`; for manuscript-journal fit, use `journal-selection-advisor`; for figure QA, use `polish-sci-figures`.

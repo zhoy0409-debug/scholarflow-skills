@@ -1,9 +1,0 @@
-interface:
-  display_name: "Snpeff Variant Annotation"
-  short_description: "Annotate and filter VCF variants with SnpEff and SnpSift. SnpEff predicts functional effects (HIGH/MODERATE/LOW/MODIFIER), genes, transcripts, AA change..."
-  default_prompt: "Use snpeff-variant-annotation to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "Bio & Omics Toolkit"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

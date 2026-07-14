@@ -1,9 +1,0 @@
-interface:
-  display_name: "Bio Metagenomics Strain Tracking"
-  short_description: "Track bacterial strains using MASH, sourmash, fastANI, and inStrain. Compare genomes, detect contamination, and monitor strain-level variation. Use when..."
-  default_prompt: "Use bio-metagenomics-strain-tracking to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "Bio & Omics Toolkit"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

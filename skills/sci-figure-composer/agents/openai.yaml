@@ -1,9 +1,0 @@
-interface:
-  display_name: "Sci Figure Composer"
-  short_description: "Use when the user asks to compose, redesign, audit, polish, resize, align, label, or export SCI/journal manuscript figures, especially large multi-panel..."
-  default_prompt: "Use sci-figure-composer to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "General Utilities"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

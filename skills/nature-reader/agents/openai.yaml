@@ -1,9 +1,0 @@
-interface:
-  display_name: "Nature Reader"
-  short_description: "Read research papers deeply and produce structured notes that preserve article logic, figures, methods, evidence chains, limitations, and reusable citat..."
-  default_prompt: "Use nature-reader to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "Nature Research Suite"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

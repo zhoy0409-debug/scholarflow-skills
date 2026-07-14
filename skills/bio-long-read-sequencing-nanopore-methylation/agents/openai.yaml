@@ -1,9 +1,0 @@
-interface:
-  display_name: "Bio Long Read Sequencing Nanopore Methylation"
-  short_description: "Calls DNA methylation from Oxford Nanopore sequencing data using signal-level analysis. Use when detecting 5mC or 6mA modifications directly from nanopo..."
-  default_prompt: "Use bio-long-read-sequencing-nanopore-methylation to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "Bio & Omics Toolkit"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

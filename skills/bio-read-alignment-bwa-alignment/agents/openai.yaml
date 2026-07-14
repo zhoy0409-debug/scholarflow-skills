@@ -1,9 +1,0 @@
-interface:
-  display_name: "Bio Read Alignment Bwa Alignment"
-  short_description: "Align DNA short reads to reference genomes using bwa-mem2, the faster successor to BWA-MEM. Use when aligning DNA short reads to a reference genome."
-  default_prompt: "Use bio-read-alignment-bwa-alignment to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "Bio & Omics Toolkit"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

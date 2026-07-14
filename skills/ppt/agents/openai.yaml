@@ -1,9 +1,0 @@
-interface:
-  display_name: "PPT Deck Orchestration"
-  short_description: "Plan, author, verify, screenshot, and export PowerPoint slide decks through a filesystem-based deck workflow."
-  default_prompt: "Use ppt to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "Delivery Stack"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

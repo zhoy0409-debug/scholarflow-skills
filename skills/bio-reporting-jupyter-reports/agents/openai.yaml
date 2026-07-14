@@ -1,9 +1,0 @@
-interface:
-  display_name: "Bio Reporting Jupyter Reports"
-  short_description: "Creates reproducible Jupyter notebooks for bioinformatics analysis with parameterization using papermill. Use when generating automated analysis reports..."
-  default_prompt: "Use bio-reporting-jupyter-reports to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "Bio & Omics Toolkit"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

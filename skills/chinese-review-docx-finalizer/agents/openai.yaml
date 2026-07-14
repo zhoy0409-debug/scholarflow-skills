@@ -1,9 +1,0 @@
-interface:
-  display_name: "Chinese Review DOCX Finalizer"
-  short_description: "Finalize Chinese-language review manuscripts in DOCX by checking structure, headings, citations, references, formatting, figure/table callouts, acknowle..."
-  default_prompt: "Use chinese-review-docx-finalizer to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "Delivery Stack"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

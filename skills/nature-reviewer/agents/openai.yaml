@@ -1,9 +1,0 @@
-interface:
-  display_name: "Nature Reviewer"
-  short_description: "Review manuscripts like a careful internal reviewer, identifying claims, evidence gaps, structure issues, citation problems, figures, methods, and submi..."
-  default_prompt: "Use nature-reviewer to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "Nature Research Suite"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

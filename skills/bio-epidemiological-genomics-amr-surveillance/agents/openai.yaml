@@ -1,9 +1,0 @@
-interface:
-  display_name: "Bio Epidemiological Genomics Amr Surveillance"
-  short_description: "Detects acquired antimicrobial-resistance determinants and chromosomal point-mutation resistance in bacterial assemblies using AMRFinderPlus, ResFinder..."
-  default_prompt: "Use bio-epidemiological-genomics-amr-surveillance to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "Bio & Omics Toolkit"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

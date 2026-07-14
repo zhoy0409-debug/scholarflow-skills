@@ -1,9 +1,0 @@
-interface:
-  display_name: "Session Handoff"
-  short_description: "Creates a safe en-US handoff markdown file from the current session, including the session timestamp, status, objective, expected result, work done, win..."
-  default_prompt: "Use session-handoff to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "Agent Ops & Governance"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

@@ -1,9 +1,0 @@
-interface:
-  display_name: "Bio Variant Calling Filtering Best Practices"
-  short_description: "Comprehensive variant filtering including GATK VQSR, hard filters, bcftools expressions, and quality metric interpretation for SNPs and indels. Use when..."
-  default_prompt: "Use bio-variant-calling-filtering-best-practices to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "Bio & Omics Toolkit"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

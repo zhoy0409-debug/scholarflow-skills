@@ -1,9 +1,0 @@
-interface:
-  display_name: "Bio Alignment Indexing"
-  short_description: "Create and use BAI/CSI indices for BAM/CRAM files using samtools and pysam. Use when enabling random access to alignment files or fetching specific geno..."
-  default_prompt: "Use bio-alignment-indexing to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "Bio & Omics Toolkit"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

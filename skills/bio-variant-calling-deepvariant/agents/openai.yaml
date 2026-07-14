@@ -1,9 +1,0 @@
-interface:
-  display_name: "Bio Variant Calling Deepvariant"
-  short_description: "Deep learning-based variant calling with Google DeepVariant. Provides high accuracy for germline SNPs and indels from Illumina, PacBio, and ONT data. Us..."
-  default_prompt: "Use bio-variant-calling-deepvariant to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "Bio & Omics Toolkit"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

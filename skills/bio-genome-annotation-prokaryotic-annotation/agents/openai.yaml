@@ -1,9 +1,0 @@
-interface:
-  display_name: "Bio Genome Annotation Prokaryotic Annotation"
-  short_description: "Annotates bacterial and archaeal genomes (isolates, MAGs, plasmids) with Bakta (active versioned databases, NCBI-compliant output) or Prokka (legacy), p..."
-  default_prompt: "Use bio-genome-annotation-prokaryotic-annotation to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "Bio & Omics Toolkit"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

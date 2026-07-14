@@ -1,9 +1,0 @@
-interface:
-  display_name: "Bio Batch Downloads"
-  short_description: "Download large datasets from NCBI efficiently using EPost, history server, batching, rate limiting, and retry logic. Use when bulk-fetching tens of thou..."
-  default_prompt: "Use bio-batch-downloads to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "Bio & Omics Toolkit"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"
