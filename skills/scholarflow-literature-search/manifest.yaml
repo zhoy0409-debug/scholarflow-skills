@@ -1,0 +1,45 @@
+name: scholarflow-literature-search
+version: 2.2.0
+description: >
+  Routing manifest for ScholarFlow Literature Search. The active workflow selects
+  only the guidance needed for a traceable literature-search request.
+
+always_load:
+  - static/core/tools.md
+  - static/core/routing-and-ops.md
+
+axes:
+  workflow:
+    detect: |
+      Map the user's need to one or more workflows:
+        multi-source-search   find literature across Crossref, PubMed, and arXiv
+        citation-verification verify citations extracted from a document
+        mesh-strategy         build a reproducible PubMed or MeSH strategy
+        citation-file-mgmt    convert or manage NBIB, RIS, and BibTeX files
+        reference-mgmt        prepare citations, related records, or ID lookups
+    values:
+      multi-source-search: references/workflows/wf1-multi-source-search.md
+      citation-verification: references/workflows/wf2-citation-verification.md
+      mesh-strategy: references/workflows/wf3-mesh-strategy.md
+      citation-file-mgmt: references/workflows/wf4-citation-file-mgmt.md
+      reference-mgmt: references/workflows/wf5-reference-mgmt.md
+    multi: true
+
+references:
+  on_demand:
+    - condition: source reliability tiers and fallback routing rules
+      path: references/source-tiers.md
+    - condition: deduplication across sources
+      path: references/dedup-engine.md
+    - condition: extracting citations from documents
+      path: references/citation-parser.md
+    - condition: query construction, source selection, and result ranking
+      path: references/search-strategy.md
+    - condition: RIS and BibTeX format specifications and field mappings
+      path: references/ris-bibtex-format.md
+    - condition: optional no-MCP discovery search with OpenAlex
+      path: scripts/academic_search.py
+    - condition: multi-source NBIB, RIS, and BibTeX conversion
+      path: scripts/format-converter.py
+    - condition: endpoint preflight before batch operations
+      path: scripts/preflight.py

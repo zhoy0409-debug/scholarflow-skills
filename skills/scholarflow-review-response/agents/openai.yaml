@@ -1,0 +1,4 @@
+﻿interface:
+  display_name: ScholarFlow Review Response
+  short_description: Build constructive, evidence-backed reviewer responses and revision plans.
+  default_prompt: Turn my reviewer comments and manuscript changes into a clear, respectful, evidence-backed response package.

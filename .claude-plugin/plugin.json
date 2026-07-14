@@ -1,7 +1,7 @@
 {
   "name": "scholarflow",
   "displayName": "ScholarFlow Skills",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Zhoy's research workflows for evidence search, manuscripts, journal readiness, bioinformatics planning, scientific figures, and integrity review.",
   "author": {
     "name": "Zhoy",

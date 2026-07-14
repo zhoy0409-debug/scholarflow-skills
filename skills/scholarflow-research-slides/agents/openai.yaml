@@ -1,0 +1,4 @@
+﻿interface:
+  display_name: ScholarFlow Research Slides
+  short_description: Create clear, editable research presentation slides.
+  default_prompt: Design an editable research presentation slide from my outline, data, and communication goal.

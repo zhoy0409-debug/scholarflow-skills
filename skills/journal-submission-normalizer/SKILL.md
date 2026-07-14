@@ -1,6 +1,6 @@
 ---
 name: journal-submission-normalizer
-description: Search official journal author instructions, extract submission formatting rules, normalize manuscripts against those rules, and produce a compliance report before submission. Use when the user needs manuscript formatting for a target journal, including font, font size, line spacing, margins, title page, headings, figures, tables, captions, superscripts/subscripts, references, declarations, file naming, cover letter, graphical abstract, highlights, or submission checklist.
+description: Use when a researcher needs a manuscript checked and normalized against a target journal's official submission and formatting requirements, with a compliance report before submission.
 ---
 
 # Journal Submission Normalizer

@@ -1,4 +1,4 @@
-interface:
+﻿interface:
   display_name: "Journal Selection Advisor"
   short_description: "Match a manuscript to realistic journals, tiers, institutional rules, and submission constraints."
   default_prompt: "Use $journal-selection-advisor to identify realistic target journals for this manuscript."

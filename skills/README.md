@@ -1,7 +1,7 @@
 # Skills Directory
 
-`bioinformatics-workbench`, `journal-selection-advisor`, `journal-submission-normalizer`, `polish-sci-figures`, and `research-integrity-guardrail` are standalone Core skills.
+Every top-level folder in this directory is one public ScholarFlow skill. Choose the narrowest folder that matches the task.
 
-`paper-spine` and every `paper-spine-*` folder form one Manuscript Studio bundle. Install the complete bundle to use its routed drafting, citation, revision, translation, and audit workflow.
+`scholarflow-manuscript-studio` is one installable skill with internal workflow components in `modules/`. Keep the folder intact; do not install those components separately.
 
-All other directories are focused maintained workflows. Choose the narrowest one that matches the task.
+See [the root skill index](../SKILL_INDEX.md) for a task-oriented guide.

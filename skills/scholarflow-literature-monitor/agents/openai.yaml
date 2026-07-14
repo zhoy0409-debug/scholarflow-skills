@@ -1,0 +1,4 @@
+﻿interface:
+  display_name: ScholarFlow Literature Monitor
+  short_description: Design and maintain a bounded, traceable literature-monitoring workflow.
+  default_prompt: Design a literature-monitoring workflow for my research topic, including sources, screening rules, delivery format, and review cadence.

@@ -3,8 +3,10 @@
 from __future__ import annotations
 
 import json
+import hashlib
 import re
 import sys
+from collections import defaultdict
 from pathlib import Path
 
 
@@ -23,6 +25,9 @@ REQUIRED_ROOT_FILES = {
     "LICENSE",
 }
 LINK = re.compile(r"\[[^]]+\]\(([^)]+)\)")
+RESOURCE_REFERENCE = re.compile(
+    r"`((?:(?:\.\./)*)?(?:assets|config|modules|references|scripts|static|templates)/[A-Za-z0-9_./-]+)`"
+)
 NON_ENGLISH = re.compile(r"[\u4e00-\u9fff\ufffd]")
 
 
@@ -39,7 +44,7 @@ def public_text_files(root: Path, skills: list[Path]) -> list[Path]:
 
 
 def validate_frontmatter(path: Path, expected_name: str, errors: list[str]) -> None:
-    lines = path.read_text(encoding="utf-8").splitlines()
+    lines = path.read_text(encoding="utf-8-sig").splitlines()
     if not lines or lines[0] != "---":
         errors.append(f"{path}: missing opening frontmatter delimiter")
         return
@@ -52,12 +57,20 @@ def validate_frontmatter(path: Path, expected_name: str, errors: list[str]) -> N
     name = fields.get("name", "").strip().strip("\"'")
     if name != expected_name:
         errors.append(f"{path}: frontmatter name must be {expected_name}")
-    if not fields.get("description", "").strip():
+    description_index = next((index for index, line in enumerate(lines[1:end], 1) if line.startswith("description:")), None)
+    description = fields.get("description", "").strip().strip("\"'")
+    if description_index is not None and description in {"|", "|-", ">", ">-"}:
+        description = " ".join(
+            line.strip() for line in lines[description_index + 1 : end] if line.startswith((" ", "\t"))
+        )
+    if not description:
         errors.append(f"{path}: missing frontmatter description")
+    elif not description.lower().startswith("use when "):
+        errors.append(f"{path}: description must begin with 'Use when'")
 
 
 def validate_text(path: Path, root: Path, errors: list[str]) -> None:
-    text = path.read_text(encoding="utf-8")
+    text = path.read_text(encoding="utf-8-sig")
     if NON_ENGLISH.search(text):
         errors.append(f"{path}: public text contains non-English or corrupted characters")
     for raw_link in LINK.findall(text):
@@ -67,6 +80,35 @@ def validate_text(path: Path, root: Path, errors: list[str]) -> None:
         target = (path.parent / link).resolve()
         if not target.exists() or (root not in target.parents and target != root):
             errors.append(f"{path}: broken local link {raw_link}")
+
+
+def skill_owner(path: Path, skills: list[Path]) -> Path | None:
+    return next((skill for skill in skills if skill in path.parents), None)
+
+
+def validate_resource_references(path: Path, root: Path, skills: list[Path], errors: list[str]) -> None:
+    text = path.read_text(encoding="utf-8-sig")
+    skill = skill_owner(path, skills)
+    for raw_path in RESOURCE_REFERENCE.findall(text):
+        candidates = [(path.parent / raw_path).resolve()]
+        if skill is not None and not raw_path.startswith("../"):
+            candidates.append((skill / raw_path).resolve())
+        if any(candidate.exists() and (candidate == root or root in candidate.parents) for candidate in candidates):
+            continue
+        errors.append(f"{path}: referenced local resource does not exist: {raw_path}")
+
+
+def validate_duplicate_scripts(skill_root: Path, errors: list[str]) -> None:
+    by_hash: dict[str, list[Path]] = defaultdict(list)
+    for path in skill_root.rglob("*.py"):
+        if path.name == "__init__.py" or path.stat().st_size < 128:
+            continue
+        digest = hashlib.sha256(path.read_bytes()).hexdigest()
+        by_hash[digest].append(path)
+    for paths in by_hash.values():
+        if len(paths) > 1:
+            rendered = ", ".join(str(path.relative_to(skill_root)) for path in paths)
+            errors.append(f"duplicate Python script content: {rendered}")
 
 
 def main() -> int:
@@ -86,16 +128,21 @@ def main() -> int:
     for skill in skills:
         metadata = skill / "agents/openai.yaml"
         validate_frontmatter(skill / "SKILL.md", skill.name, errors)
-        if not metadata.is_file() or "display_name:" not in metadata.read_text(encoding="utf-8"):
+        if not metadata.is_file() or "display_name:" not in metadata.read_text(encoding="utf-8-sig"):
             errors.append(f"{skill.name}: missing display_name metadata")
+        elif "ownership:" in metadata.read_text(encoding="utf-8-sig"):
+            errors.append(f"{skill.name}: deprecated ownership metadata is not allowed")
 
     for path in public_text_files(root, skills):
         if path.is_file():
             validate_text(path, root, errors)
+            validate_resource_references(path, root, skills, errors)
+
+    validate_duplicate_scripts(skill_root, errors)
 
     for path in [root / ".claude-plugin/plugin.json", root / ".claude-plugin/marketplace.json"]:
         try:
-            json.loads(path.read_text(encoding="utf-8"))
+            json.loads(path.read_text(encoding="utf-8-sig"))
         except (OSError, json.JSONDecodeError) as exc:
             errors.append(f"{path}: invalid JSON ({exc})")
 

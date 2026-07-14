@@ -1,0 +1,4 @@
+﻿interface:
+  display_name: ScholarFlow Proposal Writer
+  short_description: Build evidence-aware research proposals and evaluation packages.
+  default_prompt: Build or revise my research proposal with a clear argument, methods, feasibility, risks, and evaluation plan.

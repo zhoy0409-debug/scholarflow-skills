@@ -1,0 +1,4 @@
+﻿interface:
+  display_name: ScholarFlow Experiment Log
+  short_description: Turn raw observations into structured, traceable experiment logs.
+  default_prompt: Turn my raw experiment notes and observations into a structured log with anomalies, metadata, and follow-up actions.

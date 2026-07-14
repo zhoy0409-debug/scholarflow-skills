@@ -1,0 +1,4 @@
+﻿interface:
+  display_name: ScholarFlow Delivery QA
+  short_description: Stage, render, and verify research deliverables before handoff.
+  default_prompt: Stage my supplied files safely and verify that the final deliverables render correctly before handoff.

@@ -1,9 +1,0 @@
-interface:
-  display_name: "Nature Experiment Log"
-  short_description: "Convert raw experiment notes, images, voice-derived notes, and observations into structured experiment logs with metadata, protocol context, anomaly tra..."
-  default_prompt: "Use nature-experiment-log to handle this workflow."
-ownership:
-  product_owner: "Zhoy"
-  product_line: "Nature Research Suite"
-  origin: "zhoy-original-or-curated"
-  release_channel: "stable"

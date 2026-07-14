@@ -1,6 +1,6 @@
 ---
 name: journal-selection-advisor
-description: Help users choose suitable journals for a manuscript through guided intake, manuscript-journal fit analysis, tiered recommendations, JCR/CAS/discipline target matching, institutional requirement checks, publication-risk calibration, and submission sequencing. Use when the user asks for journal selection, target journals, where to submit, JCR quartile, CAS partition, impact factor goals, SCI/SSCI/EI/CSSCI/CSCD journals, manuscript positioning, publication strategy, or whether a paper is strong enough for a target journal.
+description: Use when a researcher needs journal selection, manuscript-journal fit analysis, tiered recommendations, JCR or CAS target matching, institutional requirement checks, publication-risk calibration, or submission sequencing.
 ---
 
 # Journal Selection Advisor
@@ -115,7 +115,7 @@ Give a practical sequence:
 - what to strengthen before submitting to reach-tier journals;
 - how to adapt title, abstract, cover letter, and keywords for the top candidates;
 - when to use `journal-submission-normalizer` after choosing a target;
-- when to use `nature-citation` or `research-integrity-guardrail`.
+- when to use `scholarflow-citation-review` or `research-integrity-guardrail`.
 
 Do not recommend simultaneous submissions unless journal policy explicitly permits them.
 

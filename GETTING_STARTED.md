@@ -1,6 +1,6 @@
 # Getting Started
 
-Choose the narrowest entry point that matches the work in front of you. The five ScholarFlow Core skills are standalone. The `paper-spine*` folders are one advanced Manuscript Studio bundle and should be installed together.
+Choose the narrowest public skill that matches the work in front of you. The five ScholarFlow Core skills are standalone. `scholarflow-manuscript-studio` is one integrated Manuscript Studio package; install that single folder when you need end-to-end writing or revision support.
 
 ## 1. Plan an analysis
 
@@ -28,9 +28,9 @@ State whether the output is for a manuscript, presentation, or public showcase. 
 
 ## 5. Build or revise a manuscript
 
-Use `paper-spine` for an end-to-end manuscript package. Install all `paper-spine*` folders first, then provide the manuscript or materials folder, target journal, source references, and the required outcome: a new draft, a revision, a translation package, or a final audit.
+Use `scholarflow-manuscript-studio` for an end-to-end manuscript package. Provide the manuscript or materials folder, target journal, source references, and the required outcome: a new draft, a revision, a translation package, or a final audit. The skill selects its internal stages without requiring separate module installation.
 
-Use `nature-academic-search` or `nature-citation` when a focused evidence search or reference audit is all that is needed.
+Use `scholarflow-literature-search` for a focused evidence search or citation verification. Use `scholarflow-citation-review` when the evidence exists but the reference list or claim support needs an audit.
 
 ## 6. Audit research integrity
 

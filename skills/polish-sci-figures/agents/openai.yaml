@@ -1,4 +1,4 @@
-interface:
+﻿interface:
   display_name: "Polish Scientific Figures"
   short_description: "Create, redraw, and QA scientific figures for papers, slides, and public showcases."
   default_prompt: "Use $polish-sci-figures to create or polish this scientific figure into a readable, evidence-grounded deliverable."

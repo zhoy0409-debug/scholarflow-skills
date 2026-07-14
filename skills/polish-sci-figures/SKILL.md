@@ -1,6 +1,6 @@
 ---
 name: polish-sci-figures
-description: Create, redraw, arrange, audit, and package polished scientific figures for manuscripts, presentations, and public research showcases. Use for scientific visualization, figure polishing, multi-panel layout, figure QA, published-figure reproduction from open source data, readable typography, high-contrast color, non-overlapping legends, and publication-ready PNG/SVG/PDF exports.
+description: Use when a researcher needs scientific figures created, redrawn, arranged, audited, or exported with readable typography, high-contrast color, non-overlapping legends, and publication-ready files.
 ---
 
 # Polish Scientific Figures

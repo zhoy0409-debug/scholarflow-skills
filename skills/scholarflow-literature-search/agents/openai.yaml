@@ -1,0 +1,4 @@
+﻿interface:
+  display_name: ScholarFlow Literature Search
+  short_description: Run traceable academic searches and screen evidence conservatively.
+  default_prompt: Search the academic literature for my research question and return a traceable evidence record with coverage limits.

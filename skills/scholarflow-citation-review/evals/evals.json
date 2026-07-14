@@ -1,0 +1,29 @@
+﻿{
+  "skill_name": "scholarflow-citation-review",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "descriptionNature/CNSdescription, descriptionZotero RDFdescriptionHTMLdescription: Tumor-associated macrophages promote immune evasion by suppressing cytotoxic T cell activity. Single-cell RNA sequencing reveals cellular heterogeneity in pancreatic cancer.",
+      "expected_output": "Segments the text, maps each segment to citation candidates, exports references.rdf, and provides an HTML visualization that can download selected references as ENW, RIS, or Zotero RDF.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "descriptionNaturedescription, description, description, description: single-cell RNA sequencing reveals cellular heterogeneity in pancreatic cancer. Spatial transcriptomics further preserves tissue context for interpreting tumor microenvironments.",
+      "expected_output": "Restricts scope to Nature Portfolio-style journals and produces a segment-reference correspondence table.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "Find flagship Nature/Science/Cell references for: CRISPR screens can identify genetic dependencies in cancer cells. Export RIS for EndNote.",
+      "expected_output": "Restricts to Nature, Science, and Cell only, treats the claim as a segment, and exports RIS without fabricating missing metadata.",
+      "files": []
+    },
+    {
+      "id": 4,
+      "prompt": "descriptionNaturedescription, description ENW, RIS description Zotero RDF, description. ",
+      "expected_output": "Produces the citation browser HTML with year filters, selectable references, and downloadable ENW/RIS/Zotero RDF exports from the same page.",
+      "files": []
+    }
+  ]
+}

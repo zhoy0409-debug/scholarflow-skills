@@ -1,6 +1,6 @@
 ---
 name: research-integrity-guardrail
-description: Audit research manuscripts, reports, and study materials for unsupported claims, inconsistent numbers, citation gaps, reproducibility omissions, and overstatement. Use before major revision, submission, defence, or public release when the user needs findings and an evidence ledger rather than a prose rewrite.
+description: Use when a researcher needs manuscripts, reports, or study materials audited for unsupported claims, inconsistent numbers, citation gaps, reproducibility omissions, or overstatement.
 ---
 
 # Research Integrity Guardrail

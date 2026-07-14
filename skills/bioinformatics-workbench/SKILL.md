@@ -1,6 +1,6 @@
 ---
 name: bioinformatics-workbench
-description: Turn a biological question and available sequencing or omics data into a realistic, reproducible bioinformatics workflow with explicit QC gates and deliverables.
+description: Use when a researcher needs to turn a biological question and available sequencing or omics data into a realistic, reproducible bioinformatics workflow with explicit QC gates and deliverables.
 ---
 
 # ScholarFlow Bioinformatics Workbench

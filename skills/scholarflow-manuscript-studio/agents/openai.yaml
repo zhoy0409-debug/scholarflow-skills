@@ -1,0 +1,4 @@
+﻿interface:
+  display_name: ScholarFlow Manuscript Studio
+  short_description: Build or revise a research manuscript with evidence-aware final QA.
+  default_prompt: Build a research manuscript workflow from my materials or draft. Establish evidence, target-venue constraints, and open risks before drafting.

@@ -6,8 +6,9 @@ A ScholarFlow release is ready only when all of the following are true.
 2. **Evidence integrity**: it does not fabricate citations, data, statistics, journal requirements, or research conclusions.
 3. **Current requirements**: journal-specific rules are retrieved from official current sources, not copied from a static memory table.
 4. **Usable output**: figures are inspected at their real viewing size; documents receive a visible compliance or risk report; recommendations state their rationale.
-5. **Complete installation path**: a standalone skill is self-contained, and a multi-module workflow explicitly lists every required component.
+5. **Complete installation path**: a public skill is self-contained by default; optional MCP servers, provider credentials, or local dependencies have an explicit setup path and a usable fallback.
 6. **Public provenance**: any published-figure reproduction includes attribution, licence status, source-data or source-code access, and a reproducible method.
 7. **Release hygiene**: public documentation and metadata are English, links resolve, frontmatter is valid, and release checks pass.
+8. **Routing and maintenance**: each public skill has one clear trigger, internal stages do not compete as public skills, referenced local resources exist, and substantial Python utilities are not maintained as byte-identical copies.
 
 Core and maintained workflow modules share the same release bar. New modules are added when they solve a recurring research problem more reliably than an existing workflow, not merely to inflate the catalogue.
