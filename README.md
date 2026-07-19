@@ -55,6 +55,12 @@ optional local MCP server for Claude Code, documented in its
 [setup notes](skills/scholarflow-literature-search/README.md); the browser-based
 workflow remains available without it.
 
+Maintainer release checks require Python 3.10 or newer:
+
+```powershell
+python scripts/release_check.py
+```
+
 Start in plain language:
 
 ```text

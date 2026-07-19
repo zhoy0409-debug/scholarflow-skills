@@ -1,11 +1,16 @@
 #!/usr/bin/env python3
 """Block simple release regressions without third-party dependencies."""
-from __future__ import annotations
+from __future__ import print_function
+
+import sys
+
+if sys.version_info < (3, 10):
+    print("Release check requires Python 3.10+.", file=sys.stderr)
+    raise SystemExit(2)
 
 import json
 import hashlib
 import re
-import sys
 from collections import defaultdict
 from pathlib import Path
 
@@ -31,11 +36,11 @@ RESOURCE_REFERENCE = re.compile(
 NON_ENGLISH = re.compile(r"[\u4e00-\u9fff\ufffd]")
 
 
-def skill_dirs(skill_root: Path) -> list[Path]:
+def skill_dirs(skill_root):
     return sorted(path for path in skill_root.iterdir() if path.is_dir() and (path / "SKILL.md").is_file())
 
 
-def public_text_files(root: Path, skills: list[Path]) -> list[Path]:
+def public_text_files(root, skills):
     files = [root / name for name in REQUIRED_ROOT_FILES if name != "LICENSE"]
     files += [path for skill in skills for path in skill.rglob("*.md")]
     files += [path for skill in skills for path in skill.rglob("*.yaml")]
@@ -43,20 +48,20 @@ def public_text_files(root: Path, skills: list[Path]) -> list[Path]:
     return files
 
 
-def validate_frontmatter(path: Path, expected_name: str, errors: list[str]) -> None:
+def validate_frontmatter(path, expected_name, errors):
     lines = path.read_text(encoding="utf-8-sig").splitlines()
     if not lines or lines[0] != "---":
-        errors.append(f"{path}: missing opening frontmatter delimiter")
+        errors.append("{}: missing opening frontmatter delimiter".format(path))
         return
     try:
         end = lines.index("---", 1)
     except ValueError:
-        errors.append(f"{path}: missing closing frontmatter delimiter")
+        errors.append("{}: missing closing frontmatter delimiter".format(path))
         return
     fields = dict(line.split(":", 1) for line in lines[1:end] if ":" in line)
     name = fields.get("name", "").strip().strip("\"'")
     if name != expected_name:
-        errors.append(f"{path}: frontmatter name must be {expected_name}")
+        errors.append("{}: frontmatter name must be {}".format(path, expected_name))
     description_index = next((index for index, line in enumerate(lines[1:end], 1) if line.startswith("description:")), None)
     description = fields.get("description", "").strip().strip("\"'")
     if description_index is not None and description in {"|", "|-", ">", ">-"}:
@@ -64,29 +69,29 @@ def validate_frontmatter(path: Path, expected_name: str, errors: list[str]) -> N
             line.strip() for line in lines[description_index + 1 : end] if line.startswith((" ", "\t"))
         )
     if not description:
-        errors.append(f"{path}: missing frontmatter description")
+        errors.append("{}: missing frontmatter description".format(path))
     elif not description.lower().startswith("use when "):
-        errors.append(f"{path}: description must begin with 'Use when'")
+        errors.append("{}: description must begin with 'Use when'".format(path))
 
 
-def validate_text(path: Path, root: Path, errors: list[str]) -> None:
+def validate_text(path, root, errors):
     text = path.read_text(encoding="utf-8-sig")
     if NON_ENGLISH.search(text):
-        errors.append(f"{path}: public text contains non-English or corrupted characters")
+        errors.append("{}: public text contains non-English or corrupted characters".format(path))
     for raw_link in LINK.findall(text):
         link = raw_link.split("#", 1)[0]
         if not link or "://" in link or link.startswith("mailto:"):
             continue
         target = (path.parent / link).resolve()
         if not target.exists() or (root not in target.parents and target != root):
-            errors.append(f"{path}: broken local link {raw_link}")
+            errors.append("{}: broken local link {}".format(path, raw_link))
 
 
-def skill_owner(path: Path, skills: list[Path]) -> Path | None:
+def skill_owner(path, skills):
     return next((skill for skill in skills if skill in path.parents), None)
 
 
-def validate_resource_references(path: Path, root: Path, skills: list[Path], errors: list[str]) -> None:
+def validate_resource_references(path, root, skills, errors):
     text = path.read_text(encoding="utf-8-sig")
     skill = skill_owner(path, skills)
     for raw_path in RESOURCE_REFERENCE.findall(text):
@@ -95,11 +100,11 @@ def validate_resource_references(path: Path, root: Path, skills: list[Path], err
             candidates.append((skill / raw_path).resolve())
         if any(candidate.exists() and (candidate == root or root in candidate.parents) for candidate in candidates):
             continue
-        errors.append(f"{path}: referenced local resource does not exist: {raw_path}")
+        errors.append("{}: referenced local resource does not exist: {}".format(path, raw_path))
 
 
-def validate_duplicate_scripts(skill_root: Path, errors: list[str]) -> None:
-    by_hash: dict[str, list[Path]] = defaultdict(list)
+def validate_duplicate_scripts(skill_root, errors):
+    by_hash = defaultdict(list)
     for path in skill_root.rglob("*.py"):
         if path.name == "__init__.py" or path.stat().st_size < 128:
             continue
@@ -108,36 +113,36 @@ def validate_duplicate_scripts(skill_root: Path, errors: list[str]) -> None:
     for paths in by_hash.values():
         if len(paths) > 1:
             rendered = ", ".join(str(path.relative_to(skill_root)) for path in paths)
-            errors.append(f"duplicate Python script content: {rendered}")
+            errors.append("duplicate Python script content: {}".format(rendered))
 
 
-def main() -> int:
+def main():
     root = Path(__file__).resolve().parents[1]
-    errors: list[str] = []
+    errors = []
     for name in REQUIRED_ROOT_FILES:
         if not (root / name).is_file():
-            errors.append(f"missing root file: {name}")
+            errors.append("missing root file: {}".format(name))
 
     skill_root = root / "skills"
     skills = skill_dirs(skill_root) if skill_root.is_dir() else []
     actual_names = {skill.name for skill in skills}
     missing_core = CORE_SKILLS - actual_names
     if missing_core:
-        errors.append(f"missing Core skills: {sorted(missing_core)}")
+        errors.append("missing Core skills: {}".format(sorted(missing_core)))
 
     for skill in skills:
         metadata = skill / "agents/openai.yaml"
         validate_frontmatter(skill / "SKILL.md", skill.name, errors)
         if not metadata.is_file():
-            errors.append(f"{skill.name}: missing agents/openai.yaml")
+            errors.append("{}: missing agents/openai.yaml".format(skill.name))
             continue
         metadata_text = metadata.read_text(encoding="utf-8-sig")
         if "product_owner: Zhoy" not in metadata_text:
-            errors.append(f"{skill.name}: product_owner must be Zhoy")
+            errors.append("{}: product_owner must be Zhoy".format(skill.name))
         if "display_name:" not in metadata_text:
-            errors.append(f"{skill.name}: missing display_name metadata")
+            errors.append("{}: missing display_name metadata".format(skill.name))
         elif "ownership:" in metadata_text:
-            errors.append(f"{skill.name}: deprecated ownership metadata is not allowed")
+            errors.append("{}: deprecated ownership metadata is not allowed".format(skill.name))
 
     for path in public_text_files(root, skills):
         if path.is_file():
@@ -150,18 +155,18 @@ def main() -> int:
         try:
             json.loads(path.read_text(encoding="utf-8-sig"))
         except (OSError, json.JSONDecodeError) as exc:
-            errors.append(f"{path}: invalid JSON ({exc})")
+            errors.append("{}: invalid JSON ({})".format(path, exc))
 
     showcase = root / "showcase/elife-tea-seq-figure-3"
     for name in ["figure3a-d-atlas-rerender.png", "figure3e-marker-heatmap-rerender.png", "reproduce_elife_63632_figure3_umaps.py"]:
         if not (showcase / name).is_file():
-            errors.append(f"missing showcase asset: {name}")
+            errors.append("missing showcase asset: {}".format(name))
 
     if errors:
         print("Release check failed:")
-        print("\n".join(f"- {error}" for error in errors))
+        print("\n".join("- {}".format(error) for error in errors))
         return 1
-    print(f"Release check passed for {len(skills)} skills.")
+    print("Release check passed for {} skills.".format(len(skills)))
     return 0
 
 

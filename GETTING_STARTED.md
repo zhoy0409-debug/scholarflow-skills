@@ -39,3 +39,14 @@ Use `research-integrity-guardrail` before a major revision, submission, defence,
 Provide the manuscript plus tables, figures, reference list, and raw calculations when available. The skill returns findings first; it does not conceal uncertainty or rewrite unsupported claims into smoother language.
 
 For the full workflow inventory, see [SKILL_INDEX.md](SKILL_INDEX.md).
+
+## Maintenance checks
+
+Repository checks require Python 3.10 or newer:
+
+```powershell
+python scripts/release_check.py
+```
+
+If `python` points to an older interpreter, run the same script with a Python
+3.10+ executable from your agent runtime or development environment.

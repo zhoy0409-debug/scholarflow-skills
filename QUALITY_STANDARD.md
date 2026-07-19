@@ -10,5 +10,6 @@ A ScholarFlow release is ready only when all of the following are true.
 6. **Public provenance**: any published-figure reproduction includes attribution, licence status, source-data or source-code access, and a reproducible method.
 7. **Release hygiene**: public documentation and metadata are English, links resolve, frontmatter is valid, and release checks pass.
 8. **Routing and maintenance**: each public skill has one clear trigger, internal stages do not compete as public skills, referenced local resources exist, and substantial Python utilities are not maintained as byte-identical copies.
+9. **Outcome acceptance**: each new or substantially changed workflow has a small, reviewable acceptance case that shows the required inputs, expected output shape, and the boundary it must not cross.
 
 Core and maintained workflow modules share the same release bar. New modules are added when they solve a recurring research problem more reliably than an existing workflow, not merely to inflate the catalogue.
