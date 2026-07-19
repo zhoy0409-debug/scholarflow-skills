@@ -47,9 +47,10 @@ Use the best available source in this order: plotting code plus data, native vec
 
 1. Generate from the authoritative source and export PNG plus an editable master when the source supports it.
 2. Open every final image. For multiple outputs, use `scripts/make_montage.py` to inspect cross-figure typography, margins, palette, and panel rhythm.
-3. Create a 1200-px-wide preview for every public showcase and inspect it. Fix unreadable text, clipping, collisions, and accidental blank space before delivery.
-4. For `manuscript`, inspect at the target column width and render the real page only after the figure is embedded. For `presentation`, inspect the rendered intended slide. Use `scripts/render_doc_pages.py` when a DOCX, PPTX, or PDF exists.
-5. For SVG output, run `scripts/check_svg_editability.py`; describe raster-only or partially editable output honestly.
+3. Run `scripts/figure_gate.py` before delivery when a final export exists. Use `--width-mm` for the actual inserted width, `--line-art` for line drawings, `--claim-editable` when editability is promised, and `--panels` when panel-label coordinates are available.
+4. Create a 1200-px-wide preview for every public showcase and inspect it. Fix unreadable text, clipping, collisions, and accidental blank space before delivery.
+5. For `manuscript`, inspect at the target column width and render the real page only after the figure is embedded. For `presentation`, inspect the rendered intended slide. Use `scripts/render_doc_pages.py` when a DOCX, PPTX, or PDF exists.
+6. For SVG output, run `scripts/check_svg_editability.py` when a quick editability-only check is enough; describe raster-only or partially editable output honestly.
 
 ## Acceptance gate
 
@@ -61,6 +62,7 @@ For `showcase`, also block delivery unless the 1200-px preview is readable and, 
 
 - `assets/sci_style.mplstyle`: strong readable matplotlib baseline. Override it only for a verified target requirement.
 - `scripts/panel_labels.py`: use only when panel labels are required.
+- `scripts/figure_gate.py`: blocks low final DPI, likely clipped raster content, fake editable SVGs, tiny SVG text, and misaligned panel-label grids.
 - `scripts/make_montage.py`: use for multi-asset visual QA.
 - `scripts/render_doc_pages.py`: use only after a document or slide deck exists.
 - `scripts/check_svg_editability.py`: use before calling SVG output editable.
