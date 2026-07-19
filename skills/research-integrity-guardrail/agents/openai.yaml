@@ -1,4 +1,5 @@
-﻿interface:
+﻿product_owner: Zhoy
+interface:
   display_name: "Research Integrity Guardrail"
   short_description: "Audit claims, numbers, citations, and reproducibility before research work is released."
   default_prompt: "Use $research-integrity-guardrail to audit this research artifact before submission."

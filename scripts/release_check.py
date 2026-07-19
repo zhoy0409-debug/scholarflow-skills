@@ -128,9 +128,15 @@ def main() -> int:
     for skill in skills:
         metadata = skill / "agents/openai.yaml"
         validate_frontmatter(skill / "SKILL.md", skill.name, errors)
-        if not metadata.is_file() or "display_name:" not in metadata.read_text(encoding="utf-8-sig"):
+        if not metadata.is_file():
+            errors.append(f"{skill.name}: missing agents/openai.yaml")
+            continue
+        metadata_text = metadata.read_text(encoding="utf-8-sig")
+        if "product_owner: Zhoy" not in metadata_text:
+            errors.append(f"{skill.name}: product_owner must be Zhoy")
+        if "display_name:" not in metadata_text:
             errors.append(f"{skill.name}: missing display_name metadata")
-        elif "ownership:" in metadata.read_text(encoding="utf-8-sig"):
+        elif "ownership:" in metadata_text:
             errors.append(f"{skill.name}: deprecated ownership metadata is not allowed")
 
     for path in public_text_files(root, skills):

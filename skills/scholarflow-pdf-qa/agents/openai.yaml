@@ -1,4 +1,5 @@
-﻿interface:
+﻿product_owner: Zhoy
+interface:
   display_name: ScholarFlow PDF QA
   short_description: Read, create, and visually verify research PDFs.
   default_prompt: Inspect my PDF for content and layout issues, then return a verified report or corrected deliverable.

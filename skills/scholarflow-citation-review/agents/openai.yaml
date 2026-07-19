@@ -1,4 +1,5 @@
-﻿interface:
+﻿product_owner: Zhoy
+interface:
   display_name: ScholarFlow Citation Review
   short_description: Verify citations, reference metadata, and claim support.
   default_prompt: Audit my manuscript citations and reference list for verifiability, metadata consistency, and claim support.

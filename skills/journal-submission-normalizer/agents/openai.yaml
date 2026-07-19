@@ -1,4 +1,5 @@
-﻿interface:
+﻿product_owner: Zhoy
+interface:
   display_name: "Journal Submission Normalizer"
   short_description: "Retrieve official journal requirements, normalize a manuscript, and report compliance gaps."
   default_prompt: "Use $journal-submission-normalizer to prepare this manuscript for its target journal."
